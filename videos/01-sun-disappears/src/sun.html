@@ -202,31 +202,165 @@ function sceneOrbit(t) {
   s += earth(ex, ey, 46, 0, t, 1);
   return s;
 }
+// ---------- people (two-segment limbs, shading, winter clothes) ----------
+const rot = (a, Ln) => [Math.sin(a) * Ln, Math.cos(a) * Ln];
+function limb(x0, y0, a1, a2, L1, L2, w, c) {
+  const [dx1, dy1] = rot(a1, L1), x1 = x0 + dx1, y1 = y0 + dy1, [dx2, dy2] = rot(a2, L2), x2 = x1 + dx2, y2 = y1 + dy2;
+  return { svg: `<path d="M${x0},${y0} L${x1},${y1} L${x2},${y2}" stroke="${c}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`, x2, y2 };
+}
+// o: {s, face, phase, moving, top, pants, skin, hair, lookUp, phone(0..1 light), coat, hat, scarf, hug, breath, t}
+function person(x, y, o) {
+  const s = o.s || 1, f = o.face || 1, p = o.phase || 0, mv = o.moving ? 1 : 0, t = o.t || 0;
+  const hipY = -150 - (mv ? Math.abs(Math.cos(p)) * 4 : 0), bulk = o.coat ? 7 : 0;
+  const leg = ph => { const a = Math.sin(ph) * .42 * mv, bend = (Math.max(0, -Math.cos(ph)) * .7 + .05) * mv; return limb(0, hipY, a, a - bend, 76, 74, 19, o.pants); };
+  const shoe = (l, c) => `<ellipse cx="${l.x2 + 9}" cy="${l.y2 + 1}" rx="17" ry="7" fill="${c}"/>`;
+  const L1 = leg(p + Math.PI), L2 = leg(p);
+  const ty = hipY - 112, coatLen = o.coat ? 34 : 0;
+  const torso = `<path d="M${-23 - bulk},${hipY + 6 + coatLen} C${-27 - bulk},${hipY - 40} ${-31 - bulk},${ty + 18} ${-22 - bulk},${ty + 4} Q4,${ty - 9} ${26 + bulk},${ty + 6} C${33 + bulk},${ty + 30} ${27 + bulk},${hipY - 40} ${25 + bulk},${hipY + 6 + coatLen} Z" fill="${o.top}"/>` +
+    `<path d="M${-23 - bulk},${hipY + 6 + coatLen} C${-27 - bulk},${hipY - 40} ${-31 - bulk},${ty + 18} ${-22 - bulk},${ty + 4} L-6,${ty} L-8,${hipY + 6 + coatLen}Z" fill="#000" opacity=".22"/>` +
+    (o.coat ? [0, 1, 2, 3].map(i => `<path d="M${-22 - bulk},${ty + 30 + i * 30} Q2,${ty + 38 + i * 30} ${26 + bulk},${ty + 30 + i * 30}" stroke="#000" stroke-opacity=".18" stroke-width="2" fill="none"/>`).join('') : '');
+  const shX = 2, shY = ty + 14, swing = Math.sin(p) * .38 * mv;
+  let armB, armF;
+  if (o.hug) { armB = limb(shX - 6, shY, .35, -1.6, 54, 44, 15, o.top); armF = limb(shX + 4, shY, .3, -1.75, 54, 46, 16, o.top); }
+  else if (o.phone) { armB = limb(shX - 4, shY, -swing - .05, -swing + .25, 60, 56, 14, o.top); armF = limb(shX, shY, 1.9, 2.6, 58, 50, 15, o.top); }
+  else { armB = limb(shX - 4, shY, -swing - .05, -swing + .25, 60, 56, 14, o.top); armF = limb(shX, shY, swing + .05, swing + .3, 60, 56, 15, o.top); }
+  const hx = 6, hy = ty - 34, tilt = -16 * (o.lookUp || 0);
+  const head = `<rect x="${hx - 7}" y="${ty - 16}" width="14" height="20" rx="5" fill="${o.skin}"/>` +
+    `<g transform="rotate(${tilt},${hx},${hy + 14})">` +
+    `<ellipse cx="${hx}" cy="${hy}" rx="20" ry="24" fill="${o.skin}"/><ellipse cx="${hx - 6}" cy="${hy + 2}" rx="13" ry="20" fill="#000" opacity=".12"/>` +
+    (o.hat ? `<path d="M${hx - 22},${hy - 4} C${hx - 22},${hy - 34} ${hx + 22},${hy - 34} ${hx + 22},${hy - 6} Z" fill="${o.hat}"/><rect x="${hx - 23}" y="${hy - 9}" width="46" height="8" rx="4" fill="${o.hat}" opacity=".85"/><circle cx="${hx}" cy="${hy - 32}" r="6" fill="${o.hat}"/>`
+           : `<path d="M${hx - 21},${hy - 2} C${hx - 24},${hy - 30} ${hx + 6},${hy - 36} ${hx + 21},${hy - 14} C${hx + 14},${hy - 20} ${hx - 2},${hy - 18} ${hx - 8},${hy - 12} C${hx - 12},${hy - 4} ${hx - 14},${hy + 6} ${hx - 21},${hy - 2}Z" fill="${o.hair}"/>`) +
+    `<ellipse cx="${hx + 11}" cy="${hy - 2}" rx="2.4" ry="3" fill="#1a120d"/><path d="M${hx + 6},${hy - 9} q6,-3 11,0" stroke="${o.hair}" stroke-width="2.4" fill="none" stroke-linecap="round"/>` +
+    `<ellipse cx="${hx - 14}" cy="${hy + 1}" rx="4" ry="6.5" fill="${o.skin}"/>` + `</g>`;
+  const scarf = o.scarf ? `<path d="M${hx - 16},${ty - 10} Q${hx},${ty + 2} ${hx + 18},${ty - 10} L${hx + 18},${ty + 2} Q${hx},${ty + 14} ${hx - 16},${ty + 2}Z" fill="${o.scarf}"/><rect x="${hx - 12}" y="${ty}" width="11" height="40" rx="4" fill="${o.scarf}"/>` : '';
+  let extra = '';
+  if (o.phone) { const lx = armF.x2, ly = armF.y2;
+    extra = `<rect x="${lx - 5}" y="${ly - 14}" width="10" height="18" rx="2" fill="#111"/>` +
+      `<polygon points="${lx},${ly - 10} ${lx + 70},${ly - 300} ${lx - 20},${ly - 310}" fill="#fff6dc" opacity="${.07 * o.phone}" filter="url(#soft)"/><circle cx="${lx}" cy="${ly - 10}" r="${16 * o.phone}" fill="#fff" opacity="${.35 * o.phone}" filter="url(#blur2)"/><circle cx="${lx}" cy="${ly - 10}" r="4" fill="#fff" opacity="${o.phone}"/>`; }
+  let breath = '';
+  if (o.breath) for (let i = 0; i < 4; i++) { const k = ((t * .55 + i / 4 + (o.seed || 0)) % 1);
+    breath += `<circle cx="${hx + 26 + k * 46}" cy="${hy + 8 - k * 22}" r="${5 + k * 16}" fill="#eef6ff" opacity="${(1 - k) * .45 * o.breath}" filter="url(#blur2)"/>`; }
+  const shadow = `<ellipse cx="4" cy="2" rx="44" ry="8" fill="#000" opacity=".3" filter="url(#blur2)"/>`;
+  return `<g transform="translate(${x},${y}) scale(${f * s},${s})">${shadow}` +
+    armB.svg + `<circle cx="${armB.x2}" cy="${armB.y2}" r="7" fill="${o.skin}"/>` + L1.svg.replace(o.pants, '#1d2028') + shoe(L1, '#3a3530') +
+    torso + scarf + head + L2.svg + shoe(L2, '#4a443c') + armF.svg + `<circle cx="${armF.x2}" cy="${armF.y2}" r="7.5" fill="${o.skin}"/>` + extra + breath + `</g>`;
+}
+const CROWD = [
+  { x: 120, dir: 1, top: '#8a3b3b', pants: '#2a2533', skin: '#a46a46', hair: '#1b1410', s: 1.0 },
+  { x: 260, dir: -1, top: '#3f6b5a', pants: '#24262e', skin: '#c08a66', hair: '#2a1d16', s: 1.06 },
+  { x: 430, dir: 1, top: '#2f4b7e', pants: '#1f2638', skin: '#8d5a3b', hair: '#17110d', s: 1.12 },
+  { x: 600, dir: -1, top: '#7a6a4a', pants: '#2b2a30', skin: '#b07a55', hair: '#1d1612', s: .98 },
+];
+
+// ---------- frost creeping from the screen edges ----------
+const FROST = (() => { const r = R(42), br = [];
+  const grow = (x, y, a, len, depth) => { const ex = x + Math.cos(a) * len, ey = y + Math.sin(a) * len; br.push([x, y, ex, ey, depth]);
+    if (depth < 4) for (let i = 0; i < 2; i++) grow(lerp(x, ex, .4 + r() * .5), lerp(y, ey, .4 + r() * .5), a + (r() < .5 ? -1 : 1) * (.6 + r() * .5), len * (.45 + r() * .2), depth + 1); };
+  for (let i = 0; i < 30; i++) { const side = 1 + (i % 3), u = side === 1 ? r() : .45 + r() * .55;
+    const [x, y, a] = side === 0 ? [u * 720, 0, Math.PI / 2] : side === 1 ? [u * 720, 1280, -Math.PI / 2] : side === 2 ? [0, u * 1280, 0] : [720, u * 1280, Math.PI];
+    grow(x, y, a + (r() - .5) * .8, 60 + r() * 80, 0); }
+  return br; })();
+function frost(k) {
+  if (k <= 0) return '';
+  let s = `<defs><radialGradient id="frostEdge" cx=".5" cy=".38" r=".75"><stop offset=".6" stop-color="#e8f6ff" stop-opacity="0"/><stop offset="1" stop-color="#e8f6ff" stop-opacity=".75"/></radialGradient></defs>`;
+  s += `<rect width="720" height="1280" fill="url(#frostEdge)" opacity="${k}"/>`;
+  s += `<g stroke="#f4fbff" stroke-linecap="round" fill="none" opacity="${.85 * clamp(k * 1.4)}">` +
+    FROST.map(([x1, y1, x2, y2, d]) => { const show = clamp(k * 1.6 - d * .25); if (show <= 0) return '';
+      return `<line x1="${x1}" y1="${y1}" x2="${lerp(x1, x2, show)}" y2="${lerp(y1, y2, show)}" stroke-width="${2.2 - d * .4}" opacity="${1 - d * .15}"/>`; }).join('') + `</g>`;
+  return s;
+}
+function lampPost(x, y, h, on) {
+  return `<circle cx="${x + 18}" cy="${y - h + 8}" r="150" fill="url(#lampG)" opacity="${.6 * on}"/>` +
+    `<rect x="${x - 3}" y="${y - h}" width="6" height="${h}" fill="#0b0d18"/><path d="M${x},${y - h} q0,-10 18,-6" stroke="#0b0d18" stroke-width="5" fill="none"/>` +
+    `<rect x="${x + 10}" y="${y - h + 2}" width="16" height="10" rx="3" fill="${on > .5 ? '#ffe2ad' : '#556'}"/>`;
+}
+
+// Street: daylight, then the light stops (people stop, look up, phones on, moon fades)
+function sceneStreet(t) {
+  const d0 = T_ARRIVE, dark = ease(ramp(t, d0, d0 + .5)), lampsOn = ramp(t, d0 + 1.0, d0 + 1.3), win = ease(ramp(t, d0 + 1.2, d0 + 3));
+  const moonFade = ease(ramp(t, W(3, 3)[1], W(3, 3)[1] + 1.2));
+  let s = `<defs><linearGradient id="stSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix('#3d7cc9', '#03050d', dark)}"/><stop offset="1" stop-color="${mix('#bfe0f5', '#0e1428', dark)}"/></linearGradient>` +
+    `<radialGradient id="lampG"><stop offset="0" stop-color="#ffd59a" stop-opacity=".9"/><stop offset=".35" stop-color="#ffb35c" stop-opacity=".3"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient></defs>` +
+    `<rect width="720" height="1280" fill="url(#stSky)"/>` + (dark > 0 ? stars(dark, t) : '');
+  // moon: pale in daylight, bright when dark, then fades
+  const mA = lerp(.35, 1, dark) * (1 - moonFade * .92);
+  s += `<circle cx="170" cy="480" r="${80}" fill="#fff8e0" opacity="${.18 * mA * dark}" filter="url(#soft)"/>` + moon(170, 480, 30, mA);
+  s += skyline(5, 930, mix('#8aa3bd', '#0d1222', dark), 0, win) + skyline(8, 990, mix('#6f879f', '#0a0e1c', dark), 0, win * .9);
+  s += `<rect y="985" width="720" height="295" fill="${mix('#9a8f80', '#121521', dark)}"/><rect y="985" width="720" height="8" fill="${mix('#c8bba8', '#22283a', dark)}"/>` +
+       `<rect y="1090" width="720" height="190" fill="${mix('#4a4a4e', '#0b0d15', dark)}"/>` +
+       Array.from({ length: 6 }, (_, i) => `<rect x="${i * 140 + 20}" y="1180" width="70" height="8" fill="#ddd" opacity="${lerp(.7, .15, dark)}"/>`).join('');
+  s += lampPost(40, 990, 300, lampsOn) + lampPost(680, 990, 300, lampsOn) + palm(560, 992, 250, mix('#3d4a3a', '#090c16', dark), t);
+  // people: walk until it goes dark, then stop and look up; two raise phone lights
+  CROWD.forEach((c, i) => {
+    const walkEnd = d0 + .35 + i * .12, wt = Math.min(t, walkEnd) - (d0 - 1.7);
+    const x = c.x + c.dir * wt * 26, look = ease(ramp(t, d0 + .4 + i * .15, d0 + 1.1 + i * .15));
+    const phone = (i === 1 || i === 2) ? ease(ramp(t, d0 + 1.6 + i * .3, d0 + 2.0 + i * .3)) : 0;
+    s += person(x, 1000 + (i % 2) * 14, { s: c.s * 1.05, face: c.dir, moving: t < walkEnd, phase: wt * 6.4, top: c.top, pants: c.pants, skin: c.skin, hair: c.hair, lookUp: look * .9, phone, t });
+  });
+  s += `<rect width="720" height="1280" fill="#000" opacity="${.15 * dark}"/>`;
+  return s;
+}
+// A week: night street in snow, people in coats around a fire barrel, breath fog, frost on the "lens"
 function sceneWeek(t) {
   const k = ease(ramp(t, L(5).start, L(5).end + .3));
-  let s = `<defs><linearGradient id="skw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03050d"/><stop offset="1" stop-color="${mix('#121a33', '#2a3550', k)}"/></linearGradient></defs><rect width="720" height="1280" fill="url(#skw)"/>` + stars(1, t);
-  s += skyline(5, 940, mix('#0b0f20', '#18213a', k), k * .9, 1 - k * .7) + skyline(8, 1000, mix('#070a16', '#141b30', k), k, .9 - k * .7);
-  s += `<rect y="1000" width="720" height="280" fill="${mix('#05070f', '#d7e8f5', k * .9)}"/>`;
-  s += palm(90, 1004, 260, mix('#060912', '#2a3550', k), t) + palm(650, 1004, 230, mix('#060912', '#2a3550', k), t);
-  s += `<rect y="996" width="720" height="10" fill="#eef7ff" opacity="${k}"/>`;
-  s += snow(t, 90, ramp(t, L(5).start + .5, L(5).start + 2));
-  s += `<rect width="720" height="1280" fill="#bfe6ff" opacity="${k * .08}"/>`;
+  let s = `<defs><linearGradient id="skw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03050d"/><stop offset="1" stop-color="${mix('#121a33', '#2a3550', k)}"/></linearGradient>` +
+    `<radialGradient id="lampG"><stop offset="0" stop-color="#ffd59a" stop-opacity=".9"/><stop offset=".35" stop-color="#ffb35c" stop-opacity=".3"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>` +
+    `<radialGradient id="fireG"><stop offset="0" stop-color="#ffd08a" stop-opacity=".95"/><stop offset=".3" stop-color="#ff8a3c" stop-opacity=".45"/><stop offset="1" stop-color="#ff6a1a" stop-opacity="0"/></radialGradient></defs>` +
+    `<rect width="720" height="1280" fill="url(#skw)"/>` + stars(.8, t);
+  s += skyline(5, 930, '#0d1222', k * .9, .5) + skyline(8, 990, '#0a0e1c', k, .45);
+  s += `<rect y="985" width="720" height="295" fill="${mix('#121521', '#cfe0ee', k * .9)}"/>`;
+  // snow drifts
+  s += `<path d="M-10,1000 C120,${990 - 14 * k} 260,${996 - 10 * k} 380,${990 - 18 * k} C520,${984 - 10 * k} 620,${996 - 12 * k} 730,${988 - 16 * k} L730,1030 L-10,1030Z" fill="#eef6ff" opacity="${k}"/>`;
+  s += lampPost(60, 990, 300, 1) + palm(640, 992, 240, mix('#090c16', '#2a3550', k), t) + `<path d="M${640 + 29},${992 - 240} l-60,40 M${669},${752} l70,36" stroke="#eef6ff" stroke-width="6" opacity="${k * .8}" stroke-linecap="round"/>`;
+  // fire barrel
+  const fx = 360, fy = 1010, fl = 1 + Math.sin(t * 13) * .07 + Math.sin(t * 7) * .05;
+  s += `<circle cx="${fx}" cy="${fy - 110}" r="${230 * fl}" fill="url(#fireG)" opacity=".85"/>` +
+       `<rect x="${fx - 34}" y="${fy - 90}" width="68" height="90" rx="6" fill="#3b3a3c"/><rect x="${fx - 34}" y="${fy - 62}" width="68" height="5" fill="#2a292b"/><rect x="${fx - 34}" y="${fy - 30}" width="68" height="5" fill="#2a292b"/>` +
+       `<path transform="translate(${fx},${fy - 88}) scale(${.8 * fl},${fl})" d="M0,0 C-40,-20 -34,-70 -6,-120 C2,-88 20,-88 16,-56 C30,-72 34,-32 0,0Z" fill="#ff8a2e"/>` +
+       `<path transform="translate(${fx},${fy - 88}) scale(${.45 * fl},${.7 * fl})" d="M0,0 C-40,-20 -34,-70 -6,-120 C2,-88 20,-88 16,-56 C30,-72 34,-32 0,0Z" fill="#ffd27a"/>`;
+  const P = [
+    { x: 250, f: 1, top: '#5b2c2c', scarf: '#c9a14a', hat: '#2b3a55', skin: '#a46a46' },
+    { x: 500, f: -1, top: '#2f4b5e', scarf: '#9a2f3a', hat: '#4a3b2a', skin: '#c08a66' },
+    { x: 300, f: 1, top: '#3c4a3a', scarf: '#d8d2c4', hat: '#6b2f2f', skin: '#8d5a3b', s: .68 },
+  ];
+  P.forEach((c, i) => { s += person(c.x, 1012 + (i === 2 ? 14 : 0), { s: (c.s || 1) * 1.0, face: c.f, top: c.top, pants: '#24262e', skin: c.skin, hair: '#17110d', coat: true, hat: c.hat, scarf: c.scarf, hug: true, breath: 1, seed: i * .3, t }); });
+  // warm light on people from the fire, cold light elsewhere
+  s += `<rect width="720" height="1280" fill="#9fc8ff" opacity="${.06 + k * .06}"/>`;
+  s += snow(t, 110, ramp(t, L(5).start + .2, L(5).start + 1.4)) + frost(k * .55);
   return s;
 }
+// A year: the river frozen solid; boat stuck in ice, icicles on a bridge, a lone walker with a torch, blizzard
 function sceneYear(t) {
   const k = ease(ramp(t, L(6).start, L(6).end));
-  let s = `<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#02040b"/><stop offset="1" stop-color="#16243f"/></linearGradient>` +
-    `<linearGradient id="ice" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ec8e6"/><stop offset="1" stop-color="#e8f6ff"/></linearGradient></defs>` +
-    `<rect width="720" height="1280" fill="url(#sky)"/>` + stars(1, t);
-  s += `<path d="M-10,905 L60,860 L120,900 L190,840 L260,905 Z M470,905 L540,850 L590,880 L660,830 L730,905 Z" fill="#cfe6f6" opacity=".55"/>`;
-  s += `<rect y="900" width="720" height="380" fill="url(#ice)"/>`;
-  // cracks grow
-  const r = R(4); for (let i = 0; i < 9; i++) { let x = r() * 720, y = 930 + r() * 300, d = `M${x},${y}`;
-    for (let j = 0; j < 5; j++) { x += (r() - .5) * 120; y += (r() - .5) * 50; d += ` L${x},${y}`; }
-    s += `<path d="${d}" stroke="#7fa9c9" stroke-width="2.2" fill="none" stroke-dasharray="700" stroke-dashoffset="${700 * (1 - k)}" opacity=".8"/>`; }
-  s += snow(t, 70, .7) + `<rect y="900" width="720" height="8" fill="#fff" opacity=".7"/>`;
+  let s = `<defs><linearGradient id="skyY" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#02040b"/><stop offset="1" stop-color="#1a2a45"/></linearGradient>` +
+    `<linearGradient id="iceY" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb9d8"/><stop offset="1" stop-color="#e6f5ff"/></linearGradient></defs>` +
+    `<rect width="720" height="1280" fill="url(#skyY)"/>` + stars(.7, t);
+  s += skyline(11, 860, '#0f1a2c', 1, .12);
+  // far bank
+  s += `<rect y="860" width="720" height="40" fill="#dfeefa"/>` + palm(90, 880, 180, '#24324a', t) + palm(610, 880, 160, '#24324a', t);
+  // frozen river
+  s += `<rect y="895" width="720" height="385" fill="url(#iceY)"/>`;
+  const r = R(4); for (let i = 0; i < 10; i++) { let x = r() * 720, y = 910 + r() * 340, d = `M${x},${y}`;
+    for (let j = 0; j < 5; j++) { x += (r() - .5) * 120; y += (r() - .5) * 40; d += ` L${x},${y}`; }
+    s += `<path d="${d}" stroke="#7fa9c9" stroke-width="2" fill="none" stroke-dasharray="700" stroke-dashoffset="${700 * (1 - k)}" opacity=".85"/>`; }
+  // bridge with icicles
+  s += `<rect x="-10" y="760" width="740" height="26" fill="#2a3650"/><rect x="-10" y="752" width="740" height="10" fill="#eef7ff"/>`;
+  for (let i = 0; i < 6; i++) s += `<rect x="${i * 140 + 40}" y="786" width="20" height="110" fill="#22304a"/>`;
+  for (let i = 0; i < 34; i++) { const x = 6 + i * 21.5, h = (8 + ((i * 37) % 23)) * (.3 + .7 * k); s += `<polygon points="${x - 4},786 ${x + 4},786 ${x},${786 + h}" fill="#e8f6ff" opacity=".9"/>`; }
+  // boat stuck in ice
+  s += `<g transform="translate(150,1010)"><path d="M-80,0 L80,0 L60,34 L-60,34Z" fill="#5a3b2a"/><rect x="-80" y="-6" width="160" height="8" fill="#eef7ff"/><rect x="-4" y="-90" width="6" height="86" fill="#3a2a20"/><rect x="-80" y="28" width="160" height="14" fill="#cfe6f6"/></g>`;
+  // lone walker with a torch, leaning into the wind
+  const wx = 470 + (t - L(6).start) * 10;
+  s += `<polygon points="${wx + 30},${1050 - 210} ${wx + 330},${1050 - 120} ${wx + 300},${1050 + 10}" fill="#fff6dc" opacity=".14" filter="url(#blur2)"/>`;
+  s += person(wx, 1052, { s: 1.12, face: 1, top: '#3a2e46', pants: '#22242c', skin: '#a06c4b', hair: '#17110d', coat: true, hat: '#5a1f2a', scarf: '#c9a14a', moving: true, phase: (t - L(6).start) * 4.2, breath: 1, t, lean: 6 });
+  // blizzard: diagonal snow streaks
+  let bz = ''; const rb = R(77); for (let i = 0; i < 120; i++) { const x0 = rb() * 900, y0 = rb() * 1280, sp = 200 + rb() * 220;
+    const x = (x0 - t * sp * 1.4) % 900 + (x0 - t * sp * 1.4 < 0 ? 900 : 0) - 90, y = (y0 + t * sp) % 1300 - 10;
+    bz += `<line x1="${x}" y1="${y}" x2="${x + 14}" y2="${y - 9}" stroke="#fff" stroke-width="${1.4 + rb() * 1.6}" opacity="${.35 + rb() * .45}" stroke-linecap="round"/>`; }
+  s += bz + `<rect width="720" height="1280" fill="#cfe8ff" opacity=".08"/>` + frost(.55 + k * .45);
   return s;
 }
+
 function sceneDeep(t) {
   const st = L(7).start, vk = ease(ramp(t, W(7, 5)[1], W(7, 5)[1] + 1));
   let s = `<defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d2a44"/><stop offset=".5" stop-color="#071a2e"/><stop offset="1" stop-color="#030a14"/></linearGradient></defs>` +
@@ -269,7 +403,7 @@ function sceneCTA(t) {
   return s;
 }
 const SCENES = [
-  { s: 0, f: sceneSpace }, { s: L(4).start - .15, f: sceneOrbit }, { s: L(5).start - .1, f: sceneWeek }, { s: L(6).start - .1, f: sceneYear },
+  { s: 0, f: sceneSpace }, { s: T_ARRIVE - 1.7, f: sceneStreet }, { s: L(4).start - .15, f: sceneOrbit }, { s: L(5).start - .1, f: sceneWeek }, { s: L(6).start - .1, f: sceneYear },
   { s: L(7).start - .1, f: sceneDeep }, { s: L(8).start - .15, f: sceneHope }, { s: L(9).start - .1, f: sceneCTA },
 ];
 const XF = .55;
@@ -315,7 +449,7 @@ function renderUI(t) {
   // chips
   chip('c1', 7.6, 11.0, t); chip('c2', W(2, 8)[1], T_ARRIVE, t); chip('c3', W(4, 7)[1] - .1, L(5).start - .1, t);
   chip('c4', W(7, 7)[1] - .2, L(8).start - .1, t); chip('c5', W(8, 4)[1] - .1, L(9).start - .1, t); chip('c6', L(9).start + .6, TOTAL, t);
-  $('note').style.opacity = t < L(4).start - .2 ? .9 : 0;
+  $('note').style.opacity = t < T_ARRIVE - 1.7 ? .9 : 0;
 }
 
 window.render = function (t) {
