@@ -43,7 +43,7 @@ Python tools, which is most of the point of `/yt-script`, `/yt-retention` and `/
 rest works.
 
 Then spend ten minutes on [`templates/voice.md`](templates/voice.md). Copy it to
-`~/.claude/youtube/voice.md` and fill it in, or send Claude three of your own videos and say "write
+`.claude/youtube/voice.md` in your project (or `~/.claude/youtube/voice.md`) and fill it in, or send Claude three of your own videos and say "write
 my voice.md from these". Every skill reads that file. It matters more here than anywhere else,
 because you have to say the words out loud.
 

@@ -1,33 +1,45 @@
 # voice.md
 
-Copy this to `~/.claude/youtube/voice.md` and fill it in. Every skill in this pack reads it. Ten
-minutes here is worth more than any prompt you will ever write, because on YouTube you have to say
-the words out loud and a script in the wrong voice is unreadable on camera.
+> **مسودة أولية.** هذا صوت مبدئي كتبه Claude حتى تشتغل السكلات. بدّله بصوتك الحقيقي:
+> انطي Claude نص أو رابط ثلاث فيديوهات من فيديوهاتك وگول "اكتب voice.md من هذني".
+> الأقسام اللي بيها **[؟]** لازم تجاوبها انت.
 
 ## Who I am talking to
 
-One person. Name them properly - not "creators", but "someone with under a thousand subs who has
-made nine videos and cannot work out why none of them break 400 views".
+**[؟]** شخص واحد بالضبط. منو هو؟ شگد عمره، شنو يعرف عن الموضوع، وشنو مشكلته؟
+مثال: "شاب عراقي بالعشرينات يريد يبدي قناة يوتيوب، صوّر خمس فيديوهات وما تعدّت 200 مشاهدة".
 
 ## How I actually talk
 
-Paste the transcript of your best-performing video here, or three of them. Not what you wish you
-sounded like.
+- لهجة عراقية بغدادية طبيعية، مثل ما أحچي ويا صديقي، مو فصحى.
+- جمل قصيرة. فكرة وحدة بكل جملة.
+- أحچي ويا المشاهد مباشرة: "انت"، "خلي أگلك"، "شوف".
+- أبدي بالنتيجة أو المشكلة، مو بالمقدمة.
+- أشرح الشي الصعب بمثال من الحياة اليومية بالعراق.
+- الكلمات الإنگليزية التقنية (مثل thumbnail، views، algorithm) عادي أستخدمها إذا الناس هيچ يگولوها.
 
 ## Words I never use
 
-The ones that are not mine. Be specific: "unlock", "game-changer", "dive in", "let's get into it".
+- فصحى رسمية بالكلام: "عزيزي المشاهد"، "في هذا الفيديو سوف نتحدث عن"، "دعونا نبدأ".
+- مبالغات فارغة: "سر خطير"، "راح يغير حياتك"، "ما راح تصدق".
+- ترجمات حرفية من الإنگليزي: "دعونا نغوص"، "تغيير قواعد اللعبة".
+- "لا تنسى تسوي لايك واشتراك" ببداية الفيديو.
 
 ## Words I do use
 
-Your tics. The phrases that are yours. Keep them.
+**[؟]** الكلمات والجمل اللي تكررها انت دائماً. مثال: "يعني"، "بالمختصر"، "هسه خلي نشوف".
 
 ## What I will not claim
 
-Numbers I cannot show, results that are not mine, tools I have not used. Write them down so the
-skills refuse them for you instead of you catching it in the edit.
+- أرقام ونتايج ما أگدر أثبتها.
+- نجاح مو مالتي أو تجربة ما سويتها.
+- أدوات أو طرق ما جربتها بنفسي.
+- وعود بمشاهدات أو فلوس.
 
 ## My format
 
-Length, how a video opens, whether there is an intro, whether you swear, whether you appear on
-camera, what the desk looks like.
+**[؟]** جاوب على هذني:
+- طول الفيديو المعتاد؟
+- تطلع بوجهك لو صوت بس؟
+- اكو مقدمة ثابتة لو تدخل بالموضوع على طول؟
+- شنو مجال القناة؟
