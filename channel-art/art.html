@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<title>ماذا لو؟ Lab — channel art</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@700&family=Space+Grotesk:wght@500;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; overflow: hidden; background: #070a1f; }
+  .ar { font-family: 'Noto Naskh Arabic', serif; direction: rtl; }
+  .lat { font-family: 'Space Grotesk', sans-serif; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+// Renders the avatar (800x800) or the banner (2560x1440) depending on ?mode=
+const mode = new URLSearchParams(location.search).get('mode') || 'avatar';
+let seed = 21; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const stars = (w, h, n, maxR) => Array.from({ length: n }, () => {
+  const r = rnd() * maxR + .4, o = .25 + rnd() * .75;
+  return `<circle cx="${rnd() * w}" cy="${rnd() * h}" r="${r}" fill="#fff" opacity="${o}"/>`;
+}).join('');
+const defs = `
+  <radialGradient id="bg" cx=".5" cy=".42" r=".8"><stop offset="0" stop-color="#1f1a5c"/><stop offset=".55" stop-color="#0f1236"/><stop offset="1" stop-color="#070a1f"/></radialGradient>
+  <radialGradient id="neb1"><stop offset="0" stop-color="#6b3fd1" stop-opacity=".55"/><stop offset="1" stop-color="#6b3fd1" stop-opacity="0"/></radialGradient>
+  <radialGradient id="neb2"><stop offset="0" stop-color="#1fa6c9" stop-opacity=".4"/><stop offset="1" stop-color="#1fa6c9" stop-opacity="0"/></radialGradient>
+  <radialGradient id="earth" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#7fd3ff"/><stop offset=".45" stop-color="#2f7fd0"/><stop offset="1" stop-color="#0e2a66"/></radialGradient>
+  <radialGradient id="atm"><stop offset=".86" stop-color="#7fd3ff" stop-opacity="0"/><stop offset=".95" stop-color="#9fe2ff" stop-opacity=".55"/><stop offset="1" stop-color="#9fe2ff" stop-opacity="0"/></radialGradient>
+  <radialGradient id="moonA" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff6dc"/><stop offset=".6" stop-color="#d9cfb4"/><stop offset="1" stop-color="#8f8670"/></radialGradient>
+  <radialGradient id="moonB" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ffe0b8"/><stop offset=".6" stop-color="#e3a978"/><stop offset="1" stop-color="#9a5f3c"/></radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe7a8"/><stop offset=".55" stop-color="#f4c76b"/><stop offset="1" stop-color="#d79a3c"/></linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="soft"><feGaussianBlur stdDeviation="40"/></filter>`;
+
+function earth(cx, cy, r) {
+  // simple continents as soft blobs, clipped to the globe
+  return `<clipPath id="ec${cx}"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath>
+    <circle cx="${cx}" cy="${cy}" r="${r * 1.12}" fill="url(#atm)"/>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#earth)"/>
+    <g clip-path="url(#ec${cx})" fill="#3fae7a" opacity=".85">
+      <ellipse cx="${cx - r * .25}" cy="${cy - r * .2}" rx="${r * .32}" ry="${r * .22}" transform="rotate(-25 ${cx} ${cy})"/>
+      <ellipse cx="${cx + r * .35}" cy="${cy + r * .25}" rx="${r * .22}" ry="${r * .32}" transform="rotate(15 ${cx} ${cy})"/>
+      <ellipse cx="${cx - r * .1}" cy="${cy + r * .55}" rx="${r * .25}" ry="${r * .12}"/>
+    </g>
+    <g clip-path="url(#ec${cx})" fill="#fff" opacity=".45">
+      <ellipse cx="${cx - r * .1}" cy="${cy - r * .55}" rx="${r * .5}" ry="${r * .06}"/>
+      <ellipse cx="${cx + r * .2}" cy="${cy + r * .05}" rx="${r * .45}" ry="${r * .05}"/>
+    </g>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#000" stroke-opacity=".0"/>
+    <path d="M${cx + r * .2},${cy - r} A${r},${r} 0 0 1 ${cx + r * .2},${cy + r} A${r * .75},${r} 0 0 0 ${cx + r * .2},${cy - r}Z" fill="#050818" opacity=".45" transform="rotate(20 ${cx} ${cy})"/>`;
+}
+const moon = (cx, cy, r, g) => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#${g})"/><circle cx="${cx - r * .3}" cy="${cy + r * .1}" r="${r * .16}" fill="#000" opacity=".12"/><circle cx="${cx + r * .25}" cy="${cy - r * .3}" r="${r * .1}" fill="#000" opacity=".1"/>`;
+
+if (mode === 'avatar') {
+  const W = 800, H = 800;
+  document.getElementById('root').innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><defs>${defs}</defs>
+    <rect width="${W}" height="${H}" fill="url(#bg)"/>
+    <circle cx="250" cy="260" r="260" fill="url(#neb1)"/><circle cx="600" cy="600" r="240" fill="url(#neb2)"/>
+    ${stars(W, H, 120, 1.8)}
+    <ellipse cx="400" cy="410" rx="300" ry="96" fill="none" stroke="#f4c76b" stroke-opacity=".55" stroke-width="5" transform="rotate(-18 400 410)"/>
+    <text x="400" y="560" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="520" fill="url(#gold)" filter="url(#glow)">؟</text>
+    <path d="M${400 - 300 * Math.cos(.314)},${410 + 300 * Math.sin(.314)}" />
+    ${moon(400 + 300 * Math.cos(-.314) * .98, 410 + 96 * Math.sin(-.314) * -1 - 70, 38, 'moonA')}
+    ${moon(400 - 290 * Math.cos(-.314), 410 + 120, 30, 'moonB')}
+    <text x="400" y="700" text-anchor="middle" class="lat" font-family="Space Grotesk" font-weight="700" font-size="74" letter-spacing="14" fill="#ffffff">LAB</text>
+  </svg>`;
+} else {
+  const W = 2560, H = 1440;
+  // YouTube safe area (visible on every device): 1546 x 423, centred
+  const sx = (W - 1546) / 2, sy = (H - 423) / 2;
+  document.getElementById('root').innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><defs>${defs}</defs>
+    <rect width="${W}" height="${H}" fill="url(#bg)"/>
+    <circle cx="520" cy="420" r="620" fill="url(#neb1)"/><circle cx="2100" cy="1050" r="640" fill="url(#neb2)"/><circle cx="1500" cy="300" r="420" fill="url(#neb1)" opacity=".6"/>
+    ${stars(W, H, 520, 2.4)}
+    <g>
+      <ellipse cx="${sx + 300}" cy="${sy + 212}" rx="290" ry="74" fill="none" stroke="#f4c76b" stroke-opacity=".5" stroke-width="4" transform="rotate(-14 ${sx + 300} ${sy + 212})"/>
+      ${earth(sx + 300, sy + 212, 160)}
+      ${moon(sx + 560, sy + 120, 44, 'moonA')}
+      ${moon(sx + 40, sy + 300, 34, 'moonB')}
+    </g>
+    <text x="${sx + 1546}" y="${sy + 215}" text-anchor="start" direction="rtl" font-family="Noto Naskh Arabic" font-weight="700" font-size="190" fill="#ffffff" filter="url(#glow)">ماذا لو<tspan fill="url(#gold)">؟</tspan></text>
+    <rect x="${sx + 640}" y="${sy + 76}" width="230" height="110" rx="30" fill="url(#gold)"/>
+    <text x="${sx + 755}" y="${sy + 156}" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="76" letter-spacing="6" fill="#16123a">LAB</text>
+    <text x="${sx + 1546}" y="${sy + 330}" text-anchor="start" direction="rtl" font-family="Noto Naskh Arabic" font-weight="700" font-size="68" fill="#f4c76b">أسئلة مستحيلة… بأجوبة علمية</text>
+    <text x="${sx + 1546}" y="${sy + 405}" text-anchor="end" font-family="Space Grotesk" font-weight="500" font-size="40" letter-spacing="3" fill="#cfd6ff" opacity=".85">IMPOSSIBLE QUESTIONS · REAL SCIENCE</text>
+    ${new URLSearchParams(location.search).has('guides') ? `<rect x="${sx}" y="${sy}" width="1546" height="423" fill="none" stroke="#ff3b6b" stroke-width="4" stroke-dasharray="20 12"/>` : ''}
+  </svg>`;
+}
+</script>
+</body>
+</html>
