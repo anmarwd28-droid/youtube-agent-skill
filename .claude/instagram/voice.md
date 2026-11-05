@@ -1,67 +1,73 @@
 # voice.md
 
-Fill this in (it lives at `.claude/instagram/voice.md` in the project). Every skill in the
-pack reads it. Ten minutes here is the difference between scripts you shoot and
-scripts you rewrite.
-
-If you would rather not fill it in by hand, send Claude three of your own reels
-or captions and say "write my voice.md from these". That works better than
-guessing at the answers.
-
-This file matters more on Instagram than anywhere else, because you have to say
-the words out loud. A line you would never say is not a draft, it is a retake.
+> **مسودة أولية لحساب جديد.** الحساب ما نزل بيه شي بعد، فهذا صوت مبدئي كتبه Claude.
+> بعد أول أسبوع من الريلز، انطي Claude نصوصهن وگول "عدّل voice.md على هذني".
+> الأقسام اللي بيها **[؟]** لازم تجاوبها انت.
 
 ---
 
 ## Who I am
 
-- **Name:**
-- **Handle:**
-- **What I do, in one sentence:**
-- **Who I am talking to:** (be specific: "photographers charging under $2,000",
-  not "creatives")
-- **What I sell:**
+- **Handle:** q3_tvm
+- **What I do, in one sentence:** محتوى إسلامي قصير يذكّر الواحد بربه بوسط يومه: أذكار، قصص، تدبر آيات، ونصايح إيمانية.
+- **Who I am talking to:** **[؟]** شخص واحد بالضبط. مثال: "شاب أو بنية بالعشرينات، يصلي بس يحس قلبه بعيد، ويسكرول بالليل قبل لا ينام".
+- **What I sell:** ما أبيع شي. الهدف إن الناس تتذكر، وتحفظ الريل، وتدزه لغيرها.
+- **التوجه:** عام لكل المسلمين. ماكو خلافات مذهبية، ولا جدال، ولا نقد لأي طرف.
 
 ## What I sound like
 
-- **Three of my own reels or captions that sound most like me:** (paste them)
-- **On camera I am:** (fast and loud / dry / calm / funny / deadpan)
-- **Words I actually use:**
+- **Format:** ريلز أنميشن بدون وجه. صاحب الحساب يسجل الصوت، وبعدين ينسوى عليه أنميشن شبه واقعي يمشي ويا الكلام.
+- **On camera I am:** هادئ، دافي، وقريب. مثل واحد يحچي ويا صديقه بالليل، مو مثل خطيب على منبر.
+- **اللغة:** لهجة عراقية بسيطة بالكلام. الآيات والأدعية والأحاديث تنگال بنصها العربي الفصيح وبعدين تنشرح بالعراقي.
+- **Words I actually use:** **[؟]** الكلمات اللي تكررها انت. مثال: "يا ربي"، "تدري؟"، "خلي أگلك".
 - **Words I would never say out loud:**
-- **Do I swear:** (yes / mild / no)
-- **Emoji in captions:** (never / one, rarely / freely)
-- **Face on camera:** (always / sometimes / faceless)
-- **Voiceover or to-camera:**
-- **Pace:** (words per minute, if you have timed yourself reading a script.
-  `beats.py --wpm` uses this. Most people are between 150 and 200.)
+  - تخويف وتهديد: "راح تنحرگ"، "إذا ما دزيت هذا الريل...".
+  - "دزها لعشرة أشخاص وراح يصيرلك خير" وأي سلسلة من هالنوع.
+  - مبالغات فارغة: "سر ما يعرفه أحد"، "معجزة راح تصدمك".
+  - فصحى رسمية بالشرح: "أيها الإخوة الكرام"، "في هذا المقطع سوف نتحدث".
+- **Do I swear:** لا.
+- **Emoji in captions:** قليل، وحدة بس إذا تخدم المعنى (🤍 أو 🌙).
+- **Face on camera:** بدون وجه.
+- **Voiceover or to-camera:** فويس أوفر.
+- **Pace:** هادئ. الكلام الديني يحتاج وقفات، فالأرجح 130 لـ 150 كلمة بالدقيقة. **[؟]** وقّت نفسك على سكربت واحد وعدّل الرقم.
+
+## Content pillars
+
+1. **أدعية وأذكار:** دعاء قصير أو ذكر، وشوكت ينگال، وشنو فضله، كله بمصدره.
+2. **قصص إسلامية:** قصص الأنبياء والصحابة وأهل البيت والصالحين، وكل قصة إلها درس واحد.
+3. **تدبر آيات:** آية وحدة، معناها، وشلون نعيشها اليوم.
+4. **نصايح إيمانية يومية:** الصبر، الصلاة، بر الوالدين، الأخلاق، القلق، والرجوع لله.
 
 ## My positions
 
-Three to five things I believe that some of my audience does not. These are
-where the good reels come from.
+**[؟]** ثلاث أفكار تؤمن بيها انت. هذني أمثلة تگدر تبدل بيهن:
 
-1.
-2.
-3.
+1. الدين رحمة قبل ما يكون حساب، والكلام الهادي يوصل أكثر من الصراخ.
+2. ذكر صغير كل يوم أحسن من حماس كبير ينطفي بعد أسبوع.
+3. **[؟]**
 
 ## Off limits
 
-- **Topics I do not post about:**
-- **Clients, numbers or names I cannot say publicly:**
-- **Claims I am not allowed to make:** (regulated industry, employer policy, NDA)
+- **Topics I do not post about:** الخلافات المذهبية، والسياسة، والتكفير، والفتاوى الشخصية ("حلال لو حرام"). الفتوى تنطلب من أهل العلم.
+- **تصوير الأنبياء والصحابة وأهل البيت:** ما ينرسمون بوجوه ولا بأجسام بالأنميشن. نستخدم مناظر طبيعية، وسما، وصحرا، ومساجد، وأيادي، وظلال من بعيد، أو كتابة.
+- **Claims I am not allowed to make:**
+  - ولا آية بدون اسم السورة ورقم الآية.
+  - ولا حديث بدون مصدره، وماكو حديث ضعيف أو موضوع.
+  - إذا Claude مو متأكد من صحة نص أو مصدره، يكتب `{{تأكد من المصدر}}` وما يخترع.
 
 ## Proof I can use
 
-Real numbers, outcomes and stories I am happy to put my name on. The skills will
-never invent one, so if this section is empty, every draft comes back with
-`{{your number}}` in it.
+المصادر هنا هي الدليل: القرآن الكريم وكتب الحديث المعتمدة. **[؟]** إذا عندك شيخ أو كتاب أو موقع ترجع إله للتأكد، اكتبه هنا.
 
--
 -
 -
 
 ## The ask
 
-- **My keyword CTA, if I use one:** (one word, sayable, no spaces)
-- **What the keyword sends them:**
-- **Where my link goes:**
+- **My keyword CTA, if I use one:** ماكو بالبداية. الطلب يكون واحد من هذني: "احفظه حتى تتذكره"، أو "دزه لواحد يحتاجه"، أو "اكتب آمين".
+- **What the keyword sends them:** —
+- **Where my link goes:** **[؟]**
+
+## Posting
+
+- ريل كل يوم، ونبدل بين الأقسام الأربعة حتى ما يصير الحساب مكرر.

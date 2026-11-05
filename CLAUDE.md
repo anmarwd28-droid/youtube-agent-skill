@@ -8,3 +8,10 @@
 ## YouTube content
 
 - Write YouTube scripts, titles and descriptions in Iraqi Arabic unless I ask otherwise.
+
+## Instagram content
+
+- Account q3_tvm: Islamic content for all Muslims, faceless animated Reels over my voiceover.
+- Write Instagram scripts and captions in Iraqi Arabic; quote Quran, hadith and duas in their original Arabic with the source.
+- Never invent or guess a verse reference or hadith source; mark it `{{تأكد من المصدر}}` instead.
+- Never depict prophets, companions or Ahl al-Bayt in animation prompts.
