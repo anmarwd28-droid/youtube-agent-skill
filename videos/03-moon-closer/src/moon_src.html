@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@500;700&family=Space+Grotesk:wght@500;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 720px; height: 1280px; overflow: hidden; background: #04060f; }
+  #stage { position: relative; width: 720px; height: 1280px; overflow: hidden; }
+  svg.l { position: absolute; inset: 0; }
+  #cap { position: absolute; left: 40px; right: 40px; top: 108px; text-align: center; }
+  #cap .line { font-family: 'Noto Naskh Arabic', serif; direction: rtl; font-size: 46px; font-weight: 700; line-height: 1.55; color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.7); }
+  #cap .line.big { font-size: 58px; }
+  .list { position: absolute; top: 420px; right: 14px; width: 150px; height: 280px; border-radius: 20px; background: rgba(8,12,30,.5); border: 1px solid rgba(255,255,255,.14); }
+  .list .hd { position: absolute; top: 12px; left: 0; right: 0; text-align: center; font-family: 'Noto Naskh Arabic', serif; font-size: 18px; font-weight: 700; color: rgba(255,255,255,.6); }
+  .list .rail, .list .fill { position: absolute; right: 22px; width: 2px; }
+  .list .rail { top: 64px; bottom: 40px; background: rgba(255,255,255,.18); }
+  .list .fill { top: 64px; background: #f4c76b; }
+  .list .it { position: absolute; right: 36px; width: 106px; text-align: right; transform: translateY(-50%); font-family: 'Noto Naskh Arabic', serif; font-size: 20px; font-weight: 700; white-space: nowrap; direction: rtl; }
+  .list .dot { position: absolute; right: 17px; width: 12px; height: 12px; border-radius: 50%; transform: translateY(-50%); }
+  .chip { position: absolute; padding: 6px 16px 9px; border-radius: 14px; background: rgba(244,199,107,.96); color: #1c140a; white-space: nowrap; opacity: 0;
+          font-family: 'Noto Naskh Arabic', serif; font-weight: 700; font-size: 28px; direction: rtl; transform: translate(-50%, -50%); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+  .chip.dark { background: rgba(8,12,30,.72); color: #fff; border: 1px solid rgba(255,255,255,.2); }
+  .chip.big { font-size: 40px; padding: 8px 24px 12px; }
+  .chip.red { background: rgba(214,64,64,.95); color: #fff; }
+  #note { position: absolute; left: 0; right: 0; top: 1180px; text-align: center; font-family: 'Noto Naskh Arabic', serif; font-size: 17px; color: rgba(255,255,255,.5); direction: rtl; }
+  #cmt { position: absolute; left: 60px; right: 60px; top: 520px; padding: 22px 26px; border-radius: 22px; background: #fff; direction: rtl; opacity: 0;
+         font-family: 'Noto Naskh Arabic', serif; box-shadow: 0 14px 50px rgba(0,0,0,.5); }
+  #cmt .u { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; color: #555; }
+  #cmt .u i { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,#5b7bd5,#9a5bd5); display: inline-block; }
+  #cmt .q { margin-top: 10px; font-size: 34px; font-weight: 700; color: #111; line-height: 1.5; }
+  #cmt .h { margin-top: 8px; font-size: 22px; color: #777; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="v" class="l" width="720" height="1280" viewBox="0 0 720 1280">
+    <defs>
+      <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.2"/></filter>
+      <filter id="haze" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="14"/></filter>
+      <filter id="grain"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter>
+      <radialGradient id="vig" cx=".5" cy=".46" r=".78"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></radialGradient>
+      <radialGradient id="moonGlow"><stop offset="0" stop-color="#fff6dc" stop-opacity=".55"/><stop offset=".35" stop-color="#cfd8ff" stop-opacity=".18"/><stop offset="1" stop-color="#9fb0ff" stop-opacity="0"/></radialGradient>
+      <radialGradient id="lampG"><stop offset="0" stop-color="#ffd59a" stop-opacity=".9"/><stop offset=".35" stop-color="#ffb35c" stop-opacity=".3"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+      <radialGradient id="lavaG"><stop offset="0" stop-color="#ffd08a" stop-opacity=".95"/><stop offset=".3" stop-color="#ff6a2a" stop-opacity=".5"/><stop offset="1" stop-color="#ff3a1a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a5d86"/><stop offset="1" stop-color="#0b2238"/></linearGradient>
+      <marker id="arrY" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f4c76b"/></marker>
+      <marker id="arrW" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/></marker>
+    </defs>
+    <g id="sA"></g>
+    <g id="sB"></g>
+  </svg>
+  <canvas id="glA" style="position:absolute;left:0;top:0;width:720px;height:1280px;opacity:0"></canvas>
+  <canvas id="gl" style="position:absolute;left:0;top:0;width:720px;height:1280px;opacity:0"></canvas>
+  <svg id="ov" class="l" width="720" height="1280" viewBox="0 0 720 1280"><g id="oA"></g><g id="oB"></g></svg>
+  <svg id="fg" class="l" width="720" height="1280" viewBox="0 0 720 1280">
+    <rect width="720" height="1280" fill="url(#vig)"/>
+    <rect width="720" height="1280" filter="url(#grain)" opacity=".05" style="mix-blend-mode:overlay"/>
+    <rect id="flash" width="720" height="1280" fill="#fff6dc" opacity="0"/>
+    <rect id="fade" width="720" height="1280" fill="#000" opacity="0"/>
+  </svg>
+  <div id="ui"></div>
+  <div id="cmt"><div class="u"><i></i>أحد متابعي القناة</div><div class="q">«أصنع فيديو عن ماذا يحدث لو أصبح القمر أقرب»</div><div class="h">👍 ❤️</div></div>
+  <div id="note">* الأحجام والمسافات ليست بمقياسها الحقيقي</div>
+  <div id="cap"><div class="line"></div></div>
+</div>
+<script type="module">import { init } from './gl3d.js'; window.gl3dReady = Promise.all([init(document.getElementById('glA')), init(document.getElementById('gl'))]).then(([a, g]) => { window.GLA = a; window.GL = g; return true; });</script>
+<script>
+const TM = window.TIMING, TOTAL = window.TOTAL;
+const $ = id => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; };
+const ramp = (t, a, b) => clamp((t - a) / (b - a));
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (a, b, k) => { const A = hex(a), B = hex(b); return '#' + A.map((v, i) => Math.round(lerp(v, B[i], clamp(k))).toString(16).padStart(2, '0')).join(''); };
+const R = (seed => () => (seed = (seed * 16807) % 2147483647) / 2147483647);
+const L = i => TM[i], S0 = i => TM[i].start;
+const W = (i, j) => TM[i].words[j];
+const WS = (i, j) => TM[i].words[Math.min(j, TM[i].words.length - 1)][1];
+const pmod = (a, m) => ((a % m) + m) % m;
+
+// ---------- captions (chunked, like Short #1) ----------
+const KEY = new Set(['اقتربَ', 'القمرُ', 'فجأة؟', 'أربعمئةِ', 'ألفِ', 'نصفِ', 'بمرّتين،', 'بأربعِ', 'مرّات.', 'البحر.', 'المدَّ', 'والجزر.', 'بثماني', 'تغمرُ', 'مرّتينِ', 'الأرضَ', 'نفسَها.', 'زلازلُ', 'وبراكينُ', 'يبتعدُ', 'أربعةِ', 'سنتيمتراتٍ', 'متابعينا.', 'سؤالَك']);
+const CH = [];
+TM.forEach((l, i) => { let cur = [];
+  l.words.forEach((w, j) => { cur.push(w); const p = /[،.…:؟]$/.test(w[0]); if ((p && cur.length >= 3) || cur.length >= 7 || j === l.words.length - 1) { CH.push({ i, w: cur }); cur = []; } }); });
+function renderCap(t) {
+  const el = $('cap'), line = el.querySelector('.line');
+  let k = -1; CH.forEach((c, j) => { if (t >= c.w[0][1] - .12) k = j; });
+  if (k < 0) { el.style.opacity = 0; return; }
+  const c = CH[k], nx = CH[k + 1], endT = c.w[c.w.length - 1][2];
+  const inK = ease(ramp(t, c.w[0][1] - .12, c.w[0][1] + .15));
+  const outK = nx ? 1 - ease(ramp(t, Math.min(nx.w[0][1] - .12, endT + 1.2), Math.min(nx.w[0][1], endT + 1.5))) : 1 - ramp(t, TOTAL - .6, TOTAL - .1);
+  el.style.opacity = inK * outK; el.style.transform = `translateY(${(1 - inK) * 12}px)`;
+  line.className = 'line' + (c.i === 0 ? ' big' : '');
+  line.innerHTML = c.w.map(([w, s]) => { const q = ramp(t, s - .06, s + .12), key = KEY.has(w);
+    return `<span style="color:${key ? mix('#77736d', '#f4c76b', q) : mix('#77736d', '#ffffff', q)}">${w}</span>`; }).join(' ');
+}
+
+//@@SHARED@@
+//@@PERSON@@
+//@@LAMP@@
+
+// ---------- scenes ----------
+let F = {};
+const ROW = 1000;
+// the Moon sits in the sky; a soft halo behind it in the bg, the city in the ov layer in front
+function moonSky(x, y, r, bright = 1) {
+  F.moon = { x, y, r, a: 1, sunI: 1 }; F.light = [x, y];
+  return `<circle cx="${x}" cy="${y}" r="${r * (3.2 + bright)}" fill="url(#moonGlow)" opacity="${.55 + .45 * bright}"/>`;
+}
+function nightSky(id, t, glow = 0) {
+  return `<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix('#04060f', '#1a2448', glow)}"/><stop offset="1" stop-color="${mix('#121a36', '#3b4a78', glow)}"/></linearGradient></defs>` +
+    `<rect width="720" height="1280" fill="url(#${id})"/>` + stars(1 - glow * .6, t);
+}
+function city(t, glow, look, phones, walkUntil) {
+  let s = skyline(5, 930, mix('#0d1222', '#2a3456', glow), 0, .6) + skyline(8, 990, mix('#0a0e1c', '#1e2644', glow), 0, .55);
+  s += `<rect y="985" width="720" height="295" fill="${mix('#121521', '#2c3044', glow)}"/><rect y="985" width="720" height="8" fill="${mix('#22283a', '#4a5270', glow)}"/>` +
+       `<rect y="1090" width="720" height="190" fill="#0b0d15"/>` + Array.from({ length: 6 }, (_, i) => `<rect x="${i * 140 + 20}" y="1180" width="70" height="8" fill="#ddd" opacity=".15"/>`).join('');
+  s += lampPost(40, 990, 300, 1) + lampPost(680, 990, 300, 1) + palm(560, 992, 250, mix('#090c16', '#1a2238', glow), t);
+  CROWD.forEach((c, i) => {
+    const stopT = walkUntil + i * .12, wt = Math.min(t, stopT) - (walkUntil - 2.2);
+    const SPD = 300 * c.s * 1.05 * Math.sin(.34) * 4.0 / Math.PI, x = c.x + c.dir * Math.max(0, wt) * SPD;
+    s += person(x, 1000 + (i % 2) * 14, { s: c.s * 1.05, face: c.dir, moving: t < stopT && wt > 0, phase: wt * 4.0, amp: .34, top: c.top, pants: c.pants, skin: c.skin, hair: c.hair,
+      lookUp: look * .95, phone: (i === 1 || i === 2) ? phones : 0, t }); });
+  s += `<rect width="720" height="1280" fill="#cfd8ff" opacity="${.06 * glow}"/>`;
+  return s;
+}
+// 0: hook: the Moon grows huge over a night street
+function sceneHook(t) {
+  const k = ease(ramp(t, .2, 3.1));
+  const s = nightSky('skH', t, k * .6) + moonSky(360, 520, lerp(34, 150, k), k);
+  F.ov = city(t, k * .7, ease(ramp(t, .8, 1.6)), ease(ramp(t, 1.6, 2.2)), 1.0);
+  return s;
+}
+// 1: space: Earth and Moon, real distance, then half distance
+const EP = [220, 930], MP0 = [560, 470];
+function sceneSpace(t) {
+  const half = ease(ramp(t, W(2, 2)[1], W(2, 5)[1] + .2));
+  const mp = [lerp(MP0[0], (EP[0] + MP0[0]) / 2, half), lerp(MP0[1], (EP[1] + MP0[1]) / 2, half)];
+  let s = space(t);
+  const dx = mp[0] - EP[0], dy = mp[1] - EP[1], dd = Math.hypot(dx, dy), ux = dx / dd, uy = dy / dd;
+  s += `<line x1="${EP[0] + ux * 130}" y1="${EP[1] + uy * 130}" x2="${mp[0] - ux * 40}" y2="${mp[1] - uy * 40}" stroke="#fff" stroke-width="3" stroke-dasharray="10 10" opacity=".55" marker-start="url(#arrW)" marker-end="url(#arrW)"/>`;
+  if (half > 0) s += `<circle cx="${MP0[0]}" cy="${MP0[1]}" r="26" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2" stroke-dasharray="5 7"/>`;
+  F.earth = { x: EP[0], y: EP[1], r: 110, a: 1, sunI: 1, lights: .3 }; F.moon = { x: mp[0], y: mp[1], r: 30 * lerp(1, 1.15, half), a: 1, sunI: 1 }; F.light = [-1600, 700];
+  F.ov = ''; F.chipM = mp;
+  return s;
+}
+// 2: back on the street: Moon twice as big and brighter, people photograph it
+function sceneSky(t) {
+  const st = WS(2, 6) - .2, k = ease(ramp(t, st, st + 1.6)), br = ease(ramp(t, WS(2, 12), WS(2, 12) + .8));
+  const s = nightSky('skS', t, .3 + .4 * br) + moonSky(360, 520, lerp(70, 140, k), .4 + .6 * br);
+  F.ov = city(t, .3 + .5 * br, 1, ease(ramp(t, S0(3), S0(3) + .6)), st);
+  F.flash = Math.max(0, 1 - Math.abs(t - (S0(3) + 1.2)) * 6) * .5;
+  return s;
+}
+// 3: tides: Earth with two water bulges pulled toward and away from the Moon
+function sceneTide(t) {
+  const st = S0(4) - .2, bulge = ease(ramp(t, WS(4, 9), WS(4, 14) + .4)), ph = Math.sin(t * 2) * .01;
+  let s = space(t, '#04071a', '#0a0f2c');
+  const ex = 360, ey = 860, er = 170;
+  const ry = er * (1.06 + .02 * (1 - bulge) + .26 * bulge + ph);
+  s += `<ellipse cx="${ex}" cy="${ey}" rx="${er * (1.02 - .02 * bulge)}" ry="${ry}" fill="#3f8fd8" opacity=".55"/><ellipse cx="${ex}" cy="${ey}" rx="${er * (1.02 - .02 * bulge)}" ry="${ry}" fill="none" stroke="#9fd4ff" stroke-width="3" opacity=".8"/>`;
+  // pull arrows toward the Moon
+  for (let i = 0; i < 3; i++) { const p = pmod(t * .8 + i / 3, 1); s += `<line x1="${ex}" y1="${ey - ry - 10 - p * 60}" x2="${ex}" y2="${ey - ry - 40 - p * 60}" stroke="#f4c76b" stroke-width="5" opacity="${(1 - p) * .9}" marker-end="url(#arrY)"/>`; }
+  F.earth = { x: ex, y: ey, r: er, a: 1, sunI: 1, lights: .2 }; F.moon = { x: 360, y: 440, r: 44, a: 1, sunI: 1 }; F.light = [-1600, 700];
+  F.ov = '';
+  return s;
+}
+// 4: a coastal city: the sea surges in, twice a day
+function sceneFlood(t) {
+  const st = S0(5) - .2, cyc = (t - st) / (S0(6) - st);   // two high tides in this scene
+  const lvl = lerp(1060, 860, .5 - .5 * Math.cos(cyc * Math.PI * 4)) - 20 * ramp(t, st, st + .3);
+  const s = nightSky('skF', t, .45) + moonSky(380, 470, 120, 1);
+  let o = skyline(12, 900, '#1a2240', 0, .55);
+  o += `<rect y="895" width="720" height="40" fill="#2a2e3c"/>` + palm(120, 900, 220, '#141a2e', t) + palm(620, 900, 240, '#141a2e', t) + lampPost(360, 900, 260, 1);
+  // houses on the shore
+  [[40, 140], [200, 120], [380, 150], [540, 130]].forEach(([x, h]) => { o += `<rect x="${x}" y="${900 - h}" width="140" height="${h}" fill="#232a44"/>` + [0, 1].map(j => `<rect x="${x + 20 + j * 60}" y="${900 - h + 30}" width="34" height="40" fill="#ffcf87" opacity=".7"/>`).join(''); });
+  // sea surging
+  let wv = `M-20,${lvl}`; for (let x = -20; x <= 760; x += 40) wv += ` Q${x + 20},${lvl - 14 + Math.sin(t * 3 + x * .05) * 8} ${x + 40},${lvl}`;
+  o += `<path d="${wv} L760,1300 L-20,1300Z" fill="url(#seaG)" opacity=".95"/><path d="${wv}" stroke="#cfe8f8" stroke-width="4" fill="none" opacity=".8"/>`;
+  for (let i = 0; i < 8; i++) { const x = pmod(i * 97 + t * 60, 760) - 20; o += `<path d="M${x},${lvl + 10} q20,-12 40,0" stroke="#fff" stroke-width="3" fill="none" opacity=".5"/>`; }
+  // moon reflection
+  o += `<rect x="330" y="${lvl + 10}" width="100" height="${1280 - lvl}" fill="#fff6dc" opacity=".12" filter="url(#soft)"/>`;
+  F.ov = o;
+  return s;
+}
+// 5: the Earth itself is pulled: quake + volcano under a huge Moon
+function sceneQuake(t) {
+  const st = S0(6), q = ramp(t, WS(6, 9), WS(6, 9) + .3), vol = ease(ramp(t, WS(6, 13), WS(6, 13) + 1));
+  const sh = q * (1 - ramp(t, S0(7) - .6, S0(7))) * (Math.sin(t * 61) * 7 + Math.sin(t * 37) * 5);
+  const s = nightSky('skQ', t, .5) + moonSky(250 + sh * .2, 430, 170, 1);
+  let o = `<g transform="translate(${sh},${sh * .4})">`;
+  const vx = 470, top = 760;
+  o += `<circle cx="${vx}" cy="${top}" r="${160 + vol * 80}" fill="url(#lavaG)" opacity="${vol}"/>`;
+  let pl = ''; for (let i = 0; i < 24; i++) { const p = pmod(t * .25 + i / 24, 1), wob = Math.sin(p * 6 + i) * 30 * p;
+    pl += `<circle cx="${vx + wob + p * 90}" cy="${top - p * 380}" r="${16 + p * 60}" fill="${i % 3 ? '#2a2422' : '#4a403a'}" opacity="${vol * (1 - p) * .7}"/>`; }
+  o += `<g filter="url(#soft)">${pl}</g>`;
+  o += `<path d="M150,1000 L410,${top} L530,${top} L760,1000Z" fill="#1d1715"/><path d="M150,1000 L410,${top} L440,${top} L260,1000Z" fill="#2c231f"/>`;
+  for (let i = 0; i < 3; i++) o += `<path d="M${vx - 30 + i * 25},${top + 2} q${-14 + i * 12},${70 + i * 20} ${-30 + i * 26},${180 + i * 30}" stroke="#ff7a2e" stroke-width="${7 - i * 1.5}" fill="none" opacity="${vol}"/>`;
+  o += skyline(21, 1000, '#0f1424', 0, .3) + `<rect y="995" width="720" height="290" fill="#14161f"/>`;
+  // ground cracks
+  const cr = q; o += `<path d="M60,1100 l70,30 l40,-20 l90,40 l60,-10 l100,50 l80,-30 l120,40" stroke="#ff8a3c" stroke-width="4" fill="none" stroke-dasharray="800" stroke-dashoffset="${800 * (1 - cr)}" opacity=".85"/>`;
+  o += `</g>`;
+  F.ov = o;
+  return s;
+}
+// 6: reality: the Moon is slowly drifting away
+function sceneReal(t) {
+  const st = S0(7) - .2, k = ease(ramp(t, WS(7, 5), S0(8) - .3));
+  let s = space(t, '#060a1e', '#0d1336');
+  const mx = lerp(470, 600, k), my = lerp(560, 430, k);
+  s += `<line x1="300" y1="830" x2="${mx - 30}" y2="${my + 30}" stroke="#fff" stroke-width="3" stroke-dasharray="10 10" opacity=".45"/>`;
+  s += `<line x1="${mx + 20}" y1="${my - 50}" x2="${mx + 70}" y2="${my - 100}" stroke="#f4c76b" stroke-width="5" marker-end="url(#arrY)" opacity="${ramp(t, WS(7, 5), WS(7, 5) + .5)}"/>`;
+  F.earth = { x: 240, y: 900, r: 130, a: 1, sunI: 1, lights: .3 }; F.moon = { x: mx, y: my, r: 36, a: 1, sunI: 1 }; F.light = [-1600, 600];
+  F.ov = '';
+  return s;
+}
+// 7: CTA: the viewer's comment, then "your turn"
+function sceneCTA(t) {
+  const st = S0(8), k = ease(ramp(t, st - .2, st + .6));
+  let s = space(t, '#070a1f', '#120f33');
+  F.moon = { x: 360, y: 980, r: 90, a: 1, sunI: 1 }; F.light = [-1200, 700]; F.earth = null;
+  const b = Math.abs(Math.sin(t * 3)) * 8, a2 = ramp(t, WS(8, 6), WS(8, 6) + .4);
+  F.ov = `<g opacity="${a2}" transform="translate(360,${820 - b})"><path d="M-46,-34 h92 a14,14 0 0 1 14,14 v40 a14,14 0 0 1 -14,14 h-52 l-22,20 v-20 h-18 a14,14 0 0 1 -14,-14 v-40 a14,14 0 0 1 14,-14z" fill="#fff"/>` +
+    `<circle cx="-24" cy="0" r="6" fill="#16123a"/><circle cx="0" cy="0" r="6" fill="#16123a"/><circle cx="24" cy="0" r="6" fill="#16123a"/></g>`;
+  return s;
+}
+const SCENES = [
+  { s: 0, f: sceneHook }, { s: S0(1) - .2, f: sceneSpace }, { s: WS(2, 6) - .4, f: sceneSky }, { s: S0(4) - .25, f: sceneTide }, { s: S0(5) - .2, f: sceneFlood },
+  { s: S0(6) - .2, f: sceneQuake }, { s: S0(7) - .2, f: sceneReal }, { s: S0(8) - .2, f: sceneCTA },
+];
+const XF = .5;
+
+// ---------- UI ----------
+const TLI = [['٣٨٤ ألف كم', S0(1)], ['١٩٢ ألف كم', WS(2, 2)], ['أقرب…', S0(6)]];
+const CHIPS = [
+  ['c1', '٣٨٤٬٤٠٠ كم', 0, 0, '', WS(1, 5), WS(2, 2)],
+  ['c2', 'نصف المسافة', 0, 0, '', WS(2, 4), WS(2, 6) - .3],
+  ['c3', 'أكبر ×٢', 200, 740, 'big', WS(2, 9), S0(3)], ['c4', 'أسطع ×٤', 520, 740, 'big', WS(2, 12), S0(3)],
+  ['c5', 'المدّ أقوى ×٨', 360, 1130, 'big', WS(4, 14) - .1, S0(5)],
+  ['c6', 'مرّتين كل يوم', 360, 760, 'dark', WS(5, 4), S0(6)],
+  ['c7', 'زلازل', 180, 680, 'red', WS(6, 9), S0(7)], ['c8', 'براكين', 560, 600, 'red', WS(6, 13), S0(7)],
+  ['c9', 'يبتعد ٣٫٨ سم كل سنة', 360, 1120, 'big', WS(7, 8), S0(8)],
+  ['c10', '@MadhaLawLab', 360, 1110, 'dark', WS(8, 6) + .3, 999],
+];
+$('ui').innerHTML = `<div class="list" id="tl"><div class="hd">المسافة</div><div class="rail"></div><div class="fill" id="tlf"></div>` +
+  TLI.map((x, i) => { const y = 64 + i * 88; return `<div class="it" id="tli${i}" style="top:${y}px">${x[0]}</div><div class="dot" id="tld${i}" style="top:${y}px"></div>`; }).join('') + `</div>` +
+  CHIPS.map(c => `<div class="chip ${c[4]}" id="${c[0]}" style="${c[1][0] === '@' ? 'direction:ltr;' : ''}left:${c[2]}px;top:${c[3]}px">${c[1]}</div>`).join('');
+function renderUI(t) {
+  const vis = ease(ramp(t, S0(1), S0(1) + .4)) * (1 - ease(ramp(t, S0(7) - .4, S0(7))));
+  $('tl').style.opacity = vis * (t > S0(4) - .25 && t < S0(6) - .2 ? .0 : 1) + 0;
+  let act = 0; TLI.forEach((x, i) => { if (t >= x[1]) act = i; });
+  $('tlf').style.height = (act * 88) + 'px';
+  TLI.forEach((x, i) => { const on = i <= act, cur = i === act;
+    $('tli' + i).style.color = cur ? '#fff' : on ? 'rgba(244,199,107,.9)' : 'rgba(255,255,255,.45)';
+    $('tld' + i).style.background = on ? '#f4c76b' : 'rgba(255,255,255,.35)';
+    $('tld' + i).style.boxShadow = cur ? '0 0 0 6px rgba(244,199,107,.25)' : 'none'; });
+  CHIPS.forEach(c => { $(c[0]).style.opacity = ease(ramp(t, c[5], c[5] + .3)) * (1 - ease(ramp(t, c[6] - .3, c[6]))); });
+  if (F.chipM) { const mx = (EP[0] + F.chipM[0]) / 2 + 70, my = (EP[1] + F.chipM[1]) / 2; ['c1', 'c2'].forEach(id => { $(id).style.left = mx + 'px'; $(id).style.top = my + 'px'; }); }
+  $('cmt').style.opacity = ease(ramp(t, S0(8), S0(8) + .5));
+  $('cmt').style.transform = `translateY(${(1 - ease(ramp(t, S0(8), S0(8) + .5))) * 30}px)`;
+  $('note').style.opacity = (t > S0(1) && t < S0(4) - .25) || (t > S0(7) && t < S0(8)) ? .85 : 0;
+}
+
+window.render = function (t) {
+  let i = 0; SCENES.forEach((sc, j) => { if (t >= sc.s) i = j; });
+  const cur = SCENES[i], prev = SCENES[i - 1], k = prev ? ease(ramp(t, cur.s, cur.s + XF)) : 1;
+  F = { t }; let ovA = '', FA = null;
+  if (prev && k < 1) { $('sA').innerHTML = prev.f(t); ovA = F.ov || ''; FA = { t, earth: F.earth, moon: F.moon, light: F.light, opacity: 1 - k }; } else $('sA').innerHTML = '';
+  F = { t, chipM: F.chipM };
+  $('sB').innerHTML = cur.f(t); $('sB').setAttribute('opacity', k);
+  $('oA').innerHTML = ovA; $('oA').setAttribute('opacity', 1 - k); $('oB').innerHTML = F.ov || ''; $('oB').setAttribute('opacity', k);
+  F.opacity = k;
+  if (window.GLA) GLA.draw(FA || { t, opacity: 0 });
+  if (window.GL) GL.draw(F);
+  $('turb').setAttribute('seed', String(Math.floor(t * 24) % 50));
+  $('flash').setAttribute('opacity', F.flash || 0);
+  $('fade').setAttribute('opacity', clamp((t - (TOTAL - .5)) / .5) + (1 - ramp(t, 0, .4)));
+  renderCap(t); renderUI(t);
+};
+</script>
+</body>
+</html>
