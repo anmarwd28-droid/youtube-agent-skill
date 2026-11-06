@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ar"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@700&family=Cairo:wght@900&display=block" rel="stylesheet">
+<style>
+html,body{margin:0;width:1280px;height:720px;overflow:hidden;background:#050817}
+#bg{position:absolute;inset:0}
+canvas{position:absolute;left:0;top:0;width:1280px;height:720px}
+#t{position:absolute;right:40px;top:150px;width:640px;text-align:center;direction:rtl;font-family:'Cairo',sans-serif;font-weight:900;color:#fff;line-height:1.05}
+#t .a{font-size:78px;color:#bfe6ff;text-shadow:0 6px 30px rgba(0,0,0,.8)}
+#t .b{font-size:132px;white-space:nowrap;text-shadow:0 8px 40px rgba(0,0,0,.9),0 3px 0 #0b1430,0 -3px 0 #0b1430,3px 0 0 #0b1430,-3px 0 0 #0b1430}
+#t .c{display:inline-block;margin-top:22px;font-size:62px;color:#1c140a;background:#f4c76b;padding:0 30px 14px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+</style></head><body>
+<svg id="bg" width="1280" height="720"><defs>
+<radialGradient id="g" cx=".3" cy=".5" r=".8"><stop offset="0" stop-color="#1b2c5a"/><stop offset="1" stop-color="#03050f"/></radialGradient>
+<radialGradient id="flk"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<filter id="b"><feGaussianBlur stdDeviation="2.5"/></filter></defs>
+<rect width="1280" height="720" fill="url(#g)"/><g id="st"></g></svg>
+<canvas id="gl"></canvas>
+<svg id="fl" width="1280" height="720" style="position:absolute;inset:0"></svg>
+<div id="t"><div class="a">ماذا لو بقيت</div><div class="b">تثلج سنة؟</div><div class="c">على الأرض كلها</div></div>
+<script>
+let s='',r=7;const R=()=>(r=(r*16807)%2147483647)/2147483647;
+for(let i=0;i<200;i++)s+=`<circle cx="${R()*1280}" cy="${R()*720}" r="${R()*1.4+.3}" fill="#fff" opacity="${.3+R()*.6}"/>`;document.getElementById('st').innerHTML=s;
+let f='';for(let i=0;i<120;i++){const z=R();f+=`<circle cx="${R()*1280}" cy="${R()*720}" r="${.8+z*z*7}" fill="url(#flk)" opacity="${.35+z*.6}" ${z>.85?'filter="url(#b)"':''}/>`}document.getElementById('fl').innerHTML=f;
+</script>
+<script type="module">
+import { init } from './gl3d_snow.js';
+const g = await init(document.getElementById('gl'), 1.5);
+g.draw({ t: 0, earth: { x: 360, y: 380, r: 300, a: 1, sunI: 1, lights: 0, snow: .78, cloudy: .2, rot: 4.15 }, light: [160, 200], opacity: 1 });
+window.sceneReady = true;
+</script></body></html>
