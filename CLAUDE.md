@@ -18,7 +18,7 @@
 
 ## Shorts rules (learned from the first Shorts)
 
-- Length: 35–50 seconds (YouTube allows up to 3 minutes, but shorter Shorts keep viewers to the end).
+- Length depends on the idea: as long as the idea really needs and no longer. Cut anything that does not add to it (YouTube allows Shorts up to 3 minutes; viewers finishing the Short matters most).
 - Keep the same look as the published Shorts: illustrated scenes with the same 2D people, the city street and skyline, the real NASA 3D Earth and Moon, captions at the top with gold keywords, gold chips, a timeline list on the side. Make it a bit more realistic each time, but never switch to a different style.
 - Facts must be scientifically correct; list them in the video's `upload.md`.
 - Never publish or schedule a video before I have watched it and said it needs no changes.
