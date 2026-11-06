@@ -1,6 +1,6 @@
 # ماذا لو اختفت كل الحيوانات من العالم؟ — Short #4
 
-61 s, 1080x1920, 30 fps. Realistic look built from silhouettes, layered haze, natural light and textures (no cartoon faces): savanna sunrise with elephants, giraffes and birds fading into the heat haze until one person is left, a starling murmuration, a school of silver fish and a cat on a wall disappearing, a misty forest where the sound wave goes flat (the audio cuts to real silence), a fridge losing meat, eggs, milk and honey, a produce stand running low, a coral colony bleaching, soil losing its earthworms and cracking, a fruit tree whose seeds no bird carries away, a lone person over endless crops, the living Earth, animal tracks in the sand forming a "?". Source in `src/`.
+61 s, 1080x1920, 30 fps. Same look as the earlier Shorts (illustrated street with the same people, gold chips, timeline, real 3D Earth), a bit more realistic: a morning street where the birds on the wire, the pigeons and a dog on a leash vanish and people stop and look around, a starling murmuration, a school of silver fish and a cat on a wall disappearing, a misty forest where the sound wave goes flat (the audio cuts to real silence), a fridge losing meat, eggs, milk and honey, a produce stand running low, a coral colony bleaching, soil losing its earthworms and cracking, a fruit tree whose seeds no bird carries away, a lone person over endless crops, the living Earth, animal tracks in the sand forming a "?". Source in `src/` (`animals2.html` is the final page; `animals.html` was the silhouette draft).
 
 ## Title
 ماذا لو اختفت كل الحيوانات من العالم؟ 🐘
@@ -20,7 +20,7 @@
 ماذا لو اختفت الحيوانات, ماذا لو, الحيوانات, الطبيعة, الشعاب المرجانية, ديدان الأرض, علوم, هل تعلم, what if all animals disappeared, science shorts
 
 ## Settings
-Not made for kids · not altered/synthetic content · Science & Technology · Arabic · cover at 2 s (savanna sunrise)
+Not made for kids · not altered/synthetic content · Science & Technology · Arabic · cover at 2 s (morning street)
 
 ## Facts (approximate, as narrated)
 - About three quarters of leading food crop types benefit from animal pollinators (FAO/IPBES).
