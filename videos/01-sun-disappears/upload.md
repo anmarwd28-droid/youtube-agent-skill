@@ -1,5 +1,7 @@
 # ماذا لو اختفت الشمس فجأة؟ — Short #1
 
+Final cut: 32 s, 3D scenes (three.js) with 2D people, synthesized music and sound effects. Source in `src3d/`.
+
 ## Title
 ماذا لو اختفت الشمس فجأة؟ 🌑
 
@@ -28,7 +30,6 @@
 - The Moon shines only by reflected sunlight.
 - Commonly cited estimates: average surface temperature near -18 °C after a week, below -70 °C after a year.
 - Ocean surfaces freeze, but the ice insulates the water below and geothermal heat keeps the deep ocean liquid; life around hydrothermal vents does not depend on sunlight.
-- The Sun has roughly 5 billion years left.
 
 ## Search data (vidIQ, at upload time)
 - "ماذا لو اختفت الشمس": ~4.7k monthly searches, competition 53/100
