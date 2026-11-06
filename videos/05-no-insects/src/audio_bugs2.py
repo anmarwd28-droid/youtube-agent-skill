@@ -8,7 +8,7 @@ TM = json.load(open(sys.argv[2], encoding="utf-8")); TOTAL = float(sys.argv[3]);
 SR = 44100; N = int(TOTAL * SR) + SR
 rng = np.random.default_rng(7)
 L = lambda i: TM[i]; Wd = lambda i, j: TM[i]["words"][j]
-T = dict(gone=Wd(0, 7)[1] - .1, picnic=L(1)["start"], orch=L(2)["start"], market=L(3)["start"], corn=L(4)["start"], wind=Wd(4, 6)[1], pond=L(5)["start"], fall=Wd(6, 2)[1], floor=L(7)["start"], pile=L(8)["start"], ant=L(9)["start"], end=L(10)["start"])
+T = dict(gone=Wd(0, 6)[1] - .1, picnic=L(1)["start"], wilt=L(2)["start"], orch=L(3)["start"], market=L(4)["start"], corn=L(5)["start"], wind=Wd(5, 6)[1], pond=L(6)["start"], fall=Wd(7, 2)[1], floor=L(8)["start"], pile=L(9)["start"], ant=L(10)["start"], end=L(11)["start"])
 t = np.arange(N) / SR
 mus = np.zeros((N, 2)); sfx = np.zeros((N, 2))
 
@@ -59,7 +59,9 @@ def buzz(dur, f=220, amp=.06):
 def chirp(f0, f1, dur, amp=.06): return tone(f0, f1, dur, dur * .6, amp)
 # ---------------- music
 mus += pad(['G3', 'B3', 'D4', 'G4'], 0, T['gone'] + .3, .05, .6, .4)
-mus += pad(['E3', 'G3', 'B3'], T['gone'], T['orch'] + .6, .05, .3, .8)
+mus += pad(['E3', 'G3', 'B3'], T['gone'], T['wilt'] + .6, .05, .3, .8)
+mus += pad(['D2', 'A2', 'F3'], T['wilt'], T['orch'] + .6, .065, .4, .8, bright=4)
+place(sfx, tone(60, 30, 2.5, .8, .6), T['wilt'] + .3); sfx += noise_band(200, 1200, T['wilt'], T['orch'], .02, 1., .5, lfo=.8)
 mus += pad(['C3', 'G3', 'E4', 'G4'], T['orch'], T['market'] + .6, .055, .6, .8)
 mus += pad(['A2', 'E3', 'C4'], T['market'], T['corn'] + .6, .055, .6, .8)
 mus += pad(['F3', 'A3', 'C4', 'F4'], T['corn'], T['pond'] + .6, .055, .6, .8)
@@ -70,7 +72,8 @@ mus += pad(['G3', 'B3', 'D4', 'G4', 'B4'], T['ant'], TOTAL, .07, 1.0, 1.2)
 place(sfx, buzz(T['gone'] + .2, 230, .05), 0, 1., .65); place(sfx, buzz(T['gone'], 180, .03), .2, 1., .35)
 for at in (.4, 1.3, 2.1): place(sfx, chirp(3200, 4200, .12, .04), at, 1., .3); place(sfx, chirp(3800, 3000, .1, .03), at + .15, 1., .3)
 for k in range(10): place(sfx, bell(note('B6') * (1 + .02 * k), .9, .015), T['gone'] + k * .06, 1., .3 + .05 * k)
-sfx += noise_band(300, 2500, T['picnic'], T['orch'] + .2, .006, .5, .5, lfo=.5)
+sfx += noise_band(300, 2500, T['picnic'], T['wilt'] + .2, .006, .5, .5, lfo=.5)
+place(sfx, buzz(Wd(1, 3)[1] - T['picnic'] + .2, 520, .03), T['picnic'], 1., .55)
 for at in np.arange(T['orch'], T['market'] - .3, 2.2): place(sfx, buzz(1.8, rng.uniform(200, 260), .035), at, 1., rng.uniform(.3, .7))
 for at in np.arange(T['orch'] + .5, T['market'], 1.3): place(sfx, chirp(3000, 4300, .1, .03), at, 1., rng.uniform(.2, .8))
 sfx += noise_band(250, 1800, T['market'], T['corn'] + .2, .012, .5, .5, lfo=.8)

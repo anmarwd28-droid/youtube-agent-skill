@@ -83,7 +83,7 @@ const WS = (i, j) => TM[i].words[Math.min(j, TM[i].words.length - 1)][1];
 const pmod = (a, m) => ((a % m) + m) % m;
 
 // ---------- captions (chunked, like Short #1) ----------
-const KEY = new Set(['اختفت', 'الحشراتِ', 'غداً؟', 'بعوضَ', 'ذباب.', 'ثلاثةِ', 'أرباعِ', 'الملقّحات…', 'حشرات.', 'نادرةً', 'وغاليةً', 'الكاكاو.', 'الرياحَ', 'تلقّحُها.', 'طيورٌ', 'وضفادعُ', 'وسحالٍ', 'تجوع…', 'فتنهارُ', 'سلسلةٌ', 'تحلّلُ', 'للتربة.', 'تتراكمُ', 'خصوبتَها', 'صغيرةٌ', 'العالمَ', 'ظهرِها.', 'سؤالَك']);
+const KEY = new Set(['تستيقظَ', 'غداً…', 'حشرةٌ', 'واحدةٌ', 'بعوضَ', 'ذباب…', 'حلماً،', 'كابوسٍ…', 'أشهرٍ', 'ثلاثةِ', 'أرباعِ', 'الملقّحات…', 'حشرات.', 'نادرةً', 'وغاليةً', 'الكاكاو.', 'الرياحَ', 'تلقّحُها.', 'طيورٌ', 'وضفادعُ', 'وسحالٍ', 'تجوع…', 'فتنهارُ', 'سلسلةٌ', 'تحلّلُ', 'للتربة.', 'تتراكمُ', 'خصوبتَها', 'صغيرةٌ', 'العالمَ', 'ظهرِها.', 'سؤالَك']);
 const CH = [];
 TM.forEach((l, i) => { let cur = [];
   l.words.forEach((w, j) => { cur.push(w); const p = /[،.…:؟]$/.test(w[0]); if ((p && cur.length >= 3) || cur.length >= 7 || j === l.words.length - 1) { CH.push({ i, w: cur }); cur = []; } }); });
@@ -296,7 +296,7 @@ function blossom(x, y, s, t, seed) {
     `<circle r="5" fill="#e8d070"/>` + Array.from({ length: 8 }, (_, i) => `<line x1="0" y1="0" x2="${Math.cos(i * .8) * 9}" y2="${Math.sin(i * .8) * 9}" stroke="#d8b040" stroke-width="1.2"/>`).join('') + `</g>`;
 }
 function sceneOrchard(t) {
-  const st = S0(2) - .2;
+  const st = S0(3) - .2;
   let s = `<defs><linearGradient id="skO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fc0e8"/><stop offset="1" stop-color="#e8f0d8"/></linearGradient>` +
     `<radialGradient id="blG" cx=".5" cy=".9" r="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".7" stop-color="#ffe8f0"/><stop offset="1" stop-color="#f0a8c0"/></radialGradient></defs><rect width="720" height="1280" fill="url(#skO)"/>`;
   // rows of blooming trees fading into distance
@@ -333,7 +333,7 @@ function crate(x, y, w, fruit, fill, label, price, seed) {
   return s;
 }
 function sceneMarket(t) {
-  const st = S0(3), em = ease(ramp(t, st, S0(4) - .5)), pr = 1 + 9 * ease(ramp(t, WS(3, 3), S0(4) - .8));
+  const st = S0(4), em = ease(ramp(t, st, S0(5) - .5)), pr = 1 + 9 * ease(ramp(t, WS(4, 3), S0(5) - .8));
   let s = `<defs><linearGradient id="mkB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a22"/><stop offset="1" stop-color="#1a120e"/></linearGradient>` +
     `<radialGradient id="apG" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#ff6a5a"/><stop offset=".6" stop-color="#c81e1e"/><stop offset="1" stop-color="#6a0a0a"/></radialGradient>` +
     `<radialGradient id="stG" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#ff5a5a"/><stop offset="1" stop-color="#a00a1a"/></radialGradient>` +
@@ -362,7 +362,7 @@ function cornPlant(x, y, h, t, seed, sc = 1) {
   return s;
 }
 function sceneCorn(t) {
-  const st = S0(4), wind = ease(ramp(t, WS(4, 6) - .2, WS(4, 6) + .4));
+  const st = S0(5), wind = ease(ramp(t, WS(5, 6) - .2, WS(5, 6) + .4));
   let s = `<defs><linearGradient id="skC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a8ac8"/><stop offset=".7" stop-color="#e8d8a0"/><stop offset="1" stop-color="#c8a858"/></linearGradient></defs><rect width="720" height="1280" fill="url(#skC)"/>`;
   s += `<g filter="url(#blur2)">` + Array.from({ length: 5 }, (_, i) => { const rr = R(i + 3), cx = pmod(rr() * 900 + t * 20, 900) - 90, cy = 320 + rr() * 220, w = 90 + rr() * 70;
     return Array.from({ length: 9 }, (_, k) => { const u = k / 8; return `<circle cx="${cx - w + u * 2 * w}" cy="${cy - Math.sin(u * Math.PI) * w * .35 + (rr() - .5) * 10}" r="${w * (.25 + .3 * Math.sin(u * Math.PI))}" fill="#fff" opacity=".9"/>`; }).join('') + `<ellipse cx="${cx}" cy="${cy + w * .12}" rx="${w * 1.1}" ry="${w * .16}" fill="#d8e0ec" opacity=".9"/>`; }).join('') + `</g>`;
@@ -402,7 +402,7 @@ function swallow(x, y, s, t, seed) {
   return `<g transform="translate(${x},${y}) scale(${s})"><path d="M0,0 C-20,${-20 - 20 * f} -50,${-24 - 26 * f} -70,${-10 - 30 * f} C-44,-6 -20,-2 0,4Z M0,0 C20,${-20 - 20 * f} 50,${-24 - 26 * f} 70,${-10 - 30 * f} C44,-6 20,-2 0,4Z" fill="#1a2030"/><ellipse cx="0" cy="4" rx="8" ry="14" fill="#1a2030"/><path d="M-4,16 l-8,20 M4,16 l8,20" stroke="#1a2030" stroke-width="3"/><ellipse cx="0" cy="-6" rx="5" ry="4" fill="#c84a2a"/></g>`;
 }
 function scenePond(t) {
-  const st = S0(5) - .2, hungry = ease(ramp(t, S0(6), S0(6) + 2)), dk = ease(ramp(t, S0(6), S0(7) - .5));
+  const st = S0(6) - .2, hungry = ease(ramp(t, S0(7), S0(7) + 2)), dk = ease(ramp(t, S0(7), S0(8) - .5));
   let s = `<defs><linearGradient id="skPd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix('#3a4a7a', '#1a2040', dk)}"/><stop offset=".55" stop-color="${mix('#e8906a', '#7a4a5a', dk)}"/><stop offset="1" stop-color="${mix('#f8c890', '#9a6a6a', dk)}"/></linearGradient>` +
     `<linearGradient id="wPd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix('#e8a07a', '#6a4a5a', dk)}"/><stop offset="1" stop-color="#1a2a3a"/></linearGradient>` +
     `<radialGradient id="lpG" cx=".4" cy=".4" r=".8"><stop offset="0" stop-color="#6aa848"/><stop offset="1" stop-color="#2a5a20"/></radialGradient></defs>` +
@@ -419,14 +419,14 @@ function scenePond(t) {
   // swallows hunting, then fewer and slower
   for (let i = 0; i < 4; i++) { const sx = pmod(t * (180 - 100 * hungry) + i * 230, 1000) - 140, sy = 420 + i * 50 + Math.sin(t * 2 + i) * 40; s += `<g opacity="${1 - hungry * (i % 2 ? 1 : .5)}">${swallow(sx, sy, .8, t, i)}</g>`; }
   // food chain: insect -> frog -> bird -> hawk; collapses like dominoes
-  const fc = ease(ramp(t, S0(6) - .3, S0(6) + .2)), col = W(6, 2)[1];
+  const fc = ease(ramp(t, S0(7) - .3, S0(7) + .2)), col = W(7, 2)[1];
   if (fc > 0) { const icons = ['🐞', '🐸', '🐦', '🦅'], lab = ['حشرات', 'ضفادع', 'طيور', 'صقور'];
     let o = `<g opacity="${fc}">`;
     lab.forEach((l, i) => { const x = 110 + i * 166, y = 900, fall = ease(ramp(t, col + i * .35, col + i * .35 + .6)), ang = fall * 75, dy = fall * 40;
       if (i < 3) o += `<line x1="${x + 58}" y1="${y}" x2="${x + 108}" y2="${y}" stroke="#fff" stroke-width="4" marker-end="url(#arrW)" opacity="${1 - fall}"/>`;
       o += `<g transform="translate(${x},${y + dy}) rotate(${ang})"><rect x="-56" y="-70" width="112" height="140" rx="16" fill="rgba(8,12,30,.75)" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>` +
         chainIcon(i) + `<text x="0" y="54" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#fff">${l}</text>` +
-        (i === 0 ? `<line x1="-44" y1="-56" x2="44" y2="30" stroke="#e53935" stroke-width="7" opacity="${ease(ramp(t, S0(6) + .2, S0(6) + .6))}"/>` : '') + `</g>`; });
+        (i === 0 ? `<line x1="-44" y1="-56" x2="44" y2="30" stroke="#e53935" stroke-width="7" opacity="${ease(ramp(t, S0(7) + .2, S0(7) + .6))}"/>` : '') + `</g>`; });
     s += o + `</g>`; }
   s += `<rect width="720" height="1280" fill="#0a1020" opacity="${.25 * dk}"/>`;
   F.ov = '';
@@ -460,7 +460,7 @@ function beetle(x, y, s, t, ang) {
     `<path d="M40,-4 q10,-10 16,-8 M40,4 q10,10 16,8" stroke="#05140e" stroke-width="1.6" fill="none"/></g>`;
 }
 function sceneFloor(t) {
-  const st = S0(7) - .2, gone = ease(ramp(t, S0(8) - .2, S0(8) + .8)), pile = ease(ramp(t, S0(8), S0(9) - .4)), grey = ease(ramp(t, WS(8, 4), S0(9) - .4));
+  const st = S0(8) - .2, gone = ease(ramp(t, S0(9) - .2, S0(9) + .8)), pile = ease(ramp(t, S0(9), S0(10) - .4)), grey = ease(ramp(t, WS(9, 4), S0(10) - .4));
   let s = `<defs><linearGradient id="flB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3a1a"/><stop offset="1" stop-color="#1a1a0e"/></linearGradient>` +
     `<linearGradient id="logG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a5a3a"/><stop offset=".5" stop-color="#4a3420"/><stop offset="1" stop-color="#1a1008"/></linearGradient>` +
     `<linearGradient id="soilG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix('#2a1a0c', '#7a7064', grey)}"/><stop offset=".4" stop-color="${mix('#4a2e16', '#8a8274', grey)}"/><stop offset="1" stop-color="${mix('#6a4424', '#a09888', grey)}"/></linearGradient></defs>` +
@@ -494,7 +494,7 @@ function sceneFloor(t) {
 }
 // 9: an ant carrying the Earth
 function sceneAnt(t) {
-  const st = S0(9) - .2, k = ease(ramp(t, st, st + 1));
+  const st = S0(10) - .2, k = ease(ramp(t, st, st + 1));
   let s = `<defs><radialGradient id="aBg" cx=".5" cy=".45" r=".8"><stop offset="0" stop-color="#3a5a2a"/><stop offset="1" stop-color="#0a1408"/></radialGradient></defs><rect width="720" height="1280" fill="url(#aBg)"/>` + bokeh(t, ['#d8f080', '#fff2b0', '#a8d060', '#ffd070'], 34, 51, 1.2);
   // big leaf the ant walks on
   s += `<path d="M-40,1060 C120,900 520,860 780,960 C560,1100 160,1160 -40,1060Z" fill="#4a8a2a"/><path d="M-40,1060 C120,900 520,860 780,960" stroke="#8ac050" stroke-width="5" fill="none"/>` +
@@ -507,7 +507,7 @@ function sceneAnt(t) {
 }
 // 10: CTA on a honeycomb
 function sceneCTA(t) {
-  const st = S0(10), k = ease(ramp(t, st - .2, st + .6)), b = Math.abs(Math.sin(t * 3)) * 6;
+  const st = S0(11), k = ease(ramp(t, st - .2, st + .6)), b = Math.abs(Math.sin(t * 3)) * 6;
   let s = `<defs><linearGradient id="hcB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2408"/><stop offset="1" stop-color="#140a02"/></linearGradient><radialGradient id="hcC" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#ffd24a"/><stop offset="1" stop-color="#b8700a"/></radialGradient></defs><rect width="720" height="1280" fill="url(#hcB)"/>`;
   const hx = (cx, cy, r) => Array.from({ length: 6 }, (_, i) => `${cx + r * Math.cos(i * Math.PI / 3 + Math.PI / 6)},${cy + r * Math.sin(i * Math.PI / 3 + Math.PI / 6)}`).join(' ');
   for (let row = -1; row < 16; row++) for (let col = -1; col < 9; col++) { const r = 52, cx = col * r * 1.732 + (row % 2) * r * .866, cy = row * r * 1.5, rr = R(row * 20 + col + 99), lit = rr() > .55;
@@ -515,32 +515,153 @@ function sceneCTA(t) {
   s += `<rect width="720" height="1280" fill="#000" opacity=".35"/>`;
   s += `<g opacity="${k}"><polygon points="${hx(360, 700, 190)}" fill="url(#hcC)" stroke="#fff2c0" stroke-width="6"/><text x="360" y="790" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="240" fill="#3a2408">؟</text></g>`;
   s += bee(360 + Math.cos(t * 1.5) * 230, 700 + Math.sin(t * 1.5) * 140, 1.3, t, Math.cos(t * 1.5) > 0 ? 160 : 20, k);
-  F.ov = `<g opacity="${ramp(t, WS(10, 4), WS(10, 4) + .4)}" transform="translate(360,${1020 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
+  F.ov = `<g opacity="${ramp(t, WS(11, 4), WS(11, 4) + .4)}" transform="translate(360,${1020 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
   F.earth = null; F.moon = null;
   return s;
 }
 const SCENES = [
-  { s: 0, f: sceneMeadow }, { s: S0(1) - .2, f: scenePicnic }, { s: S0(2) - .2, f: sceneOrchard }, { s: S0(3) - .2, f: sceneMarket }, { s: S0(4) - .2, f: sceneCorn },
-  { s: S0(5) - .2, f: scenePond }, { s: S0(7) - .2, f: sceneFloor }, { s: S0(9) - .2, f: sceneAnt }, { s: S0(10) - .2, f: sceneCTA },
+  { s: 0, f: sceneMacro }, { s: S0(1) - .2, f: sceneSkin }, { s: S0(2) - .2, f: sceneWilt }, { s: S0(3) - .2, f: sceneOrchard }, { s: S0(4) - .2, f: sceneMarket }, { s: S0(5) - .2, f: sceneCorn },
+  { s: S0(6) - .2, f: scenePond }, { s: S0(8) - .2, f: sceneFloor }, { s: S0(10) - .2, f: sceneAnt }, { s: S0(11) - .2, f: sceneCTA },
 ];
 const XF = .5;
 
 // ---------- UI ----------
 const CHIPS = [
-  ['c1', '٣/٤ أنواع المحاصيل', 360, 300, 'big', WS(2, 3), WS(2, 11)], ['c2', 'الملقّحات = حشرات', 360, 300, '', WS(2, 11), S0(3)],
-  ['c3', 'السعر ↑', 360, 480, 'red', WS(3, 3), S0(4)],
-  ['c4', 'الرياح تلقّحها', 360, 300, 'big', WS(4, 6), S0(5)],
-  ['c5', 'طيور', 160, 330, 'dark', WS(5, 4), S0(6)], ['c6', 'ضفادع', 360, 330, 'dark', WS(5, 5), S0(6)], ['c7', 'سحالي', 560, 330, 'dark', WS(5, 6), S0(6)],
-  ['c8', 'سلسلة غذائية', 360, 760, 'big', WS(6, 3), S0(7)],
-  ['c9', 'تحلّل وإعادة تدوير', 360, 330, '', WS(7, 5), S0(8)], ['c10', 'تربة بلا خصوبة', 360, 1010, 'red', WS(8, 5), S0(9)],
-  ['c11', '@MadhaLawLab', 360, 1140, 'dark', WS(10, 6), 999],
+  ['t0', 'ماذا لو اختفت كل الحشرات؟', 360, 1120, 'big', .15, S0(1) - .1], ['t1', 'لا بعوض… لا ذباب', 360, 1080, 'dark', WS(1, 1), S0(2) - .1], ['t2', '', 360, 1100, 'big red', WS(2, 6) - .2, S0(3)],
+  ['c1', '٣/٤ أنواع المحاصيل', 360, 300, 'big', WS(3, 2), WS(3, 10)], ['c2', 'الملقّحات = حشرات', 360, 300, '', WS(3, 10), S0(4)],
+  ['c3', 'السعر ↑', 360, 480, 'red', WS(4, 3), S0(5)],
+  ['c4', 'الرياح تلقّحها', 360, 300, 'big', WS(5, 6), S0(6)],
+  ['c5', 'طيور', 160, 330, 'dark', WS(6, 4), S0(7)], ['c6', 'ضفادع', 360, 330, 'dark', WS(6, 5), S0(7)], ['c7', 'سحالي', 560, 330, 'dark', WS(6, 6), S0(7)],
+  ['c8', 'سلسلة غذائية', 360, 760, 'big', WS(7, 3), S0(8)],
+  ['c9', 'تحلّل وإعادة تدوير', 360, 330, '', WS(8, 5), S0(9)], ['c10', 'تربة بلا خصوبة', 360, 1010, 'red', WS(9, 5), S0(10)],
+  ['c11', '@MadhaLawLab', 360, 1140, 'dark', WS(11, 6), 999],
 ];
 $('ui').innerHTML = CHIPS.map(c => `<div class="chip ${c[4]}" id="${c[0]}" style="${c[1][0] === '@' ? 'direction:ltr;' : ''}left:${c[2]}px;top:${c[3]}px">${c[1]}</div>`).join('');
 function renderUI(t) {
   CHIPS.forEach(c => { $(c[0]).style.opacity = ease(ramp(t, c[5], c[5] + .3)) * (1 - ease(ramp(t, c[6] - .3, c[6]))); });
+  if (F.months !== undefined) $('t2').textContent = 'بعد ' + '٠١٢٣٤٥٦٧٨٩'[Math.max(1, F.months)] + ' أشهر';
   $('note').style.opacity = 0;
 }
 
+
+
+// ---- realistic macro subjects for the new opening ----
+const RS = s => { const r = R(s * 7919 + 13); r(); return r; };
+function macroBee(x, y, s, t, a = 1) {
+  const r = RS(5), wf = .55 + .45 * Math.abs(Math.sin(t * 38));
+  let o = `<g transform="translate(${x},${y}) scale(${s})" opacity="${a}"><defs>` +
+    `<radialGradient id="mbT" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#f0c060"/><stop offset=".6" stop-color="#b07820"/><stop offset="1" stop-color="#4a2c08"/></radialGradient>` +
+    `<radialGradient id="mbA" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#ffd860"/><stop offset=".55" stop-color="#d08c18"/><stop offset="1" stop-color="#5a3404"/></radialGradient>` +
+    `<radialGradient id="mbE" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#5a4a3a"/><stop offset=".6" stop-color="#1a120a"/><stop offset="1" stop-color="#000"/></radialGradient>` +
+    `<linearGradient id="mbW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8f4ff" stop-opacity=".55"/><stop offset=".5" stop-color="#c8b8ff" stop-opacity=".25"/><stop offset="1" stop-color="#a8f0d8" stop-opacity=".35"/></linearGradient>` +
+    `<clipPath id="mbAc"><ellipse cx="-46" cy="6" rx="44" ry="30" transform="rotate(12,-46,6)"/></clipPath></defs>`;
+  o += `<ellipse cx="-10" cy="58" rx="80" ry="10" fill="#000" opacity=".25" filter="url(#blur2)"/>`;
+  // far legs
+  o += [[-20, 20, -40, 54], [0, 22, -6, 60], [16, 20, 30, 58]].map(([a1, b1, a2, b2]) => `<path d="M${a1},${b1} L${(a1 + a2) / 2 - 6},${(b1 + b2) / 2} L${a2},${b2}" stroke="#2a1808" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity=".7"/>`).join('');
+  // abdomen with fuzzy bands
+  o += `<ellipse cx="-46" cy="6" rx="44" ry="30" transform="rotate(12,-46,6)" fill="url(#mbA)"/><g clip-path="url(#mbAc)">` + [-70, -50, -30].map(k => `<rect x="${k}" y="-30" width="11" height="70" fill="#1a0e04" opacity=".88" transform="rotate(20,${k},0)"/>`).join('');
+  for (let i = 0; i < 160; i++) { const px = -90 + r() * 90, py = -24 + r() * 60; o += `<line x1="${px}" y1="${py}" x2="${px - 1.5 + r()}" y2="${py - 2 - r() * 1.5}" stroke="${r() > .5 ? '#ffe090' : '#3a2008'}" stroke-width=".7" opacity=".28"/>`; }
+  o += `</g><path d="M-88,10 l-10,4" stroke="#1a0e04" stroke-width="4" stroke-linecap="round"/>`;
+  // thorax: dense fuzz
+  o += `<circle cx="0" cy="-4" r="28" fill="url(#mbT)"/>`;
+  for (let i = 0; i < 220; i++) { const a2 = r() * 6.283, d = 20 + r() * 12; o += `<line x1="${Math.cos(a2) * (d - 6)}" y1="${-4 + Math.sin(a2) * (d - 6)}" x2="${Math.cos(a2) * d}" y2="${-4 + Math.sin(a2) * d}" stroke="${r() > .3 ? '#f0c878' : '#6a4410'}" stroke-width="1.1" opacity=".75"/>`; }
+  // pollen grains clinging to the fuzz
+  for (let i = 0; i < 40; i++) { const a2 = r() * 6.283, d = r() * 30; o += `<circle cx="${Math.cos(a2) * d}" cy="${-4 + Math.sin(a2) * d}" r="${1 + r() * 1.4}" fill="#ffe14a"/>`; }
+  // wings with veins (flutter)
+  o += `<g transform="translate(-4,-26)"><g transform="rotate(-30) scale(1,${wf})"><path d="M0,0 C20,-50 90,-66 110,-40 C120,-22 70,-4 0,0Z" fill="url(#mbW)" stroke="#fff" stroke-opacity=".6" stroke-width="1.2"/>` +
+    `<path d="M4,-2 C30,-24 70,-38 104,-40 M10,-4 C40,-16 70,-20 96,-18 M30,-14 L46,-44 M56,-24 L70,-52" stroke="#3a3040" stroke-width=".9" fill="none" opacity=".55"/></g>` +
+    `<g transform="rotate(-8) scale(1,${wf})"><path d="M0,0 C14,-30 64,-40 78,-22 C84,-10 50,0 0,0Z" fill="url(#mbW)" stroke="#fff" stroke-opacity=".5" stroke-width="1"/><path d="M4,-2 C24,-14 50,-22 74,-20" stroke="#3a3040" stroke-width=".8" fill="none" opacity=".5"/></g></g>`;
+  // head with compound eye
+  o += `<ellipse cx="34" cy="2" rx="19" ry="22" fill="#2a1a0a"/><ellipse cx="38" cy="-2" rx="11" ry="16" fill="url(#mbE)"/>`;
+  for (let i = 0; i < 30; i++) { const ex = 32 + r() * 12, ey = -14 + r() * 24; o += `<circle cx="${ex}" cy="${ey}" r=".9" fill="#7a6a5a" opacity=".55"/>`; }
+  o += `<ellipse cx="35" cy="-9" rx="4" ry="6" fill="#fff" opacity=".55"/><path d="M44,-16 q14,-24 26,-30 q6,-2 8,2 M42,-18 q8,-26 18,-34" stroke="#1a0e04" stroke-width="2.4" fill="none"/>` +
+    `<path d="M48,14 q10,10 6,22" stroke="#3a2008" stroke-width="3" fill="none"/>`;
+  // near legs with pollen basket
+  o += [[-10, 22, -26, 62], [10, 22, 16, 64], [24, 18, 44, 56]].map(([a1, b1, a2, b2]) => `<path d="M${a1},${b1} L${(a1 + a2) / 2 - 8},${(b1 + b2) / 2} L${a2},${b2}" stroke="#3a2410" stroke-width="3.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>`).join('') +
+    `<ellipse cx="-20" cy="46" rx="9" ry="7" fill="#ffb21a"/><ellipse cx="-22" cy="44" rx="4" ry="3" fill="#ffe08a"/>`;
+  return o + `</g>`;
+}
+function bigFlower(x, y, s, t, petal, tip, wilt = 0, seed = 1) {
+  const r = RS(seed + 40), id = 'bf' + seed; let o = `<defs><radialGradient id="${id}" cx="0" cy=".5" r="1"><stop offset="0" stop-color="${mix(petal, '#8a6a3a', wilt)}"/><stop offset="1" stop-color="${mix(tip, '#5a3a1a', wilt)}"/></radialGradient></defs>`;
+  o += `<path d="M${x},${y + 900 * s} C${x + 20 * s},${y + 500 * s} ${x - 10 * s},${y + 200 * s} ${x},${y}" stroke="${mix('#3a6a2a', '#6a5a30', wilt)}" stroke-width="${14 * s}" fill="none"/>`;
+  o += `<g transform="translate(${x},${y}) scale(${s})">`;
+  for (let i = 0; i < 16; i++) { const a = i / 16 * 360 + Math.sin(t + i) * 1.5, droop = wilt * (30 + r() * 30);
+    o += `<g transform="rotate(${a}) translate(0,${droop * .6}) rotate(${droop * (i % 2 ? 1 : -1) * .3})"><path d="M14,0 C40,-20 110,-22 130,0 C110,22 40,20 14,0Z" fill="url(#${id})"/>` +
+      `<path d="M20,0 L122,0 M40,-6 L110,-4 M40,6 L110,4" stroke="${mix(tip, '#3a2a10', .4)}" stroke-width="1" opacity=".35"/></g>`; }
+  o += `<circle r="44" fill="${mix('#6a3a08', '#3a2a14', wilt)}"/>`;
+  for (let i = 0; i < 160; i++) { const rr = Math.sqrt(i) * 3.4, a = i * 2.39996; o += `<circle cx="${Math.cos(a) * rr}" cy="${Math.sin(a) * rr}" r="${1.6 + rr * .03}" fill="${mix(i % 3 ? '#e8a020' : '#ffd24a', '#6a5a3a', wilt)}"/>`; }
+  return o + `</g>`;
+}
+// L0: macro shot: a pollen-covered bee on a sunflower, gone in a puff of light on "not a single insect"
+function sceneMacro(t) {
+  const vt = W(0, 6)[1], gone = ramp(t, vt, vt + .5), push = ease(ramp(t, 0, vt));
+  let s = `<defs><radialGradient id="mcB" cx=".65" cy=".3" r="1"><stop offset="0" stop-color="#fff2c0"/><stop offset=".35" stop-color="#a8c868"/><stop offset="1" stop-color="#2a4a1a"/></radialGradient></defs><rect width="720" height="1280" fill="url(#mcB)"/>`;
+  s += bokeh(t, ['#fff6c8', '#d8f090', '#ffd890', '#ffffff'], 40, 77, 1.4);
+  s += `<g opacity=".8" filter="url(#soft)">${bigFlower(120, 260, .6, t, '#f8d040', '#e09010', 0, 7)}${bigFlower(640, 360, .45, t, '#f070a0', '#b03060', 0, 8)}</g>`;
+  const z = 1 + .08 * push;
+  s += `<g transform="translate(360,760) scale(${z}) translate(-360,-760)">` + bigFlower(360, 820, 1.5, t, '#ffd84a', '#f0a010', 0, 1) + macroBee(360 + Math.sin(t * 2) * 3, 700, 2.6, t, 1 - gone) + `</g>`;
+  if (gone > 0) { const r = RS(12); let m = ''; for (let i = 0; i < 120; i++) { const a = r() * 6.28, d = gone * (30 + r() * 260); m += `<circle cx="${360 + Math.cos(a) * d}" cy="${700 + Math.sin(a) * d * .8 - gone * 80}" r="${1.5 + r() * 3}" fill="#fff6c8" opacity="${(1 - gone) * .95}"/>`; } s += `<g filter="url(#blur1)">${m}</g>`; }
+  s += `<g opacity=".7" filter="url(#haze)">${bigFlower(80, 1180, .9, t, '#f8e060', '#e8a020', 0, 9)}</g>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L1: macro: a mosquito on skin, then gone
+function mosquito(x, y, s, t, a = 1) {
+  const leg = (x1, y1, x2, y2, x3, y3) => `<path d="M${x1},${y1} L${x2},${y2} L${x3},${y3}" stroke="#2a2420" stroke-width="2.2" fill="none" stroke-linejoin="round"/>` +
+    [.3, .55, .8].map(u => `<circle cx="${lerp(x2, x3, u)}" cy="${lerp(y2, y3, u)}" r="1.8" fill="#f4f0e8"/>`).join('');
+  return `<g transform="translate(${x},${y}) scale(${s})" opacity="${a}"><ellipse cx="0" cy="30" rx="70" ry="10" fill="#4a2a1a" opacity=".2" filter="url(#blur2)"/>` +
+    leg(-10, 0, -60, -30, -110, 30) + leg(0, 2, -20, -40, -40, 32) + leg(8, 2, 40, -36, 90, 30) +
+    `<g opacity=".5"><path d="M-4,-8 C-30,-40 -90,-50 -110,-36 C-90,-20 -40,-14 -4,-8Z" fill="#e8eef4" stroke="#fff" stroke-width="1"/><path d="M-10,-12 L-100,-38 M-20,-16 L-80,-26" stroke="#6a6a70" stroke-width=".8"/></g>` +
+    `<path d="M-6,0 C-30,-6 -70,-2 -96,10 C-70,14 -30,10 -6,4Z" fill="#3a3028"/>` + [-80, -64, -48, -32].map(k => `<path d="M${k},${-2 + (k + 80) * .05} l0,10" stroke="#f4f0e8" stroke-width="3" opacity=".85"/>`).join('') +
+    `<ellipse cx="6" cy="-2" rx="16" ry="10" fill="#2a2420"/><path d="M0,-10 l12,0" stroke="#f4f0e8" stroke-width="2"/><circle cx="24" cy="-2" r="8" fill="#1a1614"/><circle cx="26" cy="-4" r="2.4" fill="#fff" opacity=".6"/>` +
+    `<path d="M30,0 L78,26" stroke="#1a1614" stroke-width="2.4"/><path d="M28,-6 q10,-20 24,-26 M28,-4 q16,-14 30,-14" stroke="#3a3028" stroke-width="1.4" fill="none"/>` +
+    `<ellipse cx="-60" cy="4" rx="${8 + Math.sin(t * 3) * .5}" ry="5" fill="#8a1a1a" opacity=".55"/></g>`;
+}
+function sceneSkin(t) {
+  const st = S0(1) - .2, gone = ease(ramp(t, WS(1, 3), WS(1, 3) + .5)), dream = ease(ramp(t, WS(1, 4), WS(1, 4) + 1));
+  let s = `<defs><radialGradient id="skG" cx=".5" cy=".4" r=".9"><stop offset="0" stop-color="#e8b898"/><stop offset=".7" stop-color="#c88a6a"/><stop offset="1" stop-color="#7a4a34"/></radialGradient>` +
+    `<filter id="poreT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .4  0 0 0 0 .2  0 0 0 0 .14  0 0 0 -1.4 .7"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+    `<filter id="creaseT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".01 .06" numOctaves="3" seed="8"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .25  0 0 0 0 .18  0 0 0 -1.8 .8"/><feComposite in2="SourceGraphic" operator="in"/></filter></defs>`;
+  s += `<rect width="720" height="1280" fill="url(#skG)"/><rect width="720" height="1280" fill="#fff" filter="url(#poreT)" opacity=".5"/><rect width="720" height="1280" fill="#fff" filter="url(#creaseT)" opacity=".4"/>`;
+  const r = RS(21); for (let i = 0; i < 70; i++) { const hx = r() * 720, hy = r() * 1280; s += `<path d="M${hx},${hy} q${6 + r() * 8},${-4} ${14 + r() * 14},${2}" stroke="#5a3424" stroke-width="1.1" fill="none" opacity=".45"/>`; }
+  s += `<ellipse cx="360" cy="660" rx="60" ry="40" fill="#e07a6a" opacity=".15" filter="url(#soft)"/>`;
+  s += mosquito(330, 640, 2.6, t, 1 - gone);
+  if (gone > 0 && gone < 1) { const rr = RS(31); let m = ''; for (let i = 0; i < 50; i++) { const a = rr() * 6.28, d = gone * (20 + rr() * 160); m += `<circle cx="${330 + Math.cos(a) * d}" cy="${640 + Math.sin(a) * d}" r="${1 + rr() * 2}" fill="#fff" opacity="${1 - gone}"/>`; } s += m; }
+  s += `<rect width="720" height="1280" fill="#fff6e8" opacity="${.25 * dream}" filter="url(#haze)"/>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L2: the dream turns into a nightmare: the same field drains of colour and wilts as months pass
+function sceneWilt(t) {
+  const st = S0(2) - .2, w = ease(ramp(t, WS(2, 5) - .3, S0(3) - .2)), sat = 1 - .85 * w;
+  let s = `<defs><radialGradient id="mcB2" cx=".65" cy=".3" r="1"><stop offset="0" stop-color="${mix('#fff2c0', '#b8b0a0', w)}"/><stop offset=".35" stop-color="${mix('#a8c868', '#8a8460', w)}"/><stop offset="1" stop-color="${mix('#2a4a1a', '#2a2618', w)}"/></radialGradient>` +
+    `<filter id="desat"><feColorMatrix type="saturate" values="${sat}"/></filter></defs>`;
+  s += `<g filter="url(#desat)"><rect width="720" height="1280" fill="url(#mcB2)"/>` + bokeh(t, ['#fff6c8', '#d8f090', '#ffd890'], 30, 77, 1.2 * (1 - w * .6));
+  s += bigFlower(360, 820, 1.5, t, '#ffd84a', '#f0a010', w, 1) + `<g opacity=".8" filter="url(#soft)">${bigFlower(120, 300, .6, t, '#f8d040', '#e09010', w, 7)}${bigFlower(640, 380, .45, t, '#f070a0', '#b03060', w, 8)}</g>`;
+  for (let i = 0; i < 18; i++) { const rr = RS(i + 90), x = rr() * 720, y = pmod(rr() * 1280 + (t - st) * 90 * w, 1280); s += `<ellipse cx="${x}" cy="${y}" rx="10" ry="5" transform="rotate(${t * 60 + i * 20},${x},${y})" fill="#8a6a3a" opacity="${w * .8}"/>`; }
+  s += `</g>`;
+  F.ov = ''; F.earth = null; F.moon = null; F.months = Math.min(6, Math.floor(w * 6.99));
+  return s;
+}
+// realistic frog (replaces the cartoon one)
+function frog(x, y, s, t, hungry) {
+  const th = 1 + Math.sin(t * 5) * .08, sag = hungry * 6;
+  return `<g transform="translate(${x},${y}) scale(${s})"><defs><radialGradient id="frG" cx=".4" cy=".25" r=".85"><stop offset="0" stop-color="${mix('#9ad060', '#a8a070', hungry)}"/><stop offset=".55" stop-color="${mix('#4a8a2a', '#6a6a3a', hungry)}"/><stop offset="1" stop-color="#14280a"/></radialGradient>` +
+    `<radialGradient id="frI" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#f0d060"/><stop offset=".7" stop-color="#c88a10"/><stop offset="1" stop-color="#3a2400"/></radialGradient>` +
+    `<filter id="frT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".12" numOctaves="3" seed="5"/><feColorMatrix values="0 0 0 0 .05  0 0 0 0 .15  0 0 0 0 .02  0 0 0 -1.6 1"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+    `<clipPath id="frC"><path d="M-62,0 C-72,-32 -52,-${60 - sag} -10,-${64 - sag} C32,-${68 - sag} 64,-42 60,-8 C58,4 -56,6 -62,0Z"/></clipPath></defs>` +
+    `<ellipse cx="0" cy="8" rx="78" ry="14" fill="#000" opacity=".3" filter="url(#blur2)"/>` +
+    `<path d="M-54,-2 q-34,12 -42,6 q12,-10 30,-12" stroke="#3a6a22" stroke-width="11" fill="none" stroke-linecap="round"/>` +
+    `<path d="M-62,0 C-72,-32 -52,-${60 - sag} -10,-${64 - sag} C32,-${68 - sag} 64,-42 60,-8 C58,4 -56,6 -62,0Z" fill="url(#frG)"/>` +
+    `<g clip-path="url(#frC)"><rect x="-80" y="-80" width="160" height="90" fill="#fff" filter="url(#frT)" opacity=".7"/>` +
+    [[-34, -34, 9], [-12, -48, 7], [-44, -16, 8], [10, -52, 6], [26, -36, 7], [-20, -20, 6]].map(([a, b, rr]) => `<ellipse cx="${a}" cy="${b + sag}" rx="${rr}" ry="${rr * .7}" fill="#1e3a10" opacity=".7"/>`).join('') +
+    `<path d="M-60,-6 C-30,-2 20,-2 58,-12" stroke="#d8e0a0" stroke-width="3" opacity=".35" fill="none"/></g>` +
+    `<ellipse cx="22" cy="-10" rx="${26 * th}" ry="${12 * th}" fill="#e8e4b0" opacity=".75"/>` +
+    [-1, 1].map(sd => `<circle cx="${20 + sd * 20}" cy="${-64 + sag}" r="17" fill="url(#frG)"/><circle cx="${20 + sd * 20}" cy="${-66 + sag}" r="12" fill="url(#frI)"/><ellipse cx="${20 + sd * 20}" cy="${-66 + sag}" rx="9" ry="3.6" fill="#0a0806"/>` +
+      `<ellipse cx="${16 + sd * 20}" cy="${-71 + sag}" rx="4" ry="2.4" fill="#fff" opacity=".9"/><path d="M${8 + sd * 20},${-74 + sag} q12,-6 24,0" stroke="#2a4a14" stroke-width="3" fill="none"/>`).join('') +
+    `<path d="M40,-2 q24,8 34,2" stroke="#3a7a2a" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M30,-30 q16,${6 + sag} 30,0" stroke="#14280a" stroke-width="2" fill="none"/>` +
+    `<path d="M-40,-50 C-10,-${64 - sag} 30,-${66 - sag} 50,-40" stroke="#fff" stroke-width="2.4" opacity=".35" fill="none"/></g>`;
+}
 
 window.render = function (t) {
   let i = 0; SCENES.forEach((sc, j) => { if (t >= sc.s) i = j; });
@@ -549,6 +670,8 @@ window.render = function (t) {
   if (prev && k < 1) { $('sA').innerHTML = prev.f(t); ovA = F.ov || ''; FA = { t, earth: F.earth, moon: F.moon, light: F.light, opacity: 1 - k }; } else $('sA').innerHTML = '';
   F = { t, chipM: F.chipM };
   $('sB').innerHTML = cur.f(t); $('sB').setAttribute('opacity', k);
+  const KB = j => { const sc = SCENES[j]; if (!sc || sc.f === sceneAnt) return ''; const e = SCENES[j + 1] ? SCENES[j + 1].s : TOTAL, z = 1 + .07 * ease(ramp(t, sc.s, e)); return `translate(360 640) scale(${z}) translate(-360 -640)`; };
+  $('sB').setAttribute('transform', KB(i)); $('sA').setAttribute('transform', KB(i - 1));
   $('oA').innerHTML = ovA; $('oA').setAttribute('opacity', 1 - k); $('oB').innerHTML = F.ov || ''; $('oB').setAttribute('opacity', k);
   F.opacity = k;
   if (window.GLA) GLA.draw(FA || { t, opacity: 0 });

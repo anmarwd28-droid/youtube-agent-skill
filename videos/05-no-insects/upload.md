@@ -1,12 +1,12 @@
 # ماذا لو اختفت كل الحشرات؟ — Short #4
 
-61 s, 1080x1920, 30 fps. Illustrated realistic scenes (meadow macro, picnic, orchard in bloom, fruit market, cornfield in the wind, pond at dusk with a collapsing food chain, forest-floor recyclers, an ant carrying the 3D Earth, honeycomb CTA). Source in `src/`.
+66 s, 1080x1920, 30 fps. Stronger hook (macro bee that vanishes, mosquito on skin, a field that drains of colour as months pass), then illustrated realistic scenes ( orchard in bloom, fruit market, cornfield in the wind, pond at dusk with a collapsing food chain, forest-floor recyclers, an ant carrying the 3D Earth, honeycomb CTA). Source in `src/`.
 
 ## Title
 ماذا لو اختفت كل الحشرات من الأرض؟ 🐝
 
 ## Description
-لا بعوض ولا ذباب… يبدو حلماً، لكن الفواكه والطيور والتربة نفسها تدفع الثمن.
+تخيّل أن تستيقظ غداً… ولا توجد حشرة واحدة على الأرض. يبدو حلماً، لكنه يتحوّل إلى كابوس خلال أشهر.
 الحشرات صغيرة جداً… لكنها تحمل العالم على ظهرها.
 ماذا لو؟ اكتب سؤالك في التعليقات، وقد يكون الفيديو القادم.
 
