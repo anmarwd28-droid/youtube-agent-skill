@@ -1,0 +1,261 @@
+// ---------- scenes ----------
+let F = {};
+const RS = s => { const r = R(s * 7919 + 13); r(); return r; };
+// ---- silhouettes (side view, origin at the feet) ----
+const SIL = {
+  elephant: `M-150,-150 C-150,-190 -110,-215 -60,-215 C-20,-215 40,-210 80,-190 C110,-175 125,-140 125,-100 L125,0 L95,0 L92,-70 L60,-80 L58,0 L28,0 L25,-80 C0,-85 -40,-85 -60,-80 L-62,0 L-92,0 L-95,-80 C-110,-90 -120,-110 -130,-120 C-150,-100 -165,-60 -170,-20 C-172,-8 -160,-4 -158,-14 C-155,-50 -148,-90 -140,-120 C-148,-135 -150,-145 -150,-150Z`,
+  ear: `M-112,-196 C-80,-204 -58,-172 -62,-132 C-66,-110 -94,-104 -106,-120Z`,
+  giraffe: `M-60,-200 C-60,-232 60,-242 82,-210 C92,-190 86,-170 70,-165 L74,0 L64,0 L58,-160 L52,-160 L50,0 L40,0 L40,-158 L-36,-158 L-36,0 L-46,0 L-50,-158 L-56,-160 L-58,0 L-68,0 L-64,-170 C-66,-180 -64,-192 -60,-200Z M-62,-200 L-42,-214 L-98,-392 L-118,-388Z M-140,-404 C-136,-418 -112,-420 -98,-404 C-104,-394 -128,-388 -140,-404Z M-116,-414 l-4,-18 M-106,-414 l2,-18`,
+  human: `M0,-180 a14,15 0 1 1 0.1,0Z M-17,-148 C-24,-120 -24,-92 -19,-80 L-15,-80 L-12,0 L-2,0 L0,-72 L2,0 L12,0 L15,-80 L19,-80 C24,-92 24,-120 17,-148 C8,-153 -8,-153 -17,-148Z M-17,-146 L-27,-84 L-21,-82 L-13,-136Z M17,-146 L27,-84 L21,-82 L13,-136Z`,
+  cat: `M-20,0 C-30,-20 -26,-50 -10,-62 C-6,-72 -2,-80 4,-82 L8,-97 L15,-85 L23,-97 L25,-80 C35,-74 35,-58 27,-52 C31,-40 31,-14 23,0Z`,
+};
+function acacia(x, y, s, col) {
+  const r = RS(3); let o = `<g transform="translate(${x},${y}) scale(${s})" fill="${col}"><path d="M-6,0 C-10,-60 -4,-120 -26,-176 L-14,-178 C4,-130 6,-70 8,0Z M0,-70 C24,-110 46,-146 84,-178 L92,-170 C60,-142 36,-104 12,-60Z M-4,-110 C-40,-140 -70,-160 -110,-176 L-104,-184 C-64,-170 -30,-150 0,-126Z"/>`;
+  for (let i = 0; i < 26; i++) o += `<ellipse cx="${-150 + i * 13 + (r() - .5) * 10}" cy="${-186 - Math.sin(i / 25 * Math.PI) * 16 + (r() - .5) * 8}" rx="${30 + r() * 20}" ry="${12 + r() * 8}"/>`;
+  return o + `</g>`;
+}
+function sil(name, x, y, s, col, a = 1, flip = 1) { return `<path d="${SIL[name]}" transform="translate(${x},${y}) scale(${s * flip},${s})" fill="${col}" opacity="${a}"/>`; }
+// L0: savanna sunrise: elephants, giraffes, birds fade into the heat haze; only a person remains
+function sceneSavanna(t) {
+  const vt = W(0, 9)[1] - .3, gone = ease(ramp(t, vt, vt + 1.2)), man = ease(ramp(t, W(0, 10)[1] - .3, W(0, 10)[1] + .4));
+  let s = `<defs><linearGradient id="svS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e2a50"/><stop offset=".35" stop-color="#7a4a5a"/><stop offset=".62" stop-color="#e8784a"/><stop offset=".72" stop-color="#ffc070"/><stop offset="1" stop-color="#3a2416"/></linearGradient>` +
+    `<radialGradient id="svSun"><stop offset="0" stop-color="#fff8e0"/><stop offset=".25" stop-color="#ffd890" stop-opacity=".9"/><stop offset="1" stop-color="#ff9a50" stop-opacity="0"/></radialGradient></defs><rect width="720" height="1280" fill="url(#svS)"/>`;
+  s += `<circle cx="300" cy="900" r="420" fill="url(#svSun)" opacity=".85"/><circle cx="300" cy="905" r="92" fill="#fff4d0"/>`;
+  s += `<rect y="880" width="720" height="70" fill="#ffd8a0" opacity=".35" filter="url(#haze)"/>`;
+  // distant hills + ground
+  s += `<path d="M-20,930 C120,905 260,915 380,908 C520,900 620,912 740,905 L740,1300 L-20,1300Z" fill="#2a1a12"/>`;
+  s += `<path d="M-20,925 C140,910 300,918 420,912 C560,905 640,915 740,910" stroke="#ffb070" stroke-width="2" fill="none" opacity=".5"/>`;
+  const a = 1 - gone, shimmer = gone > 0 ? `transform="translate(0,${Math.sin(t * 20) * 2 * gone})"` : '';
+  s += acacia(610, 930, 1.3, '#1a100a');
+  const ex = 200 - (t * 6);
+  s += `<g opacity="${a}" ${shimmer}>` + sil('elephant', ex, 935, .55, '#160c08') + sil('ear', ex, 935, .55, '#24160e') + sil('elephant', ex + 110, 937, .34, '#160c08') +
+       sil('giraffe', 470, 932, .62, '#160c08') + sil('giraffe', 530, 934, .5, '#160c08', 1, -1);
+  for (let i = 0; i < 14; i++) { const bx = 120 + i * 30 + Math.sin(t + i) * 10 + t * 18, by = 520 + Math.sin(i * 1.7) * 40, f = Math.sin(t * 8 + i) * 4; s += `<path d="M${bx - 9},${by} Q${bx - 4},${by - 4 - f} ${bx},${by} Q${bx + 4},${by - 4 - f} ${bx + 9},${by}" stroke="#1a100a" stroke-width="2.2" fill="none"/>`; }
+  s += `</g>`;
+  // grass foreground + the one person left
+  let gr = ''; const rg = RS(9); for (let i = 0; i < 160; i++) { const gx = rg() * 740 - 10, h = 30 + rg() * 90, sw = Math.sin(t * 1.3 + i) * 5; gr += `<path d="M${gx},1300 q${sw},-${h / 2} ${sw * 2 + 6},-${h}" stroke="#120a06" stroke-width="${2 + rg() * 3}" fill="none"/>`; }
+  s += `<path d="M-20,1080 C200,1050 500,1070 740,1040 L740,1300 L-20,1300Z" fill="#140a06"/>` + gr;
+  s += `<g opacity="${man}">${sil('human', 360, 1062, 1.05, '#0a0604')}</g>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L1: three empty places: no birds in the sky, no fish in the sea, no cat in the street
+function sceneEmpty(t) {
+  const c1 = WS(1, 4) - .1, c2 = WS(1, 8) - .1;
+  let s = '';
+  if (t < c1) { // sky: a starling murmuration dissolves
+    const gone = ease(ramp(t, WS(1, 1) + .1, WS(1, 3) + .3));
+    s += `<defs><linearGradient id="emS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4a6a"/><stop offset=".7" stop-color="#d89a7a"/><stop offset="1" stop-color="#f0c090"/></linearGradient></defs><rect width="720" height="1280" fill="url(#emS)"/>`;
+    const r = RS(41); let m = ''; for (let i = 0; i < 700; i++) { const u = r(), v = r(), ang = u * 6.283, rad = Math.sqrt(v), cx = 360 + Math.cos(ang) * rad * (220 + 60 * Math.sin(t * 1.3)), cy = 560 + Math.sin(ang) * rad * (110 + 40 * Math.cos(t * 1.1)) + Math.sin(cx * .01 + t * 2) * 40;
+      m += `<circle cx="${cx + (r() - .5) * gone * 300}" cy="${cy - gone * 120 * r()}" r="1.6" fill="#140e10" opacity="${(1 - gone) * (.6 + .4 * r())}"/>`; }
+    s += m + `<path d="M-20,1060 C200,1040 500,1050 740,1030 L740,1300 L-20,1300Z" fill="#1a1410"/>` + Array.from({ length: 12 }, (_, i) => `<path d="M${i * 64},1050 l-10,0 l10,-${60 + (i * 37) % 50} l10,${60 + (i * 37) % 50}Z" fill="#120e0a"/>`).join('');
+  } else if (t < c2) { // sea: a bait ball of silver fish dissolves
+    const gone = ease(ramp(t, WS(1, 6), WS(1, 7) + .4));
+    s += `<defs><linearGradient id="emW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a7aa8"/><stop offset=".5" stop-color="#0e3a5e"/><stop offset="1" stop-color="#04121e"/></linearGradient><linearGradient id="emR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8f6ff" stop-opacity=".35"/><stop offset="1" stop-color="#e8f6ff" stop-opacity="0"/></linearGradient>` +
+      `<linearGradient id="fsG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a5a6a"/><stop offset=".5" stop-color="#cfe2ea"/><stop offset="1" stop-color="#f4f8fa"/></linearGradient></defs><rect width="720" height="1280" fill="url(#emW)"/>` +
+      [-1, -.4, .2, .8].map((u, i) => `<polygon points="${360 + u * 140},0 ${400 + u * 140},0 ${430 + u * 320},1280 ${290 + u * 320},1280" fill="url(#emR)" opacity="${.6 + .3 * Math.sin(t + i)}"/>`).join('');
+    const r = RS(52); let f = ''; for (let i = 0; i < 260; i++) { const ang = r() * 6.283 + t * (.6 + .2 * r()), rad = 60 + r() * 210, x = 360 + Math.cos(ang) * rad, y = 640 + Math.sin(ang) * rad * .7, dir = ang + Math.PI / 2;
+      f += `<g transform="translate(${x + (r() - .5) * gone * 200},${y}) rotate(${dir * 57.3})" opacity="${(1 - gone) * (.7 + .3 * r())}"><ellipse rx="14" ry="4" fill="url(#fsG)"/><path d="M-14,0 l-7,-5 l0,10Z" fill="#9ab4c0"/></g>`; }
+    s += f;
+  } else { // street at night: a cat on a wall under a lamp, then nothing
+    const gone = ease(ramp(t, WS(1, 10), WS(1, 10) + .7));
+    s += `<defs><linearGradient id="emN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05070f"/><stop offset="1" stop-color="#141a2a"/></linearGradient><radialGradient id="emL" cx=".5" cy=".3" r=".6"><stop offset="0" stop-color="#ffd8a0" stop-opacity=".55"/><stop offset="1" stop-color="#ffb060" stop-opacity="0"/></radialGradient>` +
+      `<filter id="brickT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".2" numOctaves="3" seed="3"/><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .06  0 0 0 0 .04  0 0 0 -1.6 .9"/><feComposite in2="SourceGraphic" operator="in"/></filter></defs><rect width="720" height="1280" fill="url(#emN)"/>` + stars(.4, t);
+    s += `<ellipse cx="460" cy="560" rx="380" ry="460" fill="url(#emL)"/><rect x="452" y="300" width="12" height="980" fill="#0a0c12"/><path d="M458,300 q0,-30 -50,-30 l-20,0" stroke="#0a0c12" stroke-width="10" fill="none"/><rect x="370" y="262" width="40" height="20" rx="6" fill="#ffe8b8"/><circle cx="390" cy="285" r="60" fill="#ffd8a0" opacity=".25" filter="url(#soft)"/>`;
+    s += `<rect x="-20" y="860" width="760" height="420" fill="#4a3a32"/><rect x="-20" y="860" width="760" height="420" fill="#fff" filter="url(#brickT)" opacity=".6"/>` + Array.from({ length: 10 }, (_, i) => `<line x1="-20" y1="${880 + i * 40}" x2="740" y2="${880 + i * 40}" stroke="#2a201a" stroke-width="3"/>`).join('') + `<rect x="-20" y="850" width="760" height="16" fill="#5a4a40"/>`;
+    s += `<g opacity="${1 - gone}">${sil('cat', 300, 852, 1.6, '#06070a')}<path d="M268,850 C236,852 222,826 242,804" stroke="#06070a" stroke-width="10" fill="none" stroke-linecap="round"/><circle cx="336" cy="-0" r="0"/><circle cx="324" cy="${852 - 1.6 * 70}" r="3" fill="#c8ff6a" opacity=".8"/><circle cx="334" cy="${852 - 1.6 * 70}" r="3" fill="#c8ff6a" opacity=".8"/></g>`;
+    s += `<rect width="720" height="1280" fill="#000" opacity=".15"/>`;
+  }
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L2: silence: a misty forest at dawn, and a sound wave that flattens to a line
+function sceneSilence(t) {
+  const st = S0(2) - .2, flat = ease(ramp(t, WS(2, 4), WS(2, 10) + .5));
+  let s = `<defs><linearGradient id="slS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a9aa8"/><stop offset=".6" stop-color="#d8dcd8"/><stop offset="1" stop-color="#a8b0a8"/></linearGradient><linearGradient id="slRay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffbe8" stop-opacity=".5"/><stop offset="1" stop-color="#fffbe8" stop-opacity="0"/></linearGradient></defs><rect width="720" height="1280" fill="url(#slS)"/>`;
+  s += `<circle cx="560" cy="330" r="200" fill="#fff8e0" opacity=".7" filter="url(#soft)"/>`;
+  for (let L = 0; L < 6; L++) { const col = mix('#c8ccc8', '#1a221c', L / 5), base = 760 + L * 90, r = RS(L + 60); let tr = '';
+    for (let i = 0; i < 22; i++) { const x = i * 36 - 20 + r() * 20, h = (150 + r() * 160) * (1 + L * .2), w = h * .16; tr += `<path d="M${x},${base} l-${w},0 l${w},-${h} l${w},${h}Z" fill="${col}"/><rect x="${x - 2}" y="${base - 4}" width="4" height="${40 + L * 10}" fill="${col}"/>`; }
+    s += tr + `<rect y="${base - 60}" width="720" height="120" fill="#e8ece8" opacity="${.35 - L * .04}" filter="url(#haze)"/>`; }
+  s += [-.5, 0, .5, 1].map((u, i) => `<polygon points="${560 + u * 60},330 ${580 + u * 60},330 ${380 + u * 260},1280 ${300 + u * 260},1280" fill="url(#slRay)" opacity="${.35 + .15 * Math.sin(t + i)}"/>`).join('');
+  s += `<rect y="1180" width="720" height="100" fill="#141a16"/>`;
+  // sound wave flattening
+  let d = 'M40,1000'; for (let x = 40; x <= 680; x += 4) { const amp = (1 - flat) * (60 * Math.sin(x * .05 + t * 9) * Math.sin(x * .013 + t * 3) + 20 * Math.sin(x * .21 + t * 13)); d += ` L${x},${1000 + amp}`; }
+  s += `<path d="${d}" stroke="#fff" stroke-width="4" fill="none" opacity=".9"/><path d="${d}" stroke="#fff" stroke-width="12" fill="none" opacity=".15" filter="url(#blur2)"/>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L3: the fridge: meat, eggs, milk and honey vanish; only vegetables are left
+function sceneFridge(t) {
+  const gm = ease(ramp(t, WS(3, 4) - .1, WS(3, 4) + .4)), ge = ease(ramp(t, WS(3, 6) - .1, WS(3, 6) + .4)), gk = ease(ramp(t, WS(3, 8) - .1, WS(3, 8) + .4)), gh = ease(ramp(t, WS(3, 10) - .1, WS(3, 10) + .4));
+  let s = `<defs><linearGradient id="frW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f8fc"/><stop offset="1" stop-color="#b8c2cc"/></linearGradient><linearGradient id="frBk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8d2da"/><stop offset=".5" stop-color="#eef3f7"/><stop offset="1" stop-color="#c0cad2"/></linearGradient>` +
+    `<radialGradient id="egG" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff8ec"/><stop offset=".7" stop-color="#e8d8c0"/><stop offset="1" stop-color="#a89478"/></radialGradient><linearGradient id="mkG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8dde2"/><stop offset=".4" stop-color="#ffffff"/><stop offset="1" stop-color="#c8cdd2"/></linearGradient>` +
+    `<radialGradient id="hnG" cx=".4" cy=".4" r=".7"><stop offset="0" stop-color="#ffd870"/><stop offset=".6" stop-color="#d88a10"/><stop offset="1" stop-color="#7a3a00"/></radialGradient><radialGradient id="mtG" cx=".4" cy=".4" r=".8"><stop offset="0" stop-color="#e05a5a"/><stop offset=".7" stop-color="#a81e28"/><stop offset="1" stop-color="#5a0a10"/></radialGradient>` +
+    `<radialGradient id="tmG" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ff7a5a"/><stop offset=".7" stop-color="#d0281a"/><stop offset="1" stop-color="#6a0a04"/></radialGradient></defs>`;
+  s += `<rect width="720" height="1280" fill="#2a3038"/><rect x="40" y="140" width="640" height="1100" rx="20" fill="url(#frW)"/><rect x="70" y="170" width="580" height="1040" fill="url(#frBk)"/>`;
+  s += `<rect x="70" y="170" width="580" height="24" fill="#fff"/><rect x="70" y="190" width="580" height="200" fill="#fff" opacity=".35" filter="url(#haze)"/>`;
+  [480, 760, 1020].forEach(y => { s += `<rect x="70" y="${y}" width="580" height="12" fill="#e8f4ff" opacity=".7"/><rect x="70" y="${y}" width="580" height="2" fill="#fff"/><rect x="70" y="${y + 12}" width="580" height="30" fill="#000" opacity=".06" filter="url(#blur2)"/>`; });
+  // top shelf: honey jar + milk bottle
+  s += `<g opacity="${1 - gh}"><rect x="140" y="350" width="110" height="130" rx="18" fill="url(#hnG)" opacity=".95"/><rect x="134" y="330" width="122" height="30" rx="6" fill="#c8a040"/><rect x="152" y="380" width="22" height="80" rx="10" fill="#fff" opacity=".35"/><ellipse cx="195" cy="482" rx="60" ry="8" fill="#000" opacity=".12"/></g>`;
+  s += `<g opacity="${1 - gk}"><path d="M470,480 L470,330 C470,300 490,290 495,270 L495,240 L545,240 L545,270 C550,290 570,300 570,330 L570,480Z" fill="url(#mkG)"/><rect x="492" y="226" width="56" height="20" rx="4" fill="#2a6ad0"/><rect x="478" y="360" width="84" height="60" fill="#2a6ad0" opacity=".2"/><rect x="482" y="300" width="14" height="170" rx="6" fill="#fff" opacity=".7"/></g>`;
+  // middle shelf: egg carton + lettuce
+  s += `<g opacity="${1 - ge}"><path d="M110,760 L120,690 L380,690 L390,760Z" fill="#a89a88"/>` + [0, 1, 2, 3, 4].map(i => `<ellipse cx="${150 + i * 50}" cy="672" rx="22" ry="28" fill="url(#egG)"/><ellipse cx="${144 + i * 50}" cy="662" rx="6" ry="9" fill="#fff" opacity=".7"/>`).join('') + `<path d="M110,760 L120,700 L380,700 L390,760Z" fill="#b8aa98"/></g>`;
+  s += `<g transform="translate(530,700)">` + Array.from({ length: 14 }, (_, i) => { const a = i / 14 * 6.283; return `<ellipse cx="${Math.cos(a) * 34}" cy="${Math.sin(a) * 22}" rx="40" ry="28" transform="rotate(${a * 57.3},${Math.cos(a) * 34},${Math.sin(a) * 22})" fill="${i % 2 ? '#5aa040' : '#7ac050'}"/>`; }).join('') + `<circle r="26" fill="#a8d878"/></g>`;
+  // bottom shelf: meat tray + carrots + tomatoes
+  s += `<g opacity="${1 - gm}"><rect x="110" y="960" width="260" height="60" rx="10" fill="#1a1a1e"/><ellipse cx="240" cy="972" rx="110" ry="34" fill="url(#mtG)"/>` + Array.from({ length: 7 }, (_, i) => `<path d="M${160 + i * 26},960 q10,10 0,24" stroke="#f0c8c0" stroke-width="3" fill="none" opacity=".6"/>`).join('') + `<path d="M120,950 L360,950" stroke="#fff" stroke-width="3" opacity=".6"/></g>`;
+  s += [0, 1, 2].map(i => `<path d="M${430 + i * 30},1016 L${470 + i * 30},880 L${490 + i * 30},884 L${452 + i * 30},1018Z" fill="#f07a1a"/><path d="M${472 + i * 30},880 l-6,-40 M${478 + i * 30},880 l6,-42 M${482 + i * 30},882 l18,-34" stroke="#3a8a2a" stroke-width="4"/>`).join('') +
+       [0, 1].map(i => `<circle cx="${570 + i * 46}" cy="990" r="28" fill="url(#tmG)"/><path d="M${560 + i * 46},966 l10,6 l10,-6" stroke="#2a6a1a" stroke-width="4" fill="none"/>`).join('');
+  s += `<rect x="40" y="140" width="640" height="1100" rx="20" fill="none" stroke="#9aa4ae" stroke-width="6"/><rect width="720" height="1280" fill="#cfe6ff" opacity=".06"/>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L4: produce stand: fruit and vegetables run low
+function fruitApple(x, y, r) { return `<circle cx="${x}" cy="${y + 3}" r="${r}" fill="#000" opacity=".25" filter="url(#blur1)"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#apG)"/><path d="M${x},${y - r * .8} q2,-8 6,-10" stroke="#5a3a1a" stroke-width="2" fill="none"/><ellipse cx="${x - r * .35}" cy="${y - r * .35}" rx="${r * .25}" ry="${r * .15}" fill="#fff" opacity=".5"/>`; }
+function fruitOrange(x, y, r) { return `<circle cx="${x}" cy="${y + 3}" r="${r}" fill="#000" opacity=".25" filter="url(#blur1)"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#orG)"/><circle cx="${x - r * .3}" cy="${y - r * .3}" r="${r * .2}" fill="#fff" opacity=".35"/>`; }
+function fruitStraw(x, y, r) { return `<path d="M${x - r},${y - r * .6} C${x - r},${y + r * .3} ${x - r * .3},${y + r} ${x},${y + r * 1.1} C${x + r * .3},${y + r} ${x + r},${y + r * .3} ${x + r},${y - r * .6} Q${x},${y - r * 1.1} ${x - r},${y - r * .6}Z" fill="url(#stG)"/>` +
+  Array.from({ length: 7 }, (_, i) => `<ellipse cx="${x + Math.cos(i * 1.9) * r * .55}" cy="${y + Math.sin(i * 1.9) * r * .45}" rx="1.2" ry="1.8" fill="#ffe080"/>`).join('') + `<path d="M${x - r * .7},${y - r * .7} l${r * .3},${r * .25} l${r * .4},${-r * .3} l${r * .4},${r * .3} l${r * .3},${-r * .25}" fill="#3a8a2a"/>`; }
+function fruitPepper(x, y, r) { return `<path d="M${x - r * .8},${y - r * .6} C${x - r},${y + r} ${x + r},${y + r} ${x + r * .8},${y - r * .6} Q${x},${y - r * 1.1} ${x - r * .8},${y - r * .6}Z" fill="url(#pnG)"/><path d="M${x},${y - r * .9} l0,-${r * .5}" stroke="#2a6a1a" stroke-width="4"/><ellipse cx="${x - r * .3}" cy="${y - r * .1}" rx="${r * .15}" ry="${r * .4}" fill="#fff" opacity=".3"/>`; }
+function crate(x, y, w, fruit, fill, seed) {
+  let s = `<g><rect x="${x}" y="${y}" width="${w}" height="150" fill="#9a6a3a"/><rect x="${x}" y="${y}" width="${w}" height="150" fill="#000" filter="url(#woodTex)" opacity=".7"/>` +
+    [0, 1, 2].map(k => `<rect x="${x}" y="${y + k * 52}" width="${w}" height="4" fill="#5a3a1a"/>`).join('') + `<rect x="${x}" y="${y}" width="${w}" height="150" fill="none" stroke="#5a3a1a" stroke-width="4"/>`;
+  const r = RS(seed), n = Math.round(22 * fill);
+  for (let i = 0; i < n; i++) { const fx = x + 20 + (i % 6) * (w - 40) / 5 + (r() - .5) * 8, fy = y + 6 - Math.floor(i / 6) * 22 + (r() - .5) * 6; s += fruit(fx, fy, 15); }
+  return s + `</g>`;
+}
+function sceneProduce(t) {
+  const st = S0(4), em = ease(ramp(t, WS(4, 4) - .3, S0(5) - .4));
+  let s = `<defs><linearGradient id="mkB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3424"/><stop offset="1" stop-color="#1a120e"/></linearGradient>` +
+    `<radialGradient id="apG" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#ff6a5a"/><stop offset=".6" stop-color="#c81e1e"/><stop offset="1" stop-color="#6a0a0a"/></radialGradient>` +
+    `<radialGradient id="orG" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#ffc060"/><stop offset=".6" stop-color="#f07a10"/><stop offset="1" stop-color="#8a3a00"/></radialGradient>` +
+    `<radialGradient id="stG" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#ff5a5a"/><stop offset="1" stop-color="#a00a1a"/></radialGradient>` +
+    `<radialGradient id="pnG" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#ffe060"/><stop offset=".6" stop-color="#e8b010"/><stop offset="1" stop-color="#7a5a00"/></radialGradient></defs><rect width="720" height="1280" fill="url(#mkB)"/>`;
+  for (let i = 0; i < 4; i++) { const bx = 100 + i * 170; s += `<line x1="${bx}" y1="300" x2="${bx}" y2="380" stroke="#222" stroke-width="2"/><circle cx="${bx}" cy="390" r="14" fill="#ffe2a0"/><circle cx="${bx}" cy="390" r="140" fill="url(#lampG)" opacity=".6"/>`; }
+  s += `<rect x="20" y="760" width="680" height="16" fill="#4a3020"/><rect x="20" y="1110" width="680" height="16" fill="#4a3020"/>`;
+  const f = [1 - em * 1.05, 1 - em * 1.2, 1 - em * 1.3, 1 - em * 1.1].map(v => clamp(v));
+  s += crate(40, 600, 310, fruitApple, f[0], 1) + crate(370, 600, 310, fruitStraw, f[1], 2) + crate(40, 950, 310, fruitOrange, f[2], 3) + crate(370, 950, 310, fruitPepper, f[3], 4);
+  s += `<rect width="720" height="1280" fill="#ffb060" opacity=".06"/>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L5: a coral colony close-up bleaches white, then turns grey with algae
+function sceneBleach(t) {
+  const st = S0(5) - .2, b = ease(ramp(t, WS(5, 2), WS(5, 4) + 1)), g = ease(ramp(t, WS(5, 6), S0(6) - .3));
+  const col = g > 0 ? mix('#f4f2ea', '#7a7a5a', g) : mix('#d8785a', '#f4f2ea', b), tip = g > 0 ? mix('#ffffff', '#9a9a70', g) : mix('#ffc0a0', '#ffffff', b);
+  let s = `<defs><linearGradient id="blW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a8ab8"/><stop offset=".5" stop-color="#0e4a6e"/><stop offset="1" stop-color="#05182a"/></linearGradient><linearGradient id="blR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8f6ff" stop-opacity=".35"/><stop offset="1" stop-color="#e8f6ff" stop-opacity="0"/></linearGradient>` +
+    `<linearGradient id="blC" gradientUnits="userSpaceOnUse" x1="0" y1="1240" x2="0" y2="400"><stop offset="0" stop-color="${mix(col, '#000000', .45)}"/><stop offset=".6" stop-color="${col}"/><stop offset="1" stop-color="${tip}"/></linearGradient></defs><rect width="720" height="1280" fill="url(#blW)"/>`;
+  s += [-1, -.3, .4, 1].map((u, i) => `<polygon points="${360 + u * 150},0 ${400 + u * 150},0 ${440 + u * 330},1280 ${300 + u * 330},1280" fill="url(#blR)" opacity="${.6 + .3 * Math.sin(t * .8 + i)}"/>`).join('');
+  const r = RS(77); let br = '';
+  const branch = (bx, by, a, len, w, d) => { const sw = Math.sin(t * 1.1 + d + bx * .01) * .012; a += sw; const ex = bx + Math.cos(a) * len, ey = by + Math.sin(a) * len, nx = -Math.sin(a), ny = Math.cos(a), w2 = w * .74;
+    br += `<polygon points="${bx + nx * w},${by + ny * w} ${ex + nx * w2},${ey + ny * w2} ${ex - nx * w2},${ey - ny * w2} ${bx - nx * w},${by - ny * w}"/><circle cx="${ex}" cy="${ey}" r="${w2}"/>`;
+    if (d < 5) { branch(ex, ey, a - .38 - r() * .25, len * .74, w2, d + 1); branch(ex, ey, a + .38 + r() * .25, len * .74, w2, d + 1); } };
+  branch(360, 1240, -Math.PI / 2, 210, 34, 0);
+  s += `<g fill="url(#blC)">${br}</g>`;
+  // polyps with tiny tentacles (only while alive)
+  const pa = (1 - b) * .9; if (pa > 0) { let p = ''; const rp = RS(81); for (let i = 0; i < 160; i++) { const x = 140 + rp() * 440, y = 420 + rp() * 760; p += `<g transform="translate(${x},${y})" opacity="${pa}">${[0, 1, 2, 3, 4, 5].map(k => `<line x1="0" y1="0" x2="${Math.cos(k + t) * 5}" y2="${Math.sin(k + t) * 5}" stroke="#ffe0c8" stroke-width="1.2"/>`).join('')}</g>`; } s += p; }
+  // algae fuzz in the end
+  if (g > 0) { let al = ''; const ra = RS(91); for (let i = 0; i < 300; i++) { const x = 140 + ra() * 440, y = 420 + ra() * 800; al += `<circle cx="${x}" cy="${y}" r="${1 + ra() * 2}" fill="#5a6a3a" opacity="${g * .5}"/>`; } s += al; }
+  s += `<path d="M-20,1220 C200,1200 500,1210 740,1190 L740,1300 L-20,1300Z" fill="#2a2e30"/>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L6: soil cross-section with earthworms; they vanish and the soil compacts and cracks
+function sceneSoil(t) {
+  const st = S0(6) - .2, gone = ease(ramp(t, WS(6, 2), WS(6, 3) + .5)), comp = ease(ramp(t, WS(6, 5), S0(7) - .3));
+  let s = `<defs><linearGradient id="soS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a1c"/><stop offset=".4" stop-color="#5a3e26"/><stop offset="1" stop-color="#7a4e30"/></linearGradient>` +
+    `<filter id="soT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".18" numOctaves="4" seed="11"/><feColorMatrix values="0 0 0 0 .08  0 0 0 0 .05  0 0 0 0 .02  0 0 0 -1.4 .95"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+    `<linearGradient id="wmG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8a090"/><stop offset=".5" stop-color="#b86a5a"/><stop offset="1" stop-color="#6a3a30"/></linearGradient></defs>`;
+  s += `<rect width="720" height="280" fill="#8ab8e0"/><rect y="230" width="720" height="60" fill="${mix('#5a9a30', '#a8a050', comp)}"/>`;
+  let gr = ''; const rg = RS(5); for (let i = 0; i < 120; i++) { const gx = rg() * 740 - 10, h = 20 + rg() * 50; gr += `<path d="M${gx},260 q${(rg() - .5) * 8},-${h / 2} ${(rg() - .5) * 16},-${h}" stroke="${mix('#4a8a28', '#b0a050', comp)}" stroke-width="3" fill="none"/>`; }
+  s += gr + `<rect y="270" width="720" height="1010" fill="url(#soS)"/><rect y="270" width="720" height="1010" fill="#fff" filter="url(#soT)" opacity="${.7 + .2 * comp}"/>`;
+  // roots
+  const rr = RS(17); let roots = ''; for (let i = 0; i < 9; i++) { let x = 40 + i * 80, y = 270, d = `M${x},${y}`; for (let k = 0; k < 8; k++) { x += (rr() - .5) * 30; y += 30 + rr() * 30; d += ` L${x},${y}`; } roots += `<path d="${d}" stroke="#d8c8a8" stroke-width="${2.4 - comp}" fill="none" opacity=".6"/>`; }
+  s += roots;
+  // stones
+  for (let i = 0; i < 16; i++) { const rs = RS(i + 200), x = rs() * 720, y = 400 + rs() * 860, rx = 10 + rs() * 26; s += `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${rx * .7}" fill="#8a7a6a"/><ellipse cx="${x - rx * .3}" cy="${y - rx * .25}" rx="${rx * .4}" ry="${rx * .2}" fill="#c8b8a8" opacity=".5"/>`; }
+  // worm tunnels + worms
+  const tun = [[100, 420, 1], [520, 560, -1], [240, 800, 1], [460, 1020, -1], [140, 1140, 1]];
+  tun.forEach(([x, y, dir], i) => { let d = `M${x - 120 * dir},${y}`; for (let k = 0; k <= 12; k++) d += ` L${x - 120 * dir + k * 22 * dir},${y + Math.sin(k * .8 + i) * 18}`;
+    s += `<path d="${d}" stroke="#1e140c" stroke-width="${16 * (1 - comp)}" fill="none" stroke-linecap="round" opacity=".85"/>`;
+    const p = pmod((t - st) * .05 + i * .2, 1); let wd = ''; for (let k = 0; k <= 10; k++) { const u = p * .5 + k * .025, xx = x - 120 * dir + u * 264 * dir, yy = y + Math.sin(u * 12 * .8 + i + Math.sin(t * 3 + k) * .1) * 18; wd += (k ? ' L' : 'M') + `${xx},${yy}`; }
+    s += `<g opacity="${1 - gone}"><path d="${wd}" stroke="url(#wmG)" stroke-width="11" fill="none" stroke-linecap="round"/><path d="${wd}" stroke="#7a4038" stroke-width="11" fill="none" stroke-dasharray="1.4 5" opacity=".6"/><path d="${wd}" stroke="#ffd8d0" stroke-width="2.4" fill="none" opacity=".55" transform="translate(0,-3)"/></g>`; });
+  // compaction cracks
+  if (comp > 0) { const rc = RS(33); for (let i = 0; i < 14; i++) { let x = rc() * 720, y = 300 + rc() * 900, d = `M${x},${y}`; for (let k = 0; k < 5; k++) { x += (rc() - .5) * 60; y += 20 + rc() * 30; d += ` L${x},${y}`; } s += `<path d="${d}" stroke="#140c06" stroke-width="2.6" fill="none" stroke-dasharray="300" stroke-dashoffset="${300 * (1 - comp)}"/>`; } }
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L7: a fruiting tree; birds no longer carry the seeds away, fruit piles up beneath it
+function sceneSeeds(t) {
+  const st = S0(7) - .2, gone = ease(ramp(t, WS(7, 8) - .3, WS(7, 8) + .4)), fall = ease(ramp(t, WS(7, 8), S0(8) - .3));
+  let s = `<defs><linearGradient id="sdS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a9ac8"/><stop offset="1" stop-color="#e8eedc"/></linearGradient><radialGradient id="beG" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ff6a7a"/><stop offset=".7" stop-color="#b01a2a"/><stop offset="1" stop-color="#5a0010"/></radialGradient></defs><rect width="720" height="1280" fill="url(#sdS)"/>`;
+  s += `<path d="M-20,900 C200,880 500,895 740,870 L740,1300 L-20,1300Z" fill="#5a7a3a"/><rect y="900" width="720" height="380" fill="#4a6a30"/>`;
+  s += `<path d="M330,1000 C320,860 340,760 300,640 L330,630 C370,740 360,860 380,1000Z" fill="#3a2a1c"/><path d="M335,800 C280,740 230,700 180,690 M350,760 C420,700 470,680 520,680" stroke="#3a2a1c" stroke-width="18" fill="none" stroke-linecap="round"/>`;
+  const rc = RS(12); for (let i = 0; i < 120; i++) { const a = rc() * 6.283, d = Math.sqrt(rc()), x = 350 + Math.cos(a) * d * 260, y = 560 + Math.sin(a) * d * 180; s += `<ellipse cx="${x}" cy="${y}" rx="${26 + rc() * 22}" ry="${16 + rc() * 12}" transform="rotate(${rc() * 180},${x},${y})" fill="${['#2a5a22', '#3a6a2a', '#1e4a1a', '#4a7a30'][Math.floor(rc() * 4)]}"/>`; }
+  const rb = RS(19); for (let i = 0; i < 60; i++) { const a = rb() * 6.283, d = Math.sqrt(rb()), x = 350 + Math.cos(a) * d * 240, y0 = 560 + Math.sin(a) * d * 160, y = lerp(y0, 960 + rb() * 50, fall * (rb() > .3 ? 1 : 0)); s += `<circle cx="${x + (fall * (rb() - .5) * 40)}" cy="${y}" r="7" fill="url(#beG)"/>`; }
+  // birds carrying berries away (gone after "won't find anyone")
+  for (let i = 0; i < 5; i++) { const p = pmod((t - st) * .25 + i / 5, 1), bx = lerp(380, 820, p), by = 560 - p * 200 + Math.sin(t * 3 + i) * 10, f = Math.sin(t * 9 + i) * 8;
+    s += `<g opacity="${1 - gone}"><path d="M${bx - 20},${by} Q${bx - 10},${by - 10 - f} ${bx},${by} Q${bx + 10},${by - 10 - f} ${bx + 20},${by}" stroke="#1a1e28" stroke-width="4" fill="none"/><ellipse cx="${bx}" cy="${by + 2}" rx="6" ry="4" fill="#1a1e28"/><circle cx="${bx + 8}" cy="${by + 4}" r="3.4" fill="#d01a2a"/></g>`; }
+  // seedlings crowding under the tree
+  for (let i = 0; i < 16; i++) { const x = 220 + i * 18, h = 20 * fall * (1 + (i % 3) * .4); s += `<path d="M${x},1010 l0,-${h}" stroke="#5a9a30" stroke-width="3"/><ellipse cx="${x - 5}" cy="${1010 - h}" rx="6" ry="3" fill="#6ab040" opacity="${fall}"/><ellipse cx="${x + 5}" cy="${1010 - h}" rx="6" ry="3" fill="#6ab040" opacity="${fall}"/>`; }
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L8: a lone person on a hill over endless crop fields at dusk; the sky is empty
+function sceneAlone(t) {
+  const st = S0(8) - .2;
+  let s = `<defs><linearGradient id="alS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3058"/><stop offset=".55" stop-color="#b86a5a"/><stop offset=".72" stop-color="#f0b070"/><stop offset="1" stop-color="#6a4a2a"/></linearGradient><linearGradient id="alF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8a050"/><stop offset="1" stop-color="#6a4a1a"/></linearGradient></defs><rect width="720" height="1280" fill="url(#alS)"/>`;
+  s += `<circle cx="200" cy="840" r="260" fill="#ffd090" opacity=".35" filter="url(#soft)"/><circle cx="200" cy="845" r="44" fill="#fff0c8"/>`;
+  s += `<g filter="url(#blur2)" opacity=".7">` + Array.from({ length: 5 }, (_, i) => `<ellipse cx="${pmod(i * 180 + t * 4, 900) - 90}" cy="${360 + i * 50}" rx="${120 + i * 20}" ry="10" fill="#e8a080"/>`).join('') + `</g>`;
+  s += `<rect y="860" width="720" height="420" fill="url(#alF)"/>`;
+  for (let k = 0; k < 40; k++) { const x0 = -900 + k * 64; s += `<line x1="${360 + (x0 - 360) * .02}" y1="862" x2="${x0}" y2="1300" stroke="#8a6a30" stroke-width="${1 + Math.abs(x0 - 360) * .002}" opacity=".5"/>`; }
+  for (let k = 0; k < 14; k++) { const y = 862 + Math.pow(k / 13, 2) * 440; s += `<line x1="-20" y1="${y}" x2="740" y2="${y}" stroke="#e8c070" stroke-width="${1 + k * .2}" opacity="${.25 + k * .02}"/>`; }
+  s += `<path d="M380,1300 C440,1120 560,1080 760,1100 L760,1300Z" fill="#2a1a10"/>` + sil('human', 560, 1092, 1.05, '#0e0806');
+  s += `<path d="M560,1092 L380,1180" stroke="#000" stroke-width="22" opacity=".25" filter="url(#blur2)"/>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L9: the living planet
+function sceneEarth(t) {
+  const st = S0(9) - .2;
+  let s = space(t, '#02040c', '#0a1030');
+  F.earth = { x: 360, y: 700, r: 280, a: 1, sunI: 1, lights: .6, rot: 1.0, tilt: .41 }; F.light = [-800, 300]; F.moon = null;
+  F.ov = '';
+  return s;
+}
+// L10: CTA: animal tracks in the sand form a question mark
+function sceneCTA(t) {
+  const st = S0(10) - .2, b = Math.abs(Math.sin(t * 3)) * 6;
+  let s = `<defs><linearGradient id="snd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8c890"/><stop offset="1" stop-color="#b8905a"/></linearGradient>` +
+    `<filter id="sndT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .35  0 0 0 0 .2  0 0 0 -1.6 .9"/><feComposite in2="SourceGraphic" operator="in"/></filter></defs>` +
+    `<rect width="720" height="1280" fill="url(#snd)"/><rect width="720" height="1280" fill="#fff" filter="url(#sndT)" opacity=".55"/>`;
+  for (let i = 0; i < 16; i++) s += `<path d="M-20,${120 + i * 76} ${Array.from({ length: 13 }, () => 'q30,-10 60,0').join(' ')}" stroke="#a07a48" stroke-width="3" fill="none" opacity=".25"/>`;
+  const P = []; for (let i = 0; i <= 26; i++) { const u = i / 26; let x, y; if (u < .7) { const a = Math.PI * (1.05 + u / .7 * 1.45); x = 360 + Math.cos(a) * 150; y = 520 + Math.sin(a) * 150; } else { x = 360 + (u - .7) * 0; y = 680 + (u - .7) / .3 * 150; } P.push([x, y]); }
+  P.push([360, 950]);
+  const n = Math.floor(clamp((t - st) / 3.5) * P.length);
+  for (let i = 0; i < n; i++) { const [x, y] = P[i], [x2, y2] = P[Math.min(i + 1, P.length - 1)], a = Math.atan2(y2 - y, x2 - x) * 57.3 + 90, off = (i % 2 ? 12 : -12);
+    s += `<g transform="translate(${x + off * Math.cos(a / 57.3)},${y + off * Math.sin(a / 57.3)}) rotate(${a})"><ellipse cx="0" cy="6" rx="11" ry="9" fill="#7a5a30" opacity=".65"/>` + [-10, -4, 4, 10].map(k => `<ellipse cx="${k}" cy="${-8 - Math.abs(k) * -.2}" rx="4" ry="5" fill="#7a5a30" opacity=".65"/>`).join('') + `<ellipse cx="2" cy="4" rx="9" ry="6" fill="#5a3a18" opacity=".25"/></g>`; }
+  F.ov = `<g opacity="${ramp(t, WS(10, 4), WS(10, 4) + .4)}" transform="translate(360,${1100 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
+  F.earth = null; F.moon = null;
+  return s;
+}
+const SCENES = [
+  { s: 0, f: sceneSavanna }, { s: S0(1) - .2, f: sceneEmpty }, { s: S0(2) - .2, f: sceneSilence }, { s: S0(3) - .2, f: sceneFridge }, { s: S0(4) - .2, f: sceneProduce },
+  { s: S0(5) - .2, f: sceneBleach }, { s: S0(6) - .2, f: sceneSoil }, { s: S0(7) - .2, f: sceneSeeds }, { s: S0(8) - .2, f: sceneAlone }, { s: S0(9) - .2, f: sceneEarth }, { s: S0(10) - .2, f: sceneCTA },
+];
+const XF = .5;
+
+// ---------- UI ----------
+const CHIPS = [
+  ['t0', 'ماذا لو اختفت كل الحيوانات؟', 360, 1150, 'big', .15, S0(1) - .1],
+  ['c1', 'لا تغريد', 160, 860, 'dark', WS(2, 6), S0(3)], ['c2', 'لا نباح', 360, 860, 'dark', WS(2, 8), S0(3)], ['c3', 'لا طنين', 560, 860, 'dark', WS(2, 10), S0(3)],
+  ['c4', '٣/٤ أنواع المحاصيل تعتمد على الملقّحات', 360, 470, '', WS(4, 3), S0(5)],
+  ['c5', 'المرجان حيوان', 360, 330, 'big', WS(5, 7), S0(6)],
+  ['c6', 'ديدان الأرض تحرث التربة', 360, 330, '', WS(6, 3), S0(7)],
+  ['c7', 'البذور لا تبتعد', 360, 330, 'big', WS(7, 9), S0(8)],
+  ['c8', '@MadhaLawLab', 360, 1200, 'dark', WS(10, 6), 999],
+];
+$('ui').innerHTML = CHIPS.map(c => `<div class="chip ${c[4]}" id="${c[0]}" style="${c[1][0] === '@' ? 'direction:ltr;' : ''}left:${c[2]}px;top:${c[3]}px">${c[1]}</div>`).join('');
+function renderUI(t) {
+  CHIPS.forEach(c => { $(c[0]).style.opacity = ease(ramp(t, c[5], c[5] + .3)) * (1 - ease(ramp(t, c[6] - .3, c[6]))); });
+  $('note').style.opacity = 0;
+}
+

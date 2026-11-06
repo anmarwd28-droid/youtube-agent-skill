@@ -8,7 +8,7 @@ TM = json.load(open(sys.argv[2], encoding="utf-8")); TOTAL = float(sys.argv[3]);
 SR = 44100; N = int(TOTAL * SR) + SR
 rng = np.random.default_rng(7)
 L = lambda i: TM[i]; Wd = lambda i, j: TM[i]["words"][j]
-T = dict(gone=Wd(0, 6)[1] - .1, picnic=L(1)["start"], wilt=L(2)["start"], orch=L(3)["start"], market=L(4)["start"], corn=L(5)["start"], wind=Wd(5, 6)[1], pond=L(6)["start"], fall=Wd(7, 2)[1], floor=L(8)["start"], pile=L(9)["start"], ant=L(10)["start"], end=L(11)["start"])
+T = dict(gone=Wd(0, 9)[1] - .3, empty=L(1)["start"], sea=Wd(1, 4)[1], cat=Wd(1, 8)[1], silence=Wd(2, 4)[1], sil=L(2)["start"], fridge=L(3)["start"], produce=L(4)["start"], coral=L(5)["start"], soil=L(6)["start"], seeds=L(7)["start"], birdsgone=Wd(7, 8)[1], alone=L(8)["start"], earth=L(9)["start"], end=L(10)["start"])
 t = np.arange(N) / SR
 mus = np.zeros((N, 2)); sfx = np.zeros((N, 2))
 
@@ -53,44 +53,36 @@ def bell(f, dur=2.5, amp=.3):
     return sum(np.sin(2 * np.pi * f * m * tt) * np.exp(-tt / (dur * .35 / m ** .5)) * a for m, a in ((1, 1), (2.76, .45), (5.4, .22), (8.9, .1))) * amp
 
 
-def buzz(dur, f=220, amp=.06):
-    tt = np.arange(int(dur * SR)) / SR; fm = f * (1 + .03 * np.sin(2 * np.pi * 7 * tt)); ph = 2 * np.pi * np.cumsum(fm) / SR
-    w = sum(np.sin(ph * h) / h for h in range(1, 8)); e = np.clip(tt / .2, 0, 1) * np.clip((dur - tt) / .3, 0, 1); return w * e * amp
 def chirp(f0, f1, dur, amp=.06): return tone(f0, f1, dur, dur * .6, amp)
-# ---------------- music
-mus += pad(['G3', 'B3', 'D4', 'G4'], 0, T['gone'] + .3, .05, .6, .4)
-mus += pad(['E3', 'G3', 'B3'], T['gone'], T['wilt'] + .6, .05, .3, .8)
-mus += pad(['D2', 'A2', 'F3'], T['wilt'], T['orch'] + .6, .065, .4, .8, bright=4)
-place(sfx, tone(60, 30, 2.5, .8, .6), T['wilt'] + .3); sfx += noise_band(200, 1200, T['wilt'], T['orch'], .02, 1., .5, lfo=.8)
-mus += pad(['C3', 'G3', 'E4', 'G4'], T['orch'], T['market'] + .6, .055, .6, .8)
-mus += pad(['A2', 'E3', 'C4'], T['market'], T['corn'] + .6, .055, .6, .8)
-mus += pad(['F3', 'A3', 'C4', 'F4'], T['corn'], T['pond'] + .6, .055, .6, .8)
-mus += pad(['D3', 'F3', 'A3'], T['pond'], T['floor'] + .6, .06, .6, .8)
-mus += pad(['Bb2', 'F3', 'D4'], T['floor'], T['ant'] + .6, .06, .6, .8)
-mus += pad(['G3', 'B3', 'D4', 'G4', 'B4'], T['ant'], TOTAL, .07, 1.0, 1.2)
+# ---------------- music (cut to silence on "silence")
+mus += pad(['D3', 'A3', 'F4', 'A4'], 0, T['silence'], .055, 1.2, .08)
+mus += pad(['D2', 'A2'], T['gone'], T['silence'], .04, .8, .08, bright=3)
+mus += pad(['A2', 'E3', 'C4'], T['fridge'] - .3, T['coral'] + .6, .05, 1.5, .8)
+mus += pad(['F2', 'C3', 'A3'], T['coral'], T['seeds'] + .6, .055, .6, .8)
+mus += pad(['D2', 'A2', 'F3'], T['seeds'], T['alone'] + .6, .055, .6, .8)
+mus += pad(['Bb2', 'F3', 'D4'], T['alone'], T['earth'] + .6, .05, 1.2, .8)
+mus += pad(['D3', 'A3', 'D4', 'F#4', 'A4'], T['earth'], TOTAL, .07, 1.4, 1.2)
 # ---------------- effects
-place(sfx, buzz(T['gone'] + .2, 230, .05), 0, 1., .65); place(sfx, buzz(T['gone'], 180, .03), .2, 1., .35)
-for at in (.4, 1.3, 2.1): place(sfx, chirp(3200, 4200, .12, .04), at, 1., .3); place(sfx, chirp(3800, 3000, .1, .03), at + .15, 1., .3)
-for k in range(10): place(sfx, bell(note('B6') * (1 + .02 * k), .9, .015), T['gone'] + k * .06, 1., .3 + .05 * k)
-sfx += noise_band(300, 2500, T['picnic'], T['wilt'] + .2, .006, .5, .5, lfo=.5)
-place(sfx, buzz(Wd(1, 3)[1] - T['picnic'] + .2, 520, .03), T['picnic'], 1., .55)
-for at in np.arange(T['orch'], T['market'] - .3, 2.2): place(sfx, buzz(1.8, rng.uniform(200, 260), .035), at, 1., rng.uniform(.3, .7))
-for at in np.arange(T['orch'] + .5, T['market'], 1.3): place(sfx, chirp(3000, 4300, .1, .03), at, 1., rng.uniform(.2, .8))
-sfx += noise_band(250, 1800, T['market'], T['corn'] + .2, .012, .5, .5, lfo=.8)
-for at in np.arange(Wd(3, 3)[1], T['corn'] - .5, .7): place(sfx, tone(1800, 1800, .06, .03, .05), at, 1., .6)
-sfx += noise_band(200, 1400, T['corn'] - .2, T['pond'] + .2, .02 + 0, .6, .5, lfo=1.2)
-sfx += noise_band(300, 1600, T['wind'], T['pond'], .035, .5, .5, lfo=1.)
-for at in np.arange(T['pond'] + .3, T['floor'], .8):
-    place(sfx, tone(140, 110, .12, .05, .2), at, 1., .6); place(sfx, tone(150, 115, .1, .04, .14), at + .13, 1., .6)
-for at in np.arange(T['pond'], T['floor'], .9):
-    for j in range(3): place(sfx, tone(4300, 4200, .03, .012, .03), at + j * .06, 1., rng.uniform(.2, .8))
-for i in range(4): place(sfx, burst(.06, 500, 3000, .02, .35), T['fall'] + i * .35 + .4, 1., .3 + i * .15); place(sfx, tone(220, 160, .2, .06, .2), T['fall'] + i * .35 + .4)
-for at in np.sort(rng.uniform(T['floor'], T['pile'] + 4, 40)): place(sfx, burst(.05, 1500, 7000, .015, rng.uniform(.04, .1)), at, 1., rng.uniform(.2, .8))
-for k, (f, at) in enumerate(((note('G5'), 0), (note('D6'), .3), (note('G6'), .6))):
-    place(sfx, bell(f, 2.2, .1), T['ant'] + .3 + at, 1., .35 + .15 * k)
+sfx += noise_band(200, 1200, 0, T['silence'], .012, 1., .06, lfo=.6)
+for at in (.4, 1.1, 1.9, 2.6): place(sfx, chirp(3200, 4300, .12, .05), at, 1., .3 + .1 * (at % 1)); place(sfx, chirp(3900, 3100, .1, .04), at + .16, 1., .4)
+place(sfx, tone(90, 70, 1.5, .5, .25), .6, 1., .4)
+place(sfx, whoosh(1.6, .3), T['empty'] + .2)
+sfx += noise_band(60, 500, T['sea'] - .1, T['cat'], .05, .3, .2)
+for at in np.arange(T['cat'], T['sil'] - .1, .7): place(sfx, tone(4300, 4200, .03, .012, .04), at, 1., .7)
+place(sfx, tone(520, 700, .25, .12, .08), T['cat'] + .3, 1., .4)
+sfx += noise_band(300, 900, T['sil'], T['silence'], .01, .5, .05)
+place(sfx, tone(60, 60, 3.5, 1.5, .0), T['silence'])
+sfx += noise_band(80, 160, T['fridge'], T['produce'] + .2, .03, .3, .4)
+place(sfx, burst(.2, 200, 2000, .06, .25), T['fridge'] + .3)
+for at in (Wd(3, 4)[1], Wd(3, 6)[1], Wd(3, 8)[1], Wd(3, 10)[1]): place(sfx, tone(900, 500, .25, .08, .1), at)
+sfx += noise_band(300, 2000, T['produce'], T['coral'] + .2, .008, .5, .5, lfo=.8)
+sfx += noise_band(50, 500, T['coral'], T['soil'] + .2, .05, .5, .5)
+for at in np.sort(rng.uniform(T['coral'], T['soil'], 12)): place(sfx, tone(rng.uniform(350, 600), rng.uniform(900, 1300), .07, .03, .05), at, 1., rng.uniform(.3, .7))
+sfx += noise_band(40, 200, T['soil'], T['seeds'] + .2, .05, .5, .5)
+for at in np.arange(T['seeds'] + .3, T['birdsgone'], .5): place(sfx, chirp(3000, 4400, .1, .04), at, 1., rng.uniform(.3, .8))
+sfx += noise_band(300, 1400, T['alone'], T['earth'] + .2, .02, 1., .8, lfo=.7)
 for k, (f, at) in enumerate(((note('D5'), 0), (note('A5'), .35), (note('D6'), .7))):
     place(sfx, bell(f, 2.4, .12), T['end'] + .1 + at, 1., .35 + .15 * k)
-place(sfx, buzz(TOTAL - T['end'], 240, .025), T['end'], 1., .5)
 # ---------------- simple reverb on music, then mix
 ir_len = int(2.2 * SR); ir = rng.standard_normal(ir_len) * np.exp(-np.arange(ir_len) / SR / .6); ir /= np.sqrt((ir ** 2).sum())
 def conv(x): n = len(x) + ir_len; X = np.fft.rfft(x, n) * np.fft.rfft(ir, n); return np.fft.irfft(X, n)[: len(x)]
