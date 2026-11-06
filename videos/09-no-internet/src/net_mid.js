@@ -1,0 +1,179 @@
+// ---------- scenes ----------
+//@@FISH@@
+let F = {};
+const RS = s => { const r = R(s * 7919 + 13); r(); return r; };
+const noNet = (x, y, s, a = 1) => `<g transform="translate(${x},${y}) scale(${s})" opacity="${a}"><circle r="34" fill="rgba(8,12,30,.75)"/>` +
+  [26, 18, 10].map((r, i) => `<path d="M${-r * .8},${-r * .2 + 8} A${r},${r} 0 0 1 ${r * .8},${-r * .2 + 8}" stroke="#fff" stroke-width="4" fill="none" opacity="${.9 - i * .1}"/>`).join('') + `<circle cx="0" cy="12" r="3.6" fill="#fff"/><line x1="-22" y1="-18" x2="22" y2="22" stroke="#e53935" stroke-width="6" stroke-linecap="round"/></g>`;
+function nightCity(t, glow = 0) {
+  let s = `<defs><linearGradient id="ncS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04060f"/><stop offset="1" stop-color="#18223e"/></linearGradient></defs><rect width="720" height="1280" fill="url(#ncS)"/>` + stars(.6, t);
+  s += skyline(5, 930, '#0d1222', 0, .7) + skyline(8, 990, '#0a0e1c', 0, .65);
+  s += `<rect y="985" width="720" height="295" fill="#121521"/><rect y="985" width="720" height="8" fill="#22283a"/><rect y="1090" width="720" height="190" fill="#0b0d15"/>` + Array.from({ length: 6 }, (_, i) => `<rect x="${i * 140 + 20}" y="1180" width="70" height="8" fill="#ddd" opacity=".15"/>`).join('');
+  s += lampPost(40, 990, 300, 1) + lampPost(680, 990, 300, 1) + palm(560, 992, 250, '#090c16', t);
+  return s;
+}
+// L0: night street: everyone on their phones; the connection drops, they stop
+function sceneStreet(t) {
+  const off = W(0, 3)[1], stopK = ease(ramp(t, off + .2, off + .8));
+  let s = nightCity(t);
+  CROWD.forEach((c, i) => { const stopT = off + .3 + i * .1, wt = Math.min(t, stopT) + .8, SPD = 300 * c.s * 1.05 * Math.sin(.34) * 4.0 / Math.PI, x = c.x + c.dir * wt * SPD * .5;
+    s += person(x, 1000 + (i % 2) * 14, { s: c.s * 1.05, face: c.dir, moving: t < stopT, phase: wt * 4.0, amp: .34, top: c.top, pants: c.pants, skin: c.skin, hair: c.hair, phone: 1, lookUp: stopK * .3, t });
+    if (t > off) s += noNet(x + c.dir * 30, 1000 - 330 * c.s, .8, ease(ramp(t, off + i * .12, off + i * .12 + .3))); });
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L1: close-up of a phone: messages, videos and maps all fail
+function phoneUI(t, fails) {
+  const icon = (x, y, col, glyph, f) => `<g transform="translate(${x},${y})"><rect x="-44" y="-44" width="88" height="88" rx="22" fill="${col}" opacity="${1 - .55 * f}"/>${glyph}<g opacity="${f}"><circle cx="34" cy="-34" r="16" fill="#e53935"/><text x="34" y="-27" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="20" fill="#fff">!</text></g></g>`;
+  return `<rect x="150" y="260" width="420" height="860" rx="60" fill="#111"/><rect x="164" y="274" width="392" height="832" rx="48" fill="url(#scr)"/><rect x="300" y="290" width="120" height="26" rx="13" fill="#111"/>` +
+    `<text x="360" y="420" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="88" fill="#fff">07:30</text>` +
+    icon(250, 640, '#2ea84a', `<path d="M-22,-14 h44 a8,8 0 0 1 8,8 v22 a8,8 0 0 1 -8,8 h-28 l-12,10 v-10 h-4 a8,8 0 0 1 -8,-8 v-22 a8,8 0 0 1 8,-8z" fill="#fff"/>`, fails[0]) +
+    icon(360, 640, '#e53935', `<path d="M-12,-16 L18,0 L-12,16Z" fill="#fff"/>`, fails[1]) +
+    icon(470, 640, '#3a7ad8', `<path d="M0,-24 C14,-24 22,-14 22,-2 C22,12 0,28 0,28 C0,28 -22,12 -22,-2 C-22,-14 -14,-24 0,-24Z" fill="#fff"/><circle cy="-4" r="7" fill="#3a7ad8"/>`, fails[2]) +
+    `<g opacity="${Math.max(...fails)}"><rect x="200" y="800" width="320" height="120" rx="24" fill="rgba(255,255,255,.14)"/>${noNet(250, 860, .8)}<text x="490" y="870" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="26" fill="#fff" direction="rtl">لا يوجد اتصال</text></g>` +
+    `<path d="M200,300 L320,300 L180,1000Z" fill="#fff" opacity=".05"/>`;
+}
+function scenePhone(t) {
+  const f = [ease(ramp(t, WS(1, 3) - .1, WS(1, 3) + .3)), ease(ramp(t, WS(1, 5) - .1, WS(1, 5) + .3)), ease(ramp(t, WS(1, 7) - .1, WS(1, 7) + .3))];
+  let s = `<defs><linearGradient id="bdr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8c8a0"/><stop offset="1" stop-color="#8a6a4a"/></linearGradient><linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a4a8a"/><stop offset="1" stop-color="#8a3a6a"/></linearGradient></defs>` +
+    `<rect width="720" height="1280" fill="url(#bdr)"/><rect x="460" y="60" width="240" height="380" fill="#fff6d8" opacity=".5" filter="url(#haze)"/>` +
+    `<rect x="-20" y="900" width="760" height="400" fill="#c8b8d8" opacity=".6" filter="url(#blur2)"/>`;
+  s += phoneUI(t, f);
+  // a hand holding the phone
+  s += `<path d="M150,980 C120,1000 110,1080 150,1140 L260,1300 L460,1300 L540,1150 C560,1100 580,1060 570,1000 L560,960 C550,1000 540,1040 520,1050 L190,1050 C170,1040 160,1010 150,980Z" fill="#b07a55"/><path d="M190,1050 L520,1050" stroke="#8a5a3a" stroke-width="3" opacity=".5"/>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L2: bigger than your phone: the morning city crowd, all confused
+function sceneBigger(t) {
+  let s = `<defs><linearGradient id="mn2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a7ac0"/><stop offset="1" stop-color="#f0d0a8"/></linearGradient></defs><rect width="720" height="1280" fill="url(#mn2)"/>`;
+  s += skyline(5, 930, '#8aa0b8', 0, 0) + skyline(8, 990, '#6a8098', 0, 0) + `<rect y="985" width="720" height="295" fill="#9a9084"/><rect y="1090" width="720" height="190" fill="#4a4a4e"/>` + lampPost(40, 990, 300, 0) + lampPost(680, 990, 300, 0);
+  CROWD.forEach((c, i) => { const x = 130 + i * 150; s += person(x, 1000 + (i % 2) * 14, { s: c.s, face: c.dir, top: c.top, pants: c.pants, skin: c.skin, hair: c.hair, phone: i % 2 ? 1 : 0, lookUp: .2 + .3 * Math.sin(t + i), t }) + noNet(x, 1000 - 320 * c.s, .6, .9); });
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L3: the bank: ATM out of service, card declined, and cash comes back as king
+function sceneBank(t) {
+  const atm = ease(ramp(t, WS(3, 2) - .2, WS(3, 4))), card = ease(ramp(t, WS(3, 5) - .2, WS(3, 8))), cash = ease(ramp(t, WS(3, 9) - .2, WS(3, 12)));
+  let s = `<defs><linearGradient id="bkW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8b8a0"/><stop offset="1" stop-color="#8a7a64"/></linearGradient><linearGradient id="atmG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a6070"/><stop offset=".5" stop-color="#9aa0ac"/><stop offset="1" stop-color="#4a505c"/></linearGradient>` +
+    `<linearGradient id="bill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ad08a"/><stop offset="1" stop-color="#4a8a4a"/></linearGradient></defs><rect width="720" height="1280" fill="url(#bkW)"/>`;
+  s += Array.from({ length: 12 }, (_, i) => `<line x1="0" y1="${i * 110}" x2="720" y2="${i * 110}" stroke="#a89880" stroke-width="2"/>`).join('') + `<rect y="1080" width="720" height="200" fill="#6a5a48"/>`;
+  // ATM in the wall
+  s += `<rect x="250" y="320" width="300" height="620" rx="14" fill="url(#atmG)"/><rect x="290" y="380" width="220" height="160" rx="8" fill="#1a2a4a"/><rect x="290" y="380" width="220" height="160" rx="8" fill="#e53935" opacity="${.85 * atm}"/>` +
+    `<text x="400" y="476" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="30" fill="#fff" opacity="${atm}">خارج الخدمة</text>` +
+    `<rect x="300" y="580" width="200" height="120" rx="8" fill="#3a3e48"/>` + Array.from({ length: 12 }, (_, i) => `<rect x="${314 + (i % 3) * 62}" y="${592 + Math.floor(i / 3) * 26}" width="50" height="18" rx="4" fill="#cfd4dc"/>`).join('') +
+    `<rect x="330" y="730" width="140" height="12" rx="6" fill="#111"/><rect x="310" y="790" width="180" height="20" rx="8" fill="#111"/>`;
+  s += person(170, 1090, { s: 1.0, face: 1, top: '#2f4b7e', pants: '#1f2638', skin: '#8d5a3b', hair: '#17110d', lookUp: .2, t });
+  // card terminal declined
+  s += `<g opacity="${card}" transform="translate(600,820) rotate(8)"><rect x="-70" y="-110" width="140" height="220" rx="18" fill="#2a2e38"/><rect x="-54" y="-94" width="108" height="70" rx="6" fill="#e53935"/><text x="0" y="-50" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#fff">مرفوض</text>` +
+    Array.from({ length: 9 }, (_, i) => `<rect x="${-46 + (i % 3) * 34}" y="${-4 + Math.floor(i / 3) * 30}" width="26" height="22" rx="4" fill="#8a8e98"/>`).join('') + `</g>`;
+  // banknotes fluttering in
+  if (cash > 0) { const r = RS(51); for (let i = 0; i < 24; i++) { const x = r() * 720, y = pmod(r() * 1280 + (t * 120) * (.6 + r()), 1400) - 100, rot = Math.sin(t * 2 + i) * 40;
+    s += `<g transform="translate(${x},${y}) rotate(${rot})" opacity="${cash}"><rect x="-44" y="-22" width="88" height="44" rx="4" fill="url(#bill)"/><rect x="-38" y="-16" width="76" height="32" rx="3" fill="none" stroke="#2a5a2a" stroke-width="2"/><circle r="10" fill="#c8e8b8" stroke="#2a5a2a" stroke-width="2"/></g>`; }
+    s += `<g opacity="${cash}" transform="translate(400,250)"><path d="M-60,30 L-70,-30 L-30,0 L0,-40 L30,0 L70,-30 L60,30Z" fill="#f4c76b" stroke="#a87a20" stroke-width="3"/></g>`; }
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L4: the airport: departures board all "delayed", passengers waiting
+function sceneAirport(t) {
+  const st = S0(4) - .2, dl = ease(ramp(t, WS(4, 1) - .2, WS(4, 1) + .4));
+  let s = `<defs><linearGradient id="apS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a9ac0"/><stop offset="1" stop-color="#e0e8f0"/></linearGradient></defs><rect width="720" height="1280" fill="#2a3040"/>`;
+  s += `<rect x="0" y="560" width="720" height="380" fill="url(#apS)"/>` + Array.from({ length: 7 }, (_, i) => `<rect x="${i * 120 - 10}" y="560" width="10" height="380" fill="#1a1e28"/>`).join('');
+  s += `<g transform="translate(360,800) scale(.7)"><ellipse cx="0" cy="40" rx="260" ry="10" fill="#000" opacity=".2"/><path d="M-250,0 C-250,-30 -220,-40 -180,-40 L180,-40 C230,-40 260,-20 270,0 C260,14 230,18 180,18 L-200,18 C-235,18 -250,12 -250,0Z" fill="#eef2f6"/><path d="M-250,0 L-280,-110 L-235,-110 L-170,-40Z" fill="#2a5b9a"/><path d="M-40,8 L-140,70 L-90,70 L60,10Z" fill="#c8ced6"/>` + Array.from({ length: 16 }, (_, i) => `<rect x="${-150 + i * 20}" y="-26" width="9" height="11" rx="3" fill="#2b3a4e"/>`).join('') + `</g>`;
+  // departures board
+  const rows = [['القاهرة', '08:10'], ['دبي', '08:40'], ['إسطنبول', '09:15'], ['لندن', '09:50'], ['بغداد', '10:20']];
+  s += `<rect x="70" y="250" width="580" height="290" rx="12" fill="#0e121a" stroke="#2b3446" stroke-width="3"/><rect x="70" y="250" width="580" height="50" rx="12" fill="#1b2438"/><text x="630" y="284" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#fff" direction="rtl">المغادرون ✈</text>` +
+    rows.map(([c, h], i) => `<text x="630" y="${334 + i * 44}" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#ffd76a" direction="rtl">${c}</text><text x="380" y="${334 + i * 44}" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="24" fill="#ffd76a">${h}</text>` +
+      `<text x="100" y="${334 + i * 44}" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="${mix('#7ae08a', '#ff6b6b', ease(ramp(dl, i * .12, i * .12 + .3)))}" direction="rtl">${dl > i * .12 + .15 ? 'متأخرة' : 'في الموعد'}</text>`).join('');
+  // seated, waiting passengers
+  s += `<rect y="960" width="720" height="320" fill="#4a4e5a"/>` + [[140, -1], [300, 1], [470, -1], [610, 1]].map(([x, f], i) => person(x, 1150, { s: .8, face: f, top: CROWD[i].top, pants: CROWD[i].pants, skin: CROWD[i].skin, hair: CROWD[i].hair, phone: i % 2, lookUp: .2, t })).join('');
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L5: a port with ships waiting and a store with empty shelves; billions lost
+function scenePort(t) {
+  const st = S0(5) - .2, store = ease(ramp(t, WS(5, 5) - .2, WS(5, 5) + .4)) * 0;
+  let s = `<defs><linearGradient id="ptS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a8ab0"/><stop offset="1" stop-color="#d8e0e8"/></linearGradient></defs><rect width="720" height="1280" fill="url(#ptS)"/>`;
+  s += `<rect y="760" width="720" height="520" fill="#2a5a7a"/>` + Array.from({ length: 6 }, (_, i) => `<path d="M${pmod(i * 140 + t * 20, 760) - 20},${800 + i * 60} q20,-6 40,0" stroke="#cfe8f8" stroke-width="2" fill="none" opacity=".4"/>`).join('');
+  // cranes idle
+  [[120, 760], [300, 760]].forEach(([x, y]) => { s += `<path d="M${x},${y} L${x},${y - 320} L${x + 200},${y - 320} M${x},${y - 280} L${x + 200},${y - 320} M${x - 40},${y - 320} L${x},${y - 320}" stroke="#e8a020" stroke-width="10" fill="none"/><line x1="${x + 150}" y1="${y - 320}" x2="${x + 150}" y2="${y - 160}" stroke="#333" stroke-width="2"/>`; });
+  // stacked containers on the dock
+  const cols = ['#c83a2a', '#2a6ac8', '#e8a020', '#3a8a4a', '#8a3ac8'];
+  for (let r2 = 0; r2 < 4; r2++) for (let c = 0; c < 6; c++) { const x = 40 + c * 70, y = 740 - r2 * 34; s += `<rect x="${x}" y="${y}" width="66" height="32" fill="${cols[(r2 * 3 + c) % 5]}"/>` + Array.from({ length: 6 }, (_, k) => `<line x1="${x + 6 + k * 10}" y1="${y + 3}" x2="${x + 6 + k * 10}" y2="${y + 29}" stroke="#000" stroke-opacity=".2" stroke-width="2"/>`).join(''); }
+  s += `<rect x="0" y="760" width="460" height="30" fill="#6a6a6a"/>`;
+  // ships waiting offshore
+  [[560, 900, 1], [440, 1050, .8]].forEach(([x, y, sc], i) => { s += `<g transform="translate(${x + Math.sin(t * .6 + i) * 3},${y}) scale(${sc})"><path d="M-160,0 L160,0 L130,50 L-130,50Z" fill="#2a2e38"/><rect x="-150" y="-10" width="300" height="12" fill="#c83a2a"/>` +
+    Array.from({ length: 8 }, (_, k) => `<rect x="${-140 + k * 32}" y="-40" width="30" height="30" fill="${cols[(k + i) % 5]}"/>`).join('') + `<rect x="100" y="-90" width="40" height="80" fill="#e8e8e8"/></g>`; });
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L6: the internet lives in cables on the sea floor
+function sceneCable(t) {
+  const st = S0(6) - .2;
+  let s = `<defs><linearGradient id="cbW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d5a86"/><stop offset=".5" stop-color="#0a2a46"/><stop offset="1" stop-color="#03101c"/></linearGradient><linearGradient id="cbR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8ecff" stop-opacity=".3"/><stop offset="1" stop-color="#d8ecff" stop-opacity="0"/></linearGradient>` +
+    `<linearGradient id="cbC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6070"/><stop offset=".5" stop-color="#2a2e38"/><stop offset="1" stop-color="#14161c"/></linearGradient></defs><rect width="720" height="1280" fill="url(#cbW)"/>`;
+  s += [-1, -.3, .4, 1].map((u, i) => `<polygon points="${360 + u * 150},0 ${400 + u * 150},0 ${440 + u * 330},1280 ${300 + u * 330},1280" fill="url(#cbR)" opacity="${.6 + .3 * Math.sin(t * .8 + i)}"/>`).join('');
+  s += `<path d="M-20,1000 C200,970 500,990 740,960 L740,1300 L-20,1300Z" fill="#3a4a52"/>`;
+  // the cable lying across the seabed, light pulses racing along it
+  const cp = `M-40,1020 C140,980 280,1060 420,1010 C540,970 640,1000 760,980`;
+  s += `<path d="${cp}" stroke="url(#cbC)" stroke-width="34" fill="none" stroke-linecap="round"/><path d="${cp}" stroke="#7a8090" stroke-width="4" fill="none" opacity=".6" transform="translate(0,-10)"/>`;
+  s += `<path d="${cp}" stroke="#6ad0ff" stroke-width="8" fill="none" stroke-dasharray="20 120" stroke-dashoffset="${-t * 400}" opacity=".95"/><path d="${cp}" stroke="#6ad0ff" stroke-width="22" fill="none" stroke-dasharray="20 120" stroke-dashoffset="${-t * 400}" opacity=".25" filter="url(#blur2)"/>`;
+  // a cutaway of the cable: fibres inside
+  s += `<g transform="translate(360,760)"><circle r="120" fill="#2a2e38"/><circle r="100" fill="#1a1e26"/><circle r="70" fill="#3a3e48"/>` + Array.from({ length: 12 }, (_, i) => { const a = i / 12 * 6.283; return `<circle cx="${Math.cos(a) * 32}" cy="${Math.sin(a) * 32}" r="9" fill="#6ad0ff" opacity="${.6 + .4 * Math.sin(t * 6 + i)}"/>`; }).join('') + `<circle r="12" fill="#bfe6ff"/></g>`;
+  s += fishSVG(pmod(t * 30, 900) - 90, 560, 80, 1, t, '#9fb3c0', 21) + fishSVG(760 - pmod(t * 22 + 300, 900), 640, 60, -1, t, '#c8a878', 22);
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L7: people put their phones down and talk at a café table
+function sceneCafe(t) {
+  let s = `<defs><linearGradient id="cfS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8905a"/><stop offset="1" stop-color="#f8d0a0"/></linearGradient></defs><rect width="720" height="1280" fill="url(#cfS)"/>`;
+  s += skyline(5, 900, '#b07a5a', 0, .3) + palm(620, 960, 260, '#5a4030', t) + `<rect y="960" width="720" height="320" fill="#a8806a"/>`;
+  for (let i = 0; i < 6; i++) s += `<line x1="${i * 140}" y1="200" x2="${i * 140 + 70}" y2="260" stroke="#3a2a1a" stroke-width="2"/><circle cx="${i * 140 + 70}" cy="266" r="8" fill="#ffe2a0"/><circle cx="${i * 140 + 70}" cy="266" r="30" fill="#ffd8a0" opacity=".4" filter="url(#blur2)"/>`;
+  s += `<rect x="200" y="1020" width="320" height="16" rx="6" fill="#5a3a24"/><rect x="352" y="1036" width="16" height="140" fill="#4a3020"/>` +
+       `<rect x="250" y="1006" width="44" height="16" rx="4" fill="#111"/><rect x="420" y="1006" width="44" height="16" rx="4" fill="#111"/>` + `<rect x="330" y="986" width="24" height="34" rx="6" fill="#f4efe4"/><rect x="370" y="986" width="24" height="34" rx="6" fill="#f4efe4"/>`;
+  s += person(180, 1180, { s: 1.0, face: 1, top: '#8a3b3b', pants: '#2a2533', skin: '#a46a46', hair: '#1b1410', lookUp: .1, t }) + person(540, 1180, { s: 1.04, face: -1, top: '#3f6b5a', pants: '#24262e', skin: '#c08a66', hair: '#2a1d16', lookUp: .1, t });
+  const b = Math.abs(Math.sin(t * 2)) * 6;
+  s += `<g transform="translate(260,${700 - b})"><path d="M-50,-30 h100 a14,14 0 0 1 14,14 v40 a14,14 0 0 1 -14,14 h-60 l-20,18 v-18 h-20 a14,14 0 0 1 -14,-14 v-40 a14,14 0 0 1 14,-14z" fill="#fff"/><circle cx="-20" cy="-2" r="5" fill="#333"/><circle cx="0" cy="-2" r="5" fill="#333"/><circle cx="20" cy="-2" r="5" fill="#333"/></g>` +
+       `<g transform="translate(470,${660 + b})"><path d="M-50,-30 h100 a14,14 0 0 1 14,14 v40 a14,14 0 0 1 -14,14 h-20 v18 l-20,-18 h-60 a14,14 0 0 1 -14,-14 v-40 a14,14 0 0 1 14,-14z" fill="#fff6d8"/><circle cx="-20" cy="-2" r="5" fill="#333"/><circle cx="0" cy="-2" r="5" fill="#333"/><circle cx="20" cy="-2" r="5" fill="#333"/></g>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L8: CTA: a wifi sign that turns into a question mark
+function sceneEarth(t) {
+  const st = S0(8), k = ease(ramp(t, st - .2, st + .8)), b = Math.abs(Math.sin(t * 3)) * 6;
+  let s = space(t, '#03050f', '#0a1030');
+  F.earth = { x: 360, y: 980, r: 330, a: 1, sunI: 1, lights: .8, rot: 1.0, tilt: .41 }; F.light = [-600, 400]; F.moon = null;
+  F.ov = `<g transform="translate(360,520)" opacity="${k}">` + [150, 105, 60].map((r, i) => `<path d="M${-r * .8},${-r * .2 + 40} A${r},${r} 0 0 1 ${r * .8},${-r * .2 + 40}" stroke="#f4c76b" stroke-width="16" fill="none" stroke-linecap="round" opacity="${.5 + .5 * Math.sin(t * 3 - i)}"/>`).join('') +
+    `<text x="0" y="110" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="120" fill="#fff">؟</text></g>` +
+    `<g opacity="${ramp(t, WS(8, 4), WS(8, 4) + .4)}" transform="translate(360,${800 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
+  return s;
+}
+const SCENES = [
+  { s: 0, f: sceneStreet }, { s: S0(1) - .2, f: scenePhone }, { s: S0(2) - .2, f: sceneBigger }, { s: S0(3) - .2, f: sceneBank }, { s: S0(4) - .2, f: sceneAirport },
+  { s: S0(5) - .2, f: scenePort }, { s: S0(6) - .2, f: sceneCable }, { s: S0(7) - .2, f: sceneCafe }, { s: S0(8) - .2, f: sceneEarth },
+];
+const XF = .5;
+
+// ---------- UI ----------
+const TLI = [['الصباح', S0(1)], ['الظهر', S0(3)], ['المساء', S0(7)]];
+const CHIPS = [
+  ['c1', 'الدفع نقداً فقط', 360, 330, 'big', WS(3, 9), S0(4)],
+  ['c2', 'خسائر بالمليارات', 360, 330, 'big red', WS(5, 7), S0(6)],
+  ['c3', 'كابلات تحت البحار', 360, 330, 'big', WS(6, 6), S0(7)],
+  ['c4', '@MadhaLawLab', 360, 1200, 'dark', WS(8, 6), 999],
+];
+$('ui').innerHTML = `<div class="list" id="tl"><div class="hd">يوم بلا إنترنت</div><div class="rail"></div><div class="fill" id="tlf"></div>` +
+  TLI.map((x, i) => { const y = 64 + i * 88; return `<div class="it" id="tli${i}" style="top:${y}px">${x[0]}</div><div class="dot" id="tld${i}" style="top:${y}px"></div>`; }).join('') + `</div>` +
+  CHIPS.map(c => `<div class="chip ${c[4]}" id="${c[0]}" style="${c[1][0] === '@' ? 'direction:ltr;' : ''}left:${c[2]}px;top:${c[3]}px">${c[1]}</div>`).join('');
+function renderUI(t) {
+  const vis = ease(ramp(t, S0(1), S0(1) + .4)) * (1 - ease(ramp(t, S0(8) - .4, S0(8)))) * (t > S0(1) - .2 && t < S0(2) - .2 ? 0 : 1) * (t > S0(6) - .2 && t < S0(7) - .2 ? 0 : 1) * (t > S0(4) - .2 && t < S0(5) - .2 ? 0 : 1);
+  $('tl').style.opacity = vis;
+  let act = 0; TLI.forEach((x, i) => { if (t >= x[1]) act = i; });
+  $('tlf').style.height = (act * 88) + 'px';
+  TLI.forEach((x, i) => { const on = i <= act, cur = i === act;
+    $('tli' + i).style.color = cur ? '#fff' : on ? 'rgba(244,199,107,.9)' : 'rgba(255,255,255,.45)';
+    $('tld' + i).style.background = on ? '#f4c76b' : 'rgba(255,255,255,.35)';
+    $('tld' + i).style.boxShadow = cur ? '0 0 0 6px rgba(244,199,107,.25)' : 'none'; });
+  CHIPS.forEach(c => { $(c[0]).style.opacity = ease(ramp(t, c[5], c[5] + .3)) * (1 - ease(ramp(t, c[6] - .3, c[6]))); });
+  $('note').style.opacity = 0;
+}
+
