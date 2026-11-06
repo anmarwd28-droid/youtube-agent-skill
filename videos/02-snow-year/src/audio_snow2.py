@@ -8,7 +8,7 @@ TM = json.load(open(sys.argv[2], encoding="utf-8")); TOTAL = float(sys.argv[3]);
 SR = 44100; N = int(TOTAL * SR) + SR
 rng = np.random.default_rng(7)
 L = lambda i: TM[i]; Wd = lambda i, j: TM[i]["words"][j]
-T = dict(day1=L(5)["start"], week=L(9)["start"], fire=L(12)["start"], roof=L(13)["start"], month=L(16)["start"], globe=L(21)["start"], layers=L(27)["start"], year=L(30)["start"], ball=L(33)["start"], volc=L(36)["start"], cant=L(37)["start"], baker=L(39)["start"], end=L(42)["start"])
+T = dict(day1=L(4)["start"], week=L(7)["start"], fire=L(9)["start"], roof=L(10)["start"], month=L(11)["start"], globe=L(16)["start"], layers=L(22)["start"], year=L(24)["start"], ball=L(26)["start"], volc=L(28)["start"], cant=L(30)["start"], baker=L(33)["start"], end=L(35)["start"], out=Wd(9, 4)[1])
 t = np.arange(N) / SR
 mus = np.zeros((N, 2)); sfx = np.zeros((N, 2))
 
@@ -69,8 +69,8 @@ mus += pad(['D3', 'A3', 'D4', 'F#4', 'A4'], T['end'], TOTAL, .07, .8, 1.2)
 # ---------------- effects
 sfx += noise_band(400, 2500, 0, T['week'] + .5, .012, 1.5, .8, lfo=.4)                          # soft snowfall hush
 sfx += noise_band(300, 1400, T['week'], T['month'] + .5, .02, .8, .8, lfo=.6)                   # wind
-for at in np.sort(rng.uniform(T['fire'], T['roof'] - .3, 40)):
-    place(sfx, burst(.02, 2000, 9000, .004, rng.uniform(.02, .05)), at, 1., .5 + rng.uniform(-.1, .1))
+place(sfx, burst(.25, 1500, 9000, .06, .45), T['out'], 1., .5); place(sfx, tone(120, 40, .9, .3, .5), T['out'])        # power line fails
+for at in np.arange(T['fire'], T['out'], .6): place(sfx, tone(100, 100, .5, .5, .05), at)                                 # mains hum
 for at in (T['roof'] + 2.5, T['roof'] + 5.5, T['roof'] + 8.5):                                 # roof creaks
     place(sfx, tone(140, 95, .7, .25, .25), at); place(sfx, burst(.05, 600, 3000, .02, .2), at + .02)
 sfx += noise_band(250, 1800, T['month'], T['globe'] + .3, .028, .8, .8, lfo=.7)
