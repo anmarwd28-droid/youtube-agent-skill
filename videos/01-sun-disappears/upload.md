@@ -33,3 +33,6 @@
 ## Search data (vidIQ, at upload time)
 - "ماذا لو اختفت الشمس": ~4.7k monthly searches, competition 53/100
 - "ماذا لو": ~174k monthly searches, +118% growth
+
+## Credits
+Earth and Moon textures: NASA imagery, as packaged in the three.js examples (mrdoob/three.js, examples/textures/planets).
