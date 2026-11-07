@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@500;700&family=Space+Grotesk:wght@500;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 720px; height: 1280px; overflow: hidden; background: #04060f; }
+  #stage { position: relative; width: 720px; height: 1280px; overflow: hidden; }
+  svg.l { position: absolute; inset: 0; }
+  #cap { position: absolute; left: 40px; right: 40px; top: 108px; text-align: center; }
+  #cap .line { font-family: 'Noto Naskh Arabic', serif; direction: rtl; font-size: 46px; font-weight: 700; line-height: 1.55; color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.7); }
+  #cap .line.big { font-size: 58px; }
+  .list { position: absolute; top: 420px; right: 14px; width: 150px; height: 280px; border-radius: 20px; background: rgba(8,12,30,.5); border: 1px solid rgba(255,255,255,.14); }
+  .list .hd { position: absolute; top: 12px; left: 0; right: 0; text-align: center; font-family: 'Noto Naskh Arabic', serif; font-size: 18px; font-weight: 700; color: rgba(255,255,255,.6); }
+  .list .rail, .list .fill { position: absolute; right: 22px; width: 2px; }
+  .list .rail { top: 64px; bottom: 40px; background: rgba(255,255,255,.18); }
+  .list .fill { top: 64px; background: #f4c76b; }
+  .list .it { position: absolute; right: 36px; width: 106px; text-align: right; transform: translateY(-50%); font-family: 'Noto Naskh Arabic', serif; font-size: 20px; font-weight: 700; white-space: nowrap; direction: rtl; }
+  .list .dot { position: absolute; right: 17px; width: 12px; height: 12px; border-radius: 50%; transform: translateY(-50%); }
+  .chip { position: absolute; padding: 6px 16px 9px; border-radius: 14px; background: rgba(244,199,107,.96); color: #1c140a; white-space: nowrap; opacity: 0;
+          font-family: 'Noto Naskh Arabic', serif; font-weight: 700; font-size: 28px; direction: rtl; transform: translate(-50%, -50%); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+  .chip.dark { background: rgba(8,12,30,.72); color: #fff; border: 1px solid rgba(255,255,255,.2); }
+  .chip.big { font-size: 40px; padding: 8px 24px 12px; }
+  .chip.ice { background: rgba(225,242,255,.95); color: #0d2238; }
+  .chip.red { background: rgba(214,64,64,.95); color: #fff; }
+  #note { position: absolute; left: 0; right: 0; top: 1180px; text-align: center; font-family: 'Noto Naskh Arabic', serif; font-size: 17px; color: rgba(255,255,255,.5); direction: rtl; }
+  #cmt { position: absolute; left: 60px; right: 60px; top: 520px; padding: 22px 26px; border-radius: 22px; background: #fff; direction: rtl; opacity: 0;
+         font-family: 'Noto Naskh Arabic', serif; box-shadow: 0 14px 50px rgba(0,0,0,.5); }
+  #cmt .u { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; color: #555; }
+  #cmt .u i { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,#5b7bd5,#9a5bd5); display: inline-block; }
+  #cmt .q { margin-top: 10px; font-size: 34px; font-weight: 700; color: #111; line-height: 1.5; }
+  #cmt .h { margin-top: 8px; font-size: 22px; color: #777; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="v" class="l" width="720" height="1280" viewBox="0 0 720 1280">
+    <defs>
+      <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="blur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.2"/></filter>
+      <filter id="haze" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="14"/></filter>
+      <filter id="grain"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter>
+      <radialGradient id="vig" cx=".5" cy=".46" r=".78"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></radialGradient>
+      <radialGradient id="moonGlow"><stop offset="0" stop-color="#fff6dc" stop-opacity=".55"/><stop offset=".35" stop-color="#cfd8ff" stop-opacity=".18"/><stop offset="1" stop-color="#9fb0ff" stop-opacity="0"/></radialGradient>
+      <radialGradient id="lampG"><stop offset="0" stop-color="#ffd59a" stop-opacity=".9"/><stop offset=".35" stop-color="#ffb35c" stop-opacity=".3"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+      <radialGradient id="lavaG"><stop offset="0" stop-color="#ffd08a" stop-opacity=".95"/><stop offset=".3" stop-color="#ff6a2a" stop-opacity=".5"/><stop offset="1" stop-color="#ff3a1a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a5d86"/><stop offset="1" stop-color="#0b2238"/></linearGradient>
+      <marker id="arrY" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f4c76b"/></marker>
+      <marker id="arrW" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/></marker>
+      <filter id="leafTex" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".08" numOctaves="3" seed="2"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 .8"/><feComposite in2="SourceGraphic" operator="in"/></filter><filter id="woodTex" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".5 .03" numOctaves="3" seed="4"/><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .06  0 0 0 0 .02  0 0 0 -1.8 1"/><feComposite in2="SourceGraphic" operator="in"/></filter><filter id="soilT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".25" numOctaves="3" seed="8"/><feColorMatrix values="0 0 0 0 .05  0 0 0 0 .03  0 0 0 0 .01  0 0 0 -1.5 .9"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+      <filter id="rockTex" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".09" numOctaves="4" seed="21"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 .9"/><feComposite in2="SourceGraphic" operator="in"/></filter><radialGradient id="fireGlow"><stop offset="0" stop-color="#fff2c8" stop-opacity=".95"/><stop offset=".3" stop-color="#ffb04a" stop-opacity=".5"/><stop offset="1" stop-color="#ff5a1a" stop-opacity="0"/></radialGradient>
+    </defs>
+    <g id="sA"></g>
+    <g id="sB"></g>
+  </svg>
+  <canvas id="glA" style="position:absolute;left:0;top:0;width:720px;height:1280px;opacity:0"></canvas>
+  <canvas id="gl" style="position:absolute;left:0;top:0;width:720px;height:1280px;opacity:0"></canvas>
+  <svg id="ov" class="l" width="720" height="1280" viewBox="0 0 720 1280"><g id="oA"></g><g id="oB"></g></svg>
+  <svg id="fg" class="l" width="720" height="1280" viewBox="0 0 720 1280">
+    <defs><linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".22" stop-color="#000" stop-opacity=".25"/><stop offset=".34" stop-color="#000" stop-opacity="0"/></linearGradient></defs>
+    <rect width="720" height="1280" fill="url(#scrim)"/>
+    <rect width="720" height="1280" fill="url(#vig)"/>
+    <rect width="720" height="1280" filter="url(#grain)" opacity=".05" style="mix-blend-mode:overlay"/>
+    <rect id="flash" width="720" height="1280" fill="#fff6dc" opacity="0"/>
+    <rect id="fade" width="720" height="1280" fill="#000" opacity="0"/>
+  </svg>
+  <div id="ui"></div>
+  <div id="note">* الأحجام والمسافات ليست بمقياسها الحقيقي</div>
+  <div id="cap"><div class="line"></div></div>
+</div>
+<script type="module">import { init } from './gl3d_v2.js'; window.gl3dReady = Promise.all([init(document.getElementById('glA')), init(document.getElementById('gl'))]).then(([a, g]) => { window.GLA = a; window.GL = g; return true; });</script>
+<script>
+const TM = window.TIMING, TOTAL = window.TOTAL;
+const $ = id => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; };
+const ramp = (t, a, b) => clamp((t - a) / (b - a));
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (a, b, k) => { const A = hex(a), B = hex(b); return '#' + A.map((v, i) => Math.round(lerp(v, B[i], clamp(k))).toString(16).padStart(2, '0')).join(''); };
+const R = (seed => () => (seed = (seed * 16807) % 2147483647) / 2147483647);
+const L = i => TM[i], S0 = i => TM[i].start;
+const W = (i, j) => TM[i].words[j];
+const WS = (i, j) => TM[i].words[Math.min(j, TM[i].words.length - 1)][1];
+const pmod = (a, m) => ((a % m) + m) % m;
+
+// ---------- captions (chunked, like Short #1) ----------
+const KEY = new Set(["انقطعَ", "الإنترنتُ", "العالمِ", "كامل؟", "رسائل،", "فيديوهات،", "خرائط.", "هاتفِك.", "البنوكُ", "والصرّافاتُ", "بالبطاقةِ", "النقودُ", "ملكةً", "والطائراتُ", "تتأخّر،", "الحجزِ", "والموانئُ", "ملياراتِ", "الدولارات", "كابلاتٍ", "البحار،", "بياناتِ", "رؤوسَهم", "الشاشات…", "ويتحدّثون.", "سؤالَك"]);
+const CH = [];
+TM.forEach((l, i) => { let cur = [];
+  l.words.forEach((w, j) => { cur.push(w); const p = /[،.…:؟]$/.test(w[0]); if ((p && cur.length >= 3) || cur.length >= 7 || j === l.words.length - 1) { CH.push({ i, w: cur }); cur = []; } }); });
+function renderCap(t) {
+  const el = $('cap'), line = el.querySelector('.line');
+  let k = -1; CH.forEach((c, j) => { if (t >= c.w[0][1] - .12) k = j; });
+  if (k < 0) { el.style.opacity = 0; return; }
+  const c = CH[k], nx = CH[k + 1], endT = c.w[c.w.length - 1][2];
+  const inK = ease(ramp(t, c.w[0][1] - .12, c.w[0][1] + .15));
+  const outK = nx ? 1 - ease(ramp(t, Math.min(nx.w[0][1] - .12, endT + 1.2), Math.min(nx.w[0][1], endT + 1.5))) : 1 - ramp(t, TOTAL - .6, TOTAL - .1);
+  el.style.opacity = inK * outK; el.style.transform = `translateY(${(1 - inK) * 12}px)`;
+  line.className = 'line' + (c.i === 0 ? ' big' : '');
+  line.innerHTML = c.w.map(([w, s]) => { const q = ramp(t, s - .06, s + .12), key = KEY.has(w);
+    return `<span style="color:${key ? mix('#77736d', '#f4c76b', q) : mix('#77736d', '#ffffff', q)}">${w}</span>`; }).join(' ');
+}
+
+const STARS = (() => { const r = R(17); return Array.from({ length: 140 }, () => [r() * 720, r() * 1280, r() * 1.5 + .35, r() * 6]); })();
+const stars = (a, t) => STARS.map(s => `<circle cx="${s[0]}" cy="${s[1]}" r="${s[2]}" fill="#fff" opacity="${a * (.45 + .45 * Math.sin(t * 1.4 + s[3]))}"/>`).join('');
+function space(t, top = '#070a1f', bot = '#0b0f2b') {
+  return `<defs><linearGradient id="spg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${top}"/><stop offset="1" stop-color="${bot}"/></linearGradient></defs>` +
+    `<rect width="720" height="1280" fill="url(#spg)"/>` + stars(1, t) +
+    `<circle cx="600" cy="300" r="320" fill="#4b2fa8" opacity=".12" filter="url(#soft)"/>`;
+}
+function sun(x, y, r, a, t) {
+  if (a <= 0.001) return '';
+  const p = 1 + Math.sin(t * 2) * .015;
+  return `<g opacity="${a}"><circle cx="${x}" cy="${y}" r="${r * 4.2 * p}" fill="url(#sunGlow)"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#sunCore)"/>` +
+    Array.from({ length: 7 }, (_, i) => `<circle cx="${x + Math.cos(i * 1.7 + t * .3) * r * .5}" cy="${y + Math.sin(i * 2.3 + t * .25) * r * .5}" r="${r * .12}" fill="#ffb347" opacity=".35"/>`).join('') + `</g>`;
+}
+function earth(x, y, r, day, t, lights = 0) {
+  // day: 0..1 how lit the sun-facing (left) side is
+  const rot = t * 6;
+  const land = `<g transform="translate(${x},${y}) scale(${r})"><g clip-path="url(#earthClip)">` +
+    `<circle r="1" fill="url(#earthNight)"/><circle r="1" fill="url(#earthDay)" opacity="${day}"/>` +
+    `<g fill="${mix('#0f2318', '#3fae7a', day)}" opacity=".9" transform="translate(${((rot % 4) - 2) * .25},0)">` +
+    `<ellipse cx="-.25" cy="-.2" rx=".34" ry=".22" transform="rotate(-25)"/><ellipse cx=".35" cy=".25" rx=".22" ry=".32" transform="rotate(15)"/><ellipse cx="-.1" cy=".58" rx=".25" ry=".1"/><ellipse cx=".9" cy="-.3" rx=".3" ry=".2"/><ellipse cx="-1.1" cy=".1" rx=".3" ry=".25"/></g>` +
+    `<g fill="#fff" opacity="${.45 * day + .08}"><ellipse cx="-.1" cy="-.55" rx=".5" ry=".06"/><ellipse cx=".2" cy=".05" rx=".45" ry=".05"/></g>` +
+    (lights > 0 ? Array.from({ length: 26 }, (_, i) => { const rr = R(i + 3); const a = rr() * 6.28, d = Math.sqrt(rr()) * .85;
+      return `<circle cx="${Math.cos(a) * d}" cy="${Math.sin(a) * d}" r="${.012 + rr() * .015}" fill="#ffcf87" opacity="${lights * (.5 + .5 * Math.sin(t * 3 + i))}"/>`; }).join('') : '') +
+    // terminator: right side always night
+    `<rect x="${lerp(-1, .05, day)}" y="-1" width="2" height="2" fill="#020510" opacity="${.55 * day}"/>` +
+    `</g></g>`;
+  return `<circle cx="${x}" cy="${y}" r="${r * 1.14}" fill="url(#atm)" opacity="${.35 + .65 * day}"/>` + land;
+}
+function moon(x, y, r, a) { return `<g opacity="${a}"><circle cx="${x}" cy="${y}" r="${r}" fill="url(#moonG)"/><circle cx="${x - r * .3}" cy="${y + r * .1}" r="${r * .18}" fill="#000" opacity=".12"/></g>`; }
+
+function palm(x, y, h, c, t = 0) {
+  const tx = x + h * .12, ty = y - h;
+  let s = `<path d="M${x},${y} Q${x + h * .02},${y - h * .55} ${tx},${ty}" stroke="${c}" stroke-width="${Math.max(4, h * .05)}" fill="none" stroke-linecap="round"/>`;
+  [-160, -130, -100, -70, -40, -15, 15].forEach((a, i) => { const ang = (a + Math.sin(t * 1.1 + i) * 1.2) * Math.PI / 180, Ln = h * .42;
+    const ex = tx + Math.cos(ang) * Ln, ey = ty + Math.sin(ang) * Ln * .55 + Ln * .35, cx = tx + Math.cos(ang) * Ln * .5, cy = ty + Math.sin(ang) * Ln * .5 - Ln * .08;
+    s += `<path d="M${tx},${ty} Q${cx},${cy} ${ex},${ey}" stroke="${c}" stroke-width="${Math.max(3, h * .035)}" fill="none" stroke-linecap="round"/>`; });
+  return s;
+}
+function skyline(seed, base, color, frost, winA) {
+  const r = R(seed); let s = '', x = -40;
+  while (x < 760) { const w = 40 + r() * 80, h = 60 + r() * 220, k = r();
+    s += `<rect x="${x}" y="${base - h}" width="${w}" height="${h + 300}" fill="${color}"/><rect x="${x}" y="${base - h - 3}" width="${w}" height="${6 * frost}" fill="#eaf6ff" opacity="${frost}"/>`;
+    if (k < .2) s += `<ellipse cx="${x + w / 2}" cy="${base - h}" rx="${w * .42}" ry="${w * .5}" fill="${color}"/><path d="M${x + w * .1},${base - h - w * .2} A${w * .42},${w * .5} 0 0 1 ${x + w * .9},${base - h - w * .2}" stroke="#eaf6ff" stroke-width="${5 * frost}" fill="none" opacity="${frost}"/>`;
+    if (k > .86) s += `<rect x="${x + w * .7 - 6}" y="${base - h - 120}" width="12" height="120" fill="${color}"/><polygon points="${x + w * .7 - 7},${base - h - 120} ${x + w * .7 + 7},${base - h - 120} ${x + w * .7},${base - h - 146}" fill="${color}"/>`;
+    for (let j = 0; j < 4; j++) { const wx = x + 8 + r() * (w - 20), wy = base - h + 14 + r() * (h - 30); if (r() > .45) s += `<rect x="${wx}" y="${wy}" width="5" height="7" fill="#ffcf87" opacity="${winA * (.4 + r() * .6)}"/>`; }
+    if (k > .55 && k < .7) s += palm(x + w + 6, base + 2, h * .9 + 40, color);
+    x += w + r() * 14; }
+  return s;
+}
+function snow(t, n, a) {
+  let s = ''; const r = R(99);
+  for (let i = 0; i < n; i++) { const x0 = r() * 760, sp = 40 + r() * 70, ph = r() * 1280, sz = 1.2 + r() * 2.8;
+    const y = (ph + t * sp) % 1300 - 20, x = x0 + Math.sin(t * .8 + i) * 18;
+    s += `<circle cx="${x}" cy="${y}" r="${sz}" fill="#fff" opacity="${a * (.5 + r() * .5)}"/>`; }
+  return s;
+}
+const rot = (a, Ln) => [Math.sin(a) * Ln, Math.cos(a) * Ln];
+function limb(x0, y0, a1, a2, L1, L2, w, c) {
+  const [dx1, dy1] = rot(a1, L1), x1 = x0 + dx1, y1 = y0 + dy1, [dx2, dy2] = rot(a2, L2), x2 = x1 + dx2, y2 = y1 + dy2;
+  return { svg: `<path d="M${x0},${y0} L${x1},${y1} L${x2},${y2}" stroke="${c}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`, x2, y2 };
+}
+// o: {s, face, phase, moving, top, pants, skin, hair, lookUp, phone(0..1 light), coat, hat, scarf, hug, breath, t}
+function person(x, y, o) {
+  const s = o.s || 1, f = o.face || 1, p = o.phase || 0, mv = o.moving ? 1 : 0, t = o.t || 0;
+  const hipY = -150 - (mv ? Math.abs(Math.cos(p)) * 4 : 0), bulk = o.coat ? 7 : 0;
+  const A = o.amp || .42; const leg = ph => { const a = Math.sin(ph) * A * mv, bend = (Math.max(0, Math.cos(ph)) * .75 + .05) * mv; return limb(0, hipY, a, a - bend, 76, 74, 19, o.pants); };
+  const shoe = (l, c) => `<ellipse cx="${l.x2 + 9}" cy="${l.y2 + 1}" rx="17" ry="7" fill="${c}"/>`;
+  const L1 = leg(p + Math.PI), L2 = leg(p);
+  const ty = hipY - 112, coatLen = o.coat ? 34 : 0;
+  const torso = `<path d="M${-23 - bulk},${hipY + 6 + coatLen} C${-27 - bulk},${hipY - 40} ${-31 - bulk},${ty + 18} ${-22 - bulk},${ty + 4} Q4,${ty - 9} ${26 + bulk},${ty + 6} C${33 + bulk},${ty + 30} ${27 + bulk},${hipY - 40} ${25 + bulk},${hipY + 6 + coatLen} Z" fill="${o.top}"/>` +
+    `<path d="M${-23 - bulk},${hipY + 6 + coatLen} C${-27 - bulk},${hipY - 40} ${-31 - bulk},${ty + 18} ${-22 - bulk},${ty + 4} L-6,${ty} L-8,${hipY + 6 + coatLen}Z" fill="#000" opacity=".22"/>` +
+    (o.coat ? [0, 1, 2, 3].map(i => `<path d="M${-22 - bulk},${ty + 30 + i * 30} Q2,${ty + 38 + i * 30} ${26 + bulk},${ty + 30 + i * 30}" stroke="#000" stroke-opacity=".18" stroke-width="2" fill="none"/>`).join('') : '');
+  const shX = 2, shY = ty + 14, swing = -Math.sin(p) * A * .85 * mv;
+  let armB, armF;
+  if (o.hug) { armB = limb(shX - 6, shY, .35, -1.6, 54, 44, 15, o.top); armF = limb(shX + 4, shY, .3, -1.75, 54, 46, 16, o.top); }
+  else if (o.phone) { armB = limb(shX - 4, shY, -swing - .05, -swing + .25, 60, 56, 14, o.top); armF = limb(shX, shY, 1.9, 2.6, 58, 50, 15, o.top); }
+  else { armB = limb(shX - 4, shY, -swing - .05, -swing + .25, 60, 56, 14, o.top); armF = limb(shX, shY, swing + .05, swing + .3, 60, 56, 15, o.top); }
+  const hx = 6, hy = ty - 34, tilt = -16 * (o.lookUp || 0);
+  const head = `<rect x="${hx - 7}" y="${ty - 16}" width="14" height="20" rx="5" fill="${o.skin}"/>` +
+    `<g transform="rotate(${tilt},${hx},${hy + 14})">` +
+    `<ellipse cx="${hx}" cy="${hy}" rx="20" ry="24" fill="${o.skin}"/><ellipse cx="${hx - 6}" cy="${hy + 2}" rx="13" ry="20" fill="#000" opacity=".12"/>` +
+    (o.hat ? `<path d="M${hx - 22},${hy - 4} C${hx - 22},${hy - 34} ${hx + 22},${hy - 34} ${hx + 22},${hy - 6} Z" fill="${o.hat}"/><rect x="${hx - 23}" y="${hy - 9}" width="46" height="8" rx="4" fill="${o.hat}" opacity=".85"/><circle cx="${hx}" cy="${hy - 32}" r="6" fill="${o.hat}"/>`
+           : `<path d="M${hx - 21},${hy - 2} C${hx - 24},${hy - 30} ${hx + 6},${hy - 36} ${hx + 21},${hy - 14} C${hx + 14},${hy - 20} ${hx - 2},${hy - 18} ${hx - 8},${hy - 12} C${hx - 12},${hy - 4} ${hx - 14},${hy + 6} ${hx - 21},${hy - 2}Z" fill="${o.hair}"/>`) +
+    `<ellipse cx="${hx + 11}" cy="${hy - 2}" rx="2.4" ry="3" fill="#1a120d"/><path d="M${hx + 6},${hy - 9} q6,-3 11,0" stroke="${o.hair}" stroke-width="2.4" fill="none" stroke-linecap="round"/>` +
+    `<ellipse cx="${hx - 14}" cy="${hy + 1}" rx="4" ry="6.5" fill="${o.skin}"/>` + `</g>`;
+  const scarf = o.scarf ? `<path d="M${hx - 16},${ty - 10} Q${hx},${ty + 2} ${hx + 18},${ty - 10} L${hx + 18},${ty + 2} Q${hx},${ty + 14} ${hx - 16},${ty + 2}Z" fill="${o.scarf}"/><rect x="${hx - 12}" y="${ty}" width="11" height="40" rx="4" fill="${o.scarf}"/>` : '';
+  let extra = '';
+  if (o.phone) { const lx = armF.x2, ly = armF.y2;
+    extra = `<rect x="${lx - 5}" y="${ly - 14}" width="10" height="18" rx="2" fill="#111"/>` +
+      `<polygon points="${lx},${ly - 10} ${lx + 70},${ly - 300} ${lx - 20},${ly - 310}" fill="#fff6dc" opacity="${.07 * o.phone}" filter="url(#soft)"/><circle cx="${lx}" cy="${ly - 10}" r="${16 * o.phone}" fill="#fff" opacity="${.35 * o.phone}" filter="url(#blur2)"/><circle cx="${lx}" cy="${ly - 10}" r="4" fill="#fff" opacity="${o.phone}"/>`; }
+  let breath = '';
+  if (o.breath) for (let i = 0; i < 4; i++) { const k = ((t * .55 + i / 4 + (o.seed || 0)) % 1);
+    breath += `<circle cx="${hx + 26 + k * 46}" cy="${hy + 8 - k * 22}" r="${5 + k * 16}" fill="#eef6ff" opacity="${(1 - k) * .45 * o.breath}" filter="url(#blur2)"/>`; }
+  const shadow = `<ellipse cx="4" cy="2" rx="44" ry="8" fill="#000" opacity=".3" filter="url(#blur2)"/>`;
+  return `<g transform="translate(${x},${y}) scale(${f * s},${s})">${shadow}` +
+    armB.svg + `<circle cx="${armB.x2}" cy="${armB.y2}" r="7" fill="${o.skin}"/>` + L1.svg.replace(o.pants, '#1d2028') + shoe(L1, '#3a3530') +
+    torso + scarf + head + L2.svg + shoe(L2, '#4a443c') + armF.svg + `<circle cx="${armF.x2}" cy="${armF.y2}" r="7.5" fill="${o.skin}"/>` + extra + breath + `</g>`;
+}
+const CROWD = [
+  { x: 30, dir: 1, top: '#8a3b3b', pants: '#2a2533', skin: '#a46a46', hair: '#1b1410', s: 1.0 },
+  { x: 690, dir: -1, top: '#3f6b5a', pants: '#24262e', skin: '#c08a66', hair: '#2a1d16', s: 1.06 },
+  { x: 230, dir: 1, top: '#2f4b7e', pants: '#1f2638', skin: '#8d5a3b', hair: '#17110d', s: 1.12 },
+  { x: 540, dir: -1, top: '#7a6a4a', pants: '#2b2a30', skin: '#b07a55', hair: '#1d1612', s: .98 },
+];
+function lampPost(x, y, h, on) {
+  return `<circle cx="${x + 18}" cy="${y - h + 8}" r="150" fill="url(#lampG)" opacity="${.6 * on}"/>` +
+    `<rect x="${x - 3}" y="${y - h}" width="6" height="${h}" fill="#0b0d18"/><path d="M${x},${y - h} q0,-10 18,-6" stroke="#0b0d18" stroke-width="5" fill="none"/>` +
+    `<rect x="${x + 10}" y="${y - h + 2}" width="16" height="10" rx="3" fill="${on > .5 ? '#ffe2ad' : '#556'}"/>`;
+}
+
+// ---------- scenes ----------
+function fishSVG(x, y, len, dir, t, col, seed) {
+  // body built along an undulating spine; head at +x (flipped by dir)
+  const N = 14, pts = [], ph = t * 5 + seed * 3;
+  for (let i = 0; i <= N; i++) { const u = i / N; const amp = (0.02 + u * u * .12) * len;
+    const sy = Math.sin(ph - u * 4.2) * amp, hw = len * (u < .18 ? .11 * Math.sqrt(u / .18) : .11 * (1 - (u - .18) / .82 * .88));
+    pts.push([len * (.5 - u), sy, hw]); }
+  const top = pts.map(p => `${p[0]},${p[1] - p[2]}`), bot = pts.slice().reverse().map(p => `${p[0]},${p[1] + p[2]}`);
+  const tail = pts[N], tw = len * .16;
+  const fin = pts.slice(4, 12).map(p => `${p[0]},${p[1] - p[2] - len * .035}`);
+  return `<g transform="translate(${x},${y}) scale(${dir},1)">` +
+    `<defs><linearGradient id="fg${seed}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(col, '#000000', .45)}"/><stop offset=".55" stop-color="${col}"/><stop offset="1" stop-color="${mix(col, '#ffffff', .35)}"/></linearGradient></defs>` +
+    `<polygon points="${pts.slice(4, 12).map(p => `${p[0]},${p[1] - p[2] + 1}`).join(' ')} ${fin.reverse().join(' ')}" fill="${mix(col, '#000000', .3)}" opacity=".75"/>` +
+    `<path d="M${tail[0]},${tail[1]} L${tail[0] - tw},${tail[1] - tw * .9 + Math.sin(ph) * 3} Q${tail[0] - tw * .6},${tail[1]} ${tail[0] - tw},${tail[1] + tw * .9 + Math.sin(ph) * 3}Z" fill="${mix(col, '#000000', .25)}" opacity=".9"/>` +
+    `<polygon points="${top.join(' ')} ${bot.join(' ')}" fill="url(#fg${seed})"/>` +
+    `<path d="M${pts[2][0]},${pts[2][1]} ${pts.slice(3, N).map(p => `L${p[0]},${p[1]}`).join(' ')}" stroke="${mix(col, '#ffffff', .5)}" stroke-width="1" opacity=".5" fill="none"/>` +
+    `<path d="M${pts[4][0]},${pts[4][1] + pts[4][2] * .6} q${-len * .06},${len * .08} ${-len * .1},${len * .05}" stroke="${mix(col, '#000000', .2)}" stroke-width="${len * .03}" stroke-linecap="round" fill="none" opacity=".8"/>` +
+    `<circle cx="${len * .41}" cy="${pts[1][1] - len * .025}" r="${len * .028}" fill="#0a0a0a"/><circle cx="${len * .415}" cy="${pts[1][1] - len * .032}" r="${len * .009}" fill="#fff" opacity=".8"/>` +
+    `</g>`;
+}
+let F = {};
+const RS = s => { const r = R(s * 7919 + 13); r(); return r; };
+const noNet = (x, y, s, a = 1) => `<g transform="translate(${x},${y}) scale(${s})" opacity="${a}"><circle r="34" fill="rgba(8,12,30,.75)"/>` +
+  [26, 18, 10].map((r, i) => `<path d="M${-r * .8},${-r * .2 + 8} A${r},${r} 0 0 1 ${r * .8},${-r * .2 + 8}" stroke="#fff" stroke-width="4" fill="none" opacity="${.9 - i * .1}"/>`).join('') + `<circle cx="0" cy="12" r="3.6" fill="#fff"/><line x1="-22" y1="-18" x2="22" y2="22" stroke="#e53935" stroke-width="6" stroke-linecap="round"/></g>`;
+function nightCity(t, glow = 0) {
+  let s = `<defs><linearGradient id="ncS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04060f"/><stop offset="1" stop-color="#18223e"/></linearGradient></defs><rect width="720" height="1280" fill="url(#ncS)"/>` + stars(.6, t);
+  s += skyline(5, 930, '#0d1222', 0, .7) + skyline(8, 990, '#0a0e1c', 0, .65);
+  s += `<rect y="985" width="720" height="295" fill="#121521"/><rect y="985" width="720" height="8" fill="#22283a"/><rect y="1090" width="720" height="190" fill="#0b0d15"/>` + Array.from({ length: 6 }, (_, i) => `<rect x="${i * 140 + 20}" y="1180" width="70" height="8" fill="#ddd" opacity=".15"/>`).join('');
+  s += lampPost(40, 990, 300, 1) + lampPost(680, 990, 300, 1) + palm(560, 992, 250, '#090c16', t);
+  return s;
+}
+// L0: night street: everyone on their phones; the connection drops, they stop
+function sceneStreet(t) {
+  const off = W(0, 3)[1], stopK = ease(ramp(t, off + .2, off + .8));
+  let s = nightCity(t);
+  CROWD.forEach((c, i) => { const stopT = off + .3 + i * .1, wt = Math.min(t, stopT) + .8, SPD = 300 * c.s * 1.05 * Math.sin(.34) * 4.0 / Math.PI, x = c.x + c.dir * wt * SPD * .5;
+    s += person(x, 1000 + (i % 2) * 14, { s: c.s * 1.05, face: c.dir, moving: t < stopT, phase: wt * 4.0, amp: .34, top: c.top, pants: c.pants, skin: c.skin, hair: c.hair, phone: 1, lookUp: stopK * .3, t });
+    if (t > off) s += noNet(x + c.dir * 30, 1000 - 330 * c.s, .8, ease(ramp(t, off + i * .12, off + i * .12 + .3))); });
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L1: close-up of a phone: messages, videos and maps all fail
+function phoneUI(t, fails) {
+  const icon = (x, y, col, glyph, f) => `<g transform="translate(${x},${y})"><rect x="-44" y="-44" width="88" height="88" rx="22" fill="${col}" opacity="${1 - .55 * f}"/>${glyph}<g opacity="${f}"><circle cx="34" cy="-34" r="16" fill="#e53935"/><text x="34" y="-27" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="20" fill="#fff">!</text></g></g>`;
+  return `<rect x="150" y="260" width="420" height="860" rx="60" fill="#111"/><rect x="164" y="274" width="392" height="832" rx="48" fill="url(#scr)"/><rect x="300" y="290" width="120" height="26" rx="13" fill="#111"/>` +
+    `<text x="360" y="420" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="88" fill="#fff">07:30</text>` +
+    icon(250, 640, '#2ea84a', `<path d="M-22,-14 h44 a8,8 0 0 1 8,8 v22 a8,8 0 0 1 -8,8 h-28 l-12,10 v-10 h-4 a8,8 0 0 1 -8,-8 v-22 a8,8 0 0 1 8,-8z" fill="#fff"/>`, fails[0]) +
+    icon(360, 640, '#e53935', `<path d="M-12,-16 L18,0 L-12,16Z" fill="#fff"/>`, fails[1]) +
+    icon(470, 640, '#3a7ad8', `<path d="M0,-24 C14,-24 22,-14 22,-2 C22,12 0,28 0,28 C0,28 -22,12 -22,-2 C-22,-14 -14,-24 0,-24Z" fill="#fff"/><circle cy="-4" r="7" fill="#3a7ad8"/>`, fails[2]) +
+    `<g opacity="${Math.max(...fails)}"><rect x="200" y="800" width="320" height="120" rx="24" fill="rgba(255,255,255,.14)"/>${noNet(250, 860, .8)}<text x="490" y="870" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="26" fill="#fff" direction="rtl">لا يوجد اتصال</text></g>` +
+    `<path d="M200,300 L320,300 L180,1000Z" fill="#fff" opacity=".05"/>`;
+}
+function scenePhone(t) {
+  const f = [ease(ramp(t, WS(1, 3) - .1, WS(1, 3) + .3)), ease(ramp(t, WS(1, 5) - .1, WS(1, 5) + .3)), ease(ramp(t, WS(1, 7) - .1, WS(1, 7) + .3))];
+  let s = `<defs><linearGradient id="bdr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8c8a0"/><stop offset="1" stop-color="#8a6a4a"/></linearGradient><linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a4a8a"/><stop offset="1" stop-color="#8a3a6a"/></linearGradient></defs>` +
+    `<rect width="720" height="1280" fill="url(#bdr)"/><rect x="460" y="60" width="240" height="380" fill="#fff6d8" opacity=".5" filter="url(#haze)"/>` +
+    `<rect x="-20" y="900" width="760" height="400" fill="#c8b8d8" opacity=".6" filter="url(#blur2)"/>`;
+  s += phoneUI(t, f);
+  // a hand holding the phone
+  s += `<path d="M150,980 C120,1000 110,1080 150,1140 L260,1300 L460,1300 L540,1150 C560,1100 580,1060 570,1000 L560,960 C550,1000 540,1040 520,1050 L190,1050 C170,1040 160,1010 150,980Z" fill="#b07a55"/><path d="M190,1050 L520,1050" stroke="#8a5a3a" stroke-width="3" opacity=".5"/>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L2: bigger than your phone: the morning city crowd, all confused
+function sceneBigger(t) {
+  let s = `<defs><linearGradient id="mn2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a7ac0"/><stop offset="1" stop-color="#f0d0a8"/></linearGradient></defs><rect width="720" height="1280" fill="url(#mn2)"/>`;
+  s += skyline(5, 930, '#8aa0b8', 0, 0) + skyline(8, 990, '#6a8098', 0, 0) + `<rect y="985" width="720" height="295" fill="#9a9084"/><rect y="1090" width="720" height="190" fill="#4a4a4e"/>` + lampPost(40, 990, 300, 0) + lampPost(680, 990, 300, 0);
+  CROWD.forEach((c, i) => { const x = 130 + i * 150; s += person(x, 1000 + (i % 2) * 14, { s: c.s, face: c.dir, top: c.top, pants: c.pants, skin: c.skin, hair: c.hair, phone: i % 2 ? 1 : 0, lookUp: .2 + .3 * Math.sin(t + i), t }) + noNet(x, 1000 - 320 * c.s, .6, .9); });
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L3: the bank: ATM out of service, card declined, and cash comes back as king
+function sceneBank(t) {
+  const atm = ease(ramp(t, WS(3, 2) - .2, WS(3, 4))), card = ease(ramp(t, WS(3, 5) - .2, WS(3, 8))), cash = ease(ramp(t, WS(3, 9) - .2, WS(3, 12)));
+  let s = `<defs><linearGradient id="bkW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8b8a0"/><stop offset="1" stop-color="#8a7a64"/></linearGradient><linearGradient id="atmG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a6070"/><stop offset=".5" stop-color="#9aa0ac"/><stop offset="1" stop-color="#4a505c"/></linearGradient>` +
+    `<linearGradient id="bill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ad08a"/><stop offset="1" stop-color="#4a8a4a"/></linearGradient></defs><rect width="720" height="1280" fill="url(#bkW)"/>`;
+  s += Array.from({ length: 12 }, (_, i) => `<line x1="0" y1="${i * 110}" x2="720" y2="${i * 110}" stroke="#a89880" stroke-width="2"/>`).join('') + `<rect y="1080" width="720" height="200" fill="#6a5a48"/>`;
+  // ATM in the wall
+  s += `<rect x="250" y="320" width="300" height="620" rx="14" fill="url(#atmG)"/><rect x="290" y="380" width="220" height="160" rx="8" fill="#1a2a4a"/><rect x="290" y="380" width="220" height="160" rx="8" fill="#e53935" opacity="${.85 * atm}"/>` +
+    `<text x="400" y="476" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="30" fill="#fff" opacity="${atm}">خارج الخدمة</text>` +
+    `<rect x="300" y="580" width="200" height="120" rx="8" fill="#3a3e48"/>` + Array.from({ length: 12 }, (_, i) => `<rect x="${314 + (i % 3) * 62}" y="${592 + Math.floor(i / 3) * 26}" width="50" height="18" rx="4" fill="#cfd4dc"/>`).join('') +
+    `<rect x="330" y="730" width="140" height="12" rx="6" fill="#111"/><rect x="310" y="790" width="180" height="20" rx="8" fill="#111"/>`;
+  s += person(170, 1090, { s: 1.0, face: 1, top: '#2f4b7e', pants: '#1f2638', skin: '#8d5a3b', hair: '#17110d', lookUp: .2, t });
+  // card terminal declined
+  s += `<g opacity="${card}" transform="translate(600,820) rotate(8)"><rect x="-70" y="-110" width="140" height="220" rx="18" fill="#2a2e38"/><rect x="-54" y="-94" width="108" height="70" rx="6" fill="#e53935"/><text x="0" y="-50" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#fff">مرفوض</text>` +
+    Array.from({ length: 9 }, (_, i) => `<rect x="${-46 + (i % 3) * 34}" y="${-4 + Math.floor(i / 3) * 30}" width="26" height="22" rx="4" fill="#8a8e98"/>`).join('') + `</g>`;
+  // banknotes fluttering in
+  if (cash > 0) { const r = RS(51); for (let i = 0; i < 24; i++) { const x = r() * 720, y = pmod(r() * 1280 + (t * 120) * (.6 + r()), 1400) - 100, rot = Math.sin(t * 2 + i) * 40;
+    s += `<g transform="translate(${x},${y}) rotate(${rot})" opacity="${cash}"><rect x="-44" y="-22" width="88" height="44" rx="4" fill="url(#bill)"/><rect x="-38" y="-16" width="76" height="32" rx="3" fill="none" stroke="#2a5a2a" stroke-width="2"/><circle r="10" fill="#c8e8b8" stroke="#2a5a2a" stroke-width="2"/></g>`; }
+    s += `<g opacity="${cash}" transform="translate(400,250)"><path d="M-60,30 L-70,-30 L-30,0 L0,-40 L30,0 L70,-30 L60,30Z" fill="#f4c76b" stroke="#a87a20" stroke-width="3"/></g>`; }
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L4: the airport: departures board all "delayed", passengers waiting
+function sceneAirport(t) {
+  const st = S0(4) - .2, dl = ease(ramp(t, WS(4, 1) - .2, WS(4, 1) + .4));
+  let s = `<defs><linearGradient id="apS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a9ac0"/><stop offset="1" stop-color="#e0e8f0"/></linearGradient></defs><rect width="720" height="1280" fill="#2a3040"/>`;
+  s += `<rect x="0" y="560" width="720" height="380" fill="url(#apS)"/>` + Array.from({ length: 7 }, (_, i) => `<rect x="${i * 120 - 10}" y="560" width="10" height="380" fill="#1a1e28"/>`).join('');
+  s += `<g transform="translate(360,800) scale(.7)"><ellipse cx="0" cy="40" rx="260" ry="10" fill="#000" opacity=".2"/><path d="M-250,0 C-250,-30 -220,-40 -180,-40 L180,-40 C230,-40 260,-20 270,0 C260,14 230,18 180,18 L-200,18 C-235,18 -250,12 -250,0Z" fill="#eef2f6"/><path d="M-250,0 L-280,-110 L-235,-110 L-170,-40Z" fill="#2a5b9a"/><path d="M-40,8 L-140,70 L-90,70 L60,10Z" fill="#c8ced6"/>` + Array.from({ length: 16 }, (_, i) => `<rect x="${-150 + i * 20}" y="-26" width="9" height="11" rx="3" fill="#2b3a4e"/>`).join('') + `</g>`;
+  // departures board
+  const rows = [['القاهرة', '08:10'], ['دبي', '08:40'], ['إسطنبول', '09:15'], ['لندن', '09:50'], ['بغداد', '10:20']];
+  s += `<rect x="70" y="250" width="580" height="290" rx="12" fill="#0e121a" stroke="#2b3446" stroke-width="3"/><rect x="70" y="250" width="580" height="50" rx="12" fill="#1b2438"/><text x="630" y="284" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#fff" direction="rtl">المغادرون ✈</text>` +
+    rows.map(([c, h], i) => `<text x="630" y="${334 + i * 44}" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#ffd76a" direction="rtl">${c}</text><text x="380" y="${334 + i * 44}" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="24" fill="#ffd76a">${h}</text>` +
+      `<text x="100" y="${334 + i * 44}" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="${mix('#7ae08a', '#ff6b6b', ease(ramp(dl, i * .12, i * .12 + .3)))}" direction="rtl">${dl > i * .12 + .15 ? 'متأخرة' : 'في الموعد'}</text>`).join('');
+  // seated, waiting passengers
+  s += `<rect y="960" width="720" height="320" fill="#4a4e5a"/>` + [[140, -1], [300, 1], [470, -1], [610, 1]].map(([x, f], i) => person(x, 1150, { s: .8, face: f, top: CROWD[i].top, pants: CROWD[i].pants, skin: CROWD[i].skin, hair: CROWD[i].hair, phone: i % 2, lookUp: .2, t })).join('');
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L5: a port with ships waiting and a store with empty shelves; billions lost
+function scenePort(t) {
+  const st = S0(5) - .2, store = ease(ramp(t, WS(5, 5) - .2, WS(5, 5) + .4)) * 0;
+  let s = `<defs><linearGradient id="ptS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a8ab0"/><stop offset="1" stop-color="#d8e0e8"/></linearGradient></defs><rect width="720" height="1280" fill="url(#ptS)"/>`;
+  s += `<rect y="760" width="720" height="520" fill="#2a5a7a"/>` + Array.from({ length: 6 }, (_, i) => `<path d="M${pmod(i * 140 + t * 20, 760) - 20},${800 + i * 60} q20,-6 40,0" stroke="#cfe8f8" stroke-width="2" fill="none" opacity=".4"/>`).join('');
+  // cranes idle
+  [[120, 760], [300, 760]].forEach(([x, y]) => { s += `<path d="M${x},${y} L${x},${y - 320} L${x + 200},${y - 320} M${x},${y - 280} L${x + 200},${y - 320} M${x - 40},${y - 320} L${x},${y - 320}" stroke="#e8a020" stroke-width="10" fill="none"/><line x1="${x + 150}" y1="${y - 320}" x2="${x + 150}" y2="${y - 160}" stroke="#333" stroke-width="2"/>`; });
+  // stacked containers on the dock
+  const cols = ['#c83a2a', '#2a6ac8', '#e8a020', '#3a8a4a', '#8a3ac8'];
+  for (let r2 = 0; r2 < 4; r2++) for (let c = 0; c < 6; c++) { const x = 40 + c * 70, y = 740 - r2 * 34; s += `<rect x="${x}" y="${y}" width="66" height="32" fill="${cols[(r2 * 3 + c) % 5]}"/>` + Array.from({ length: 6 }, (_, k) => `<line x1="${x + 6 + k * 10}" y1="${y + 3}" x2="${x + 6 + k * 10}" y2="${y + 29}" stroke="#000" stroke-opacity=".2" stroke-width="2"/>`).join(''); }
+  s += `<rect x="0" y="760" width="460" height="30" fill="#6a6a6a"/>`;
+  // ships waiting offshore
+  [[560, 900, 1], [440, 1050, .8]].forEach(([x, y, sc], i) => { s += `<g transform="translate(${x + Math.sin(t * .6 + i) * 3},${y}) scale(${sc})"><path d="M-160,0 L160,0 L130,50 L-130,50Z" fill="#2a2e38"/><rect x="-150" y="-10" width="300" height="12" fill="#c83a2a"/>` +
+    Array.from({ length: 8 }, (_, k) => `<rect x="${-140 + k * 32}" y="-40" width="30" height="30" fill="${cols[(k + i) % 5]}"/>`).join('') + `<rect x="100" y="-90" width="40" height="80" fill="#e8e8e8"/></g>`; });
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L6: the internet lives in cables on the sea floor
+function sceneCable(t) {
+  const st = S0(6) - .2;
+  let s = `<defs><linearGradient id="cbW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d5a86"/><stop offset=".5" stop-color="#0a2a46"/><stop offset="1" stop-color="#03101c"/></linearGradient><linearGradient id="cbR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8ecff" stop-opacity=".3"/><stop offset="1" stop-color="#d8ecff" stop-opacity="0"/></linearGradient>` +
+    `<linearGradient id="cbC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6070"/><stop offset=".5" stop-color="#2a2e38"/><stop offset="1" stop-color="#14161c"/></linearGradient></defs><rect width="720" height="1280" fill="url(#cbW)"/>`;
+  s += [-1, -.3, .4, 1].map((u, i) => `<polygon points="${360 + u * 150},0 ${400 + u * 150},0 ${440 + u * 330},1280 ${300 + u * 330},1280" fill="url(#cbR)" opacity="${.6 + .3 * Math.sin(t * .8 + i)}"/>`).join('');
+  s += `<path d="M-20,1000 C200,970 500,990 740,960 L740,1300 L-20,1300Z" fill="#3a4a52"/>`;
+  // the cable lying across the seabed, light pulses racing along it
+  const cp = `M-40,1020 C140,980 280,1060 420,1010 C540,970 640,1000 760,980`;
+  s += `<path d="${cp}" stroke="url(#cbC)" stroke-width="34" fill="none" stroke-linecap="round"/><path d="${cp}" stroke="#7a8090" stroke-width="4" fill="none" opacity=".6" transform="translate(0,-10)"/>`;
+  s += `<path d="${cp}" stroke="#6ad0ff" stroke-width="8" fill="none" stroke-dasharray="20 120" stroke-dashoffset="${-t * 400}" opacity=".95"/><path d="${cp}" stroke="#6ad0ff" stroke-width="22" fill="none" stroke-dasharray="20 120" stroke-dashoffset="${-t * 400}" opacity=".25" filter="url(#blur2)"/>`;
+  // a cutaway of the cable: fibres inside
+  s += `<g transform="translate(360,760)"><circle r="120" fill="#2a2e38"/><circle r="100" fill="#1a1e26"/><circle r="70" fill="#3a3e48"/>` + Array.from({ length: 12 }, (_, i) => { const a = i / 12 * 6.283; return `<circle cx="${Math.cos(a) * 32}" cy="${Math.sin(a) * 32}" r="9" fill="#6ad0ff" opacity="${.6 + .4 * Math.sin(t * 6 + i)}"/>`; }).join('') + `<circle r="12" fill="#bfe6ff"/></g>`;
+  s += fishSVG(pmod(t * 30, 900) - 90, 560, 80, 1, t, '#9fb3c0', 21) + fishSVG(760 - pmod(t * 22 + 300, 900), 640, 60, -1, t, '#c8a878', 22);
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L7: people put their phones down and talk at a café table
+function sceneCafe(t) {
+  let s = `<defs><linearGradient id="cfS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8905a"/><stop offset="1" stop-color="#f8d0a0"/></linearGradient></defs><rect width="720" height="1280" fill="url(#cfS)"/>`;
+  s += skyline(5, 900, '#b07a5a', 0, .3) + palm(620, 960, 260, '#5a4030', t) + `<rect y="960" width="720" height="320" fill="#a8806a"/>`;
+  for (let i = 0; i < 6; i++) s += `<line x1="${i * 140}" y1="200" x2="${i * 140 + 70}" y2="260" stroke="#3a2a1a" stroke-width="2"/><circle cx="${i * 140 + 70}" cy="266" r="8" fill="#ffe2a0"/><circle cx="${i * 140 + 70}" cy="266" r="30" fill="#ffd8a0" opacity=".4" filter="url(#blur2)"/>`;
+  s += `<rect x="200" y="1020" width="320" height="16" rx="6" fill="#5a3a24"/><rect x="352" y="1036" width="16" height="140" fill="#4a3020"/>` +
+       `<rect x="250" y="1006" width="44" height="16" rx="4" fill="#111"/><rect x="420" y="1006" width="44" height="16" rx="4" fill="#111"/>` + `<rect x="330" y="986" width="24" height="34" rx="6" fill="#f4efe4"/><rect x="370" y="986" width="24" height="34" rx="6" fill="#f4efe4"/>`;
+  s += person(180, 1180, { s: 1.0, face: 1, top: '#8a3b3b', pants: '#2a2533', skin: '#a46a46', hair: '#1b1410', lookUp: .1, t }) + person(540, 1180, { s: 1.04, face: -1, top: '#3f6b5a', pants: '#24262e', skin: '#c08a66', hair: '#2a1d16', lookUp: .1, t });
+  const b = Math.abs(Math.sin(t * 2)) * 6;
+  s += `<g transform="translate(260,${700 - b})"><path d="M-50,-30 h100 a14,14 0 0 1 14,14 v40 a14,14 0 0 1 -14,14 h-60 l-20,18 v-18 h-20 a14,14 0 0 1 -14,-14 v-40 a14,14 0 0 1 14,-14z" fill="#fff"/><circle cx="-20" cy="-2" r="5" fill="#333"/><circle cx="0" cy="-2" r="5" fill="#333"/><circle cx="20" cy="-2" r="5" fill="#333"/></g>` +
+       `<g transform="translate(470,${660 + b})"><path d="M-50,-30 h100 a14,14 0 0 1 14,14 v40 a14,14 0 0 1 -14,14 h-20 v18 l-20,-18 h-60 a14,14 0 0 1 -14,-14 v-40 a14,14 0 0 1 14,-14z" fill="#fff6d8"/><circle cx="-20" cy="-2" r="5" fill="#333"/><circle cx="0" cy="-2" r="5" fill="#333"/><circle cx="20" cy="-2" r="5" fill="#333"/></g>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// L8: CTA: a wifi sign that turns into a question mark
+function sceneEarth(t) {
+  const st = S0(8), k = ease(ramp(t, st - .2, st + .8)), b = Math.abs(Math.sin(t * 3)) * 6;
+  let s = space(t, '#03050f', '#0a1030');
+  F.earth = { x: 360, y: 980, r: 330, a: 1, sunI: 1, lights: .8, rot: 1.0, tilt: .41 }; F.light = [-600, 400]; F.moon = null;
+  F.ov = `<g transform="translate(360,520)" opacity="${k}">` + [150, 105, 60].map((r, i) => `<path d="M${-r * .8},${-r * .2 + 40} A${r},${r} 0 0 1 ${r * .8},${-r * .2 + 40}" stroke="#f4c76b" stroke-width="16" fill="none" stroke-linecap="round" opacity="${.5 + .5 * Math.sin(t * 3 - i)}"/>`).join('') +
+    `<text x="0" y="110" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="120" fill="#fff">؟</text></g>` +
+    `<g opacity="${ramp(t, WS(8, 4), WS(8, 4) + .4)}" transform="translate(360,${800 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
+  return s;
+}
+// ===== realistic shots 4–8: bank ATM at human scale, shop counter (card declined, cash), airport terminal, container port =====
+const NDEF = `<filter id="stoneT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".05 .09" numOctaves="4" seed="4"/><feColorMatrix values="0 0 0 0 .3  0 0 0 0 .26  0 0 0 0 .2  0 0 0 -1.4 .8"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+  `<filter id="metalT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9 .02" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -1.6 .5"/><feComposite in2="SourceGraphic" operator="in"/></filter>`;
+// shot 4: a bank front on the pavement; the ATM is set into the wall at real size; the person stands at it
+function sceneBank(t) {
+  const atm = ease(ramp(t, WS(3, 2) - .2, WS(3, 4)));
+  const G = 1120, M = 200; // ground line, pixels per metre (the person is ~1.75 m)
+  let s = `<defs>${NDEF}<linearGradient id="skB4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8ab0d8"/><stop offset="1" stop-color="#e8eef2"/></linearGradient>` +
+    `<linearGradient id="wallB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8ccb4"/><stop offset="1" stop-color="#a89880"/></linearGradient>` +
+    `<linearGradient id="atmB" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6a7280"/><stop offset=".45" stop-color="#b8bec8"/><stop offset="1" stop-color="#585e6a"/></linearGradient>` +
+    `<linearGradient id="glassB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a5a7a"/><stop offset=".5" stop-color="#7a9ab8"/><stop offset="1" stop-color="#2a4058"/></linearGradient></defs>`;
+  s += `<rect width="720" height="1280" fill="url(#skB4)"/>`;
+  // building facade with stone cladding and joints
+  s += `<rect x="-10" y="180" width="740" height="${G - 180}" fill="url(#wallB)"/><rect x="-10" y="180" width="740" height="${G - 180}" fill="#fff" filter="url(#stoneT)" opacity=".7"/>` +
+       Array.from({ length: 14 }, (_, i) => `<line x1="-10" y1="${200 + i * 66}" x2="730" y2="${200 + i * 66}" stroke="#8a7a64" stroke-width="2" opacity=".45"/>`).join('') +
+       Array.from({ length: 14 }, (_, i) => Array.from({ length: 5 }, (_, j) => `<line x1="${(j * 160 + (i % 2) * 80) - 10}" y1="${200 + i * 66}" x2="${(j * 160 + (i % 2) * 80) - 10}" y2="${266 + i * 66}" stroke="#8a7a64" stroke-width="2" opacity=".35"/>`).join('')).join('');
+  // bank sign
+  s += `<rect x="70" y="330" width="580" height="90" rx="6" fill="#1a3a6a"/><rect x="70" y="330" width="580" height="90" rx="6" fill="none" stroke="#c8a040" stroke-width="4"/><text x="360" y="390" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="48" fill="#f4e8c0" direction="rtl">مصرف</text>`;
+  // glass door + window on the left
+  s += `<rect x="30" y="${G - 2.6 * M}" width="230" height="${2.6 * M}" fill="url(#glassB)"/><rect x="30" y="${G - 2.6 * M}" width="230" height="${2.6 * M}" fill="none" stroke="#3a3e44" stroke-width="10"/><line x1="145" y1="${G - 2.6 * M}" x2="145" y2="${G}" stroke="#3a3e44" stroke-width="8"/>` +
+       `<path d="M50,${G - 2.5 * M} L120,${G - 2.5 * M} L60,${G - 1.4 * M}Z" fill="#fff" opacity=".15"/><rect x="128" y="${G - 1.1 * M}" width="6" height="${.5 * M}" rx="3" fill="#c8ccd2"/><rect x="156" y="${G - 1.1 * M}" width="6" height="${.5 * M}" rx="3" fill="#c8ccd2"/>`;
+  // ATM in the wall: ~0.8 m wide, top at ~1.75 m, screen centre ~1.4 m
+  const ax = 430, aw = .8 * M, top = G - 1.8 * M;
+  s += `<rect x="${ax - 16}" y="${top - 70}" width="${aw + 32}" height="60" rx="6" fill="#1a3a6a"/><text x="${ax + aw / 2}" y="${top - 30}" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="28" fill="#f4e8c0" direction="rtl">صراف آلي</text>` +
+       `<rect x="${ax - 12}" y="${top - 6}" width="${aw + 24}" height="${1.8 * M + 6 - .9 * M}" fill="#2a2e34"/>` +
+       `<rect x="${ax}" y="${top}" width="${aw}" height="${.9 * M}" rx="6" fill="url(#atmB)"/><rect x="${ax}" y="${top}" width="${aw}" height="${.9 * M}" rx="6" fill="#fff" filter="url(#metalT)" opacity=".25"/>`;
+  const sx = ax + aw * .14, sw = aw * .72, sy = top + .1 * M, sh = .28 * M;
+  s += `<rect x="${sx - 4}" y="${sy - 4}" width="${sw + 8}" height="${sh + 8}" rx="4" fill="#1a1c22"/><rect x="${sx}" y="${sy}" width="${sw}" height="${sh}" fill="${mix('#1a4a8a', '#c82a2a', atm)}"/>` +
+       `<text x="${sx + sw / 2}" y="${sy + sh / 2 + 9}" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#fff" direction="rtl" opacity="${atm}">خارج الخدمة</text>` +
+       `<text x="${sx + sw / 2}" y="${sy + sh / 2 + 9}" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="20" fill="#cfe0ff" direction="rtl" opacity="${1 - atm}">أدخل البطاقة</text>` +
+       `<path d="M${sx},${sy} L${sx + sw * .4},${sy} L${sx},${sy + sh}Z" fill="#fff" opacity=".08"/>`;
+  s += `<rect x="${ax + aw * .2}" y="${top + .46 * M}" width="${aw * .4}" height="${.2 * M}" rx="4" fill="#3a3e48"/>` + Array.from({ length: 12 }, (_, i) => `<rect x="${ax + aw * .22 + (i % 3) * aw * .13}" y="${top + .48 * M + Math.floor(i / 3) * .045 * M}" width="${aw * .1}" height="${.035 * M}" rx="2" fill="#d8dce2"/>`).join('') +
+       `<rect x="${ax + aw * .68}" y="${top + .5 * M}" width="${aw * .18}" height="10" rx="4" fill="#111"/><circle cx="${ax + aw * .77}" cy="${top + .5 * M - 10}" r="5" fill="${atm > .5 ? '#e53935' : '#3ac85a'}"/>` +
+       `<rect x="${ax + aw * .2}" y="${top + .76 * M}" width="${aw * .6}" height="12" rx="5" fill="#111"/>`;
+  // pavement with joints and a soft shadow
+  s += `<rect y="${G}" width="720" height="${1280 - G}" fill="#a8a296"/>` + Array.from({ length: 6 }, (_, i) => `<line x1="${i * 140}" y1="${G}" x2="${i * 140 - 60}" y2="1280" stroke="#8a847a" stroke-width="2"/>`).join('') + `<line x1="0" y1="${G + 60}" x2="720" y2="${G + 60}" stroke="#8a847a" stroke-width="2"/>`;
+  s += `<ellipse cx="400" cy="${G + 4}" rx="70" ry="10" fill="#000" opacity=".25" filter="url(#blur2)"/>`;
+  s += person(400, G + 2, { s: 1.06, face: 1, top: '#2f4b7e', pants: '#1f2638', skin: '#8d5a3b', hair: '#17110d', lookUp: .05, t });
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// shots 5–6: a shop counter: a real-size card terminal declines, then cash comes out and a "cash only" note appears
+function sceneCounter(t) {
+  const dec = ease(ramp(t, WS(3, 7) - .3, WS(3, 8))), cash = ease(ramp(t, WS(3, 9) - .2, WS(3, 11))), note = ease(ramp(t, WS(3, 12) - .3, WS(3, 12) + .3));
+  let s = `<defs>${NDEF}<linearGradient id="shW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8dcc8"/><stop offset="1" stop-color="#c8b8a0"/></linearGradient>` +
+    `<linearGradient id="ctr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a3a"/><stop offset="1" stop-color="#5a3a24"/></linearGradient>` +
+    `<linearGradient id="posB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a3e48"/><stop offset="1" stop-color="#1a1c22"/></linearGradient>` +
+    `<linearGradient id="note2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b8d8a8"/><stop offset="1" stop-color="#6a9a5a"/></linearGradient></defs>`;
+  s += `<rect width="720" height="1280" fill="url(#shW)"/>`;
+  // shelves with goods behind, softly out of focus
+  s += `<g filter="url(#blur2)" opacity=".8">` + [260, 420, 580].map(y => `<rect x="0" y="${y}" width="720" height="14" fill="#8a6a4a"/>` + Array.from({ length: 10 }, (_, i) => { const r = RS(y + i); return `<rect x="${20 + i * 70}" y="${y - 60 - r() * 30}" width="${40 + r() * 16}" height="${60 + r() * 30}" rx="4" fill="${['#c83a2a', '#2a6ac8', '#e8a020', '#3a8a4a', '#f4efe4'][i % 5]}"/>`; }).join('')).join('') + `</g>`;
+  s += `<rect x="-10" y="760" width="740" height="520" fill="url(#ctr)"/><rect x="-10" y="760" width="740" height="18" fill="#a87a50"/><rect x="-10" y="760" width="740" height="520" fill="#000" filter="url(#woodTex)" opacity=".5"/>`;
+  // cash register with a "cash only" paper note taped on it
+  s += `<rect x="440" y="560" width="230" height="200" rx="12" fill="#2a2e34"/><rect x="460" y="580" width="190" height="70" rx="6" fill="#3ac85a" opacity=".85"/><text x="555" y="628" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="34" fill="#0a2a10">0.00</text>` +
+       `<g opacity="${note}" transform="translate(555,700) rotate(-4)"><rect x="-80" y="-34" width="160" height="68" fill="#fffef6"/><path d="M-90,-40 l30,10 M90,-40 l-30,10" stroke="#e8e0c0" stroke-width="12" opacity=".8"/><text x="0" y="12" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="30" fill="#c82a2a" direction="rtl">نقداً فقط</text></g>`;
+  // card terminal at real size with a hand holding a card in it
+  s += `<g transform="translate(230,700)"><rect x="-80" y="-150" width="160" height="290" rx="22" fill="url(#posB)"/><rect x="-62" y="-130" width="124" height="90" rx="6" fill="${mix('#1a5a9a', '#c82a2a', dec)}"/>` +
+       `<text x="0" y="-78" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#fff" direction="rtl">${dec > .5 ? 'مرفوض' : 'جاري...'}</text>` +
+       Array.from({ length: 12 }, (_, i) => `<rect x="${-52 + (i % 3) * 38}" y="${-24 + Math.floor(i / 3) * 34}" width="30" height="26" rx="5" fill="${i === 9 ? '#c83a2a' : i === 11 ? '#3ac85a' : '#6a6e78'}"/>`).join('') + `<rect x="-60" y="134" width="120" height="10" rx="4" fill="#111"/></g>`;
+  s += `<g opacity="${1 - cash}"><rect x="190" y="830" width="84" height="54" rx="6" fill="#d8b040" transform="rotate(-8,232,857)"/><rect x="196" y="842" width="20" height="14" rx="3" fill="#c8a030" transform="rotate(-8,232,857)"/>` +
+       `<path d="M140,900 C150,860 200,850 240,860 L300,880 C320,890 318,910 300,914 L250,910 C220,960 180,980 150,980Z" fill="#b07a55"/></g>`;
+  // banknotes counted onto the counter
+  if (cash > 0) { const r = RS(51); for (let i = 0; i < 9; i++) { const k = clamp(cash * 9 - i), x = lerp(120, 300 + (i % 3) * 30, k), y = lerp(1200, 800 + i * 4, k), rot = -10 + i * 4;
+    s += `<g transform="translate(${x},${y}) rotate(${rot})" opacity="${k > 0 ? 1 : 0}"><rect x="-70" y="-34" width="140" height="68" rx="4" fill="url(#note2)"/><rect x="-62" y="-26" width="124" height="52" rx="3" fill="none" stroke="#2a5a2a" stroke-width="2"/><circle r="16" fill="#d8ecc8" stroke="#2a5a2a" stroke-width="2"/></g>`; }
+    s += `<path d="M520,1280 C510,1100 560,1000 620,960 L700,960 L720,1280Z" fill="#c08a66" opacity="${cash}"/>`; }
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// shot 7: inside a terminal: big glass wall onto the apron, a plane at the jet bridge, a hanging departures screen, seats, travellers with suitcases, a polished floor
+function suitcase(x, y, s, col) { return `<g transform="translate(${x},${y}) scale(${s})"><rect x="-24" y="-70" width="48" height="70" rx="8" fill="${col}"/><rect x="-24" y="-70" width="48" height="70" rx="8" fill="#000" opacity=".12"/>${[-12, 0, 12].map(k => `<line x1="${k}" y1="-66" x2="${k}" y2="-4" stroke="#000" stroke-opacity=".2" stroke-width="2"/>`).join('')}<rect x="-8" y="-108" width="16" height="40" fill="none" stroke="#555" stroke-width="4"/><circle cx="-14" cy="2" r="5" fill="#222"/><circle cx="14" cy="2" r="5" fill="#222"/></g>`; }
+function sceneAirport(t) {
+  const st = S0(4) - .2, dl = ease(ramp(t, WS(4, 1) - .2, WS(4, 1) + .4));
+  let s = `<defs>${NDEF}<linearGradient id="apS2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a8ab0"/><stop offset="1" stop-color="#d8e2ea"/></linearGradient>` +
+    `<linearGradient id="flr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8bcc2"/><stop offset="1" stop-color="#6a6e76"/></linearGradient>` +
+    `<linearGradient id="ceil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3e46"/><stop offset="1" stop-color="#5a5e66"/></linearGradient></defs>`;
+  // ceiling with light strips
+  s += `<rect width="720" height="300" fill="url(#ceil)"/>` + Array.from({ length: 5 }, (_, i) => `<rect x="${-40 + i * 170}" y="${60 + i * 6}" width="120" height="10" rx="4" fill="#fff6e0"/><rect x="${-40 + i * 170}" y="${60 + i * 6}" width="120" height="40" fill="#fff6e0" opacity=".12" filter="url(#blur2)"/>`).join('');
+  // glass wall onto the apron
+  s += `<rect y="300" width="720" height="560" fill="url(#apS2)"/><rect y="700" width="720" height="160" fill="#7a7e84"/>` + Array.from({ length: 8 }, (_, i) => `<line x1="${i * 96}" y1="720" x2="${i * 96 - 80}" y2="860" stroke="#f4e060" stroke-width="3" opacity=".6"/>`).join('');
+  s += `<g transform="translate(330,640) scale(1.05)"><path d="M-250,0 C-250,-30 -220,-40 -180,-40 L180,-40 C230,-40 260,-20 270,0 C260,14 230,18 180,18 L-200,18 C-235,18 -250,12 -250,0Z" fill="#f2f4f6"/><path d="M-250,0 C-250,-30 -220,-40 -180,-40 L180,-40" stroke="#c8ccd2" stroke-width="3" fill="none"/>` +
+       `<path d="M-250,0 L-282,-120 L-232,-120 L-170,-40Z" fill="#2a5b9a"/><path d="M-40,8 L-150,74 L-96,74 L60,10Z" fill="#c8ced6"/><ellipse cx="-70" cy="40" rx="40" ry="16" fill="#9aa0a8"/><rect x="-110" y="34" width="60" height="14" fill="#8a9098"/>` +
+       Array.from({ length: 18 }, (_, i) => `<rect x="${-160 + i * 18}" y="-26" width="8" height="10" rx="3" fill="#2b3a4e"/>`).join('') + `<path d="M218,-26 L248,-22 L252,-10 L224,-12Z" fill="#2b3a4e"/>` +
+       `<rect x="-60" y="18" width="6" height="40" fill="#333"/><circle cx="-57" cy="60" r="10" fill="#15171c"/><rect x="190" y="18" width="6" height="40" fill="#333"/><circle cx="193" cy="60" r="10" fill="#15171c"/></g>`;
+  s += `<path d="M720,560 L560,600 L560,640 L720,620Z" fill="#c8ccd2"/><path d="M720,560 L560,600 L560,640 L720,620Z" fill="none" stroke="#8a9098" stroke-width="3"/>`;
+  // mullions and reflections on the glass
+  s += Array.from({ length: 6 }, (_, i) => `<rect x="${i * 144 - 6}" y="300" width="12" height="560" fill="#2a2e36"/>`).join('') + `<rect y="300" width="720" height="10" fill="#2a2e36"/><rect y="852" width="720" height="12" fill="#2a2e36"/>` +
+       `<path d="M40,310 L180,310 L60,850 L-20,850Z" fill="#fff" opacity=".07"/><path d="M420,310 L500,310 L380,850 L320,850Z" fill="#fff" opacity=".05"/>`;
+  // hanging departures screen
+  const rows = [['القاهرة', '08:10'], ['دبي', '08:40'], ['إسطنبول', '09:15'], ['لندن', '09:50'], ['بغداد', '10:20']];
+  s += `<g transform="translate(0,300)">` + (() => { let s = ''; s += `<line x1="220" y1="-300" x2="220" y2="110" stroke="#222" stroke-width="4"/><line x1="500" y1="-300" x2="500" y2="110" stroke="#222" stroke-width="4"/><rect x="110" y="110" width="500" height="250" rx="10" fill="#0e121a" stroke="#3a3e46" stroke-width="8"/>` +
+       `<rect x="118" y="118" width="484" height="40" fill="#1b2438"/><text x="590" y="146" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#fff" direction="rtl">المغادرون</text>` +
+       rows.map(([c, h], i) => `<text x="590" y="${190 + i * 36}" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="21" fill="#ffd76a" direction="rtl">${c}</text><text x="360" y="${190 + i * 36}" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="21" fill="#ffd76a">${h}</text>` +
+         `<text x="140" y="${190 + i * 36}" font-family="Noto Naskh Arabic" font-weight="700" font-size="21" fill="${mix('#7ae08a', '#ff6b6b', ease(ramp(dl, i * .12, i * .12 + .3)))}" direction="rtl">${dl > i * .12 + .15 ? 'متأخرة' : 'في الموعد'}</text>`).join('') +
+       `<path d="M118,118 L300,118 L118,350Z" fill="#fff" opacity=".04"/>`;
+   return s; })() + `</g>`;
+  // polished floor with reflections of the windows and lights
+  s += `<rect y="864" width="720" height="416" fill="url(#flr2)"/>` + Array.from({ length: 6 }, (_, i) => `<rect x="${i * 144 - 6}" y="864" width="12" height="200" fill="#2a2e36" opacity=".25" filter="url(#blur2)"/>`).join('') + `<rect y="864" width="720" height="120" fill="#cfe0f0" opacity=".18" filter="url(#blur2)"/>` +
+       Array.from({ length: 8 }, (_, i) => `<line x1="${i * 110 - 20}" y1="864" x2="${i * 160 - 300}" y2="1280" stroke="#5a5e66" stroke-width="2" opacity=".5"/>`).join('');
+  // a row of metal seats
+  for (let i = 0; i < 6; i++) { const x = 70 + i * 100; s += `<rect x="${x}" y="1010" width="84" height="16" rx="6" fill="#1a1c22"/><rect x="${x + 6}" y="960" width="72" height="52" rx="8" fill="#26282e"/><rect x="${x + 36}" y="1026" width="10" height="40" fill="#8a8e96"/>`; }
+  s += `<rect x="60" y="1060" width="610" height="10" fill="#8a8e96"/>`;
+  // travellers with suitcases, waiting
+  [[120, 1, '#c83a2a'], [300, -1, '#2a6ac8'], [470, 1, '#e8a020'], [630, -1, '#3a8a4a']].forEach(([x, f, col], i) => { s += suitcase(x + f * 46, 1196, .9, col) + person(x, 1200, { s: .78, face: f, top: CROWD[i].top, pants: CROWD[i].pants, skin: CROWD[i].skin, hair: CROWD[i].hair, lookUp: .45, t }); });
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+// shot 8: a container port: STS cranes standing idle, stacked containers, ships waiting at anchor, a tug, realistic water
+function container(x, y, w, h, col) {
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${col}"/><rect x="${x}" y="${y}" width="${w}" height="${h * .18}" fill="#fff" opacity=".18"/><rect x="${x + w * .82}" y="${y}" width="${w * .18}" height="${h}" fill="#000" opacity=".22"/>` +
+    Array.from({ length: Math.floor(w / 6) }, (_, k) => `<line x1="${x + 3 + k * 6}" y1="${y + 2}" x2="${x + 3 + k * 6}" y2="${y + h - 2}" stroke="#000" stroke-opacity=".16" stroke-width="1.6"/>`).join('') + `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="1"/>`;
+}
+function ship(x, y, s, seed, t) {
+  const r = RS(seed), cols = ['#c83a2a', '#2a6ac8', '#e8a020', '#3a8a4a', '#8a3ac8', '#c8c8c8', '#2a8a8a'];
+  let o = `<g transform="translate(${x},${y}) scale(${s})">`;
+  // reflection
+  o += `<g transform="translate(0,52) scale(1,-.5)" opacity=".25"><path d="M-300,0 L300,0 L270,60 L-250,60 C-280,50 -300,30 -300,0Z" fill="#1a2028"/></g>`;
+  // hull: black topsides, red anti-fouling below the waterline band
+  o += `<path d="M-310,-30 L320,-30 L300,40 L-260,40 C-290,30 -312,10 -310,-30Z" fill="#1e2228"/><path d="M-300,22 L304,22 L300,40 L-260,40 C-280,34 -292,28 -300,22Z" fill="#9a2a1e"/><line x1="-308" y1="-24" x2="318" y2="-24" stroke="#fff" stroke-width="2" opacity=".5"/>`;
+  // containers in bays
+  for (let b = 0; b < 9; b++) for (let tier = 0; tier < 3 + (b % 3 === 1 ? 1 : 0); tier++) o += container(-280 + b * 54, -58 - tier * 28, 52, 26, cols[Math.floor(r() * cols.length)]);
+  // superstructure (bridge) at the stern with windows and a funnel
+  o += `<rect x="210" y="-140" width="80" height="110" fill="#f2f2f0"/><rect x="200" y="-150" width="100" height="14" fill="#e0e0dc"/>` + Array.from({ length: 4 }, (_, k) => `<rect x="${216}" y="${-130 + k * 24}" width="68" height="8" fill="#2a3442"/>`).join('') + `<rect x="270" y="-182" width="22" height="34" fill="#c83a2a"/><rect x="270" y="-182" width="22" height="8" fill="#1a1a1a"/>`;
+  return o + `</g>`;
+}
+function scenePort(t) {
+  const st = S0(5) - .2;
+  let s = `<defs>${NDEF}<linearGradient id="ptS2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a8eb8"/><stop offset=".8" stop-color="#d8e2ea"/><stop offset="1" stop-color="#e8e4dc"/></linearGradient>` +
+    `<linearGradient id="seaP" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a98b0"/><stop offset=".2" stop-color="#3a6a8a"/><stop offset="1" stop-color="#14344c"/></linearGradient></defs>`;
+  s += `<rect width="720" height="1280" fill="url(#ptS2)"/><g filter="url(#haze)" opacity=".6">` + Array.from({ length: 4 }, (_, i) => `<ellipse cx="${pmod(i * 230 + t * 6, 900) - 90}" cy="${300 + i * 40}" rx="200" ry="14" fill="#fff"/>`).join('') + `</g>`;
+  const HZ = 640;
+  // sea with perspective swell lines, sparkle and a hazy horizon
+  s += `<rect y="${HZ}" width="720" height="${1280 - HZ}" fill="url(#seaP)"/><rect y="${HZ - 6}" width="720" height="24" fill="#e8eef2" opacity=".5" filter="url(#blur2)"/>`;
+  for (let k = 1; k < 26; k++) { const y = HZ + Math.pow(k / 25, 1.7) * 640; let d = `M-20,${y}`; for (let x = -20; x <= 740; x += 40) d += ` q20,${-1.5 - k * .2} 40,0`;
+    s += `<path d="${d}" stroke="${k % 2 ? '#cfe2ee' : '#0e2a40'}" stroke-width="${1 + k * .09}" fill="none" opacity="${.12 + .015 * k}" transform="translate(${Math.sin(t * .7 + k) * 10},0)"/>`; }
+  const rs = RS(44); for (let i = 0; i < 70; i++) { const u = rs(), y = HZ + 10 + u * u * 600, x = rs() * 720; s += `<rect x="${x}" y="${y}" width="${3 + u * 12}" height="1.6" fill="#fff" opacity="${(.2 + .5 * rs()) * (.5 + .5 * Math.sin(t * 5 + i))}"/>`; }
+  // ships waiting at anchor (far = smaller, hazier)
+  s += `<g opacity=".7">${ship(560, HZ + 26, .32, 3, t)}</g><g opacity=".85">${ship(170, HZ + 60, .46, 5, t)}</g>`;
+  // a tug with a wake
+  const tx = pmod(t * 22, 900) - 120; s += `<path d="M${tx - 140},${HZ + 222} Q${tx - 70},${HZ + 212} ${tx - 10},${HZ + 218}" stroke="#fff" stroke-width="4" fill="none" opacity=".6"/><g transform="translate(${tx},${HZ + 210}) scale(.55)"><path d="M-60,0 L60,0 L50,22 L-50,22Z" fill="#1e2228"/><path d="M-50,16 L52,16 L50,22 L-50,22Z" fill="#9a2a1e"/><rect x="-30" y="-36" width="50" height="36" fill="#f2f2f0"/><rect x="-24" y="-30" width="38" height="8" fill="#2a3442"/><rect x="0" y="-56" width="12" height="20" fill="#e8a020"/></g>`;
+  // the quay in the foreground with stacked containers and two STS cranes
+  const Q = 960;
+  s += `<path d="M-20,${Q} L740,${Q - 20} L740,1300 L-20,1300Z" fill="#7a7a78"/><path d="M-20,${Q} L740,${Q - 20}" stroke="#e8e4dc" stroke-width="6"/><path d="M-20,${Q + 22} L740,${Q + 2}" stroke="#4a4a48" stroke-width="20"/>`;
+  for (let i = 0; i < 6; i++) { const bx = 40 + i * 130; s += `<rect x="${bx}" y="${Q - 30 - i * 3.4}" width="16" height="22" rx="4" fill="#2a2a2a"/><path d="M${bx + 8},${Q - 26 - i * 3.4} Q${bx + 40},${Q + 30} ${bx + 70},${Q + 80}" stroke="#d8c8a0" stroke-width="4" fill="none" opacity="${i % 2 ? .0 : .9}"/>`; }
+  const cols = ['#c83a2a', '#2a6ac8', '#e8a020', '#3a8a4a', '#8a3ac8', '#2a8a8a'];
+  for (let r2 = 0; r2 < 5; r2++) for (let c = 0; c < 7; c++) s += container(10 + c * 100 - r2 * 6, Q + 130 - r2 * 46 + c * 2, 96, 44, cols[(r2 * 5 + c * 3) % 6]);
+  [[110, '#d8402a'], [470, '#2a6ac8']].forEach(([x, col]) => { const top = 330;
+    s += `<g><path d="M${x},${Q - 14} L${x + 26},${top} L${x + 46},${top} L${x + 30},${Q - 14}Z M${x + 150},${Q - 22} L${x + 130},${top} L${x + 150},${top} L${x + 180},${Q - 22}Z" fill="${col}"/>` +
+      `<rect x="${x - 120}" y="${top - 24}" width="420" height="26" fill="${col}"/><path d="M${x - 120},${top - 24} L${x + 300},${top - 24}" stroke="#fff" stroke-width="2" opacity=".4"/>` +
+      `<path d="M${x + 36},${top - 24} L${x + 90},${top - 120} L${x + 140},${top - 24}" stroke="${col}" stroke-width="10" fill="none"/><line x1="${x + 90}" y1="${top - 120}" x2="${x - 120}" y2="${top - 24}" stroke="#333" stroke-width="2"/><line x1="${x + 90}" y1="${top - 120}" x2="${x + 300}" y2="${top - 24}" stroke="#333" stroke-width="2"/>` +
+      `<rect x="${x + 40}" y="${top + 2}" width="40" height="30" fill="#f2f2f0"/><rect x="${x + 46}" y="${top + 8}" width="28" height="12" fill="#2a3442"/><line x1="${x + 60}" y1="${top + 32}" x2="${x + 60}" y2="${top + 260}" stroke="#222" stroke-width="2"/><rect x="${x + 36}" y="${top + 260}" width="48" height="12" fill="#e8a020"/>` +
+      `<rect x="${x + 50}" y="${top + 40}" width="70" height="${Q - top - 70}" fill="none" stroke="${col}" stroke-width="6" opacity=".9"/></g>`; });
+  s += `<rect width="720" height="1280" fill="#d8e2ea" opacity=".06"/>`;
+  F.ov = ''; F.earth = null; F.moon = null;
+  return s;
+}
+
+const SCENES = [
+  { s: 0, f: sceneStreet }, { s: S0(1) - .2, f: scenePhone }, { s: S0(2) - .2, f: sceneBigger }, { s: S0(3) - .2, f: sceneBank }, { s: WS(3, 5) - .3, f: sceneCounter }, { s: S0(4) - .2, f: sceneAirport },
+  { s: S0(5) - .2, f: scenePort }, { s: S0(6) - .2, f: sceneCable }, { s: S0(7) - .2, f: sceneCafe }, { s: S0(8) - .2, f: sceneEarth },
+];
+const XF = .5;
+
+// ---------- UI ----------
+const TLI = [['الصباح', S0(1)], ['الظهر', S0(3)], ['المساء', S0(7)]];
+const CHIPS = [
+  ['c1', 'الدفع نقداً فقط', 360, 330, 'big', WS(3, 9), S0(4)],
+  ['c2', 'خسائر بالمليارات', 360, 330, 'big red', WS(5, 7), S0(6)],
+  ['c3', 'كابلات تحت البحار', 360, 330, 'big', WS(6, 6), S0(7)],
+  ['c4', '@MadhaLawLab', 360, 1200, 'dark', WS(8, 6), 999],
+];
+$('ui').innerHTML = `<div class="list" id="tl"><div class="hd">يوم بلا إنترنت</div><div class="rail"></div><div class="fill" id="tlf"></div>` +
+  TLI.map((x, i) => { const y = 64 + i * 88; return `<div class="it" id="tli${i}" style="top:${y}px">${x[0]}</div><div class="dot" id="tld${i}" style="top:${y}px"></div>`; }).join('') + `</div>` +
+  CHIPS.map(c => `<div class="chip ${c[4]}" id="${c[0]}" style="${c[1][0] === '@' ? 'direction:ltr;' : ''}left:${c[2]}px;top:${c[3]}px">${c[1]}</div>`).join('');
+function renderUI(t) {
+  const vis = ease(ramp(t, S0(1), S0(1) + .4)) * (1 - ease(ramp(t, S0(8) - .4, S0(8)))) * (t > S0(1) - .2 && t < S0(2) - .2 ? 0 : 1) * (t > S0(6) - .2 && t < S0(7) - .2 ? 0 : 1) * (t > S0(3) - .2 && t < S0(6) - .2 ? 0 : 1);
+  $('tl').style.opacity = vis;
+  let act = 0; TLI.forEach((x, i) => { if (t >= x[1]) act = i; });
+  $('tlf').style.height = (act * 88) + 'px';
+  TLI.forEach((x, i) => { const on = i <= act, cur = i === act;
+    $('tli' + i).style.color = cur ? '#fff' : on ? 'rgba(244,199,107,.9)' : 'rgba(255,255,255,.45)';
+    $('tld' + i).style.background = on ? '#f4c76b' : 'rgba(255,255,255,.35)';
+    $('tld' + i).style.boxShadow = cur ? '0 0 0 6px rgba(244,199,107,.25)' : 'none'; });
+  CHIPS.forEach(c => { $(c[0]).style.opacity = ease(ramp(t, c[5], c[5] + .3)) * (1 - ease(ramp(t, c[6] - .3, c[6]))); });
+  $('note').style.opacity = 0;
+}
+
+
+window.render = function (t) {
+  let i = 0; SCENES.forEach((sc, j) => { if (t >= sc.s) i = j; });
+  const cur = SCENES[i], prev = SCENES[i - 1], k = prev ? ease(ramp(t, cur.s, cur.s + XF)) : 1;
+  F = { t }; let ovA = '', FA = null;
+  if (prev && k < 1) { $('sA').innerHTML = prev.f(t); ovA = F.ov || ''; FA = { t, earth: F.earth, moon: F.moon, light: F.light, opacity: 1 - k }; } else $('sA').innerHTML = '';
+  F = { t, chipM: F.chipM };
+  $('sB').innerHTML = cur.f(t); $('sB').setAttribute('opacity', k);
+  const KB = j => { const sc = SCENES[j]; if (!sc || sc.f === sceneEarth) return ''; const e = SCENES[j + 1] ? SCENES[j + 1].s : TOTAL, z = 1 + .07 * ease(ramp(t, sc.s, e)); return `translate(360 640) scale(${z}) translate(-360 -640)`; };
+  $('sB').setAttribute('transform', KB(i)); $('sA').setAttribute('transform', KB(i - 1));
+  $('oA').innerHTML = ovA; $('oA').setAttribute('opacity', 1 - k); $('oB').innerHTML = F.ov || ''; $('oB').setAttribute('opacity', k);
+  F.opacity = k;
+  if (window.GLA) GLA.draw(FA || { t, opacity: 0 });
+  if (window.GL) GL.draw(F);
+  $('turb').setAttribute('seed', String(Math.floor(t * 24) % 50));
+  $('flash').setAttribute('opacity', F.flash || 0);
+  $('fade').setAttribute('opacity', clamp((t - (TOTAL - .5)) / .5) + (1 - ramp(t, 0, .4)));
+  renderCap(t); renderUI(t);
+};
+</script>
+</body>
+</html>
