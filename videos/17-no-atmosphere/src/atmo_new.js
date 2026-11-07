@@ -99,7 +99,7 @@ function sceneEarth(t) {
   const k = ease(ramp(t, WS(8, 2) - .2, WS(8, 4) + .3)), q = ease(ramp(t, WS(8, 9) - .2, WS(8, 9) + .6)), b = Math.abs(Math.sin(t * 3)) * 6;
   let s = space(t, '#03050f', '#0a1030');
   F.earth = { x: 360, y: 760, r: 250, a: 1, sunI: 1, lights: .3, rot: 4.8, tilt: .41 }; F.light = [-800, 300]; F.moon = null;
-  F.ov = `<circle cx="360" cy="760" r="254" fill="none" stroke="#7ab4ff" stroke-width="4" opacity="${k}"/><g opacity="${k}"><path d="M560,600 L640,520" stroke="#fff" stroke-width="2"/><text x="640" y="508" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#fff">أرقّ من قشرة التفاحة</text></g>` +
+  F.ov = `<circle cx="360" cy="760" r="254" fill="none" stroke="#7ab4ff" stroke-width="4" opacity="${k}"/><g opacity="${k}"><path d="M560,600 L600,522" stroke="#fff" stroke-width="2"/><text x="590" y="510" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#fff">أرقّ من قشرة التفاحة</text></g>` +
     `<g opacity="${q}"><text x="360" y="420" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="200" fill="#f4c76b" style="filter:drop-shadow(0 6px 20px rgba(0,0,0,.7))">؟</text></g>` +
     `<g opacity="${ramp(t, WS(8, 10), WS(8, 10) + .4)}" transform="translate(360,${1090 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
   return s;
