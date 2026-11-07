@@ -1,0 +1,301 @@
+// ---------- scenes ----------
+let F = {};
+const RS = s => { const r = R(s * 7919 + 13); r(); return r; };
+const AR = n => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]).replace('.', '٫');
+const RDEF = `<filter id="wallI" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".08" numOctaves="3" seed="3"/><feColorMatrix values="0 0 0 0 .2  0 0 0 0 .16  0 0 0 0 .1  0 0 0 -1.4 .7"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+  `<filter id="reliefR" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".012 .03" numOctaves="5" seed="21" result="n"/><feDiffuseLighting in="n" surfaceScale="6" lighting-color="#ffffff" result="l"><feDistantLight azimuth="225" elevation="40"/></feDiffuseLighting><feComposite in="l" in2="SourceGraphic" operator="arithmetic" k1="1.3" k2="0" k3="0" k4="0"/></filter>` +
+  `<filter id="grainR" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .08  0 0 0 0 .06  0 0 0 -2.4 1.3"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+  `<filter id="smokeF" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>` +
+  `<filter id="dustR" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".006 .02" numOctaves="4" seed="9"/><feColorMatrix values="0 0 0 0 .78  0 0 0 0 .5  0 0 0 0 .26  0 0 0 1.5 -.35"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+  `<linearGradient id="flameG" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffe066"/><stop offset=".45" stop-color="#ff9a1f"/><stop offset="1" stop-color="#d8361a" stop-opacity=".2"/></linearGradient>` +
+  `<radialGradient id="fireGlow"><stop offset="0" stop-color="#ffb040" stop-opacity=".7"/><stop offset="1" stop-color="#ff6a1a" stop-opacity="0"/></radialGradient>`;
+
+// ---- realistic helpers (same family as the earlier Shorts) ----
+function bldg(x, base, w, h, col, seed, side = .25) {
+  const r = RS(seed), sw = w * side; let s = `<rect x="${x}" y="${base - h}" width="${w}" height="${h}" fill="${col}"/><rect x="${x}" y="${base - h}" width="${w}" height="${h}" fill="#fff" filter="url(#wallI)" opacity=".35"/><path d="M${x + w},${base - h} l${sw},-${sw * .4} l0,${h} l-${sw},${sw * .4}Z" fill="${mix(col, '#000000', .35)}"/><path d="M${x},${base - h} l${sw},-${sw * .4} l${w},0 l-${sw},${sw * .4}Z" fill="${mix(col, '#ffffff', .25)}"/>`;
+  const cols = Math.max(2, Math.floor(w / 22)), rows = Math.floor((h - 20) / 30);
+  for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) { const wx = x + 6 + j * (w - 12) / cols, wy = base - h + 12 + i * 30; s += `<rect x="${wx}" y="${wy}" width="${(w - 12) / cols - 6}" height="16" fill="${r() > .85 ? '#ffd890' : '#5a7a98'}" opacity=".8"/><rect x="${wx}" y="${wy}" width="${((w - 12) / cols - 6) * .4}" height="16" fill="#fff" opacity=".15"/><rect x="${wx - 1}" y="${wy + 16}" width="${(w - 12) / cols - 4}" height="3" fill="#000" opacity=".2"/>`; }
+  return s;
+}
+function shanasheel(x, base, w, h, seed) {
+  const r = RS(seed); let s = `<rect x="${x}" y="${base - h}" width="${w}" height="${h}" fill="#c8a678"/><rect x="${x}" y="${base - h}" width="${w}" height="${h}" fill="#fff" filter="url(#wallI)" opacity=".6"/><rect x="${x - 4}" y="${base - h - 8}" width="${w + 8}" height="10" fill="#a8865a"/>`;
+  const bw = w * .6, bx = x + w * .2, by = base - h * .78, bh = h * .32;
+  s += `<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="#6a3e1e"/><rect x="${bx - 6}" y="${by + bh}" width="${bw + 12}" height="8" fill="#4a2a12"/>` + Array.from({ length: 5 }, (_, i) => `<rect x="${bx + 6 + i * (bw - 12) / 5}" y="${by + 6}" width="${(bw - 12) / 5 - 6}" height="${bh - 12}" fill="#3a2410"/><path d="M${bx + 6 + i * (bw - 12) / 5},${by + 6} l${((bw - 12) / 5 - 6) / 2},-6 l${((bw - 12) / 5 - 6) / 2},6" fill="#8a5a2a"/>` +
+    Array.from({ length: 3 }, (_, j) => `<line x1="${bx + 6 + i * (bw - 12) / 5}" y1="${by + 10 + j * (bh - 20) / 3}" x2="${bx + i * (bw - 12) / 5 + (bw - 12) / 5}" y2="${by + 10 + j * (bh - 20) / 3}" stroke="#a87a4a" stroke-width="1.4"/>`).join('')).join('');
+  return s + `<path d="M${x + w * .38},${base} L${x + w * .38},${base - 70} Q${x + w * .5},${base - 92} ${x + w * .62},${base - 70} L${x + w * .62},${base}Z" fill="#5a3a1e"/>`;
+}
+function palmR(x, y, h, t, col = '#3a3424', fr = '#2e4a22', dry = 0) {
+  fr = dry ? mix(fr, '#8a7a3a', dry) : fr;
+  const tx = x + h * .1, ty = y - h; let s = `<path d="M${x - 7},${y} Q${x + h * .02},${y - h * .55} ${tx - 4},${ty} L${tx + 4},${ty} Q${x + h * .04},${y - h * .55} ${x + 7},${y}Z" fill="${col}"/>`;
+  for (let i = 0; i < 16; i++) { const u = i / 16; s += `<path d="M${x - 6 + (tx - x) * u},${y - h * u} l12,-4" stroke="#000" stroke-opacity=".3" stroke-width="2"/>`; }
+  [-170, -145, -120, -95, -70, -45, -20, 5, 25].forEach((a, i) => { const ang = (a + Math.sin(t * 1.1 + i) * 1.5 + dry * 12) * Math.PI / 180, Ln = h * .5, ex = tx + Math.cos(ang) * Ln, ey = ty + Math.sin(ang) * Ln * .45 + Ln * .4, cx = tx + Math.cos(ang) * Ln * .5, cy = ty + Math.sin(ang) * Ln * .5 - Ln * .12;
+    s += `<path d="M${tx},${ty} Q${cx},${cy} ${ex},${ey}" stroke="${fr}" stroke-width="4" fill="none"/>`;
+    for (let j = 1; j < 12; j++) { const u = j / 12, px = (1 - u) * (1 - u) * tx + 2 * (1 - u) * u * cx + u * u * ex, py = (1 - u) * (1 - u) * ty + 2 * (1 - u) * u * cy + u * u * ey, ll = 22 * (1 - u * .7);
+      s += `<path d="M${px},${py} l${-ll * .5},${ll} M${px},${py} l${ll * .5},${ll}" stroke="${fr}" stroke-width="2.2" stroke-linecap="round"/>`; } });
+  return s + `<circle cx="${tx}" cy="${ty + 6}" r="7" fill="#8a5a2a"/>`;
+}
+function pine(x, y, h, seed, col, bend = 0) {
+  const r = RS(seed); let o = `<g transform="translate(${x},${y}) rotate(${bend})"><path d="M${-h * .02},0 L${-h * .008},${-h * .95} L${h * .008},${-h * .95} L${h * .02},0Z" fill="#3a2a1a"/>`;
+  for (let i = 0; i < 9; i++) { const u = i / 9, yb = -h * (.12 + u * .8), w = h * (.3 * Math.pow(1 - u, 1.1) + .035), ht = h * .16; let pts = [`${(r() - .5) * 3},${yb - ht}`];
+    for (let k = 0; k <= 9; k++) { const v = k / 9, px = -w + v * 2 * w, droop = (k % 2 ? ht * .16 : -ht * .02) + r() * ht * .1; pts.push(`${px + (r() - .5) * w * .12},${yb + droop}`); }
+    o += `<polygon points="${pts.join(' ')}" fill="${col}"/><polygon points="${pts.slice(0, 6).join(' ')}" fill="#000" opacity=".18"/>`; }
+  return o + `</g>`;
+}
+// a car seen from the side; y = where the tyres touch
+function car(x, y, s, col, face = 1, lights = 0) {
+  return `<g transform="translate(${x},${y}) scale(${face * s},${s})"><ellipse cx="0" cy="2" rx="120" ry="8" fill="#000" opacity=".3"/>` +
+    `<path d="M-115,-22 L-112,-52 Q-100,-60 -70,-62 L-40,-96 Q-30,-104 10,-104 L50,-104 Q66,-102 80,-64 L108,-58 Q120,-54 120,-36 L118,-22Z" fill="${col}"/>` +
+    `<path d="M-34,-92 L-4,-92 L-4,-64 L-60,-64Z M4,-92 L46,-92 Q58,-90 68,-64 L4,-64Z" fill="#2a3a4a"/><path d="M-30,-90 L-14,-90 L-40,-66 L-52,-66Z" fill="#fff" opacity=".18"/>` +
+    `<path d="M-112,-44 L118,-44" stroke="#000" stroke-opacity=".2" stroke-width="2"/><rect x="-6" y="-58" width="12" height="3" fill="#000" opacity=".4"/><rect x="40" y="-58" width="12" height="3" fill="#000" opacity=".4"/>` +
+    `<circle cx="-72" cy="-18" r="20" fill="#1a1a1a"/><circle cx="-72" cy="-18" r="10" fill="#9a9aa0"/><circle cx="76" cy="-18" r="20" fill="#1a1a1a"/><circle cx="76" cy="-18" r="10" fill="#9a9aa0"/>` +
+    `<rect x="110" y="-50" width="10" height="8" rx="2" fill="${lights ? '#fff6d0' : '#e8e0c0'}"/>` + (lights ? `<path d="M120,-46 L420,-90 L420,10Z" fill="#fff6d0" opacity="${.18 * lights}" filter="url(#blur2)"/>` : '') + `<rect x="-118" y="-50" width="7" height="9" rx="2" fill="#c0302a"/></g>`;
+}
+// a person holding an umbrella (open = 0..1)
+function umb(x, y, c, s, face, open, t, col = '#2a3a5a') {
+  let o = person(x, y, { s, face, top: c.top, pants: c.pants, skin: c.skin, hair: c.hair, t, lookUp: c.lookUp || 0, phase: c.phase, moving: c.moving });
+  if (open > .02) { const hx = x + 10 * s * face, top = y - 380 * s, R_ = 82 * s;
+    o += `<g opacity="${open}"><path d="M${hx},${y - 150 * s} L${hx},${top}" stroke="#222" stroke-width="${3 * s + 1}"/><path d="M${hx - R_},${top + 18 * s} Q${hx - R_},${top - R_ * .75} ${hx},${top - R_ * .8} Q${hx + R_},${top - R_ * .75} ${hx + R_},${top + 18 * s} q${-R_ / 4},-12 ${-R_ / 2},0 q${-R_ / 4},-12 ${-R_ / 2},0 q${-R_ / 4},-12 ${-R_ / 2},0 q${-R_ / 4},-12 ${-R_ / 2},0Z" fill="${col}"/>` +
+      `<path d="M${hx},${top - R_ * .8} Q${hx - R_ * .5},${top - R_ * .4} ${hx - R_ * .5},${top + 12 * s} M${hx},${top - R_ * .8} Q${hx + R_ * .5},${top - R_ * .4} ${hx + R_ * .5},${top + 12 * s}" stroke="#000" stroke-opacity=".25" stroke-width="2" fill="none"/></g>`; }
+  return o;
+}
+// falling rain streaks + splashes on a ground band
+function rain(t, a, n = 150, seed = 1, gy0 = 1000, gy1 = 1280) {
+  if (a <= 0) return ''; const r = RS(seed); let s = `<g stroke="#d8e6f2" stroke-linecap="round">`;
+  for (let i = 0; i < n; i++) { const x0 = r() * 820 - 40, sp = 1300 + r() * 500, ph = r() * 1500, L_ = 26 + r() * 30, y = pmod(ph + t * sp, 1500) - 120, x = x0 - (y + 120) * .12;
+    s += `<line x1="${x}" y1="${y}" x2="${x - L_ * .12}" y2="${y + L_}" stroke-width="${1.2 + r()}" opacity="${a * (.25 + .4 * r())}"/>`; }
+  s += `</g>`;
+  for (let i = 0; i < n * .3; i++) { const sx = r() * 720, sy = gy0 + r() * (gy1 - gy0), ph = pmod(t * 2.2 + r(), 1);
+    s += `<ellipse cx="${sx}" cy="${sy}" rx="${3 + 14 * ph}" ry="${1 + 4 * ph}" fill="none" stroke="#e8f2fa" stroke-width="1.4" opacity="${a * .6 * (1 - ph)}"/>`; }
+  return s;
+}
+// cracked-mud plates in perspective between y0 and y1 (k fades the cracks in)
+function cracks(y0, y1, k, seed, x0 = -20, x1 = 740, col = '#3a2412', fill = null) {
+  if (k <= 0 && !fill) return ''; const r = RS(seed), NU = 12, NV = 10, P = [];
+  const map = (u, v) => { const yy = y0 + Math.pow(v, 1.5) * (y1 - y0), sp = .55 + .9 * Math.pow(v, 1.5); return [360 + (u - .5) * (x1 - x0) * sp * 1.25, yy]; };
+  for (let j = 0; j <= NV; j++) { P.push([]); for (let i = 0; i <= NU; i++) P[j].push(map(i / NU + (i % NU ? (r() - .5) * .06 : 0), j / NV + (j % NV ? (r() - .5) * .05 : 0))); }
+  let s = '';
+  if (fill) for (let j = 0; j < NV; j++) for (let i = 0; i < NU; i++) { const q = [P[j][i], P[j][i + 1], P[j + 1][i + 1], P[j + 1][i]]; s += `<polygon points="${q.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}" fill="${mix(fill, '#ffffff', r() * .12)}"/>`; }
+  s += `<g stroke="${col}" stroke-linecap="round" fill="none" opacity="${k}">`;
+  for (let j = 0; j <= NV; j++) for (let i = 0; i <= NU; i++) { const p = P[j][i], w = .8 + 3.2 * (p[1] - y0) / (y1 - y0);
+    if (i < NU) { const q = P[j][i + 1]; s += `<path d="M${p[0]},${p[1]} Q${(p[0] + q[0]) / 2 + (r() - .5) * 8},${(p[1] + q[1]) / 2 + (r() - .5) * 4} ${q[0]},${q[1]}" stroke-width="${w}"/>`; }
+    if (j < NV) { const q = P[j + 1][i]; s += `<path d="M${p[0]},${p[1]} Q${(p[0] + q[0]) / 2 + (r() - .5) * 10},${(p[1] + q[1]) / 2} ${q[0]},${q[1]}" stroke-width="${w}"/>`; } }
+  return s + `</g>`;
+}
+// river water body between y0..y1 with ripples, glints and a reflected far bank
+function riverW(y0, y1, t, o = {}) {
+  const c = o.col || ['#5a8a8a', '#2e5a5e'], id = o.id || 'a';
+  let s = `<defs><linearGradient id="rv${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c[0]}"/><stop offset="1" stop-color="${c[1]}"/></linearGradient></defs><rect x="-20" y="${y0}" width="760" height="${y1 - y0}" fill="url(#rv${id})"/>`;
+  if (o.refl) s += `<rect x="-20" y="${y0}" width="760" height="${Math.min(40, (y1 - y0) * .4)}" fill="${o.refl}" opacity=".35"/>`;
+  const n = Math.max(3, Math.floor((y1 - y0) / 14));
+  for (let k = 0; k < n; k++) { const yy = y0 + 4 + (k + .5) * (y1 - y0 - 6) / n; let d = `M-20,${yy}`; for (let x = -20; x <= 740; x += 40) d += ` q20,${-1.5 - k * .1} 40,0`;
+    s += `<path d="${d}" stroke="${k % 2 ? '#d8eef0' : '#0e2a2e'}" stroke-width="1.4" fill="none" opacity=".22" transform="translate(${Math.sin(t * .9 + k) * 12 + (o.flow || 0) * t * 30 % 40},0)"/>`; }
+  if (o.sunX !== undefined) { const r = RS(91); for (let i = 0; i < 26; i++) { const u = r(); s += `<rect x="${o.sunX + (r() - .5) * 160 * (.3 + u)}" y="${y0 + 4 + u * (y1 - y0 - 8)}" width="${6 + u * 20}" height="2" fill="#fff6d8" opacity="${(.3 + .5 * r()) * (.5 + .5 * Math.sin(t * 5 + i))}"/>`; } }
+  return s + `<path d="M-20,${y0} L740,${y0}" stroke="#e8f4f2" stroke-width="2" opacity=".5"/>`;
+}
+// the shared Baghdad street: sky, far skyline, houses, palms, pavement, road (wet 0..1)
+function street(t, o = {}) {
+  const id = o.id || 'a', sk = o.sky || ['#3f7fc4', '#8ab8e0', '#cfe4f2'], wet = o.wet || 0;
+  let s = `<defs>${RDEF}<linearGradient id="sk${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sk[0]}"/><stop offset=".6" stop-color="${sk[1]}"/><stop offset="1" stop-color="${sk[2]}"/></linearGradient></defs><rect width="720" height="1280" fill="url(#sk${id})"/>`;
+  if (o.sun) s += `<defs><radialGradient id="sun${id}"><stop offset="0" stop-color="#fffbe8" stop-opacity=".95"/><stop offset=".12" stop-color="#fff6d0" stop-opacity=".6"/><stop offset="1" stop-color="#fff6d0" stop-opacity="0"/></radialGradient></defs><g opacity="${o.sun}"><circle cx="${o.sunX || 150}" cy="${o.sunY || 470}" r="240" fill="url(#sun${id})"/><circle cx="${o.sunX || 150}" cy="${o.sunY || 470}" r="34" fill="#fffdf2"/></g>`;
+  if (o.clouds) { const r = RS(5); for (let i = 0; i < 14; i++) { const cx = pmod(r() * 900 + t * (8 + r() * 6), 1000) - 140, cy = 360 + r() * 360, rr = 90 + r() * 110;
+    s += `<g opacity="${o.clouds}"><ellipse cx="${cx}" cy="${cy}" rx="${rr * 1.6}" ry="${rr * .7}" fill="${mix('#5a6270', '#8a929e', r())}" filter="url(#soft)"/><ellipse cx="${cx - rr * .3}" cy="${cy - rr * .25}" rx="${rr}" ry="${rr * .45}" fill="#9aa2ae" opacity=".55" filter="url(#soft)"/></g>`; } }
+  const hz = mix(sk[2], '#5a6878', .35), r = RS(7); let x = -30;
+  while (x < 740) { const w = 40 + r() * 70, h = 70 + r() * 200; s += `<rect x="${x}" y="${900 - h}" width="${w}" height="${h}" fill="${hz}" opacity=".75"/>`; if (r() > .7) s += `<rect x="${x + w / 2 - 3}" y="${900 - h - 40}" width="6" height="40" fill="${hz}" opacity=".75"/>`; x += w + 4; }
+  s += `<path d="M300,900 L300,760 Q330,700 360,760 L360,900Z" fill="${hz}" opacity=".85"/><rect x="380" y="640" width="12" height="260" fill="${hz}" opacity=".85"/><circle cx="386" cy="636" r="9" fill="${hz}" opacity=".85"/>`;
+  s += shanasheel(-10, 1000, 170, 250, 11) + bldg(170, 1000, 110, 330, '#bca68a', 3, .15) + shanasheel(300, 1000, 150, 220, 12) + bldg(460, 1000, 100, 200, '#a8927a', 4, .15) + shanasheel(570, 1000, 160, 190, 13);
+  s += palmR(160, 1010, 250, t, '#3a3424', '#2e4a22', o.dry || 0) + palmR(455, 1010, 230, t, '#3a3424', '#2e4a22', o.dry || 0);
+  s += `<rect y="1000" width="720" height="56" fill="${mix('#b8ab98', '#6a645a', wet)}"/>` + Array.from({ length: 13 }, (_, i) => `<rect x="${i * 60}" y="1000" width="2" height="56" fill="#000" opacity=".12"/>`).join('') + `<rect y="1054" width="720" height="12" fill="#8a8478"/>`;
+  s += `<rect y="1066" width="720" height="220" fill="${mix('#55555a', '#2a2c32', wet)}"/><rect y="1066" width="720" height="220" fill="#000" filter="url(#grainR)" opacity=".5"/>` + Array.from({ length: 7 }, (_, i) => `<rect x="${i * 120 + 20}" y="1166" width="64" height="7" fill="#e8e4d8" opacity="${.8 - .4 * wet}"/>`).join('');
+  if (wet > 0) { s += `<g opacity="${wet}">` + [[60, 'c8a678'], [225, 'bca68a'], [375, 'c8a678'], [510, 'a8927a'], [650, 'c8a678']].map(([cx, c]) => `<rect x="${cx - 40}" y="1070" width="80" height="200" fill="#${c}" opacity=".18" filter="url(#blur2)"/>`).join('') +
+    Array.from({ length: 6 }, (_, i) => { const r2 = RS(i + 60); return `<ellipse cx="${r2() * 720}" cy="${1100 + r2() * 160}" rx="${50 + r2() * 70}" ry="${8 + r2() * 8}" fill="${sk[1]}" opacity=".45"/>`; }).join('') + `</g>`; }
+  return s;
+}
+
+function palmG(x, y, h, t, haze = 0, dry = 0) {
+  const k = h / 200, trunk = mix('#5a4a36', '#a4aeb6', haze), fr = mix(mix('#3a5a26', '#7a6a3a', dry), '#a2aeb6', haze), fr2 = mix(mix('#4e7a32', '#8a7a46', dry), '#b0bcc2', haze), leaf = h > 120 ? 8 : 5;
+  const tx = x + h * .06, ty = y - h;
+  let s = `<path d="M${x - 6 * k},${y} Q${x + h * .02},${y - h * .5} ${tx - 3.5 * k},${ty} L${tx + 3.5 * k},${ty} Q${x + h * .05},${y - h * .5} ${x + 6 * k},${y}Z" fill="${trunk}"/>`;
+  for (let i = 0; i < 12; i++) { const u = i / 12; s += `<path d="M${x - 5 * k + (tx - x) * u},${y - h * u} l${10 * k},${-3 * k}" stroke="#000" stroke-opacity="${.25 * (1 - haze)}" stroke-width="${1.6 * k}"/>`; }
+  for (let i = 0; i < 15; i++) { const ang = (-190 + i * 14.3 + Math.sin(t * 1.1 + i + x) * 1.2) * Math.PI / 180, Ln = h * (.42 + .08 * Math.sin(i * 2.3)), droop = Ln * (.5 + .2 * Math.cos(i));
+    const ex = tx + Math.cos(ang) * Ln, ey = ty + Math.sin(ang) * Ln * .45 + droop * .7, cx = tx + Math.cos(ang) * Ln * .55, cy = ty + Math.sin(ang) * Ln * .5 - Ln * .1, col = i % 2 ? fr : fr2;
+    const nx = -(ey - ty), ny = ex - tx, nl = Math.hypot(nx, ny) || 1, w = Ln * .1;
+    s += `<path d="M${tx},${ty} Q${cx + nx / nl * w},${cy + ny / nl * w} ${ex},${ey} Q${cx - nx / nl * w},${cy - ny / nl * w} ${tx},${ty}Z" fill="${col}"/>`;
+    for (let j = 1; j < leaf; j++) { const u = j / leaf, px = (1 - u) ** 2 * tx + 2 * (1 - u) * u * cx + u * u * ex, py = (1 - u) ** 2 * ty + 2 * (1 - u) * u * cy + u * u * ey, ll = w * 1.6 * (1 - u * .6);
+      s += `<path d="M${px},${py} l${nx / nl * ll},${ny / nl * ll + 4 * k} M${px},${py} l${-nx / nl * ll},${-ny / nl * ll + 4 * k}" stroke="${col}" stroke-width="${1.5 * k}" stroke-linecap="round"/>`; } }
+  return s + `<circle cx="${tx}" cy="${ty + 4 * k}" r="${6 * k}" fill="${mix('#7a4a22', '#a4aeb6', haze)}"/>`;
+}
+function treeB(x, y, h, seed, haze = 0, dry = 0) {
+  const r = RS(seed), g0 = mix(mix('#2e4a1e', '#5a4a26', dry), '#8e9aa2', haze), g1 = mix(mix('#4a6e2e', '#8a7a3a', dry), '#a0acb4', haze), g2 = mix(mix('#6e9442', '#a8944a', dry), '#b6c0c6', haze);
+  let s = `<path d="M${x - h * .025},${y} L${x - h * .01},${y - h * .5} L${x + h * .01},${y - h * .5} L${x + h * .025},${y}Z" fill="${mix('#4a3a2a', '#9aa4ac', haze)}"/>`;
+  const bl = []; for (let i = 0; i < 14; i++) bl.push([x + (r() - .5) * h * .5, y - h * (.45 + r() * .5), h * (.11 + r() * .09)]);
+  bl.forEach(b => { s += `<circle cx="${b[0]}" cy="${b[1]}" r="${b[2]}" fill="${g0}"/>`; });
+  bl.forEach(b => { s += `<circle cx="${b[0] - b[2] * .2}" cy="${b[1] - b[2] * .25}" r="${b[2] * .78}" fill="${g1}"/>`; });
+  bl.forEach(b => { s += `<circle cx="${b[0] - b[2] * .35}" cy="${b[1] - b[2] * .4}" r="${b[2] * .42}" fill="${g2}"/>`; });
+  return s;
+}
+const RDEF2 = `<filter id="stainD" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".3 .006" numOctaves="3" seed="5"/><feColorMatrix values="0 0 0 0 .22  0 0 0 0 .2  0 0 0 0 .17  0 0 0 -1.2 .72"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+  `<filter id="stalkT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9 .04" numOctaves="2" seed="13"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.8 1.0"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+  `<filter id="cropT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="4" seed="23"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.4 .75"/><feComposite in2="SourceGraphic" operator="in"/></filter>` +
+  `<filter id="pebT" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".18" numOctaves="2" seed="31"/><feColorMatrix values="0 0 0 0 .2  0 0 0 0 .16  0 0 0 0 .12  0 0 0 -3 1.6"/><feComposite in2="SourceGraphic" operator="in"/></filter>`;
+const PT = p => p[0].toFixed(1) + ',' + p[1].toFixed(1);
+
+// ===================== "what if Earth had rings like Saturn?" =====================
+// rings in Earth's equatorial plane, ~1.35–2.25 Earth radii (inside the Roche limit): faint inner ring, bright main ring, a gap, outer ring
+const BANDS = [[1.35, 1.55, .25], [1.55, 1.75, .75], [1.75, 1.95, .95], [1.95, 2.0, .06], [2.0, 2.25, .6]];
+function ringPart(cx, cy, R, part, tilt = -23, e = .26, a = 1, shade = 0) {
+  let s = `<g transform="rotate(${tilt},${cx},${cy})" opacity="${a}">`;
+  BANDS.forEach(([r0, r1, op], bi) => { const n = 6; for (let q = 0; q < n; q++) { const rr = R * lerp(r0, r1, (q + .5) / n), w = R * (r1 - r0) / n + .6, o = op * (.8 + .4 * Math.sin(q * 2.3 + bi));
+      s += `<path d="M${cx - rr},${cy} A${rr},${rr * e} 0 0 ${part === 'back' ? 1 : 0} ${cx + rr},${cy}" stroke="${mix('#e8dcc4', '#b8a888', (q % 3) / 3)}" stroke-width="${w}" fill="none" opacity="${o.toFixed(2)}"/>`; } });
+  if (part === 'back' && shade) s += `<path d="M${cx + R * .2},${cy - R * .25 * e * 4} L${cx + R * 2.4},${cy - R * .05} L${cx + R * 2.4},${cy - R * .55} L${cx + R * .2},${cy - R * .9}Z" fill="#000" opacity="${.6 * shade}"/>`;
+  return s + `</g>`;
+}
+// the rings as seen from Baghdad (33°N), looking south: inner edge ~10° up, outer edge ~36° up; day = pale, night = bright with Earth's shadow cutting the middle
+function skyRing(t, hz, o = {}) {
+  const night = o.night || 0, apexOut = hz - 36 * 15, apexIn = hz - 10 * 15, cy = hz + 700; let s = `<g opacity="${o.a ?? 1}">`;
+  BANDS.forEach(([r0, r1, op], bi) => { const n = 7; for (let q = 0; q < n; q++) { const u = (lerp(r0, r1, (q + .5) / n) - 1.35) / .9, apex = lerp(apexIn, apexOut, u), ry = cy - apex, w = (apexIn - apexOut) * (r1 - r0) / .9 / n + 2.5;
+      const col = night ? mix('#fff4e0', '#d8c8a8', (q % 3) / 3) : mix('#ffffff', '#e4ecf4', (q % 3) / 3), oo = op * (night ? .9 : .5) * (.88 + .12 * Math.sin(q * 2.1 + bi));
+      s += `<path d="M-400,${cy} A760,${ry} 0 0 1 1120,${cy}" stroke="${col}" stroke-width="${w}" fill="none" opacity="${oo.toFixed(2)}"/>`; } });
+  if (night && o.shadow) s += `<path d="M310,${apexOut - 30} Q360,${apexOut - 40} 410,${apexOut - 30} L430,${apexIn + 40} Q360,${apexIn + 30} 290,${apexIn + 40}Z" fill="#05070f" opacity="${.85 * o.shadow}" filter="url(#soft)"/>`;
+  if (night) s += `<path d="M-400,${cy} A760,${cy - lerp(apexIn, apexOut, .5)} 0 0 1 1120,${cy}" stroke="#fff6e0" stroke-width="${apexIn - apexOut}" fill="none" opacity=".12" filter="url(#haze)"/>`;
+  return s + `</g>`;
+}
+function baghdadFront(t, base, night) {
+  let s = shanasheel(-10, base, 180, 230, 11) + bldg(180, base, 110, 300, '#bca68a', 3, .15) + shanasheel(310, base, 150, 210, 12) + bldg(470, base, 100, 180, '#a8927a', 4, .15) + shanasheel(580, base, 160, 200, 13);
+  s += palmG(160, base + 10, 250, t, night * .6) + palmG(460, base + 10, 230, t, night * .6);
+  s += `<rect y="${base}" width="720" height="${1290 - base}" fill="${mix('#b8ab98', '#2a2830', night)}"/><rect y="${base}" width="720" height="${1290 - base}" fill="#000" filter="url(#grainR)" opacity=".4"/>`;
+  return s;
+}
+// 0: the hook – Baghdad at dusk under a vast ring arch
+function sceneHook(t) {
+  let s = `<defs>${RDEF}<linearGradient id="skH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2440"/><stop offset=".6" stop-color="#6a5a7a"/><stop offset="1" stop-color="#e8a878"/></linearGradient></defs><rect width="720" height="1280" fill="url(#skH)"/>` + stars(.5, t);
+  s += skyRing(t, 1000, { night: .7, a: .95 });
+  s += baghdadFront(t, 1010, .5) + `<rect width="720" height="1280" fill="#1a1020" opacity=".2"/>`;
+  s += person(260, 1180, { s: .55, face: 1, top: CROWD[0].top, pants: CROWD[0].pants, skin: CROWD[0].skin, hair: CROWD[0].hair, t, lookUp: .9 }) + person(400, 1190, { s: .57, face: -1, top: CROWD[1].top, pants: CROWD[1].pants, skin: CROWD[1].skin, hair: CROWD[1].hair, t, lookUp: .9 });
+  F.ov = ''; return s;
+}
+// 1: from space: the 3D Earth with rings over the equator; the back of the rings passes behind the planet, the front in front of it
+function sceneSpace(t) {
+  let s = space(t, '#020309', '#070a1c');
+  const cx = 360, cy = 760, R = 150, k = ease(ramp(t, S0(1) - .2, S0(1) + 1.2));
+  F.earth = { x: cx, y: cy, r: R, a: 1, sunI: 1.05, lights: .3, rot: 2.2, tilt: .41 }; F.light = [-600, 400];
+  s += ringPart(cx, cy, R, 'back', -23, .26, k, 0);
+  F.ov = ringPart(cx, cy, R, 'front', -23, .26, k) + `<g opacity="${ramp(t, WS(1, 5), WS(1, 5) + .4)}"><circle cx="${cx + 300}" cy="${cy - 160}" r="18" fill="#a89a88"/><circle cx="${cx + 312}" cy="${cy - 150}" r="9" fill="#d8e8f4"/><circle cx="${cx + 290}" cy="${cy - 144}" r="6" fill="#8a7a6a"/><text x="${cx + 300}" y="${cy - 196}" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#fff">صخور وجليد</text></g>`;
+  return s;
+}
+// 2: Baghdad by day, looking south: a pale arch across the blue sky
+function sceneDay(t) {
+  let s = `<defs>${RDEF}<linearGradient id="skD2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a7cc4"/><stop offset=".7" stop-color="#9cc4e6"/><stop offset="1" stop-color="#dcebf4"/></linearGradient></defs><rect width="720" height="1280" fill="url(#skD2)"/>`;
+  s += skyRing(t, 1000, { night: 0, a: ease(ramp(t, S0(2) - .2, S0(2) + .8)) });
+  s += `<circle cx="80" cy="420" r="30" fill="#fffdf2"/><circle cx="80" cy="420" r="120" fill="#fff6d0" opacity=".3" filter="url(#soft)"/>`;
+  s += baghdadFront(t, 1010, 0) + car(560, 1240, .9, '#c83a2a', -1, 0);
+  s += person(260, 1180, { s: .55, face: 1, top: CROWD[2].top, pants: CROWD[2].pants, skin: CROWD[2].skin, hair: CROWD[2].hair, t, lookUp: .8 }) + person(330, 1190, { s: .5, face: -1, top: CROWD[3].top, pants: CROWD[3].pants, skin: CROWD[3].skin, hair: CROWD[3].hair, t, lookUp: .8 });
+  s += `<text x="40" y="975" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#fff" style="paint-order:stroke" stroke="#000" stroke-width="3">← الشرق</text><text x="680" y="975" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#fff" style="paint-order:stroke" stroke="#000" stroke-width="3">الغرب →</text><text x="360" y="975" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#fff" style="paint-order:stroke" stroke="#000" stroke-width="3">الجنوب</text>`;
+  F.ov = ''; return s;
+}
+// 3: the same view at night: the rings blaze with sunlight, light the streets, and Earth's shadow cuts a dark gap in the middle
+function sceneNight(t) {
+  let s = `<defs>${RDEF}<linearGradient id="skN3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03050f"/><stop offset="1" stop-color="#1a2440"/></linearGradient></defs><rect width="720" height="1280" fill="url(#skN3)"/>` + stars(.8, t);
+  s += skyRing(t, 1000, { night: 1, shadow: ease(ramp(t, WS(3, 10) - .3, WS(3, 10) + .5)) });
+  s += `<circle cx="600" cy="300" r="14" fill="#f4f0e0" opacity=".7"/>`;
+  s += baghdadFront(t, 1010, 1) + `<rect y="1010" width="720" height="280" fill="#fff4e0" opacity=".1"/>`;
+  s += person(260, 1180, { s: .55, face: 1, top: CROWD[0].top, pants: CROWD[0].pants, skin: CROWD[0].skin, hair: CROWD[0].hair, t, lookUp: .8 }).replace(/fill="#[0-9a-f]{6}"/gi, m => m) + `<rect width="720" height="1280" fill="#000" opacity="0"/>`;
+  F.ov = ''; return s;
+}
+// 4: the shadow of the rings falls on the winter hemisphere (here the north) – a darker, colder band
+function sceneWinter(t) {
+  let s = space(t, '#020309', '#070a1c');
+  const cx = 360, cy = 780, R = 210, k = ease(ramp(t, WS(4, 1) - .2, WS(4, 4) + .3));
+  F.earth = { x: cx, y: cy, r: R, a: 1, sunI: 1.05, lights: .2, rot: 1.0, tilt: .41 }; F.light = [-500, 950];
+  s += ringPart(cx, cy, R * .7, 'back', -23, .22, 1);
+  let sh = `<defs><clipPath id="disk4"><circle cx="${cx}" cy="${cy}" r="${R}"/></clipPath></defs><g clip-path="url(#disk4)" opacity="${k}"><g transform="rotate(-23,${cx},${cy})">`;
+  BANDS.forEach(([r0, r1, op], bi) => { const y0 = cy - R * lerp(.15, .75, (r0 - 1.35) / .9), w = R * (r1 - r0) * .7; sh += `<path d="M${cx - R * 1.2},${y0} Q${cx},${y0 - 30} ${cx + R * 1.2},${y0}" stroke="#000" stroke-width="${w}" fill="none" opacity="${(.55 * op).toFixed(2)}"/>`; });
+  sh += `</g></g>`;
+  F.ov = sh + ringPart(cx, cy, R * .7, 'front', -23, .22, 1) + `<g opacity="${k}"><text x="${cx + R + 6}" y="${cy - R * .5}" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#9ccaff" style="paint-order:stroke" stroke="#000" stroke-width="4">ظل الحلقات</text><text x="${cx - R - 20}" y="${cy + R + 60}" font-family="Noto Naskh Arabic" font-weight="700" font-size="24" fill="#f4c76b">☀ الشمس ←</text></g>`;
+  return s;
+}
+// 5: meteors: ring fragments falling as shooting stars over the city
+function sceneMeteors(t) {
+  let s = `<defs>${RDEF}<linearGradient id="skM5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03050f"/><stop offset="1" stop-color="#1a2440"/></linearGradient></defs><rect width="720" height="1280" fill="url(#skM5)"/>` + stars(.8, t);
+  s += skyRing(t, 1000, { night: 1, shadow: 1, a: .9 });
+  for (let i = 0; i < 14; i++) { const r = RS(i + 10), ph = pmod(t * .7 + r(), 1), x0 = r() * 760, y0 = 360 + r() * 260, x = x0 - ph * 300, y = y0 + ph * 420; if (ph > .7) continue;
+    s += `<path d="M${x + 120},${y - 170} L${x},${y}" stroke="url(#mtr${i})" stroke-width="${2 + r() * 3}" stroke-linecap="round"/><defs><linearGradient id="mtr${i}" gradientUnits="userSpaceOnUse" x1="${x + 120}" y1="${y - 170}" x2="${x}" y2="${y}"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff6d8"/></linearGradient></defs><circle cx="${x}" cy="${y}" r="${3 + r() * 2}" fill="#fff" filter="url(#blur2)"/>`; }
+  s += baghdadFront(t, 1010, 1);
+  s += person(330, 1180, { s: .55, face: -1, top: CROWD[1].top, pants: CROWD[1].pants, skin: CROWD[1].skin, hair: CROWD[1].hair, t, lookUp: .9 });
+  F.ov = ''; return s;
+}
+// 6: launching gets dangerous: a rocket climbs toward the ring plane, the low orbits are full of ring debris
+function sceneRocket(t) {
+  const st = S0(6) - .2, T = t - st, ry = 1060 - Math.pow(Math.max(0, T - .3), 2) * 38;
+  let s = `<defs>${RDEF}<linearGradient id="skR6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a5a9a"/><stop offset="1" stop-color="#cfe2f0"/></linearGradient></defs><rect width="720" height="1280" fill="url(#skR6)"/>`;
+  s += skyRing(t, 1080, { night: 0, a: .9 });
+  s += `<rect y="1080" width="720" height="210" fill="#8a8a7a"/><rect y="1080" width="720" height="210" fill="#000" filter="url(#grainR)" opacity=".4"/>`;
+  s += `<path d="M120,1100 L120,780 M160,1100 L160,780 M120,800 L160,820 M120,860 L160,880 M120,920 L160,940 M120,980 L160,1000 M160,800 L120,820 M160,860 L120,880 M160,920 L120,940 M160,980 L120,1000" stroke="#c84a2a" stroke-width="5"/><rect x="100" y="1086" width="200" height="16" fill="#5a5a5a"/>`;
+  const rx = 220; s += `<g transform="translate(${rx},${ry})"><path d="M-14,0 L-14,-150 Q0,-196 14,-150 L14,0Z" fill="#f4f4f0"/><path d="M-14,-40 L-26,6 L-14,0Z M14,-40 L26,6 L14,0Z" fill="#2a2a2a"/><rect x="-14" y="-120" width="28" height="10" fill="#2a2a2a"/>` +
+    (T > .2 ? `<path d="M-12,0 L0,${80 + 40 * Math.sin(t * 30)} L12,0Z" fill="#ffd27a"/><path d="M-8,0 L0,${50} L8,0Z" fill="#fff"/>` : '') + `</g>`;
+  if (T > .3) for (let i = 0; i < 14; i++) { const r = RS(i + 20), ph = pmod(t * .5 + r(), 1); s += `<circle cx="${rx + (r() - .5) * 200 * (1 + ph)}" cy="${Math.min(1080, ry + 40 + ph * 160)}" r="${30 + ph * 60}" fill="#eceae4" opacity="${(.6 * (1 - ph)).toFixed(2)}" filter="url(#soft)"/>`; }
+  for (let i = 0; i < 16; i++) { const r = RS(i + 50); s += `<circle cx="${r() * 720}" cy="${560 + r() * 200}" r="${2 + r() * 3}" fill="#6a5a4a" opacity=".8"/>`; }
+  s += `<g opacity="${ramp(t, WS(6, 4) - .2, WS(6, 4) + .3)}"><path d="M${rx + 30},${ry - 220} L560,600" stroke="#ff5a3a" stroke-width="3" stroke-dasharray="10 8"/><circle cx="560" cy="600" r="26" fill="none" stroke="#ff5a3a" stroke-width="4"/><path d="M548,588 L572,612 M572,588 L548,612" stroke="#ff5a3a" stroke-width="4"/></g>`;
+  F.ov = ''; return s;
+}
+// 7: 466 million years ago (Ordovician): bare rocky shores with no land plants, a warm shallow sea, and possibly a ring in the sky
+function sceneAncient(t) {
+  let s = `<defs>${RDEF}${RDEF2}<linearGradient id="skA7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a6aa8"/><stop offset=".7" stop-color="#a8c4d8"/><stop offset="1" stop-color="#e4e0d4"/></linearGradient></defs><rect width="720" height="1280" fill="url(#skA7)"/>`;
+  s += skyRing(t, 900, { night: 0, a: .85 });
+  s += `<path d="M-20,900 L120,840 L260,870 L380,820 L520,880 L740,850 L740,930 L-20,930Z" fill="#7a6a5a" filter="url(#reliefR)"/>`;
+  s += riverW(920, 1080, t, { id: 'a7', col: ['#3a8a9a', '#1e5a6a'], sunX: 500 });
+  s += `<path d="M-20,1060 Q200,1040 400,1070 T740,1060 L740,1290 L-20,1290Z" fill="#8a7a64"/><path d="M-20,1060 Q200,1040 400,1070 T740,1060 L740,1290 L-20,1290Z" fill="#000" filter="url(#pebT)" opacity=".5"/>`;
+  for (let i = 0; i < 9; i++) { const r = RS(i + 30); s += `<ellipse cx="${r() * 720}" cy="${1110 + r() * 150}" rx="${20 + r() * 40}" ry="${10 + r() * 16}" fill="#6a5e50"/><ellipse cx="${r() * 720}" cy="${1110 + r() * 150}" rx="${14 + r() * 20}" ry="${6 + r() * 6}" fill="#3a7a8a" opacity=".7"/>`; }
+  const tri = (x, y, sc) => `<g transform="translate(${x},${y}) scale(${sc})"><ellipse cx="0" cy="0" rx="22" ry="14" fill="#6a5a44"/><path d="M-22,0 Q0,-18 22,0" stroke="#3a2e22" stroke-width="2" fill="none"/>` + Array.from({ length: 5 }, (_, q) => `<path d="M${-14 + q * 7},-12 L${-14 + q * 7},12" stroke="#3a2e22" stroke-width="1.5"/>`).join('') + `<path d="M-6,-14 L6,-14" stroke="#3a2e22" stroke-width="2"/></g>`;
+  s += tri(200, 1200, 1.2) + tri(520, 1150, 1) + tri(400, 1240, 1.3);
+  s += `<g opacity="${ramp(t, WS(7, 12) - .2, WS(7, 12) + .3)}"><rect x="160" y="440" width="400" height="64" rx="16" fill="#0a0e1c" opacity=".8"/><text x="360" y="484" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="30" fill="#f4c76b">قبل ٤٦٦ مليون سنة</text></g>`;
+  F.ov = ''; return s;
+}
+// 8: CTA – the ringed Earth and the question
+function sceneEarth(t) {
+  const st = S0(8), k = ease(ramp(t, st - .2, st + .6)), b = Math.abs(Math.sin(t * 3)) * 6;
+  let s = space(t, '#03050f', '#0a1030');
+  const cx = 360, cy = 760, R = 150;
+  F.earth = { x: cx, y: cy, r: R, a: 1, sunI: 1, lights: .4, rot: .8, tilt: .41 }; F.light = [-800, 300]; F.moon = null;
+  s += ringPart(cx, cy, R, 'back', -23, .26, 1, 0);
+  F.ov = ringPart(cx, cy, R, 'front', -23, .26, 1) + `<g opacity="${k}"><text x="360" y="420" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="200" fill="#f4c76b" style="filter:drop-shadow(0 6px 20px rgba(0,0,0,.7))">؟</text></g>` +
+    `<g opacity="${ramp(t, WS(8, 2), WS(8, 2) + .4)}" transform="translate(360,${1090 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
+  return s;
+}
+
+const SCENES = [
+  { s: 0, f: sceneHook }, { s: S0(1) - .2, f: sceneSpace }, { s: S0(2) - .2, f: sceneDay }, { s: S0(3) - .2, f: sceneNight }, { s: S0(4) - .2, f: sceneWinter },
+  { s: S0(5) - .2, f: sceneMeteors }, { s: S0(6) - .2, f: sceneRocket }, { s: S0(7) - .2, f: sceneAncient }, { s: S0(8) - .2, f: sceneEarth },
+];
+const NOKB = new Set([sceneSpace, sceneWinter]);
+const XF = .5;
+
+// ---------- UI ----------
+const TLI = [['السماء', S0(2)], ['الليل', S0(3)], ['الشتاء', S0(4)], ['الشهب', S0(5)], ['الصواريخ', S0(6)]];
+const LIST_ON = new Set([sceneMeteors, sceneRocket]);
+const CHIPS = [
+  ['c1', 'فوق خط الاستواء', 360, 330, 'big', WS(1, 2), S0(2) - .3],
+  ['c2', 'قوس في السماء الجنوبية', 360, 330, 'big', WS(2, 3), WS(2, 9)],
+  ['c3', 'حتى في النهار', 360, 330, 'big', WS(2, 9), S0(3) - .3],
+  ['c4', 'أضوأ من القمر', 360, 330, 'big', WS(3, 5), WS(3, 10) - .2],
+  ['c5', 'ظل الأرض', 360, 330, 'dark', WS(3, 10), S0(4) - .3],
+  ['c6', 'شتاء أبرد', 360, 330, 'big', WS(4, 8), S0(5) - .3],
+  ['c7', 'شهب أكثر', 360, 330, 'big', WS(5, 5), S0(6) - .3],
+  ['c8', 'خطر الاصطدام', 360, 330, 'red', WS(6, 3), S0(7) - .3],
+  ['c9', 'دراسة ٢٠٢٤', 360, 330, 'big', WS(7, 1), WS(7, 10)],
+  ['c10', '@MadhaLawLab', 360, 1200, 'dark', WS(8, 5), 999],
+];
+$('ui').innerHTML = `<div class="list" id="tl" style="height:290px"><div class="hd">لو للأرض حلقات</div><div class="rail"></div><div class="fill" id="tlf"></div>` +
+  TLI.map((x, i) => { const y = 64 + i * 46; return `<div class="it" id="tli${i}" style="top:${y}px">${x[0]}</div><div class="dot" id="tld${i}" style="top:${y}px"></div>`; }).join('') + `</div>` +
+  CHIPS.map(c => `<div class="chip ${c[4]}" id="${c[0]}" style="${c[1][0] === '@' ? 'direction:ltr;' : ''}left:${c[2]}px;top:${c[3]}px">${c[1]}</div>`).join('');
+function renderUI(t) {
+  let i = 0; SCENES.forEach((sc, j) => { if (t >= sc.s) i = j; });
+  const on = j => SCENES[j] && LIST_ON.has(SCENES[j].f), nx = SCENES[i + 1] ? SCENES[i + 1].s : TOTAL;
+  $('tl').style.opacity = on(i) ? ease(ramp(t, SCENES[i].s + .2, SCENES[i].s + .6)) * (on(i + 1) ? 1 : 1 - ease(ramp(t, nx - .35, nx))) : 0;
+  let act = 0; TLI.forEach((x, k) => { if (t >= x[1]) act = k; });
+  $('tlf').style.height = (act * 46) + 'px';
+  TLI.forEach((x, k) => { const o = k <= act, cur = k === act;
+    $('tli' + k).style.color = cur ? '#fff' : o ? 'rgba(244,199,107,.9)' : 'rgba(255,255,255,.45)';
+    $('tld' + k).style.background = o ? '#f4c76b' : 'rgba(255,255,255,.35)'; });
+  CHIPS.forEach(c => { $(c[0]).style.opacity = ease(ramp(t, c[5], c[5] + .3)) * (1 - ease(ramp(t, c[6] - .3, c[6]))); });
+  $('note').style.opacity = (SCENES[i].f === sceneSpace || SCENES[i].f === sceneWinter) ? .9 : 0;
+}

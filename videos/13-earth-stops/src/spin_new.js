@@ -65,19 +65,33 @@ function sceneWave(t) {
   s += `<rect width="720" height="1280" fill="#0a1420" opacity="${.25 * k}"/>`;
   F.ov = ''; return s;
 }
-// 5: if it stays stopped, the oceans drain toward the poles and one giant equatorial continent emerges (real map, then the change)
-function sceneMap(t) {
-  const st = S0(5) - .2, k = ease(ramp(t, WS(5, 3), WS(5, 15) + .3)), mx = 20, my = 560, mw = 680, mh = 340;
-  let s = `<defs><clipPath id="mapC"><rect x="${mx}" y="${my}" width="${mw}" height="${mh}" rx="14"/></clipPath><linearGradient id="landEq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8a670" stop-opacity="0"/><stop offset=".25" stop-color="#b89660"/><stop offset=".5" stop-color="#a8864e"/><stop offset=".75" stop-color="#b89660"/><stop offset="1" stop-color="#c8a670" stop-opacity="0"/></linearGradient>` +
-    `<linearGradient id="seaN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e4a7a"/><stop offset="1" stop-color="#2a5a8a" stop-opacity="0"/></linearGradient><linearGradient id="seaS" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1e4a7a"/><stop offset="1" stop-color="#2a5a8a" stop-opacity="0"/></linearGradient></defs>`;
-  s += `<rect width="720" height="1280" fill="#0a1020"/>` + stars(.6, t);
-  s += `<g clip-path="url(#mapC)"><image href="tex/earth_atmos_2048.jpg" x="${mx}" y="${my}" width="${mw}" height="${mh}" preserveAspectRatio="none"/>`;
-  s += `<rect x="${mx}" y="${my + mh * .25}" width="${mw}" height="${mh * .5}" fill="url(#landEq)" opacity="${.92 * k}"/><rect x="${mx}" y="${my}" width="${mw}" height="${mh * (.18 + .12 * k)}" fill="url(#seaN)" opacity="${.95 * k}"/><rect x="${mx}" y="${my + mh * (.82 - .12 * k)}" width="${mw}" height="${mh * (.18 + .12 * k)}" fill="url(#seaS)" opacity="${.95 * k}"/>`;
-  for (let q = 0; q < 4; q++) { const y = my + mh * (.06 + q * .03); s += `<path d="M${mx},${y} L${mx + mw},${y}" stroke="#cfe4ff" stroke-width="1.4" opacity="${.3 * k}" stroke-dasharray="10 14" stroke-dashoffset="${-t * 30}"/><path d="M${mx},${my + mh - (y - my)} L${mx + mw},${my + mh - (y - my)}" stroke="#cfe4ff" stroke-width="1.4" opacity="${.3 * k}" stroke-dasharray="10 14" stroke-dashoffset="${-t * 30}"/>`; }
-  s += `</g><rect x="${mx}" y="${my}" width="${mw}" height="${mh}" rx="14" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"/><path d="M${mx},${my + mh / 2} L${mx + mw},${my + mh / 2}" stroke="#f4c76b" stroke-width="2" stroke-dasharray="6 8" opacity=".8"/>`;
-  [[my - 20, 'محيط القطب الشمالي', '#9ccaff', WS(5, 8)], [my + mh / 2 + 10, 'قارّة واحدة عملاقة', '#f4c76b', WS(5, 13)], [my + mh + 44, 'محيط القطب الجنوبي', '#9ccaff', WS(5, 8)]].forEach(([y, txt, c, a]) => { s += `<text x="360" y="${y}" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="30" fill="${c}" style="paint-order:stroke" stroke="#000" stroke-width="5" opacity="${ramp(t, a, a + .4)}">${txt}</text>`; });
-  s += `<text x="360" y="${my + mh + 100}" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#cfd8ff" opacity="${ramp(t, WS(5, 13), WS(5, 13) + .4)}">بعد آلاف السنين من التوقّف</text>`;
+// 5a: why the water moves: a cut-away Earth. Spinning flings the ocean outward at the equator; stopped, the water slides toward the poles (exaggerated)
+function sceneBulge(t) {
+  const k = ease(ramp(t, WS(5, 3), WS(5, 8) + .3)), cx = 360, cy = 800, R0 = 220;
+  let s = space(t, '#020309', '#070a1c') + `<defs><radialGradient id="mantleG"><stop offset="0" stop-color="#fff2a0"/><stop offset=".22" stop-color="#ffb030"/><stop offset=".5" stop-color="#d8601a"/><stop offset="1" stop-color="#8a2a10"/></radialGradient><linearGradient id="oceanG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a7ad0"/><stop offset="1" stop-color="#1e4a90"/></linearGradient></defs>`;
+  const rx = R0 + lerp(52, 8, k), ry = R0 + lerp(8, 58, k);
+  s += `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#oceanG)"/>`;
+  for (let q2 = 0; q2 < 5; q2++) s += `<ellipse cx="${cx}" cy="${cy}" rx="${rx - 6 - q2 * 8}" ry="${ry - 6 - q2 * 8}" fill="none" stroke="#9ccaf0" stroke-width="1.2" opacity="${.25 - q2 * .04}"/>`;
+  s += `<circle cx="${cx}" cy="${cy}" r="${R0}" fill="#7a5a3a"/><circle cx="${cx}" cy="${cy}" r="${R0}" fill="#000" filter="url(#grainR)" opacity=".4"/><circle cx="${cx}" cy="${cy}" r="${R0 - 14}" fill="url(#mantleG)"/><circle cx="${cx}" cy="${cy}" r="${R0 * .35}" fill="#fff0b0" opacity=".6" filter="url(#soft)"/>`;
+  s += `<path d="M${cx},${cy - ry - 70} L${cx},${cy + ry + 70}" stroke="#fff" stroke-width="2" stroke-dasharray="8 8" opacity=".6"/><text x="${cx + 12}" y="${cy - ry - 50}" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#cfd8ff">القطب الشمالي</text><text x="${cx + 12}" y="${cy + ry + 66}" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#cfd8ff">القطب الجنوبي</text>`;
+  s += `<path d="M${cx - rx - 40},${cy} L${cx + rx + 40},${cy}" stroke="#f4c76b" stroke-width="2" stroke-dasharray="8 8"/><text x="${cx + rx - 10}" y="${cy - 14}" text-anchor="end" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#f4c76b" style="paint-order:stroke" stroke="#000" stroke-width="3">خط الاستواء</text>`;
+  if (k < .5) { const a = t * 2.4; s += `<path d="M${cx - 120},${cy - ry - 30} A120,24 0 0 0 ${cx + 120},${cy - ry - 30}" stroke="#f4c76b" stroke-width="4" fill="none" opacity="${1 - 2 * k}"/><path d="M${cx + 120},${cy - ry - 30} l-14,-6 l2,14Z" fill="#f4c76b" opacity="${1 - 2 * k}"/>`; }
+  const ar = ramp(t, WS(5, 7), WS(5, 7) + .4);
+  [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sy]) => { const a0 = sy < 0 ? -.15 : .15, a1 = sy < 0 ? -1.05 : 1.05; const p0 = [cx + sx * (R0 + 34) * Math.cos(a0), cy + (R0 + 34) * Math.sin(a0)], p1 = [cx + sx * (R0 + 40) * Math.cos(a1), cy + (R0 + 40) * Math.sin(a1)];
+    s += `<path d="M${p0[0]},${p0[1]} Q${cx + sx * (R0 + 90) * Math.cos((a0 + a1) / 2)},${cy + (R0 + 90) * Math.sin((a0 + a1) / 2)} ${p1[0]},${p1[1]}" stroke="#9ccaff" stroke-width="5" fill="none" marker-end="url(#arrW)" opacity="${ar}"/>`; });
+  const lb = (txt, a, c) => `<g opacity="${a}"><rect x="90" y="400" width="540" height="58" rx="14" fill="#0a0e1c" opacity=".8"/><text x="360" y="439" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="27" fill="${c}">${txt}</text></g>`;
+  s += lb('مع الدوران: البحر منتفخ عند خط الاستواء', 1 - ramp(t, WS(5, 3), WS(5, 3) + .4), '#f4c76b') + lb('بدون دوران: الماء يتجه نحو القطبين', ramp(t, WS(5, 4), WS(5, 4) + .4), '#9ccaff');
   F.ov = ''; return s;
+}
+// 5b: the result on a real-looking globe: today's Earth turns into polar oceans and one equatorial supercontinent of land and dried sea floor
+function sceneNewEarth(t) {
+  const st = WS(5, 9) - .3, k = ease(ramp(t, st + .4, st + 1.6)), rot = 4.7 + (t - st) * .1 - t * .03;
+  let s = space(t, '#020309', '#070a1c');
+  F.earth = { x: 360, y: 800, r: 250, a: 1 - k, sunI: 1.05, lights: .2, rot, tilt: 0 }; F.moon = { x: 360, y: 800, r: 250, a: k, sunI: 1.05, rot, tilt: 0 }; F.light = [300, 790];
+  const lab = (x, y, txt, c, a) => `<text x="${x}" y="${y}" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="30" fill="${c}" style="paint-order:stroke" stroke="#000" stroke-width="5" opacity="${a}">${txt}</text>`;
+  F.ov = `<circle cx="360" cy="800" r="258" fill="none" stroke="#7ab4ff" stroke-width="6" opacity="${.35 * k}" filter="url(#blur2)"/>` + lab(360, 500, 'محيط القطب الشمالي', '#9ccaff', ramp(t, st + 1.2, st + 1.6)) + lab(360, 810, 'قارّة واحدة عملاقة', '#f4c76b', ramp(t, WS(5, 13), WS(5, 13) + .4)) + lab(360, 1110, 'محيط القطب الجنوبي', '#9ccaff', ramp(t, st + 1.2, st + 1.6)) +
+    `<text x="360" y="1160" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="22" fill="#cfd8ff" opacity="${ramp(t, WS(5, 13), WS(5, 13) + .4)}">بعد آلاف السنين من التوقّف</text>`;
+  return s;
 }
 // 6: one day lasts a year: six months of scorching day, then six months of freezing night, in the same Baghdad street
 function sceneDayNight(t) {
@@ -112,7 +126,7 @@ function sceneEarth(t) {
 
 const SCENES = [
   { s: 0, f: sceneHook }, { s: S0(1) - .2, f: sceneSpeed }, { s: S0(2) - .2, f: sceneFling }, { s: S0(3) - .2, f: sceneWind }, { s: S0(4) - .2, f: sceneWave },
-  { s: S0(5) - .2, f: sceneMap }, { s: S0(6) - .2, f: sceneDayNight }, { s: S0(7) - .2, f: sceneSlow }, { s: S0(8) - .2, f: sceneEarth },
+  { s: S0(5) - .2, f: sceneBulge }, { s: WS(5, 9) - .3, f: sceneNewEarth }, { s: S0(6) - .2, f: sceneDayNight }, { s: S0(7) - .2, f: sceneSlow }, { s: S0(8) - .2, f: sceneEarth },
 ];
 const XF = .5;
 
@@ -142,5 +156,5 @@ function renderUI(t) {
     $('tld' + k).style.background = o ? '#f4c76b' : 'rgba(255,255,255,.35)';
     $('tld' + k).style.boxShadow = cur ? '0 0 0 6px rgba(244,199,107,.25)' : 'none'; });
   CHIPS.forEach(c => { $(c[0]).style.opacity = ease(ramp(t, c[5], c[5] + .3)) * (1 - ease(ramp(t, c[6] - .3, c[6]))); });
-  $('note').style.opacity = 0;
+  $('note').style.opacity = SCENES[i].f === sceneBulge ? .9 * ease(ramp(t, SCENES[i].s + .3, SCENES[i].s + .7)) : 0;
 }
