@@ -74,8 +74,8 @@ sfx += noise_band(300, 2500, T['market'], T['river'] + .2, .035, .3, .3, lfo=1.)
 sfx += noise_band(200, 1500, T['river'], T['dam'], .02, .5, .8, lfo=.5)
 place(sfx, tone(220, 70, 2.2, 1.2, .25), T['power'])                                  # power winding down
 for at in np.arange(T['well'] + .3, T['fire'], .25): place(sfx, tone(90, 70, .12, .05, .2), at, 1., .5)   # drilling
-sfx += noise_band(80, 1500, T['fire'], T['dust'] + .3, .07, .6, .4, lfo=1.)           # fire roar
-for at in np.arange(T['fire'] + .2, T['dust'], .07): place(sfx, burst(.02, 1200, 7000, .006, .12), at + rng.uniform(0, .05), 1., rng.uniform(.2, .8))   # crackle
+sfx += noise_band(80, 1500, Wd(7, 2)[1] - .7, T['dust'] + .3, .07, .6, .4, lfo=1.)           # fire roar
+for at in np.arange(Wd(7, 2)[1] - .5, T['dust'], .07): place(sfx, burst(.02, 1200, 7000, .006, .12), at + rng.uniform(0, .05), 1., rng.uniform(.2, .8))   # crackle
 sfx += noise_band(200, 1400, T['dust'], T['back'] + .3, .08, .5, .5, lfo=1.2)          # dust wind
 place(sfx, tone(55, 32, 2.6, 1.0, .5), T['back']); place(sfx, burst(.5, 200, 3000, .2, .25), T['back'])   # thunder
 sfx += noise_band(400, 7000, T['rain2'], T['end'] + .3, .15, .6, .6)                    # rain returns

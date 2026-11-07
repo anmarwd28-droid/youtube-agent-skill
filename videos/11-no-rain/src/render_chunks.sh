@@ -9,4 +9,4 @@ one() { name=$1; tot=$2; N=$3; P=$4; C=150; D=$S/$name/chunks; mkdir -p $D; nc=$
   for w in 0 1 2 3; do worker $w & done; wait
   for ((i=0; i<nc; i++)); do [ -s $D/c$(printf %03d $i).mp4 ] || { echo "$name missing chunk $i"; return 1; }; done
   (cd $D && ls c*.mp4 | sort | sed "s/^/file '/;s/$/'/" > list.txt && ffmpeg -y -v error -f concat -safe 0 -i list.txt -i ../mixed.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -t $tot -movflags +faststart ../${name}_short.mp4) && echo "$name done $(date -u +%T)"; }
-one mars 65.6 1968 9060 && one rain 59.6 1788 9070
+if [ $# -gt 0 ]; then one "$@"; else one mars 65.6 1968 9060 && one rain 59.6 1788 9070; fi
