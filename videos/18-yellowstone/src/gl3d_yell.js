@@ -53,12 +53,12 @@ export async function init(canvas, dpr = 1.5) {
         c *= 0.45 + 0.65 * pow(mu, 0.45);   // limb darkening
         gl_FragColor = vec4(c * 1.15, alpha); }` });
   const sun = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 64), sunMat);
-  scene.add(sun, earth, atm, moon);
+  scene.add(sun, earth, atm, moon); earth.renderOrder = 0; moon.renderOrder = 1; atm.renderOrder = 2;
   earth.rotation.order = 'ZYX'; earth.rotation.z = 0.41; // axial tilt (spin about the tilted axis)
 
   function place(m, o) { m.visible = !!o && o.a > 0.001; if (!m.visible) return; m.position.set(o.x, -o.y, 0); m.scale.setScalar(o.r); }
   function draw(f) {
-    place(sun, f.sun); place(earth, f.earth); place(atm, f.earth); place(moon, f.moon);
+    place(sun, f.sun); place(earth, f.earth); place(atm, f.earth); place(moon, f.moon); if (f.moon && f.earth && Math.abs(f.moon.x - f.earth.x) < 1 && Math.abs(f.moon.y - f.earth.y) < 1) moon.scale.multiplyScalar(1.004);
     if (f.sun) { sunMat.uniforms.t.value = f.t; sunMat.uniforms.alpha.value = f.sun.a; }
     if (f.earth) {
       const e = f.earth, lx = (f.light ? f.light[0] : e.x - 400) - e.x, ly = -((f.light ? f.light[1] : e.y) - e.y);
