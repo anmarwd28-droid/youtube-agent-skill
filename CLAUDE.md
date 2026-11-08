@@ -21,4 +21,5 @@
 - Length depends on the idea: as long as the idea really needs and no longer. Cut anything that does not add to it (YouTube allows Shorts up to 3 minutes; viewers finishing the Short matters most).
 - Keep the same look as the published Shorts: illustrated scenes with the same 2D people, the city street and skyline, the real NASA 3D Earth and Moon, captions at the top with gold keywords, gold chips, a timeline list on the side. Make it a bit more realistic each time, but never switch to a different style.
 - Facts must be scientifically correct; list them in the video's `upload.md`.
+- Talk about the whole world, not only Iraq: the narration and the effects shown are global (no "and here in Iraq/Baghdad" angle). The street scenes keep the same drawn style, but they stand for any city in the world.
 - Never publish or schedule a video before I have watched it and said it needs no changes.
