@@ -42,7 +42,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 
 ## Channel 2: "Weird Space Lab"
 
-- An English channel of short animated facts. Space and weird science are the main topic, but the channel is general: other strange facts (history, Earth, the human body, world records, countries) are allowed, so do not hide or delete off-space videos.
+- An English channel of short animated facts on any topic. It is a general channel, not a space channel (despite the name): space, science, history, Earth, the human body, animals, world records, countries and anything else that is strange and true. Do not limit ideas to space, and do not hide or delete videos for being off-space.
 - Everything is in English: narration, on-screen text, titles, descriptions, tags and pinned comments.
 - Same visual style and the same voice (Brian) as channel 1, only in English.
 - End every video with a short question for the comments (for example "Would you survive this?").
