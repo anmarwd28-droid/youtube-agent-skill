@@ -14,3 +14,5 @@ Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a o
 |---|---|---|---|---|---|
 | 18 | ماذا لو انفجر بركان يلوستون العملاق؟ | `videos/18-yellowstone/yell_short.mp4` | `79357bff6eb8cbafde33ae2bfe93df6e0e52abe5` | 55767590 | `videos/18-yellowstone/upload.md` |
 | 19 | ماذا لو تحوّلت الشمس فجأة إلى قزم أحمر؟ | `videos/19-red-dwarf/red_short.mp4` | `2a545a8f7b44354f9e2d9ce424996c40dccb3b90` | 24240123 | `videos/19-red-dwarf/upload.md` |
+| 20 | ماذا لو دارت الأرض بالعكس؟ | `videos/20-earth-reversed/retro_short.mp4` | `5e6cc2f5849636d5a78b2b3829e908dfdc0778b7` | 38154214 | `videos/20-earth-reversed/upload.md` |
+| 21 | ماذا لو ظهر ثقب أسود بحجم حبة عنب في مدينة؟ | `videos/21-black-hole/bh_short.mp4` | `c188ea1ef75b1e5a096038e2d3c2657f41e506ab` | 23212709 | `videos/21-black-hole/upload.md` |
