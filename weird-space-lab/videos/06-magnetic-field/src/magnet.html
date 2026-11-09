@@ -976,15 +976,18 @@ function sceneCore(t) {
   const k = ease(ramp(t, WS(1, 3) - .2, WS(1, 9)));
   let s = space(t, '#03050f', '#0a1030');
   const cx = 360, cy = 820, R = 260;
-  s += `<circle cx="${cx}" cy="${cy}" r="${R}" fill="#3a6a9a"/><circle cx="${cx}" cy="${cy}" r="${R}" fill="#000" filter="url(#grainR)" opacity=".25"/>`;
-  s += `<path d="M${cx},${cy} L${cx + R},${cy} A${R},${R} 0 0 0 ${cx},${cy - R}Z" fill="#8a5a3a"/>` +
-    `<path d="M${cx},${cy} L${cx + R - 14},${cy} A${R - 14},${R - 14} 0 0 0 ${cx},${cy - R + 14}Z" fill="#c8542a"/>` +
+  // the real Earth (3D layer), with a quarter cut away in the overlay to show the layers inside
+  EARTH(cx, cy, R, 2.2);
+  let cut = `<path d="M${cx},${cy} L${cx + R + 2},${cy} A${R + 2},${R + 2} 0 0 0 ${cx},${cy - R - 2}Z" fill="#7a4a2a"/>` +
+    `<path d="M${cx},${cy} L${cx + R - 10},${cy} A${R - 10},${R - 10} 0 0 0 ${cx},${cy - R + 10}Z" fill="#c8542a"/>` +
     `<path d="M${cx},${cy} L${cx + R * .55},${cy} A${R * .55},${R * .55} 0 0 0 ${cx},${cy - R * .55}Z" fill="#f49a2a"/>` +
-    `<path d="M${cx},${cy} L${cx + R * .22},${cy} A${R * .22},${R * .22} 0 0 0 ${cx},${cy - R * .22}Z" fill="#fff2b0"/>`;
+    `<path d="M${cx},${cy} L${cx + R * .22},${cy} A${R * .22},${R * .22} 0 0 0 ${cx},${cy - R * .22}Z" fill="#fff2b0"/>` +
+    `<path d="M${cx},${cy} L${cx + R + 2},${cy} A${R + 2},${R + 2} 0 0 0 ${cx},${cy - R - 2}Z" fill="#000" filter="url(#grainR)" opacity=".25"/>` +
+    `<path d="M${cx},${cy - R - 2} L${cx},${cy} L${cx + R + 2},${cy}" stroke="#2a1a10" stroke-width="3" fill="none"/>`;
   // swirling flow in the outer core
   for (let i = 0; i < 9; i++) { const a = -(i / 9) * Math.PI / 2 - .1 + t * .4 % (Math.PI / 18), rr = R * (.32 + .18 * ((i * 7) % 3) / 2); const x = cx + Math.cos(a) * rr, y = cy + Math.sin(a) * rr;
-    s += `<path d="M${x},${y} a10,10 0 1,1 10,10" stroke="#ffd59a" stroke-width="3" fill="none" opacity="${.8 * k}" transform="rotate(${t * 90 + i * 40},${x},${y})"/>`; }
-  F.ov = fieldLines(cx, cy, R, -15, .5 * k, t) + `<g opacity="${k}">` + EN('Outer core: molten iron', cx + 40, cy - R * .38, 20, '#fff', 'start') + EN('Inner core', cx + 30, cy - 18, 18, '#3a2a10', 'start') + EN('Mantle', cx + R * .62, cy - R * .62, 20, '#fff', 'start') + `</g>`;
+    cut += `<path d="M${x},${y} a10,10 0 1,1 10,10" stroke="#ffd59a" stroke-width="3" fill="none" opacity="${.8 * k}" transform="rotate(${t * 90 + i * 40},${x},${y})"/>`; }
+  F.ov = cut + fieldLines(cx, cy, R, -15, .5 * k, t) + `<g opacity="${k}">` + EN('Outer core: molten iron', cx + 40, cy - R * .38, 20, '#fff', 'start') + EN('Inner core', cx + 30, cy - 18, 18, '#3a2a10', 'start') + EN('Mantle', cx + R * .62, cy - R * .62, 20, '#fff', 'start') + `</g>`;
   return s;
 }
 // 2a: compass needles spin aimlessly
