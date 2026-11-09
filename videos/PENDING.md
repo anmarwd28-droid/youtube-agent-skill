@@ -4,16 +4,11 @@ Do nothing here until the user says Metricool is back on the account linked to t
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
-## 1. Replace the video in posts that are already scheduled (urgent)
+## Already scheduled: keep as they are
 
-Swap in the fixed file, which removes the dotted globe glitch. Keep every other field as it is.
+Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a one-second dotted-globe glitch was found and fixed. The user decided not to replace them, so do not touch those posts. The fixed files are in the repo.
 
-| Video | Post id | When it publishes | Fixed file | Commit | Size (bytes) |
-|---|---|---|---|---|---|
-| 13 ماذا لو توقفت الأرض عن الدوران فجأة؟ | 420179240 | Wed 11 Nov 16:00 Baghdad | `videos/13-earth-stops/spin_short.mp4` | `79357bff6eb8cbafde33ae2bfe93df6e0e52abe5` | 27805494 |
-| 15 ماذا لو اختفت كل النباتات من الأرض في ليلة واحدة؟ | 420407064 | Thu 12 Nov 16:00 Baghdad | `videos/15-no-plants/plants_short.mp4` | `79357bff6eb8cbafde33ae2bfe93df6e0e52abe5` | 33510056 |
-
-## 2. Approved videos waiting to be scheduled
+## Approved videos waiting to be scheduled
 
 | # | Video | Approved file | Commit | Size (bytes) | Title, description and tags |
 |---|---|---|---|---|---|
