@@ -31,6 +31,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 - Keep the same look as the published "ماذا لو؟ Lab" Shorts: illustrated scenes with the same 2D people, the city street and skyline, the real NASA 3D Earth and Moon, captions at the top with gold keywords, gold chips, a timeline list on the side. Make it a bit more realistic each time, but never switch to a different style.
 - Facts must be scientifically correct; list them in the video's `upload.md`.
 - Talk about the whole world, not one country: the narration and the effects shown are global. The street scenes keep the same drawn style, but they stand for any city in the world.
+- Realism first, on every video (mine or your own idea), without me having to ask: push each scene as realistic as you can before you show it to me. Draw things at real-world scale (a room 2.7 m high, a person ~1.75 m, real object sizes), use the real NASA 3D Earth/planets instead of flat discs, show real physics where it matters (for example gravitational lensing around a black hole), and real-looking animals, places and materials. Before sending numbered shots, check every frame and fix anything that looks fake, flat, mis-scaled or cartoonish.
 - Never publish or schedule a video before I have watched it and said it needs no changes.
 - vidIQ: use it for research, and update video metadata only after I approve the exact values.
 
