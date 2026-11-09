@@ -28,13 +28,25 @@ function sceneDeadly(t) {
   F.ov = mosq(360, 560, 4.2, t, 0) + `<g opacity="${ease(ramp(t, WS(1, 6), WS(1, 8)))}">` + EN(n.toLocaleString('en-US'), 360, 770, 64, '#fff', 'middle', 800) + EN('deaths from malaria, every year', 360, 812, 24, 'rgba(255,255,255,.75)', 'middle', 500) + `</g>`;
   F.flash = 0; return s;
 }
-// 2: dengue, Zika, yellow fever – hundreds of millions of people sick each year
+// 2: what they spread, seen under the microscope: malaria parasites inside red blood cells, and dengue, Zika and yellow fever virus particles
+function rbc(x, y, r, inf) { return `<circle cx="${x}" cy="${y}" r="${r}" fill="#d8566a"/><circle cx="${x}" cy="${y}" r="${r * .55}" fill="#e88896" opacity=".8"/>` + (inf ? `<circle cx="${x + r * .25}" cy="${y - r * .2}" r="${r * .28}" fill="none" stroke="#5a2a8a" stroke-width="${r * .12}"/><circle cx="${x + r * .38}" cy="${y - r * .32}" r="${r * .08}" fill="#3a1a6a"/>` : ''); }
+function virion(x, y, r, c1, c2, rot) { let s = `<circle cx="${x}" cy="${y}" r="${r * 1.25}" fill="${c2}" opacity=".35"/>`; for (let i = 0; i < 18; i++) { const a = i / 18 * Math.PI * 2 + rot; s += `<circle cx="${x + Math.cos(a) * r * 1.08}" cy="${y + Math.sin(a) * r * 1.08}" r="${r * .16}" fill="${c2}"/>`; }
+  return s + `<circle cx="${x}" cy="${y}" r="${r}" fill="${c1}"/><circle cx="${x}" cy="${y}" r="${r * .55}" fill="${c2}" opacity=".7"/>`; }
+function scope(x, y, R, kind, t, a) {
+  const id = 'sc' + kind; let inner = '';
+  const r = RS(kind * 7 + 3);
+  if (kind === 0) { inner = `<rect x="${x - R}" y="${y - R}" width="${2 * R}" height="${2 * R}" fill="#f4e8e0"/>`; for (let i = 0; i < 16; i++) inner += rbc(x - R + 20 + r() * (2 * R - 40), y - R + 20 + r() * (2 * R - 40), 16 + r() * 6, r() < .35); }
+  else { const pal = [[], ['#3a8a9a', '#1a4a5a'], ['#9a6ac0', '#4a2a6a'], ['#c8a03a', '#6a4a10']][kind]; inner = `<rect x="${x - R}" y="${y - R}" width="${2 * R}" height="${2 * R}" fill="#1a1e24"/>`;
+    for (let i = 0; i < 9; i++) inner += virion(x - R + 24 + r() * (2 * R - 48), y - R + 24 + r() * (2 * R - 48), 12 + r() * 6, pal[0], pal[1], t * .3 + i); }
+  return `<g opacity="${a}"><defs><clipPath id="${id}"><circle cx="${x}" cy="${y}" r="${R}"/></clipPath></defs><g clip-path="url(#${id})">${inner}<rect x="${x - R}" y="${y - R}" width="${2 * R}" height="${2 * R}" fill="#000" filter="url(#grainR)" opacity=".25"/></g>` +
+    `<circle cx="${x}" cy="${y}" r="${R}" fill="none" stroke="#111" stroke-width="12"/><circle cx="${x}" cy="${y}" r="${R + 6}" fill="none" stroke="#555" stroke-width="3"/></g>`;
+}
 function sceneDiseases(t) {
-  const items = [['Malaria', WS(2, 0), '#c62828'], ['Dengue', WS(2, 1), '#d9822b'], ['Zika', WS(2, 2), '#8a4ac0'], ['Yellow fever', WS(2, 4), '#c8a02a']];
-  let s = `<rect width="720" height="1280" fill="#0b1020"/>` + stars(.3, t);
-  items.forEach(([n, ts, c], i) => { const a = ease(ramp(t, ts - .2, ts + .2)), x = 190 + (i % 2) * 340, y = 600 + Math.floor(i / 2) * 230;
-    s += `<g opacity="${a}"><rect x="${x - 150}" y="${y - 90}" width="300" height="180" rx="20" fill="${c}" opacity=".85"/>` + Array.from({ length: 7 }, (_, q) => { const r = RS(q + i * 9); return `<circle cx="${x - 110 + r() * 220}" cy="${y - 50 + r() * 60}" r="${6 + r() * 10}" fill="#fff" opacity=".18"/>`; }).join('') + EN(n, x, y + 56, 34, '#fff', 'middle', 800) + `</g>`; });
-  F.ov = `<g opacity="${ease(ramp(t, WS(2, 9), WS(2, 11)))}">` + EN('hundreds of millions sick / year', 360, 1110, 30, '#f4c76b', 'middle', 800) + `</g>`; F.flash = 0; return s;
+  const items = [['Malaria', WS(2, 0)], ['Dengue', WS(2, 1)], ['Zika', WS(2, 2)], ['Yellow fever', WS(2, 4)]];
+  let s = `<rect width="720" height="1280" fill="#0b1020"/>` + stars(.2, t);
+  items.forEach(([n, ts], i) => { const a = ease(ramp(t, ts - .2, ts + .2)), x = 190 + (i % 2) * 340, y = 600 + Math.floor(i / 2) * 270;
+    s += scope(x, y, 110, i, t, a) + `<g opacity="${a}">` + EN(n, x, y + 145, 28, '#fff', 'middle', 800) + `</g>`; });
+  F.ov = `<g opacity="${ease(ramp(t, WS(2, 9), WS(2, 11)))}">` + EN('hundreds of millions sick / year', 360, 1170, 30, '#f4c76b', 'middle', 800) + `</g>`; F.flash = 0; return s;
 }
 // 3: 3,500+ kinds of mosquito – only a small fraction bite people
 function sceneKinds(t) {
@@ -48,7 +60,10 @@ function sceneKinds(t) {
 function scenePond(t) {
   const p = ease(ramp(t, WS(4, 6), WS(4, 11)));
   let s = `<defs><linearGradient id="pnd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8ab8e0"/><stop offset=".45" stop-color="#cfe0d0"/><stop offset=".46" stop-color="#3a7a8a"/><stop offset="1" stop-color="#0a2a3a"/></linearGradient></defs><rect width="720" height="1280" fill="url(#pnd)"/>`;
-  for (let i = 0; i < 8; i++) s += `<path d="M${i * 100 - 20},590 q30,-120 ${20 + (i % 3) * 10},-200" stroke="#4a8a3a" stroke-width="6" fill="none"/>`;
+  s += `<path d="M-20,560 Q120,520 260,548 T560,540 T760,550 L760,592 L-20,592Z" fill="#5a8a5a" opacity=".7"/>` + Array.from({ length: 7 }, (_, i) => `<path d="M${i * 120 - 40},600 L${i * 120 + 40},600 L${i * 120 + 160},1280 L${i * 120 + 60},1280Z" fill="#bfe8ff" opacity=".05"/>`).join('');
+  for (let i = 0; i < 26; i++) { const r = RS(i + 40), x = r() * 720, h = 120 + r() * 160, sw = Math.sin(t + i) * 4; s += `<path d="M${x},592 q${6 + sw},${-h * .5} ${sw * 2},${-h}" stroke="${mix('#3a6a2a', '#6a9a4a', r())}" stroke-width="${3 + r() * 3}" fill="none"/>`; }
+  for (let i = 0; i < 8; i++) s += `<path d="M${(i * 97 + t * 8) % 760},596 l60,0" stroke="#fff" stroke-width="2" opacity=".35"/>`;
+  [[300, 596, 46], [460, 598, 38], [620, 595, 30]].forEach(([x, y, r]) => { s += `<path d="M${x},${y} m${-r},0 a${r},${r * .28} 0 1,0 ${2 * r},0 a${r},${r * .28} 0 1,0 ${-2 * r},0" fill="#3a8a3a"/><path d="M${x},${y} l${r},-4" stroke="#2a6a2a" stroke-width="2"/>`; });
   // larvae wriggling just under the surface
   const r = RS(4); for (let i = 0; i < 14; i++) { const x = 60 + r() * 600, y = 640 + r() * 140, w = Math.sin(t * 6 + i) * 6; s += `<path d="M${x},${y} q${w},12 0,24 q${-w},12 0,24" stroke="#d8d0b0" stroke-width="3" fill="none"/>`; }
   // a fish nosing toward them
@@ -59,10 +74,13 @@ function scenePond(t) {
   F.flash = 0; return s;
 }
 // 5: nature would mostly adapt – other insects fill the gap
-function dragonfly(x, y, s, t) { const f = Math.sin(t * 40) * 6; return `<g transform="translate(${x},${y}) scale(${s})"><rect x="-60" y="-3" width="80" height="6" rx="3" fill="#2a8a9a"/><circle cx="26" cy="0" r="9" fill="#2a6a7a"/><ellipse cx="0" cy="${-14 - f}" rx="30" ry="8" fill="#dff4ff" opacity=".7"/><ellipse cx="0" cy="${14 + f}" rx="30" ry="8" fill="#dff4ff" opacity=".7"/><ellipse cx="-10" cy="${-12 - f}" rx="26" ry="7" fill="#dff4ff" opacity=".6"/><ellipse cx="-10" cy="${12 + f}" rx="26" ry="7" fill="#dff4ff" opacity=".6"/></g>`; }
+function dragonfly(x, y, s, t) { const f = Math.sin(t * 40) * 6; return `<g transform="translate(${x},${y}) scale(${s})">` + Array.from({ length: 8 }, (_, i) => `<ellipse cx="${-52 + i * 8}" cy="0" rx="5" ry="${2.6 + i * .1}" fill="${i % 2 ? '#1a6a7a' : '#2a9aaa'}"/>`).join('') + `<ellipse cx="14" cy="0" rx="10" ry="6" fill="#2a6a7a"/><circle cx="28" cy="0" r="8" fill="#3a8a5a"/><circle cx="31" cy="-3" r="4" fill="#1a2a2a"/><ellipse cx="0" cy="${-14 - f}" rx="30" ry="8" fill="#dff4ff" opacity=".7"/><ellipse cx="0" cy="${14 + f}" rx="30" ry="8" fill="#dff4ff" opacity=".7"/><ellipse cx="-10" cy="${-12 - f}" rx="26" ry="7" fill="#dff4ff" opacity=".6"/><ellipse cx="-10" cy="${12 + f}" rx="26" ry="7" fill="#dff4ff" opacity=".6"/></g>`; }
 function sceneAdapt(t) {
   let s = `<defs><linearGradient id="mdw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SKY[0]}"/><stop offset="1" stop-color="${SKY[2]}"/></linearGradient></defs><rect width="720" height="1280" fill="url(#mdw)"/>` +
-    `<path d="M-20,900 Q200,820 400,880 T760,860 L760,1300 L-20,1300Z" fill="#5a9a3a"/><rect y="960" width="720" height="320" fill="#4a8a32"/>`;
+    `<path d="M-20,860 Q120,800 240,830 T480,810 T760,840 L760,900 L-20,900Z" fill="#3a6a3a"/>` + Array.from({ length: 22 }, (_, i) => { const r = RS(i + 7); return `<ellipse cx="${i * 34 + r() * 20}" cy="${830 + r() * 20}" rx="${26 + r() * 20}" ry="${40 + r() * 30}" fill="${mix('#2a5a2a', '#4a7a3a', r())}"/>`; }).join('') +
+    `<path d="M-20,900 Q200,860 400,890 T760,880 L760,1300 L-20,1300Z" fill="#5a9a3a"/><rect y="940" width="720" height="340" fill="#4a8a32"/><rect y="880" width="720" height="400" fill="#000" filter="url(#grainR)" opacity=".2"/>` +
+    Array.from({ length: 160 }, (_, i) => { const r = RS(i + 300), x = r() * 720, y = 920 + r() * 360, h = 14 + (y - 900) * .08; return `<path d="M${x},${y} q${Math.sin(t * 2 + i) * 3},${-h * .6} ${(r() - .5) * 8},${-h}" stroke="${mix('#3a7a2a', '#7ab04a', r())}" stroke-width="2" fill="none"/>`; }).join('') +
+    Array.from({ length: 18 }, (_, i) => { const r = RS(i + 500); return `<circle cx="${r() * 720}" cy="${960 + r() * 300}" r="${4 + r() * 3}" fill="${['#f4f4f0', '#f4c74a', '#c84a8a'][i % 3]}"/>`; }).join('');
   const k = ease(ramp(t, WS(5, 7), WS(5, 13)));
   let o = ''; for (let i = 0; i < 5; i++) { const r = RS(i + 60); o += dragonfly(120 + r() * 480 + Math.sin(t * (1 + r()) + i) * 60, 600 + r() * 300 + Math.cos(t * 1.4 + i) * 30, 1.6, t + i); }
   for (let i = 0; i < 6; i++) { const r = RS(i + 80), x = 100 + r() * 520 + Math.sin(t * 1.7 + i * 2) * 50, y = 700 + r() * 300; o += `<g transform="translate(${x},${y}) scale(2.2)"><ellipse rx="9" ry="6" fill="#f4c03a"/><rect x="-3" y="-6" width="3" height="12" fill="#222"/><ellipse cx="-2" cy="-8" rx="6" ry="4" fill="#fff" opacity=".7"/></g>`; }
