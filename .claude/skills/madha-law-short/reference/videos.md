@@ -25,9 +25,12 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 19-red-dwarf | ماذا لو تحوّلت الشمس إلى قزم أحمر؟ |
 | 20-earth-reversed | ماذا لو دارت الأرض بالعكس؟ |
 | 21-black-hole | ماذا لو ظهر ثقب أسود بحجم حبة عنب في مدينة؟ |
+| 22-two-moons | ماذا لو كان للأرض قمران؟ |
+| 23-no-oxygen | ماذا لو اختفى الأكسجين ٥ ثوانٍ؟ |
 
 Scheduling status is in `videos/PENDING.md`.
 
 ## Ideas waiting (from vidIQ research)
-- ماذا لو تضاعفت سرعتك كل ثانيتين؟
+- ماذا لو اختفى الزجاج من العالم ٥ ثوانٍ؟
+- ماذا لو صرت أسرع إنسان في العالم؟ (أو: تضاعفت سرعتك كل ثانيتين)
 - ماذا لو توقّف الزمن ٥ ثوانٍ للجميع إلا أنت؟
