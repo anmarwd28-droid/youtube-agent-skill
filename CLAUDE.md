@@ -30,6 +30,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 - Claude produces the narration with ElevenLabs, voice "Brian" (voice_id `nPczCjzI2devNBz1zQrb`, model `eleven_multilingual_v2`); the videos are animated, with no face on camera.
 - Length depends on the idea: as long as the idea really needs and no longer. Cut anything that does not add to it (YouTube allows Shorts up to 3 minutes; viewers finishing the Short matters most).
 - Keep the same look as the published "ماذا لو؟ Lab" Shorts: illustrated scenes with the same 2D people, the city street and skyline, the real NASA 3D Earth and Moon, captions at the top with gold keywords, gold chips, a timeline list on the side. Make it a bit more realistic each time, but never switch to a different style.
+- Standing order: in every new video, whether I picked the idea or Claude did, push every shot to the highest realism Claude can manage, without changing the style. I should never have to ask for it. Check each test still for anything that looks fake or flat and fix it before the full render.
 - Facts must be scientifically correct; list them in the video's `upload.md`.
 - Talk about the whole world, not one country: the narration and the effects shown are global. The street scenes keep the same drawn style, but they stand for any city in the world.
 - Never publish or schedule a video before I have watched it and said it needs no changes.
