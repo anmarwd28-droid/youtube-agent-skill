@@ -2,7 +2,14 @@
 
 Check every test still against this list before the full render.
 
-## Look: keep it, and make it a bit more realistic each video
+## Realism: the standing order (user, Nov 2026)
+Every new video, every shot, goes to the **highest realism possible** without changing the house style. The user should never need to ask for it again.
+- Before the full render, check each test still and ask: "does anything here look fake or flat?" If yes, fix it first.
+- Use real textures (3D NASA bodies, terrain lighting, noise-textured walls and ground, soft shadows, haze and depth), not flat colour fills.
+- Use the real 3D Moon, Earth and Sun wherever they appear.
+- Avoid simple placeholders: no plain circles for planets, no box houses, no flat green slopes, no blobs.
+
+## Look: keep it
 - Use only the house style:
   - illustrated 2D people (`person`, `onWalk`)
   - the city street with a skyline (`bareStreet`)

@@ -7,7 +7,7 @@ description: Make a new animated "what if?" YouTube Short for the channel "ما�
 
 Read `CLAUDE.md` first (the two channels, never mixing them). This skill is for channel 1 only, and its files go in `videos/`. Talk to the user in Iraqi Arabic, simply, and never in English.
 
-Rules in [reference/style.md](reference/style.md) are the user's own feedback, collected over 21 videos. Follow every one; they are the reason the videos look the same.
+**Push every shot to the highest realism you can.** This is the user's standing order for every video, chosen by them or by you; see style.md. Rules in [reference/style.md](reference/style.md) are the user's own feedback, collected over 21 videos. Follow every one; they are the reason the videos look the same.
 
 ## Never do
 
