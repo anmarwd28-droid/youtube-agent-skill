@@ -20,18 +20,19 @@ function proj3(c, p) { const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b
   const f = nrm(sub(c.look, c.pos)), r = nrm(crs(f, [0, 1, 0])), u = crs(r, f), d = sub(p, c.pos), z = dot(d, f), fp = 640 / Math.tan(c.fov * Math.PI / 360);
   return [360 + dot(d, r) / z * fp, 640 - dot(d, u) / z * fp, fp / z]; }
 const blank = () => `<rect width="720" height="1280" fill="#000"/>`;
+const spaceBG = t => space(t);
 // 0: the real globe flattens into a disc
 function sceneHook(t) {
   const m = 1 - ease(ramp(t, WS(0, 3) - .1, WS(0, 6) + .3));
   F.w = { set: 'space', cam: orbit(9.4 - .6 * (1 - m), .5 + .12 * (1 - m), .2 + t * .03), L: [-.6, .9, .5], disc: { m, spin: .3 + t * .05, clouds: .7 } };
-  F.ov = ''; return blank();
+  F.ov = ''; return spaceBG(t);
 }
 // 1: gravity pulls any Earth-sized body into a ball: inward 3D arrows, then the disc folds into a sphere
 function sceneRound(t) {
   const ar = ease(ramp(t, WS(1, 4) - .2, WS(1, 5) + .3)), m = ease(ramp(t, WS(1, 9) - .3, WS(1, 14) + .4)), fa = ar * (1 - ease(ramp(t, WS(1, 9) - .3, WS(1, 9) + .3)));
   const arrows = Array.from({ length: 10 }, (_, i) => { const th = i / 10 * 6.283 + .2; return { from: P3(Math.sin(th) * 1.32, Math.cos(th) * 1.32, .04), to: P3(Math.sin(th) * 1.04, Math.cos(th) * 1.04, .04), a: fa }; });
   F.w = { set: 'space', cam: orbit(9.0, .62 - .2 * m, .25 + t * .03), L: [-.6, .9, .5], disc: { m, spin: .4 + t * .05, clouds: .7 }, arrows };
-  F.ov = ''; return blank();
+  F.ov = ''; return spaceBG(t);
 }
 // 2: on a disc, gravity points to the centre of the disc, not straight down
 function scenePull(t) {
@@ -40,37 +41,40 @@ function scenePull(t) {
   pts.forEach(([r, th], i) => { const a = ar * ease(ramp(t, WS(2, 7) + i * .12, WS(2, 7) + i * .12 + .4)); arrows.push({ from: P3(Math.sin(th) * r, Math.cos(th) * r, .05), to: P3(Math.sin(th) * r * .42, Math.cos(th) * r * .42, .05), a });
     arrows.push({ from: P3(Math.sin(th) * r, Math.cos(th) * r, .42), to: P3(Math.sin(th) * r, Math.cos(th) * r, .06), a: dn * .95, kind: 1 }); });
   F.w = { set: 'space', cam: orbit(8.4, .72, .9 + t * .02, [0, .2, 0]), L: [-.5, .9, .6], disc: { m: 0, spin: .9 + t * .02, clouds: .6 }, arrows };
-  F.ov = ''; return blank();
+  F.ov = ''; return spaceBG(t);
 }
-// 3: away from the centre the ground tilts: a 3D street rolls, people climb, a ball rolls back
+// 3: away from the centre the ground tilts: the drawn street (new buildings, seed 27) rolls, people climb, a ball rolls back
 function sceneSlope(t) {
-  const st = S0(3) - .2, T = t - st, k = ease(ramp(t, WS(3, 4) - .2, WS(3, 10) + .5)), ang = 13 * k, rad = ang * Math.PI / 180;
-  const cam = { pos: [-1.2 + T * .12, 1.7, 11], look: [0, 4.2, -10], fov: 55 };
-  F.w = { set: 'street', tilt: rad, ball: 2.6 - 5.5 * k * k - T * .15 * k, cam };
-  const tiltP = (x, y, z) => { const dy = y - .15; return [x * Math.cos(rad) - dy * Math.sin(rad), .15 + x * Math.sin(rad) + dy * Math.cos(rad), z]; };
-  const walk = (x0, c, sp, ph) => { const wx = x0 + T * sp * (1 - .55 * k), [x, y, fz] = proj3(cam, tiltP(wx, .15, -7.6)), sc = 1.75 / 316 * fz; return `<g transform="rotate(${(ang * .35).toFixed(2)},${x.toFixed(1)},${y.toFixed(1)})">` + castSh(x, y, sc) + onWalk(x, y, CROWD[c], sc, 1, t, { moving: 1, phase: t * (6 - 2.5 * k) + ph, amp: .7 + .15 * k }) + `</g>`; };
-  let o = walk(-4.4, 0, .9, 0) + walk(-1.2, 2, .75, 1.3) + walk(2.4, 3, .65, 2.4);
-  o += `<g transform="translate(150,520)" opacity="${ease(ramp(t, WS(3, 7) - .2, WS(3, 7) + .3)).toFixed(2)}"><rect x="-110" y="-70" width="220" height="130" rx="18" fill="#0a0e1c" opacity=".88"/><path d="M-80,30 L80,30" stroke="#8a93b8" stroke-width="3"/><path d="M-80,30 L${-80 + 160 * Math.cos(rad * 2)},${30 - 160 * Math.sin(rad * 2)}" stroke="#f4c76b" stroke-width="5" stroke-linecap="round"/>` + lbl(0, -36, 'ميلٌ يزداد', 1, '#cfd8ff', 20) + `</g>`;
-  F.ov = o; return blank();
+  const st = S0(3) - .2, T = t - st, k = ease(ramp(t, WS(3, 4) - .2, WS(3, 10) + .5)), ang = 12 * k, rad = ang * Math.PI / 180, PX = 360, PY = 1094;
+  let s = `<g transform="rotate(${(-ang).toFixed(2)},${PX},${PY})"><g transform="translate(${PX},${PY}) scale(1.72) translate(${-PX},${-PY})">` + cityDay(t, { id: 's3', seed: 27 }) + `</g></g>`;
+  // the pavement line, in screen space, after rotation: y = PY - (x-PX)*tan(ang) (scaled by 1.42 around the pivot)
+  const gy = x => PY - (x - PX) * Math.tan(rad);
+  const walk = (x0, c, sc, sp, ph) => { const x = x0 + T * sp * (1 - .55 * k), y = gy(x) + 2; return `<g transform="rotate(${(-ang * .2).toFixed(2)},${x},${y}) rotate(${(ang * .55).toFixed(2)},${x},${y})">` + castSh(x, y, sc) + onWalk(x, y, CROWD[c], sc, 1, t, { moving: 1, phase: t * (6 - 2.5 * k) + ph, amp: .7 + .15 * k }) + `</g>`; };
+  s += walk(90, 0, .56, 26, 0) + walk(260, 2, .58, 22, 1.3);
+  // a ball rolls down the slope towards the centre
+  const bx = 520 - 160 * k * k - T * 5 * k, by = gy(bx) - 12; s += `<circle cx="${bx}" cy="${by}" r="12" fill="#e8463a"/><path d="M${bx - 12},${by} Q${bx},${by + 6} ${bx + 12},${by}" stroke="#fff" stroke-width="3" fill="none" transform="rotate(${(-T * 200 * k).toFixed(0)},${bx},${by})"/>`;
+  // slope gauge
+  s += `<g transform="translate(150,520)" opacity="${ease(ramp(t, WS(3, 7) - .2, WS(3, 7) + .3)).toFixed(2)}"><rect x="-110" y="-70" width="220" height="130" rx="18" fill="#0a0e1c" opacity=".88"/><path d="M-80,30 L80,30" stroke="#8a93b8" stroke-width="3"/><path d="M-80,30 L${-80 + 160 * Math.cos(rad * 2)},${30 - 160 * Math.sin(rad * 2)}" stroke="#f4c76b" stroke-width="5" stroke-linecap="round"/><path d="M-40,30 A40,40 0 0 0 ${-80 + 40 * Math.cos(rad * 2) + 40},${30 - 40 * Math.sin(rad * 2)}" fill="none" stroke="#f4c76b" stroke-width="2"/>` + lbl(0, -36, 'ميلٌ يزداد', 1, '#cfd8ff', 20) + `</g>`;
+  noEarth(); F.ov = ''; return s;
 }
 // 4: oceans and air slide to the middle: a vast central sea, dry airless rims
 function sceneSea(t) {
   const sea = ease(ramp(t, WS(4, 0) - .2, WS(4, 8) + .4)), dry = ease(ramp(t, WS(4, 1), WS(4, 12) + .3));
   F.w = { set: 'space', cam: orbit(8.0, .66, 1.1 + t * .025, [0, .15, 0]), L: [-.5, .9, .5], disc: { m: 0, spin: 1.1 + t * .03, sea, dry, clouds: .65 * (1 - dry * .6) } };
-  F.ov = ''; return blank();
+  F.ov = ''; return spaceBG(t);
 }
 // 5: when the Sun rises over the disc, the whole disc lights up at the same moment
 function sceneDay(t) {
   const up = ease(ramp(t, WS(5, 8) - .2, WS(5, 12) + .3)), sp = [.55, lerp(-1.4, 1.25, up), -3.4];
   F.w = { set: 'space', cam: orbit(9.0, .36, .15 + (t - S0(5)) * .02, [0, .55, 0]), L: [sp[0], sp[1] + 1.2, sp[2]], sun: { pos: sp, r: .22, a: .3 + .7 * up }, disc: { m: 0, spin: 1.4 + t * .03, sunI: .04 + .96 * up, lights: 1 - up * .9, clouds: .6 } };
-  F.ov = ''; return blank();
+  F.ov = ''; return spaceBG(t);
 }
 // 6: ships don't sink below the horizon: the 3D container ship only shrinks until haze hides it (the camera follows it)
 function sceneShip(t) {
   const k = ease(ramp(t, WS(6, 1) - .4, WS(6, 10) + .4)), fog = ramp(t, WS(6, 7), WS(6, 10) + .4), hd = .72, yaw = Math.PI / 2 - hd, d = 5200 * Math.pow(k, 1.4);
   const sx = -90 + Math.sin(hd) * d, sz = -360 - Math.cos(hd) * d;
   F.w = { set: 'sea', ship: { x: sx, z: sz, yaw }, fog: .00004 + .0009 * fog, cam: { pos: [0, 7 + (t - S0(6)) * .08, 40], look: [sx * .92 + 25, 4, sz], fov: 36 } };
-  F.ov = ''; return blank();
+  F.ov = `<defs>${CUDEF}</defs>` + cumulus(190, 360, 230, 4, { a: .92 }) + cumulus(560, 450, 170, 6, { a: .85 }); return blank();
 }
 // 7: the edge: the camera flies off the rock plateau, past the rim, and looks down the cliff into space
 function sceneEdge(t) {
@@ -82,7 +86,7 @@ function sceneEdge(t) {
 function sceneEclipse(t) {
   const k = ease(ramp(t, WS(8, 3) - .3, WS(8, 11) + .4)), out = ease(ramp(t, WS(8, 10), WS(8, 12) + .2));
   F.w = { set: 'space', cam: { pos: [0, 0, 10.5], look: [0, -.25, 0], fov: 30 }, L: [.25, .15, 1], moon: { pos: [0, 0, 0], L: [.25, .15, 1], shC: [-3.75 + 1.75 * k, .15, 0], shR: 2.7, ring: .85 * out } };
-  F.ov = ''; return blank();
+  F.ov = ''; return spaceBG(t);
 }
 // 9: CTA
 function sceneEarth(t) {
@@ -90,7 +94,7 @@ function sceneEarth(t) {
   F.w = { set: 'space', cam: orbit(9.6, .52, 2 + t * .04, [0, .1, 0]), L: [-.5, .9, .6], disc: { m: 0, spin: 2 + t * .08, clouds: .7 } };
   F.ov = `<g opacity="${q}"><text x="360" y="440" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="190" fill="#f4c76b" style="filter:drop-shadow(0 6px 20px rgba(0,0,0,.7))">؟</text></g>` +
     `<g opacity="${ramp(t, WS(9, 7), WS(9, 7) + .4)}" transform="translate(360,${1100 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
-  return blank();
+  return spaceBG(t);
 }
 const SCENES = [
   { s: 0, f: sceneHook }, { s: S0(1) - .2, f: sceneRound }, { s: S0(2) - .2, f: scenePull }, { s: S0(3) - .2, f: sceneSlope }, { s: S0(4) - .2, f: sceneSea },
