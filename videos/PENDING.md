@@ -18,3 +18,10 @@ Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a o
 | 21 | ماذا لو ظهر ثقب أسود بحجم حبة عنب في مدينة؟ | `videos/21-black-hole/bh_short.mp4` | `c188ea1ef75b1e5a096038e2d3c2657f41e506ab` | 23212709 | `videos/21-black-hole/upload.md` |
 | 22 | ماذا لو كان للأرض قمران؟ | `videos/22-two-moons/moons_short.mp4` | `36558ba8d787dcb877285b04ab17efa8b5aebab6` | 17982508 | `videos/22-two-moons/upload.md` |
 | 23 | ماذا لو اختفى الأكسجين من الهواء 5 ثوانٍ فقط؟ | `videos/23-no-oxygen/oxy_short.mp4` | `499623790451466beb6e67b2dd00f5af1236ab38` | 32581000 | `videos/23-no-oxygen/upload.md` |
+| 24 | ماذا لو اختفى كل الزجاج في العالم 5 ثوانٍ فقط؟ | `videos/24-no-glass/glass_short.mp4` | `e13194971b8da032d5ec516556841fe84786cc53` | 21000118 | `videos/24-no-glass/upload.md` |
+| 25 | ماذا لو استطعت أن تركض بسرعة الصوت؟ | `videos/25-speed-of-sound/speed_short.mp4` | `3497db25409d3c6841ae17f444ecfc9eb7dbe347` | 23201655 | `videos/25-speed-of-sound/upload.md` |
+| 26 | ماذا لو توقّف الزمن ٥ ثوانٍ للجميع… إلّا أنت؟ | `videos/26-time-stops/tstop_short.mp4` | `1f90c3e69c6d606011de5b3abed9bf993420e915` | 25485718 | `videos/26-time-stops/upload.md` |
+
+## Not approved yet
+
+- **27, ماذا لو كانت الأرض مسطّحة؟** (`videos/27-flat-earth/flat_short.mp4`): the user said the street, sea and edge shots look too photoreal next to the channel's drawn style. Don't schedule it. Redo those shots in the drawn style (style.md) when the user asks, and get a new approval.

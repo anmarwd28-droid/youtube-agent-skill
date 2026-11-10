@@ -2,8 +2,19 @@
 
 ## Language and tone
 
-- Always reply to me in Iraqi Arabic.
+- Always reply to me in Iraqi Arabic, every message, even long technical ones. Never write to me in English.
 - Keep explanations simple.
+
+## How to work with me
+
+- When I ask a question or say "جاوبني بس" (just answer), only answer. Don't change files, render or run anything.
+- When I say "وقف" (stop), stop everything at once, background renders included, and wait for my next message.
+- If an instruction could mean more than one thing (especially deleting), ask me which one before acting. A wrong guess once deleted the wrong thing.
+- Never lower the quality to save tokens or time: keep the full test stills, full video length and full render quality.
+- When I give several ideas, make them one at a time, so they don't clash. Do two at once only when that is clearly safe.
+- Pick ideas and titles that can go far (my goal is more than 2,500 views per video). Use vidIQ research for this.
+- Each new video starts in a new conversation. Everything needed must be saved in the repo (this file, the `madha-law-short` skill, `videos/PENDING.md`); never keep an important rule only in the chat.
+- Never ask me to paste an API key in the chat; use the secure credential form. ElevenLabs is on the free plan (10,000 characters a month); check the remaining characters before narrating.
 
 ## Two channels: never mix them
 
