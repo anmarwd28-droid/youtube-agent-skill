@@ -47,6 +47,15 @@ The page is 720×1280 SVG. It renders to 1080×1920 at dpr 1.5, 30 fps. A WebGL 
 
 To make a changed-Earth texture, write a Python script like `tex/retro_tex.py`, `tex/ash_tex.py` or `tex/proxb_tex.py`. These read `earth_atmos_2048.jpg` and paint soft, noise-modulated changes (never hard boxes). Save the result into `tex/`.
 
+### gl3d_world.js: the three.js world (first used in #27, flat Earth)
+- **What it does:** one renderer with a perspective camera and four sets, chosen per frame by `F.w = { set: 'space' | 'street' | 'sea' | 'edge', cam: { pos, look, fov }, ... }`.
+  - The disc/globe morph (`disc: { m, spin, sea, dry, lights, sunI }`), the 3D arrows, the Sun and the Moon with the eclipse shadow live in `space`.
+  - The textures are made in code.
+  - Each scene returns a black SVG rect; people and labels go in `F.ov`.
+  - The scene code uses `proj3(cam, point)` (see `videos/27-flat-earth/src/flat3_new.js`) to place 2D people on 3D ground.
+- **Page setup:** it needs an import map and the crossfade patch. `videos/27-flat-earth/src/b3.sh` shows the build: add `<script type="importmap">{"imports":{"three":"./three.module.js"}}</script>` before the module script, and add `w: F.w` to the `FA` object.
+- **Style limit:** use its space set freely. Street/sea/edge must follow the style rule in style.md: styled to match the drawings, never photoreal. `tex/flat3_*.jpg` are the three.js Earth maps reprojected to a disc by `azim.py`. `waternormals.jpg` comes from `waternormals.py`.
+
 ## Helper library (loaded before X_new.js)
 - `sun.html` slices are pasted in by build_short:
   - `space(t, top, bot)`: a starfield

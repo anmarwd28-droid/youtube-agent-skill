@@ -9,6 +9,14 @@ Read `CLAUDE.md` first (the two channels, never mixing them). This skill is for 
 
 **Push every shot to the highest realism you can.** This is the user's standing order for every video, chosen by them or by you; see style.md. Rules in [reference/style.md](reference/style.md) are the user's own feedback, collected over 21 videos. Follow every one; they are the reason the videos look the same.
 
+## Starting a fresh conversation (one per video)
+- **Why:** the user starts a new conversation for each video, to keep the context small and save usage. Everything needed is in the repo: `CLAUDE.md`, this skill, `reference/` (style, api, videos), `toolkit/`, `examples/` and the last videos' `src/`.
+- **First steps:**
+  1. Read `reference/style.md` and `reference/videos.md` (the next idea is there).
+  2. Follow the steps below.
+- **Scheduling:** look at `videos/PENDING.md` for what is waiting.
+- **Narration:** ElevenLabs runs through the proxy with the key saved on the Default environment. Check the remaining characters first with `GET /v1/user/subscription`; the free plan gives 10,000 a month.
+
 ## Never do
 
 - Publish or schedule before the user has watched the final video and said it needs no changes.
