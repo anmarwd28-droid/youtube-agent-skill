@@ -9,6 +9,17 @@ Every new video, every shot, goes to the **highest realism possible** without ch
 - Use the real 3D Moon, Earth and Sun wherever they appear.
 - Avoid simple placeholders: no plain circles for planets, no box houses, no flat green slopes, no blobs.
 
+### Real assets and three.js, to the maximum (user, Nov 2026)
+Use these real sources as much as possible in every video:
+- **Poly Haven** (`api.polyhaven.com` for the asset list, `dl.polyhaven.org` for the files). CC0: HDRI skies, PBR textures (ground, rock, wood, brick, concrete) and 3D models.
+- **Solar System Scope** (`www.solarsystemscope.com/textures/`). CC BY 4.0: planet, Sun, Moon and star-field textures. Credit them in the description: "Textures: Solar System Scope (CC BY 4.0)".
+- **NASA images** (`images-assets.nasa.gov`). Public domain: real photos for backgrounds and space.
+- **three.js**: real 3D scenes with lighting, shadows and PBR materials, pushed as far as it goes. Get three and its addons from npm (`npm pack three`); the CDN is blocked.
+
+The hosts are allowed in the Default environment's network. Save every downloaded file to `src/` with the video, so a render never depends on the network.
+
+**People: keep them as they are** (the same 2D people). Change a person only if the idea changes how they move: flying, a superpower, no sleep (swaying, slow), hunger and so on.
+
 ## Look: keep it
 - Use only the house style:
   - illustrated 2D people (`person`, `onWalk`)
