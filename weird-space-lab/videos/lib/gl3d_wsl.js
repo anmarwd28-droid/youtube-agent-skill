@@ -66,6 +66,43 @@ export async function init(canvas, dpr = 1.5) {
   scene.add(sun, earth, atm, moon, planet);
   earth.rotation.order = 'ZYX'; earth.rotation.z = 0.41; // axial tilt (spin about the tilted axis)
 
+
+  // ---------- a real 3D underwater set: sand seabed (photo texture) with moving caustics, 3D rocks (photo texture), fog ----------
+  const texL = (u, rep) => load(u).then(t => { if (rep) { t.wrapS = t.wrapT = THREE.RepeatWrapping; } return t; }).catch(() => null);
+  const [sandT, rockT, gravT] = await Promise.all([texL('textures/coast_sand_01.jpg', 1), texL('textures/rock_face.jpg', 1), texL('textures/coral_gravel.jpg', 1)]);
+  const seaScene = new THREE.Scene(); const seaCam = new THREE.PerspectiveCamera(55, W / H, .1, 400);
+  const SEA_FOG = new THREE.Color(0x0b3d5c);
+  const seaVert = `varying vec3 vW; varying vec3 vN; varying vec2 vUv; void main(){ vUv = uv; vec4 w = modelMatrix * vec4(position,1.0); vW = w.xyz; vN = normalize(mat3(modelMatrix)*normal); gl_Position = projectionMatrix * viewMatrix * w; }`;
+  const seaFrag = (body) => `uniform sampler2D tex, tex2; uniform float t, rep, fogD, deep; uniform vec3 fogC; varying vec3 vW; varying vec3 vN; varying vec2 vUv;
+    float caus(vec2 p){ float c = 0.0; for (int i = 0; i < 3; i++) { float fi = float(i); vec2 q = p * (1.3 + fi * .7) + vec2(t * (.35 + fi * .1), t * (.27 - fi * .08));
+      c += abs(sin(q.x + sin(q.y * 1.7 + t))) * abs(sin(q.y + sin(q.x * 1.3 - t * .8))); } return pow(1.0 - c / 3.0, 6.0); }
+    void main(){ ${body}
+      float d = length(vW - cameraPosition); float f = 1.0 - exp(-d * fogD); vec3 fc = fogC * (1.0 - deep * .8);
+      gl_FragColor = vec4(mix(col, fc, clamp(f, 0.0, 1.0)), 1.0); }`;
+  const sandMat = new THREE.ShaderMaterial({ uniforms: { tex: { value: sandT }, tex2: { value: gravT }, t: { value: 0 }, rep: { value: 14 }, fogD: { value: .045 }, fogC: { value: SEA_FOG }, deep: { value: 0 } }, vertexShader: seaVert,
+    fragmentShader: seaFrag(`vec3 a = texture2D(tex, vUv * rep).rgb; vec3 b = texture2D(tex2, vUv * rep * .6).rgb; float m = smoothstep(.45, .65, texture2D(tex2, vUv * 2.0).g);
+      vec3 base = mix(a, b, m * .5) * vec3(.62, .82, .9); float sh = clamp(dot(normalize(vN), normalize(vec3(.2, 1.0, .3))), 0.0, 1.0);
+      vec3 col = base * (.35 + .65 * sh) * (1.0 - deep * .75) + vec3(.55, .85, .95) * caus(vW.xz * .9) * .55 * (1.0 - deep);`) });
+  const sandGeo = new THREE.PlaneGeometry(240, 240, 240, 240); sandGeo.rotateX(-Math.PI / 2);
+  { const p = sandGeo.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), z = p.getZ(i); p.setY(i, Math.sin(x * .35 + z * .12) * .25 + Math.sin(z * .5 - x * .2) * .18 + Math.sin(x * 1.7) * Math.sin(z * 1.3) * .05); } sandGeo.computeVertexNormals(); }
+  const sand = new THREE.Mesh(sandGeo, sandMat); seaScene.add(sand);
+  const rockMat = new THREE.ShaderMaterial({ uniforms: { tex: { value: rockT }, tex2: { value: gravT }, t: { value: 0 }, rep: { value: 2 }, fogD: { value: .045 }, fogC: { value: SEA_FOG }, deep: { value: 0 } }, vertexShader: seaVert,
+    fragmentShader: seaFrag(`vec3 n = normalize(vN); vec3 base = texture2D(tex, vUv * rep).rgb * vec3(.7, .85, .88); float sh = clamp(dot(n, normalize(vec3(.3, 1.0, .4))), 0.0, 1.0);
+      vec3 col = base * (.18 + .9 * sh) * (1.0 - deep * .75) + vec3(.55, .85, .95) * caus(vW.xz * .9 + vW.y) * .35 * smoothstep(.2, .9, n.y) * (1.0 - deep);`) });
+  const hash = (x, y, z) => { const s = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453; return s - Math.floor(s); };
+  const rocks = [];
+  for (let k = 0; k < 9; k++) { const g = new THREE.IcosahedronGeometry(1, 4); const p = g.attributes.position;
+    for (let i = 0; i < p.count; i++) { const v = new THREE.Vector3(p.getX(i), p.getY(i), p.getZ(i)); const n = .75 + .35 * hash(Math.round(v.x * 3) + k, Math.round(v.y * 3), Math.round(v.z * 3)) + .12 * Math.sin(v.x * 5 + k) * Math.cos(v.z * 4);
+      v.multiplyScalar(n); v.y *= .65; p.setXYZ(i, v.x, v.y, v.z); }
+    g.computeVertexNormals(); const m = new THREE.Mesh(g, rockMat); seaScene.add(m); rocks.push(m); }
+  const ROCK_POS = [[-6, -14, 2.2], [5, -10, 1.6], [-2.5, -6, .9], [8, -22, 3.2], [-11, -26, 3.4], [2, -30, 2.6], [-4, -42, 4], [12, -40, 3.8], [0, -18, 1.2]];
+  ROCK_POS.forEach(([x, z, s], k) => { rocks[k].position.set(x, s * .25 - .2, z); rocks[k].scale.setScalar(s); rocks[k].rotation.y = k * 1.3; });
+  function drawSea(f) {
+    const s = f.sea3d, deep = s.deep || 0; seaScene.background = SEA_FOG.clone().multiplyScalar(1 - deep * .8);
+    [sandMat, rockMat].forEach(m => { m.uniforms.t.value = f.t; m.uniforms.deep.value = deep; m.uniforms.fogD.value = .04 + deep * .05; });
+    seaCam.position.set(s.camX || 0, s.camY ?? 3.2, (s.camZ ?? 8) - f.t * (s.drift ?? .25)); seaCam.lookAt(s.camX || 0, s.lookY ?? 1.2, seaCam.position.z - 12); seaCam.updateProjectionMatrix();
+    renderer.render(seaScene, seaCam);
+  }
   function place(m, o) { m.visible = !!o && o.a > 0.001; if (!m.visible) return; m.position.set(o.x, -o.y, 0); m.scale.setScalar(o.r); }
   function draw(f) {
     place(sun, f.sun); place(earth, f.earth); place(atm, f.earth); place(moon, f.moon); place(planet, f.planet && PL[f.planet.tex] ? f.planet : null);
@@ -83,7 +120,7 @@ export async function init(canvas, dpr = 1.5) {
     if (f.moon) { const m = f.moon, lx = (f.light ? f.light[0] : m.x - 400) - m.x, ly = -((f.light ? f.light[1] : m.y) - m.y);
       moonMat.uniforms.L.value.set(lx, ly, 120).normalize(); moonMat.uniforms.sunI.value = m.sunI; moonMat.uniforms.alpha.value = m.a; moon.rotation.y = 4.2; }
     canvas.style.opacity = f.opacity;
-    renderer.render(scene, cam);
+    if (f.sea3d) { renderer.autoClear = true; drawSea(f); renderer.autoClear = false; renderer.render(scene, cam); renderer.autoClear = true; } else renderer.render(scene, cam);
   }
   return { draw };
 }
