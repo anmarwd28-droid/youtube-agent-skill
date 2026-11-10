@@ -9,14 +9,11 @@ Every new video, every shot, goes to the **highest realism possible** without ch
 - Use the real 3D Moon, Earth and Sun wherever they appear.
 - Avoid simple placeholders: no plain circles for planets, no box houses, no flat green slopes, no blobs.
 
-### Real assets and three.js, to the maximum (user, Nov 2026)
-Use these real sources as much as possible in every video:
-- **Poly Haven** (`api.polyhaven.com` for the asset list, `dl.polyhaven.org` for the files). CC0: HDRI skies, PBR textures (ground, rock, wood, brick, concrete) and 3D models.
-- **Solar System Scope** (`www.solarsystemscope.com/textures/`). CC BY 4.0: planet, Sun, Moon and star-field textures. Credit them in the description: "Textures: Solar System Scope (CC BY 4.0)".
-- **NASA images** (`images-assets.nasa.gov`). Public domain: real photos for backgrounds and space.
-- **three.js**: real 3D scenes with lighting, shadows and PBR materials, pushed as far as it goes. Get three and its addons from npm (`npm pack three`); the CDN is blocked.
-
-The hosts are allowed in the Default environment's network. Save every downloaded file to `src/` with the video, so a render never depends on the network.
+### three.js only, to the maximum (user, Nov 2026)
+- **Don't use outside asset sites:** no Poly Haven, Solar System Scope or NASA downloads. The user asked for them to be removed, and their hosts are off the network list.
+- **Build everything in three.js:** real 3D geometry, lights and shadows, PBR materials, the three.js Sky and Water objects. Textures are generated in code (canvas or shader noise for brick, plaster, asphalt, rock).
+- **Earth and Moon:** use the three.js textures already in the toolkit (`tex/earth_atmos_2048.jpg`, `earth_lights_2048.png`, `earth_clouds_1024.png`, `moon_1024.jpg`). This is the same Earth the user liked in the published "دارت الأرض بالعكس" video: day/night terminator, city lights, clouds, a blue atmosphere rim, and a dark navy space with stars.
+- **Match the published Shorts:** same captions, chips, side list and 2D people.
 
 **Build the whole video in three.js** (user, Nov 2026): every scene is a real 3D scene. That covers the street and its buildings, sea and ships, terrain, space, planets and the Moon, with a perspective camera, real lighting and shadows, PBR materials, Poly Haven HDRI skies and textures, and real water (waves, sky reflections, sun glint). No more flat SVG drawings for backgrounds, water, ships or buildings. Only the captions, chips, side list and the people stay 2D on top.
 **Buildings change in every video:** different shapes, heights, facades and shops each time (random seed per video plus Poly Haven facade textures). Don't repeat the same street.
