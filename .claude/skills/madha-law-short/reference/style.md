@@ -16,6 +16,12 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **Water, ships and terrain:** three.js is fine, but styled to match the drawings (moving waves, reflections and the channel's colours), not photoreal. Ships likewise: 3D, with colours and shading that sit with the drawn scenes.
 - **People: keep them as they are** (the same 2D people). Change a person only if the idea changes how they move: flying, a superpower, no sleep (swaying, slow), hunger and so on.
 - **No outside asset sites:** no Poly Haven, Solar System Scope or NASA downloads. Their hosts were removed from the network list. Everything else is made in code.
+- **How #27 was fixed** (follow this in every video):
+  - Space scenes render the three.js layer with a transparent background over the published SVG `space(t)` (navy gradient and stars).
+  - The disc/globe shader is bright and saturated, with clouds that drift and cast shadows, sun glint on the oceans and a blue haze near the rim.
+  - The atmosphere glow uses additive blending that keeps the canvas alpha (CustomBlending: One/One for colour, Zero/One for alpha).
+  - The street is the drawn `cityDay(t, { seed })`: `bareStreet` builds a different front row of buildings for each seed. Use a new seed in every video.
+  - The sea uses the channel's sky colours, with drawn `cumulus` clouds on top.
 - **Test:** before rendering, compare a test still with a published Short. If it looks like a different channel, it is wrong.
 
 ## Look: keep it
