@@ -1,20 +1,20 @@
 # ماذا لو كانت الأرض مسطّحة؟ — Short #27
 
-64 s, 1080x1920, 30 fps. Global framing. Real 3D (three.js) with real textures.
+64 s, 1080x1920, 30 fps. Global framing. Every scene is real 3D, built only in three.js (no outside assets).
 
 What it shows, in order:
-1. The real 3D globe (Solar System Scope 8K map) flattens into a thick rock disc in space, in front of the real Milky Way.
-2. Gold arrows point inward from the rim, and gravity folds the disc back into a sphere.
-3. The disc again: gravity arrows all point to the centre, and the "straight down" arrows are crossed out.
-4. A city street tilts more and more. People walk upright as if climbing, a ball rolls back toward the centre, and a slope gauge rises.
-5. The oceans slide inward: a raised sea in the middle of the disc, with dry, pale, airless rims.
+1. The 3D globe (the same three.js Earth as the published Shorts: day side, city lights, clouds, a blue atmosphere rim) in a navy, starry space flattens into a thick rock disc.
+2. 3D gold arrows point inward from the rim, and gravity folds the disc back into a sphere.
+3. On the disc, 3D gravity arrows all point to the centre, and the "straight down" arrows are crossed out.
+4. A 3D city street (procedural buildings, shops, trees with leaves, lamp posts, sunlight and shadows) tilts more and more. People walk as if climbing, a ball rolls back toward the centre, and a slope gauge rises.
+5. The oceans slide inward: a raised, glossy sea in the middle of the disc, with dry, pale rims.
 6. Night with city lights over the whole disc. The Sun rises and the entire disc lights up at the same moment.
-7. A container ship sails away and stays whole, only getting smaller until haze hides it.
-8. The edge: a rock plateau (Poly Haven textures) ending at a cliff, with a black, airless sky and stars.
-9. A lunar eclipse on the real 3D Moon: Earth's round shadow, with its full circle outlined.
+7. A 3D container ship on a real three.js ocean (waves, sky reflections) sails away, staying whole and only shrinking until haze hides it.
+8. The edge: the camera flies over a rock plateau with boulders, past the rim, and looks down a layered cliff into black, starry space.
+9. A lunar eclipse on the 3D Moon: Earth's round shadow, with its full circle outlined.
 10. The flat disc with the question mark and the subscribe button.
 
-Source in `src/` (textures included in `src/tex/`).
+Source in `src/`.
 
 ## Title
 ماذا لو كانت الأرض مسطّحة فعلاً؟ 🌍
@@ -29,7 +29,6 @@ Source in `src/` (textures included in `src/tex/`).
 ماذا لو؟ Lab — أسئلة مستحيلة… بأجوبة علمية.
 اشترك حتى لا يفوتك السؤال القادم: @MadhaLawLab
 
-Textures: Solar System Scope (CC BY 4.0), Poly Haven (CC0).
 
 ## Tags
 ماذا لو كانت الأرض مسطحة, الأرض المسطحة, هل الأرض مسطحة, الأرض كروية, الجاذبية, خسوف القمر, علوم, هل تعلم, what if the earth was flat, flat earth science
