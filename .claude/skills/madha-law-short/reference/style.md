@@ -18,6 +18,8 @@ Use these real sources as much as possible in every video:
 
 The hosts are allowed in the Default environment's network. Save every downloaded file to `src/` with the video, so a render never depends on the network.
 
+**Build the whole video in three.js** (user, Nov 2026): every scene is a real 3D scene. That covers the street and its buildings, sea and ships, terrain, space, planets and the Moon, with a perspective camera, real lighting and shadows, PBR materials, Poly Haven HDRI skies and textures, and real water (waves, sky reflections, sun glint). No more flat SVG drawings for backgrounds, water, ships or buildings. Only the captions, chips, side list and the people stay 2D on top.
+**Buildings change in every video:** different shapes, heights, facades and shops each time (random seed per video plus Poly Haven facade textures). Don't repeat the same street.
 **People: keep them as they are** (the same 2D people). Change a person only if the idea changes how they move: flying, a superpower, no sleep (swaying, slow), hunger and so on.
 
 ## Look: keep it
