@@ -8,19 +8,23 @@ Use the exact file at the exact commit (raw URL) and check its size first.
 
 Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a one-second dotted-globe glitch was found and fixed. The user decided not to replace them, so do not touch those posts. The fixed files are in the repo.
 
-## Approved videos waiting to be scheduled
+## Scheduled on 10 Nov 2026 (YouTube only, two per day: 10:00 and 18:00 Baghdad time)
 
-| # | Video | Approved file | Commit | Size (bytes) | Title, description and tags |
-|---|---|---|---|---|---|
-| 18 | ماذا لو انفجر بركان يلوستون العملاق؟ | `videos/18-yellowstone/yell_short.mp4` | `79357bff6eb8cbafde33ae2bfe93df6e0e52abe5` | 55767590 | `videos/18-yellowstone/upload.md` |
-| 19 | ماذا لو تحوّلت الشمس فجأة إلى قزم أحمر؟ | `videos/19-red-dwarf/red_short.mp4` | `2a545a8f7b44354f9e2d9ce424996c40dccb3b90` | 24240123 | `videos/19-red-dwarf/upload.md` |
-| 20 | ماذا لو دارت الأرض بالعكس؟ | `videos/20-earth-reversed/retro_short.mp4` | `5e6cc2f5849636d5a78b2b3829e908dfdc0778b7` | 38154214 | `videos/20-earth-reversed/upload.md` |
-| 21 | ماذا لو ظهر ثقب أسود بحجم حبة عنب في مدينة؟ | `videos/21-black-hole/bh_short.mp4` | `c188ea1ef75b1e5a096038e2d3c2657f41e506ab` | 23212709 | `videos/21-black-hole/upload.md` |
-| 22 | ماذا لو كان للأرض قمران؟ | `videos/22-two-moons/moons_short.mp4` | `36558ba8d787dcb877285b04ab17efa8b5aebab6` | 17982508 | `videos/22-two-moons/upload.md` |
-| 23 | ماذا لو اختفى الأكسجين من الهواء 5 ثوانٍ فقط؟ | `videos/23-no-oxygen/oxy_short.mp4` | `499623790451466beb6e67b2dd00f5af1236ab38` | 32581000 | `videos/23-no-oxygen/upload.md` |
-| 24 | ماذا لو اختفى كل الزجاج في العالم 5 ثوانٍ فقط؟ | `videos/24-no-glass/glass_short.mp4` | `e13194971b8da032d5ec516556841fe84786cc53` | 21000118 | `videos/24-no-glass/upload.md` |
-| 25 | ماذا لو استطعت أن تركض بسرعة الصوت؟ | `videos/25-speed-of-sound/speed_short.mp4` | `3497db25409d3c6841ae17f444ecfc9eb7dbe347` | 23201655 | `videos/25-speed-of-sound/upload.md` |
-| 26 | ماذا لو توقّف الزمن ٥ ثوانٍ للجميع… إلّا أنت؟ | `videos/26-time-stops/tstop_short.mp4` | `1f90c3e69c6d606011de5b3abed9bf993420e915` | 25485718 | `videos/26-time-stops/upload.md` |
+The user chose two Shorts a day, morning and evening. Keep this rhythm for new videos once they are approved: the next free slot is **18 Nov 18:00**.
+
+| # | Video | Publish time (Asia/Baghdad) |
+|---|---|---|
+| 18 | ماذا لو انفجر بركان يلوستون العملاق؟ | 14 Nov 10:00 |
+| 19 | ماذا لو تحوّلت الشمس فجأة إلى قزم أحمر؟ | 14 Nov 18:00 |
+| 20 | ماذا لو دارت الأرض بالعكس؟ | 15 Nov 10:00 |
+| 21 | ماذا لو ظهر ثقب أسود بحجم حبة عنب في مدينة؟ | 15 Nov 18:00 |
+| 22 | ماذا لو كان للأرض قمران؟ | 16 Nov 10:00 |
+| 23 | ماذا لو اختفى الأكسجين من الهواء 5 ثوانٍ فقط؟ | 16 Nov 18:00 |
+| 24 | ماذا لو اختفى كل الزجاج في العالم 5 ثوانٍ فقط؟ | 17 Nov 10:00 |
+| 25 | ماذا لو استطعت أن تركض بسرعة الصوت؟ | 17 Nov 18:00 |
+| 26 | ماذا لو توقّف الزمن ٥ ثوانٍ للجميع… إلّا أنت؟ | 18 Nov 10:00 |
+
+Videos up to 17 were scheduled earlier (10:00 and 16:00, up to 13 Nov). No approved video is waiting now.
 
 ## Not approved yet
 
