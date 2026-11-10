@@ -775,14 +775,14 @@ const spaceBG = t => space(t);
 // 0: the real globe flattens into a disc
 function sceneHook(t) {
   const m = 1 - ease(ramp(t, WS(0, 3) - .1, WS(0, 6) + .3));
-  F.w = { set: 'space', cam: orbit(9.4 - .6 * (1 - m), .5 + .12 * (1 - m), .2 + t * .03), L: [-.6, .9, .5], disc: { m, spin: .3 + t * .05, clouds: .7 } };
+  F.w = { set: 'space', cam: orbit(9.4 - .6 * (1 - m), .5 + .12 * (1 - m), .2 + t * .03), L: [-1, .45, .55], disc: { m, spin: 3.14 + t * .03, clouds: .45 } };
   F.ov = ''; return spaceBG(t);
 }
 // 1: gravity pulls any Earth-sized body into a ball: inward 3D arrows, then the disc folds into a sphere
 function sceneRound(t) {
   const ar = ease(ramp(t, WS(1, 4) - .2, WS(1, 5) + .3)), m = ease(ramp(t, WS(1, 9) - .3, WS(1, 14) + .4)), fa = ar * (1 - ease(ramp(t, WS(1, 9) - .3, WS(1, 9) + .3)));
   const arrows = Array.from({ length: 10 }, (_, i) => { const th = i / 10 * 6.283 + .2; return { from: P3(Math.sin(th) * 1.32, Math.cos(th) * 1.32, .04), to: P3(Math.sin(th) * 1.04, Math.cos(th) * 1.04, .04), a: fa }; });
-  F.w = { set: 'space', cam: orbit(9.0, .62 - .2 * m, .25 + t * .03), L: [-.6, .9, .5], disc: { m, spin: .4 + t * .05, clouds: .7 }, arrows };
+  F.w = { set: 'space', cam: orbit(9.0, .62 - .2 * m, .25 + t * .03), L: [-1, .45, .55], disc: { m, spin: 3.14 + t * .03, clouds: .45 }, arrows };
   F.ov = ''; return spaceBG(t);
 }
 // 2: on a disc, gravity points to the centre of the disc, not straight down
@@ -791,7 +791,7 @@ function scenePull(t) {
   const pts = [[.85, .3], [.85, 1.9], [.85, 3.4], [.85, 4.9], [.55, 1.1], [.55, 4.3]], arrows = [];
   pts.forEach(([r, th], i) => { const a = ar * ease(ramp(t, WS(2, 7) + i * .12, WS(2, 7) + i * .12 + .4)); arrows.push({ from: P3(Math.sin(th) * r, Math.cos(th) * r, .05), to: P3(Math.sin(th) * r * .42, Math.cos(th) * r * .42, .05), a });
     arrows.push({ from: P3(Math.sin(th) * r, Math.cos(th) * r, .42), to: P3(Math.sin(th) * r, Math.cos(th) * r, .06), a: dn * .95, kind: 1 }); });
-  F.w = { set: 'space', cam: orbit(8.4, .72, .9 + t * .02, [0, .2, 0]), L: [-.5, .9, .6], disc: { m: 0, spin: .9 + t * .02, clouds: .6 }, arrows };
+  F.w = { set: 'space', cam: orbit(8.4, .72, .9 + t * .02, [0, .2, 0]), L: [-.5, .9, .6], disc: { m: 0, spin: .9 + t * .02, clouds: .42 }, arrows };
   F.ov = ''; return spaceBG(t);
 }
 // 3: away from the centre the ground tilts: the drawn street (new buildings, seed 27) rolls, people climb, a ball rolls back
@@ -811,21 +811,47 @@ function sceneSlope(t) {
 // 4: oceans and air slide to the middle: a vast central sea, dry airless rims
 function sceneSea(t) {
   const sea = ease(ramp(t, WS(4, 0) - .2, WS(4, 8) + .4)), dry = ease(ramp(t, WS(4, 1), WS(4, 12) + .3));
-  F.w = { set: 'space', cam: orbit(8.0, .66, 1.1 + t * .025, [0, .15, 0]), L: [-.5, .9, .5], disc: { m: 0, spin: 1.1 + t * .03, sea, dry, clouds: .65 * (1 - dry * .6) } };
+  F.w = { set: 'space', cam: orbit(8.0, .66, 1.1 + t * .025, [0, .15, 0]), L: [-.5, .9, .5], disc: { m: 0, spin: 1.1 + t * .03, sea, dry, clouds: .45 * (1 - dry * .6) } };
   F.ov = ''; return spaceBG(t);
 }
 // 5: when the Sun rises over the disc, the whole disc lights up at the same moment
 function sceneDay(t) {
   const up = ease(ramp(t, WS(5, 8) - .2, WS(5, 12) + .3)), sp = [.55, lerp(-1.4, 1.25, up), -3.4];
-  F.w = { set: 'space', cam: orbit(9.0, .36, .15 + (t - S0(5)) * .02, [0, .55, 0]), L: [sp[0], sp[1] + 1.2, sp[2]], sun: { pos: sp, r: .22, a: .3 + .7 * up }, disc: { m: 0, spin: 1.4 + t * .03, sunI: .04 + .96 * up, lights: 1 - up * .9, clouds: .6 } };
+  F.w = { set: 'space', cam: orbit(9.0, .36, .15 + (t - S0(5)) * .02, [0, .55, 0]), L: [sp[0], sp[1] + 1.2, sp[2]], sun: { pos: sp, r: .22, a: .3 + .7 * up }, disc: { m: 0, spin: 1.4 + t * .03, sunI: .04 + .96 * up, lights: 1 - up * .9, clouds: .42 } };
   F.ov = ''; return spaceBG(t);
 }
-// 6: ships don't sink below the horizon: the 3D container ship only shrinks until haze hides it (the camera follows it)
+// 6: ships don't sink below the horizon: in the drawn style, a container ship sails away and only shrinks until haze hides it
+function cargoShip(dir = 1) {   // drawn at the origin, waterline y=0, ~380 px long, facing +x
+  const pal = ['#c0392b', '#2a6ab0', '#e8a23a', '#3a8a5a', '#8a8a8a', '#2a4a7a', '#d8d8d8'], r = RS(5); let c = '';
+  for (let tr = 0; tr < 3; tr++) for (let i = 0; i < 12; i++) { const x = -120 + i * 23, y = -58 - tr * 17, col = pal[Math.floor(r() * pal.length)]; if (tr === 2 && (i < 2 || i > 9)) continue;
+    c += `<rect x="${x}" y="${y}" width="22" height="16.5" fill="${col}"/><rect x="${x}" y="${y}" width="22" height="3" fill="#fff" opacity=".18"/><rect x="${x + 15}" y="${y}" width="7" height="16.5" fill="#000" opacity=".22"/>` + [5, 10].map(q => `<path d="M${x + q},${y + 2} v13" stroke="#000" stroke-width=".8" opacity=".25"/>`).join(''); }
+  return `<g transform="scale(${dir},1)"><defs><linearGradient id="hlG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3440"/><stop offset="1" stop-color="#141a22"/></linearGradient></defs>` +
+    `<path d="M-185,-40 L175,-40 Q205,-36 196,-18 L182,0 L-170,0 Q-186,-18 -185,-40Z" fill="url(#hlG)"/><path d="M-170,0 L182,0 L176,14 L-164,14Z" fill="#8a2a22"/><path d="M-185,-42 L178,-42 L176,-38 L-185,-38Z" fill="#e8e8e8"/>` +
+    `<path d="M-185,-40 L175,-40 Q205,-36 196,-18 L182,0 L-170,0Z" fill="#fff" opacity=".07"/>` + c +
+    `<rect x="-178" y="-104" width="44" height="62" fill="#f2f2ee"/><rect x="-178" y="-104" width="14" height="62" fill="#000" opacity=".12"/>` + [0, 1, 2, 3].map(q => `<rect x="-174" y="${-98 + q * 14}" width="36" height="5" fill="#2a3a4a"/>`).join('') +
+    `<rect x="-184" y="-112" width="56" height="9" fill="#e8e8e4"/><rect x="-170" y="-138" width="13" height="27" fill="#2a2a2a"/><rect x="-170" y="-132" width="13" height="6" fill="#2a6ab0"/><path d="M-152,-112 v-22 M-156,-128 h8" stroke="#ddd" stroke-width="2"/></g>`;
+}
 function sceneShip(t) {
-  const k = ease(ramp(t, WS(6, 1) - .4, WS(6, 10) + .4)), fog = ramp(t, WS(6, 7), WS(6, 10) + .4), hd = .72, yaw = Math.PI / 2 - hd, d = 5200 * Math.pow(k, 1.4);
-  const sx = -90 + Math.sin(hd) * d, sz = -360 - Math.cos(hd) * d;
-  F.w = { set: 'sea', ship: { x: sx, z: sz, yaw }, fog: .00004 + .0009 * fog, cam: { pos: [0, 7 + (t - S0(6)) * .08, 40], look: [sx * .92 + 25, 4, sz], fov: 36 } };
-  F.ov = `<defs>${CUDEF}</defs>` + cumulus(190, 360, 230, 4, { a: .92 }) + cumulus(560, 450, 170, 6, { a: .85 }); return blank();
+  const st = S0(6) - .2, T = t - st, k = ease(ramp(t, WS(6, 1) - .4, WS(6, 10) + .4)), fog = ramp(t, WS(6, 7), WS(6, 10) + .4), HZ = 690;
+  let s = `<defs>${CUDEF}<linearGradient id="skB6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3e72b8"/><stop offset=".7" stop-color="#96bce0"/><stop offset="1" stop-color="#e8e2d0"/></linearGradient>` +
+    `<linearGradient id="seB6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7aa6cc"/><stop offset=".06" stop-color="#3f7ab0"/><stop offset=".5" stop-color="#245d93"/><stop offset="1" stop-color="#16426e"/></linearGradient>` +
+    `<linearGradient id="gl6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6dc" stop-opacity=".85"/><stop offset="1" stop-color="#fff6dc" stop-opacity="0"/></linearGradient>` +
+    `<linearGradient id="hz6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8e2d0" stop-opacity="0"/><stop offset=".5" stop-color="#eef0ec" stop-opacity="1"/><stop offset="1" stop-color="#e8e2d0" stop-opacity="0"/></linearGradient>${RDEF}</defs>` +
+    `<rect width="720" height="${HZ}" fill="url(#skB6)"/><circle cx="520" cy="440" r="34" fill="#fffdf2"/><circle cx="520" cy="440" r="150" fill="#fff6d0" opacity=".28" filter="url(#soft)"/>` + cumulus(170, 360, 230, 4, { a: .92 }) + cumulus(600, 300, 150, 6, { a: .8 }) +
+    `<rect y="${HZ}" width="720" height="${1280 - HZ}" fill="url(#seB6)"/><rect y="${HZ}" width="720" height="${1280 - HZ}" fill="#000" filter="url(#grainR)" opacity=".12"/>`;
+  // sun glitter path on the water, then drawn wave rows (perspective: small near the horizon, big near us)
+  s += `<path d="M505,${HZ} L535,${HZ} L640,1280 L400,1280Z" fill="url(#gl6)" opacity=".2"/>`;
+  const r = RS(13); for (let row = 0; row < 34; row++) { const z = Math.pow(row / 33, 1.7), y = HZ + 3 + z * 585, n = Math.round(26 - 18 * z), w = 8 + 70 * z, ph = T * (.25 + z * .5);
+    for (let i = 0; i < n; i++) { const x = pmod(i * 760 / n + r() * 40 + ph * 40 * (row % 2 ? 1 : -1), 780) - 30, gl = Math.abs(x - 520 - (y - HZ) * .2) < 60 + z * 80;
+      s += `<path d="M${x.toFixed(1)},${y.toFixed(1)} q${(w / 2).toFixed(1)},${(-2 - 6 * z).toFixed(1)} ${w.toFixed(1)},0" stroke="${gl ? '#fff8e0' : r() < .55 ? '#cfe4f4' : '#123a60'}" stroke-width="${(1 + 2.4 * z).toFixed(1)}" fill="none" stroke-linecap="round" opacity="${((gl ? .75 : .38) * (.4 + .6 * z)).toFixed(2)}"/>`; } }
+  // the ship: whole at every distance, only smaller; its reflection and bow foam; haze over the horizon at the end
+  const sc = lerp(1.05, .05, Math.pow(k, .55)), sx = lerp(300, 380, k), sy = lerp(1000, HZ + 2, Math.pow(k, .42)), bob = Math.sin(t * 1.4) * 3 * sc;
+  s += `<g opacity="${(1 - fog * .96).toFixed(2)}"><g transform="translate(${sx.toFixed(1)},${(sy + bob).toFixed(1)}) scale(${sc.toFixed(3)},${(-.55 * sc).toFixed(3)})" opacity=".28" filter="url(#blur2)">` + cargoShip(1) + `</g>` +
+    `<g transform="translate(${sx.toFixed(1)},${(sy + bob).toFixed(1)}) scale(${sc.toFixed(3)}) rotate(${(Math.sin(t * 1.1) * .8).toFixed(2)})">` + cargoShip(1) +
+    `<path d="M185,2 q20,-8 34,2 q-14,6 -34,6Z" fill="#fff" opacity=".85"/><path d="M-170,6 Q-300,16 -460,12 Q-300,22 -170,14Z" fill="#fff" opacity=".55"/></g></g>`;
+  s += `<rect y="${HZ - 70}" width="720" height="140" fill="url(#hz6)" opacity="${(.15 + .85 * fog).toFixed(2)}"/>`;
+  s += lbl(360, 1180, 'تصغرُ فقط', ease(ramp(t, WS(6, 5), WS(6, 6) + .3)), '#fff', 30);
+  F.ov = ''; return s;
 }
 // 7: the edge: the camera flies off the rock plateau, past the rim, and looks down the cliff into space
 function sceneEdge(t) {
@@ -842,7 +868,7 @@ function sceneEclipse(t) {
 // 9: CTA
 function sceneEarth(t) {
   const q = ease(ramp(t, WS(9, 0) - .2, WS(9, 0) + .6)), b = Math.abs(Math.sin(t * 3)) * 6;
-  F.w = { set: 'space', cam: orbit(9.6, .52, 2 + t * .04, [0, .1, 0]), L: [-.5, .9, .6], disc: { m: 0, spin: 2 + t * .08, clouds: .7 } };
+  F.w = { set: 'space', cam: orbit(9.6, .52, 2 + t * .04, [0, .1, 0]), L: [-.5, .9, .6], disc: { m: 0, spin: 2 + t * .08, clouds: .45 } };
   F.ov = `<g opacity="${q}"><text x="360" y="440" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="190" fill="#f4c76b" style="filter:drop-shadow(0 6px 20px rgba(0,0,0,.7))">؟</text></g>` +
     `<g opacity="${ramp(t, WS(9, 7), WS(9, 7) + .4)}" transform="translate(360,${1100 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
   return spaceBG(t);

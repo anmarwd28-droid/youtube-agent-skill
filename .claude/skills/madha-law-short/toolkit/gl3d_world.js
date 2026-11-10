@@ -112,13 +112,14 @@ export async function init(canvas, dpr = 1.5) {
     fragmentShader: `uniform sampler2D day, night, cl; uniform vec3 L, camP; uniform float m, sunI, lights, dry, sea, clouds, tm; varying vec3 vN; varying vec2 vUv; varying float vR; varying vec3 vW;
       void main(){ vec3 n = normalize(vN); vec3 l = normalize(L); float d = dot(n, l); float lit = smoothstep(-0.08, 0.35, d) * sunI;
         vec2 q = vUv - 0.5; float ca = cos(tm), sa = sin(tm); vec2 cuv = vec2(ca * q.x - sa * q.y, sa * q.x + ca * q.y) + 0.5;
-        vec3 c = texture2D(day, vUv).rgb; c = mix(vec3(dot(c, vec3(0.3, 0.59, 0.11))), c, 1.22) * 1.08; float ocean = smoothstep(0.03, 0.16, c.b - max(c.r, c.g) * 0.85);
+        vec3 c = texture2D(day, vUv).rgb; float ocean = smoothstep(0.03, 0.16, c.b - max(c.r, c.g) * 0.85);
+        c = mix(vec3(dot(c, vec3(0.3, 0.59, 0.11))), c, 1.3); c = pow(c, vec3(1.12)) * mix(1.12, 0.82, ocean); c *= mix(1.0, 0.7, smoothstep(0.86, 0.98, vR) * (1.0 - m));
         float rim = dry * smoothstep(0.45, 0.8, vR); vec3 floorC = mix(vec3(0.62, 0.55, 0.45), vec3(0.45, 0.4, 0.34), smoothstep(0.6, 1.0, vR));
         c = mix(c, mix(c * vec3(1.15, 1.0, 0.75), floorC, ocean), rim);
         float mid = sea * smoothstep(0.46, 0.2, vR); c = mix(c, vec3(0.04, 0.16, 0.36), mid);
         float cld = texture2D(cl, cuv).r * clouds * (1.0 - rim * 0.9); c *= 1.0 - 0.32 * texture2D(cl, cuv + vec2(0.006, -0.004)).r * clouds * (1.0 - m); c = mix(c, vec3(1.0), cld * 0.8);
         vec3 col = c * (0.012 + 0.07 * sunI + 1.15 * lit);
-        col += vec3(0.22, 0.42, 0.9) * (0.05 + 0.16 * smoothstep(0.82, 1.0, vR)) * lit * (1.0 - m);
+        col += vec3(0.22, 0.42, 0.9) * 0.06 * smoothstep(0.9, 1.0, vR) * lit * (1.0 - m);
         vec3 vd = normalize(camP - vW); vec3 h = normalize(l + vd); col += vec3(1.0, 0.95, 0.85) * pow(max(dot(n, h), 0.0), 90.0) * (ocean * (1.0 - rim) * (1.0 - cld) + mid) * 0.55 * lit;
         col += texture2D(night, vUv).rgb * vec3(1.0, 0.82, 0.55) * (1.0 - lit) * (1.0 - cld * 0.7) * lights * 1.6;
         float rimA = pow(1.0 - max(dot(n, vd), 0.0), 2.6) * m; col += vec3(0.35, 0.62, 1.0) * rimA * (0.08 + 0.9 * smoothstep(-0.4, 0.6, d) * sunI);
