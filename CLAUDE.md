@@ -32,6 +32,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 - Facts must be scientifically correct; list them in the video's `upload.md`.
 - Talk about the whole world, not one country: the narration and the effects shown are global. The street scenes keep the same drawn style, but they stand for any city in the world.
 - Realism first, on every video (mine or your own idea), without me having to ask: push each scene as realistic as you can before you show it to me. Draw things at real-world scale (a room 2.7 m high, a person ~1.75 m, real object sizes), use the real NASA 3D Earth/planets instead of flat discs, show real physics where it matters (for example gravitational lensing around a black hole), and real-looking animals, places and materials. Before sending numbered shots, check every frame and fix anything that looks fake, flat, mis-scaled or cartoonish.
+- Use the real assets in `weird-space-lab/videos/lib/assets/` (run `lib/setup_assets.sh <src>`): real planet maps for Mars, Jupiter, Saturn, the Sun, Venus, Mercury, the Moon, Neptune and Uranus (3D layer, `F.planet`), and CC0 photo textures (rock, snow, ground, wood, grass, mud, asphalt, sandstone) blended over drawn shapes with `photoPat`/`photoFill`. When planet maps are used, add "Planet textures: Solar System Scope (CC BY 4.0)" to the video description.
 - Never publish or schedule a video before I have watched it and said it needs no changes.
 - vidIQ: use it for research, and update video metadata only after I approve the exact values.
 

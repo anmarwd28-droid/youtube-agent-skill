@@ -30,3 +30,6 @@ function setupUI(title, tli, chips) {
 }
 // a simple sci-fi arrow
 const wArrow = (x1, y1, x2, y2, col = '#f4c76b', w = 4, a = 1) => `<path d="M${x1},${y1} L${x2},${y2}" stroke="${col}" stroke-width="${w}" marker-end="url(#${col === '#f4c76b' ? 'arrY' : 'arrW'})" opacity="${a}"/>`;
+// real photo texture (Poly Haven, CC0) as an SVG pattern; overlay it on a drawn shape with mix-blend-mode so the style stays the same
+const photoPat = (id, file, size = 400, x = 0, y = 0) => `<pattern id="${id}" patternUnits="userSpaceOnUse" x="${x}" y="${y}" width="${size}" height="${size}"><image href="textures/${file}.jpg" width="${size}" height="${size}" preserveAspectRatio="none"/></pattern>`;
+const photoFill = (d, id, op = .55, mode = 'multiply') => `<path d="${d}" fill="url(#${id})" opacity="${op}" style="mix-blend-mode:${mode}"/>`;

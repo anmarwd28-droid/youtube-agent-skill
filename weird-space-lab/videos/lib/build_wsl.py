@@ -31,6 +31,7 @@ src = src.replace("/[،.…:؟]$/", "/[,.…:?!]$/")
 mars = open(os.path.join(HERE, '../../../videos/10-mars/src/mars2.html'), encoding='utf-8').read()
 i = mars.index('function astro(x, y, o = {}) {'); j = mars.index('\n}\n', i) + 3
 src = src.replace('// ===== WSL common', mars[i:j] + '// ===== WSL common')
+if os.path.exists('gl3d_wsl.js'): src = src.replace("from './gl3d_v2.js'", "from './gl3d_wsl.js'")
 open(NAME + '.html', 'w', encoding='utf-8').write(src)
 left = [l for l in src.split('\n') if re.search(r'[؀-ۿ]', l) and ('TLI' in l or 'CHIPS' in l)]
 print('built', len(src), 'arabic-in-ui lines:', len(left), 'shops ok:', 'BAKERY' in src, 'regex ok:', '/[,.…:?!]$/' in src)
