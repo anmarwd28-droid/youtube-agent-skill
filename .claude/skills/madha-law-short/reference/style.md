@@ -9,15 +9,14 @@ Every new video, every shot, goes to the **highest realism possible** without ch
 - Use the real 3D Moon, Earth and Sun wherever they appear.
 - Avoid simple placeholders: no plain circles for planets, no box houses, no flat green slopes, no blobs.
 
-### three.js only, to the maximum (user, Nov 2026)
-- **Don't use outside asset sites:** no Poly Haven, Solar System Scope or NASA downloads. The user asked for them to be removed, and their hosts are off the network list.
-- **Build everything in three.js:** real 3D geometry, lights and shadows, PBR materials, the three.js Sky and Water objects. Textures are generated in code (canvas or shader noise for brick, plaster, asphalt, rock).
-- **Earth and Moon:** use the three.js textures already in the toolkit (`tex/earth_atmos_2048.jpg`, `earth_lights_2048.png`, `earth_clouds_1024.png`, `moon_1024.jpg`). This is the same Earth the user liked in the published "دارت الأرض بالعكس" video: day/night terminator, city lights, clouds, a blue atmosphere rim, and a dark navy space with stars.
-- **Match the published Shorts:** same captions, chips, side list and 2D people.
-
-**Build the whole video in three.js** (user, Nov 2026): every scene is a real 3D scene. That covers the street and its buildings, sea and ships, terrain, space, planets and the Moon, with a perspective camera, real lighting and shadows, PBR materials, Poly Haven HDRI skies and textures, and real water (waves, sky reflections, sun glint). No more flat SVG drawings for backgrounds, water, ships or buildings. Only the captions, chips, side list and the people stay 2D on top.
-**Buildings change in every video:** different shapes, heights, facades and shops each time (random seed per video plus Poly Haven facade textures). Don't repeat the same street.
-**People: keep them as they are** (the same 2D people). Change a person only if the idea changes how they move: flying, a superpower, no sleep (swaying, slow), hunger and so on.
+### More realism inside the same style, never a new style (user, Nov 2026)
+The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no longer looked like the channel: the 2D people looked pasted onto a realistic street. The rule is now:
+- **Space scenes stay in three.js:** Earth, the flat disc, the Moon, the Sun and 3D arrows. Use the three.js textures already in the toolkit (`tex/earth_atmos_2048.jpg`, `earth_lights_2048.png`, `earth_clouds_1024.png`, `moon_1024.jpg`). This is the same Earth as the published Shorts (the one the user liked in "دارت الأرض بالعكس"): day/night terminator, city lights, clouds, a blue atmosphere rim, and a dark navy space with stars.
+- **Streets, buildings and people stay in the illustrated 2D style of the published Shorts.** Make them a bit more realistic each time with better shading, light, shadows, depth and facade detail, and different buildings in every video. They must never look photographic.
+- **Water, ships and terrain:** three.js is fine, but styled to match the drawings (moving waves, reflections and the channel's colours), not photoreal. Ships likewise: 3D, with colours and shading that sit with the drawn scenes.
+- **People: keep them as they are** (the same 2D people). Change a person only if the idea changes how they move: flying, a superpower, no sleep (swaying, slow), hunger and so on.
+- **No outside asset sites:** no Poly Haven, Solar System Scope or NASA downloads. Their hosts were removed from the network list. Everything else is made in code.
+- **Test:** before rendering, compare a test still with a published Short. If it looks like a different channel, it is wrong.
 
 ## Look: keep it
 - Use only the house style:
