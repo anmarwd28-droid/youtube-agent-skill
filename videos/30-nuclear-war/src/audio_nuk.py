@@ -51,19 +51,22 @@ def bell(f, dur=2.5, amp=.3):
     tt = np.arange(int(dur * SR)) / SR
     return sum(np.sin(2 * np.pi * f * m * tt) * np.exp(-tt / (dur * .35 / m ** .5)) * a for m, a in ((1, 1), (2.76, .45), (5.4, .22), (8.9, .1))) * amp
 S0 = lambda i: L(i)["start"]
-T = dict(s1=S0(1), boom=Wd(2, 1)[1], s2=S0(2), s3=S0(3), s4=S0(4), s5=S0(5), s6=S0(6), hunger=Wd(6, 7)[1], s7=S0(7), cta=Wd(7, 7)[1])
+T = dict(s1=S0(1), go=Wd(1, 10)[1], s2=S0(2), b0=Wd(2, 3)[1] - .15, s3=S0(3), s4=S0(4), s5=S0(5), s6=S0(6), s7=S0(7), s8=S0(8), hunger=Wd(8, 7)[1], s9=S0(9), cta=Wd(9, 7)[1])
 mus += pad(['D2', 'A2', 'F3'], 0, T['s2'] + .3, .07, .5, .8, bright=4)
 for k in range(10): place(sfx, tone(900, 300, .5, .25, .08), .2 + k * .28, 1., .1 + .08 * k)
 for k in range(8): place(sfx, tone(1200, 1200, .04, .02, .06), T['s1'] + 1 + k * .25)
-place(sfx, tone(90, 22, 3.5, 1.6, .6), T['boom']); place(sfx, burst(3.0, 30, 1500, .9, .45), T['boom'] + .1); place(sfx, whoosh(2.2, .3), T['boom'] + .3)
-mus += pad(['C2', 'G2', 'Eb3'], T['s2'] - .2, T['s4'] + .3, .06, .8, .8, bright=4)
-sfx += noise_band(200, 2500, T['s3'], T['s4'], .1, .6, .6, lfo=.7)
-for at in np.arange(T['s3'] + .2, T['s4'], .25): place(sfx, burst(.06, 800, 5000, .02, .08), at + rng.uniform(0, .1), 1., rng.uniform(.2, .8))
-mus += pad(['A2', 'E3', 'C4'], T['s4'] - .2, T['s6'] + .3, .06, .8, .8, bright=4)
-sfx += noise_band(300, 1800, T['s4'], T['s6'], .07, .8, .8, lfo=.8)
-mus += pad(['F2', 'C3', 'Ab3'], T['s6'] - .2, T['s7'] + .3, .06, .8, .8, bright=4)
+for k in range(6): place(sfx, whoosh(.7, .16), T['go'] + k * .2, 1., .15 + .14 * k)
+dur = (T['s3'] - .2 - T['b0']) / 7
+for k in range(7): place(sfx, tone(95, 24, dur * 1.6, .55, .5), T['b0'] + k * dur); place(sfx, burst(dur, 30, 1500, .35, .38), T['b0'] + k * dur + .05, 1., .2 + .1 * k)
+mus += pad(['C2', 'G2', 'Eb3'], T['s2'] - .2, T['s5'] + .3, .06, .8, .8, bright=4)
+place(sfx, tone(400, 60, 1.6, .8, .2), T['s3'] + .1); sfx += noise_band(1500, 6000, T['s3'] + .3, T['s4'] - .2, .035, .2, .3, lfo=.9)
+sfx += noise_band(200, 2500, T['s4'], T['s5'], .1, .6, .6, lfo=.7)
+for at in np.arange(T['s4'] + .2, T['s5'], .25): place(sfx, burst(.06, 800, 5000, .02, .08), at + rng.uniform(0, .1), 1., rng.uniform(.2, .8))
+mus += pad(['A2', 'E3', 'C4'], T['s5'] - .2, T['s8'] + .3, .06, .8, .8, bright=4)
+sfx += noise_band(300, 1800, T['s5'], T['s8'], .08, .8, .8, lfo=.8)
+mus += pad(['F2', 'C3', 'Ab3'], T['s8'] - .2, T['s9'] + .3, .06, .8, .8, bright=4)
 place(sfx, bell(note('C5'), 2.4, .1), T['hunger']); place(sfx, tone(80, 40, 1.2, .6, .3), T['hunger'])
-mus += pad(['D3', 'A3', 'D4', 'F#4', 'A4'], T['s7'] - .1, TOTAL, .07, .8, 1.2)
+mus += pad(['D3', 'A3', 'D4', 'F#4', 'A4'], T['s9'] - .1, TOTAL, .07, .8, 1.2)
 for k, (f, at) in enumerate(((note('D5'), 0), (note('A5'), .35), (note('D6'), .7))):
     place(sfx, bell(f, 2.4, .12), T['cta'] + .1 + at, 1., .35 + .15 * k)
 # ---------------- simple reverb on music, then mix

@@ -1,16 +1,18 @@
 # ماذا لو اندلعت حرب نووية عالمية؟ — Short #30
 
-45.4 s, 1080x1920, 30 fps. Global framing; no country is named.
+55.1 s, 1080x1920, 30 fps. Global framing; no country is named.
 
 What it shows, in order:
 1. The 3D Earth: missile trails arc between cities all over the globe and flash on arrival.
-2. A counter runs up to more than 12,000 warheads.
-3. Six places around the world, one after another (a street by day, a coast, a snowy mountain city, a street at night, a desert city, a river city at dusk): in each a flash, a fireball, a blast ring and a mushroom cloud.
-4. Cities burn in four different places under a dark sky; black smoke columns rise; a counter reaches 150 million tonnes.
-5. The Earth is veiled by grey smoke and dims; a thermometer falls by 9 degrees.
-6. A wheat field under a dim sun: the crops droop and die, snow falls.
-7. The veiled Earth with two bars: the bombs (hundreds of millions) against famine (more than 5 billion).
-8. The living Earth with the question mark and the subscribe button.
+2. A counter runs up to more than 12,000 warheads; a second wave launches.
+3. Seven places around the world, one after another (streets by day and night, a coast, a snowy mountain city, a desert city, a river city at dusk): in each a flash, a fireball, a blast ring and a mushroom cloud.
+4. The night side of the Earth: the city lights flicker and go out; "no signal".
+5. Cities burn in four different places; black smoke columns rise; a counter reaches 150 million tonnes.
+6. The Earth is veiled by grey smoke and dims; a thermometer falls by 9 degrees.
+7. A street in summer under snow and a dark sky; people in coats with visible breath.
+8. A wheat field under a dim sun: the crops droop and die, snow falls.
+9. The veiled Earth with two bars: the bombs (hundreds of millions) against famine (more than 5 billion).
+10. The living Earth with the question mark and the subscribe button.
 
 Source in `src/` (`bnuk.sh` builds `nuk.html` from `sup_a.js` + `mil_lib.js` + `nuk_b.js`).
 
@@ -39,4 +41,6 @@ Not made for kids · not altered/synthetic content · Science & Technology · Ar
 - **Fireball:** a nuclear fireball reaches tens of millions of degrees at first; the Sun's surface is about 5,500 °C.
 - **Smoke:** a full-scale war could put about 150 million tonnes (150 Tg) of soot from burning cities into the stratosphere (Coupe et al., 2019; Xia et al., 2022).
 - **Nuclear winter:** that soot blocks sunlight for years; global average surface temperature falls by about 9 °C in the first years (Coupe et al., JGR Atmospheres, 2019).
+- **Blackout:** nuclear explosions destroy power grids and their electromagnetic pulse damages electronics and communications over wide areas.
+- **Snow in summer:** in the first years, summer temperatures over much of the northern mid-latitudes stay below freezing and sunlight at the surface drops to less than half (Coupe et al., 2019).
 - **Famine:** crops fail worldwide. Xia et al. (Nature Food, 2022) estimate about 360 million direct deaths and more than 5 billion deaths from famine after a full-scale war.
