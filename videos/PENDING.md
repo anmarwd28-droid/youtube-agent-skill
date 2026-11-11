@@ -8,26 +8,20 @@ Use the exact file at the exact commit (raw URL) and check its size first.
 
 Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a one-second dotted-globe glitch was found and fixed. The user decided not to replace them, so do not touch those posts. The fixed files are in the repo.
 
-## Scheduled on 10 Nov 2026 (YouTube only, two per day: 10:00 and 18:00 Baghdad time)
+## Schedule since 11 Nov 2026 (YouTube only, three per day: 10:00, 16:00 and 20:00 Baghdad time)
 
-The user chose two Shorts a day, morning and evening. Keep this rhythm for new videos once they are approved: the next free slot is **20 Nov 10:00**.
+The user asked for three Shorts a day: 10:00, 16:00 and one at night. 20:00 was chosen as the best of 20:00–22:00 by Metricool's best-time data. Keep this rhythm: the next free slot is **17 Nov 10:00**.
 
-| # | Video | Publish time (Asia/Baghdad) |
-|---|---|---|
-| 18 | ماذا لو انفجر بركان يلوستون العملاق؟ | 14 Nov 10:00 |
-| 19 | ماذا لو تحوّلت الشمس فجأة إلى قزم أحمر؟ | 14 Nov 18:00 |
-| 20 | ماذا لو دارت الأرض بالعكس؟ | 15 Nov 10:00 |
-| 21 | ماذا لو ظهر ثقب أسود بحجم حبة عنب في مدينة؟ | 15 Nov 18:00 |
-| 22 | ماذا لو كان للأرض قمران؟ | 16 Nov 10:00 |
-| 23 | ماذا لو اختفى الأكسجين من الهواء 5 ثوانٍ فقط؟ | 16 Nov 18:00 |
-| 24 | ماذا لو اختفى كل الزجاج في العالم 5 ثوانٍ فقط؟ | 17 Nov 10:00 |
-| 25 | ماذا لو استطعت أن تركض بسرعة الصوت؟ | 17 Nov 18:00 |
-| 26 | ماذا لو توقّف الزمن ٥ ثوانٍ للجميع… إلّا أنت؟ | 18 Nov 10:00 |
-| 27 | ماذا لو كانت الأرض مسطّحة فعلاً؟ (`a86140d4c5030cfdbb64519a6bbf85a139255a98`, 33982913 bytes) | 18 Nov 18:00 |
-| 28 | ماذا لو استيقظ كل البشر بقوّة خارقة؟ (`dc7936676ce8f9d988f0eac40aba3a5814e369fa`, 26230147 bytes) | 19 Nov 10:00 |
-| 29 | ماذا لو عاش الإنسان ألف سنة؟ (`dc7936676ce8f9d988f0eac40aba3a5814e369fa`, 18134226 bytes) | 19 Nov 18:00 |
+| Day | 10:00 | 16:00 | 20:00 |
+|---|---|---|---|
+| 11 Nov | (published) | 13 توقفت الأرض | 14 حلقات |
+| 12 Nov | 15 النباتات | 16 تبتعد عن الشمس | 17 الغلاف الجوي |
+| 13 Nov | 18 يلوستون | 19 قزم أحمر | 20 دارت بالعكس |
+| 14 Nov | 21 ثقب أسود | 22 قمران | 23 الأكسجين |
+| 15 Nov | 24 الزجاج | 25 سرعة الصوت | 26 توقّف الزمن |
+| 16 Nov | 27 الأرض مسطّحة | 28 قوّة خارقة | 29 ألف سنة |
 
-Videos up to 17 were scheduled earlier (10:00 and 16:00, up to 13 Nov). No approved video is waiting now.
+Videos 28 and 29 were uploaded from commit `dc7936676ce8f9d988f0eac40aba3a5814e369fa` (26230147 and 18134226 bytes).
 
 ## Not approved yet
 
