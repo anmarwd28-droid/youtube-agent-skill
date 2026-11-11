@@ -10,7 +10,7 @@ Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a o
 
 ## Schedule since 11 Nov 2026 (YouTube only, three per day: 10:00, 16:00 and 20:00 Baghdad time)
 
-The user asked for three Shorts a day: 10:00, 16:00 and one at night. 20:00 was chosen as the best of 20:00–22:00 by Metricool's best-time data. Keep this rhythm: the next free slot is **17 Nov 10:00**.
+The user asked for three Shorts a day: 10:00, 16:00 and one at night. 20:00 was chosen as the best of 20:00–22:00 by Metricool's best-time data. Keep this rhythm: the next free slot is **17 Nov 16:00**.
 
 | Day | 10:00 | 16:00 | 20:00 |
 |---|---|---|---|
@@ -20,8 +20,9 @@ The user asked for three Shorts a day: 10:00, 16:00 and one at night. 20:00 was 
 | 14 Nov | 21 ثقب أسود | 22 قمران | 23 الأكسجين |
 | 15 Nov | 24 الزجاج | 25 سرعة الصوت | 26 توقّف الزمن |
 | 16 Nov | 27 الأرض مسطّحة | 28 قوّة خارقة | 29 ألف سنة |
+| 17 Nov | 30 حرب نووية | | |
 
-Videos 28 and 29 were uploaded from commit `dc7936676ce8f9d988f0eac40aba3a5814e369fa` (26230147 and 18134226 bytes).
+Video 30 was uploaded from commit `fa47b2206b9ea1397fe6fad0b5bfdde27d3ec553` (26257999 bytes). Videos 28 and 29 were uploaded from commit `dc7936676ce8f9d988f0eac40aba3a5814e369fa` (26230147 and 18134226 bytes).
 
 ## Not approved yet
 

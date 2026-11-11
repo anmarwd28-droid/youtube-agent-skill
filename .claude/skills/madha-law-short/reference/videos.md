@@ -34,6 +34,7 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 
 | 28-superpowers | ماذا لو استيقظ كل البشر بقوّة خارقة؟ |
 | 29-thousand-years | ماذا لو عاش الإنسان ألف سنة؟ |
+| 30-nuclear-war | ماذا لو اندلعت حرب نووية عالمية؟ (explosions in many places around the world, cities collapse) |
 
 Scheduling status is in `videos/PENDING.md`.
 
@@ -43,7 +44,7 @@ Scheduling status is in `videos/PENDING.md`.
 3. ~~ماذا لو عاش الإنسان ألفَ سنة؟~~ Made (#29).
 4. ماذا لو لم تكن هناك منازل؟
 5. ماذا لو كان الناس يطيرون؟
-6. ماذا لو اندلعت حربٌ نوويّة عالميّة؟
+6. ~~ماذا لو اندلعت حربٌ نوويّة عالميّة؟~~ Made (#30).
 7. ماذا لو لم تأكل عشرة أيام؟
 8. ماذا لو لم تنم عشرة أيام؟
 9. ماذا لو لم تشرب الماء عشرة أيام؟
