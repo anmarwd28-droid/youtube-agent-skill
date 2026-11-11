@@ -4,6 +4,7 @@
 
 - Always reply to me in Iraqi Arabic, every message, even long technical ones. Never write to me in English.
 - Keep explanations simple.
+- No extra talk (user, Nov 2026): do not explain what you did, changed or fixed, and do not send progress reports, unless I ask. Work silently; when a video is finished, send the files with at most one short line. Answer questions in as few words as possible.
 
 ## How to work with me
 
