@@ -56,8 +56,8 @@ mus += pad(['D2', 'A2', 'F3'], 0, T['s2'] + .3, .07, .5, .8, bright=4)
 for k in range(10): place(sfx, tone(900, 300, .5, .25, .08), .2 + k * .28, 1., .1 + .08 * k)
 for k in range(8): place(sfx, tone(1200, 1200, .04, .02, .06), T['s1'] + 1 + k * .25)
 for k in range(6): place(sfx, whoosh(.7, .16), T['go'] + k * .2, 1., .15 + .14 * k)
-dur = (T['s3'] - .2 - T['b0']) / 7
-for k in range(7): place(sfx, tone(95, 24, dur * 1.6, .55, .5), T['b0'] + k * dur); place(sfx, burst(dur, 30, 1500, .35, .38), T['b0'] + k * dur + .05, 1., .2 + .1 * k)
+dur = (T['s3'] - .2 - T['b0']) / 4
+for k in range(4): place(sfx, tone(95, 24, dur * 1.3, .6, .5), T['b0'] + k * dur); place(sfx, burst(dur, 30, 1500, .45, .38), T['b0'] + k * dur + .05, 1., .2 + .2 * k); place(sfx, burst(dur * .7, 200, 3000, .3, .16), T['b0'] + k * dur + .5, 1., .8 - .2 * k)
 mus += pad(['C2', 'G2', 'Eb3'], T['s2'] - .2, T['s5'] + .3, .06, .8, .8, bright=4)
 place(sfx, tone(400, 60, 1.6, .8, .2), T['s3'] + .1); sfx += noise_band(1500, 6000, T['s3'] + .3, T['s4'] - .2, .035, .2, .3, lfo=.9)
 sfx += noise_band(200, 2500, T['s4'], T['s5'], .1, .6, .6, lfo=.7)

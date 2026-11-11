@@ -5,9 +5,9 @@
 What it shows, in order:
 1. The 3D Earth: missile trails arc between cities all over the globe and flash on arrival.
 2. A counter runs up to more than 12,000 warheads; a second wave launches.
-3. Seven places around the world, one after another (streets by day and night, a coast, a snowy mountain city, a desert city, a river city at dusk): in each a flash, a fireball, a blast ring and a mushroom cloud.
+3. Four places around the world, one after another (a street by day, a coast, a river city at dusk, a street at night): in each a flash, a fireball, a blast ring and a mushroom cloud that rises fully while the buildings break down into scorched ruins, with falling debris and dust.
 4. The night side of the Earth: the city lights flicker and go out; "no signal".
-5. Cities burn in four different places; black smoke columns rise; a counter reaches 150 million tonnes.
+5. The ruins burn in four different places; black smoke columns rise; a counter reaches 150 million tonnes.
 6. The Earth is veiled by grey smoke and dims; a thermometer falls by 9 degrees.
 7. A street in summer under snow and a dark sky; people in coats with visible breath.
 8. A wheat field under a dim sun: the crops droop and die, snow falls.

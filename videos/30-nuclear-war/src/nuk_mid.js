@@ -751,18 +751,33 @@ function place(t, v, dk = 0) {
   let s = sk('#3a3a7a', '#c86a6a', '#f8c080') + farCity(74, 880, '#4a4466', { hk: 1.5 }) + `<rect y="880" width="720" height="60" fill="#2a2840"/><rect y="940" width="720" height="340" fill="${mix('#6a5a8a', '#3a2a24', dk)}"/>` + [120, 300, 480, 660].map(x => `<rect x="${x - 8}" y="900" width="16" height="70" fill="#1e1c30"/>`).join('') + `<rect y="892" width="720" height="14" fill="#1e1c30"/><rect y="940" width="720" height="340" fill="#f8c080" opacity=".18"/>`;
   return { s, gy: 880, sc: .85 };
 }
+// the same place after the blast: buildings broken down to a jagged line of ruins, scorched, with rubble and dust (c = collapse 0..1)
+const RUIN = { 0: [1000, 70, 250], 1: [1000, 70, 250], 2: [850, 14, 90], 3: [930, 12, 70], 4: [930, 12, 70], 5: [880, 20, 130] };
+function ruin(t, v, P, c, u = 9) {
+  if (c <= 0) return P.s; const [base, h0, h1] = RUIN[v], r = RS(v * 7 + 3); let pts = `-30,1300 -30,${lerp(150, base - h0, c).toFixed(1)}`, x = -30;
+  while (x < 750) { const w = 14 + r() * 34, hh = h0 + (h1 - h0) * Math.pow(r(), 1.6), y = lerp(150, base - hh, ease(clamp(c * 1.25 - r() * .25))), y2 = y + (r() - .3) * 26 * c; pts += ` ${x.toFixed(1)},${y.toFixed(1)} ${(x + w * .6).toFixed(1)},${y2.toFixed(1)}`; x += w; }
+  pts += ` 750,${lerp(150, base - h0, c).toFixed(1)} 750,1300`;
+  let s = `<defs><clipPath id="rc${v}"><polygon points="${pts}"/></clipPath><linearGradient id="rk${v}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a201e"/><stop offset=".6" stop-color="#6a4a3a"/><stop offset="1" stop-color="#d8804a"/></linearGradient></defs>` +
+    `<rect width="720" height="1280" fill="url(#rk${v})"/>` + (v === 3 ? mountainsR(880, 330, 7, { snow: .5 }) : v === 4 ? mountainsR(900, 120, 9, {}) : '') + (v > 1 ? `<rect width="720" height="1280" fill="#2a1a14" opacity=".4"/>` : '') +
+    `<g clip-path="url(#rc${v})">${P.s}<rect width="720" height="${base}" fill="#1a0e08" opacity="${(.5 * c).toFixed(2)}"/><rect y="${base}" width="720" height="${1280 - base}" fill="#1a0e08" opacity="${(.28 * c).toFixed(2)}"/></g>`;
+  const q = RS(v + 40); for (let i = 0; i < 46; i++) { const px = q() * 720, sz = (3 + q() * 9) * P.sc, f = clamp(c * 1.3 - q() * .3), y0 = base - h0 - (h1 - h0) * q() - 60, py = y0 + (base - y0 + q() * 30) * f * f; s += `<rect x="${px.toFixed(1)}" y="${py.toFixed(1)}" width="${sz.toFixed(1)}" height="${(sz * .7).toFixed(1)}" fill="${q() > .5 ? '#5a4a40' : '#8a7a6a'}" transform="rotate(${(f * 300 * (q() - .5)).toFixed(0)},${px.toFixed(1)},${py.toFixed(1)})"/>`; }
+  let rub = `M-30,${base + 6}`; for (let xx = -30; xx <= 750; xx += 22) rub += ` L${xx},${(base - c * (6 + q() * 30) * P.sc).toFixed(1)}`; s += `<path d="${rub} L750,${base + 6}Z" fill="#4a3e36"/><path d="${rub} L750,${base + 6}Z" fill="#000" filter="url(#grainR)" opacity=".4"/>`;
+  for (let i = 0; i < 9; i++) { const p = clamp(c * 1.2 - i * .03), a = Math.sin(Math.min(1, p) * Math.PI) * .75 + .2 * c; s += `<ellipse cx="${(i * 90 + 20 + Math.sin(t + i) * 12).toFixed(1)}" cy="${(base - 30 - p * 70 * P.sc).toFixed(1)}" rx="${(60 + p * 90).toFixed(1)}" ry="${(30 + p * 50).toFixed(1)}" fill="#b8a898" opacity="${(a * .5).toFixed(2)}" filter="url(#blur9)"/>`; }
+  return s;
+}
 // 2: explosions in city after city around the world: flash, fireball, blast ring, mushroom cloud
-function boom(x, gy, sc, u, t) {
-  const fb = ease(ramp(u, 0, .18)), k = ease(ramp(u, .12, 1.05)), w = clamp((u - .05) / .9); if (u <= 0) return '';
+function boom(x, gy, sc, u, t, dur = 1.2) {
+  const fb = ease(ramp(u, 0, .18)), k = ease(ramp(u, .12, dur * .82)), w = clamp((u - .05) / .9); if (u <= 0) return '';
   let s = `<rect width="720" height="1280" fill="#ff8a3a" opacity="${(.35 * fb).toFixed(2)}"/><defs><radialGradient id="fbG"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#fff3c0"/><stop offset=".8" stop-color="#ffb04a" stop-opacity=".8"/><stop offset="1" stop-color="#ff6a1a" stop-opacity="0"/></radialGradient></defs>`;
   s += `<g transform="translate(${x},${gy}) scale(${sc}) translate(${-x},${-gy})">` + (k > 0 ? mushroom(x, gy, k, t) : '') + `<circle cx="${x}" cy="${gy - 20 - 360 * k}" r="${(170 * fb * (1 - .75 * k)).toFixed(1)}" fill="url(#fbG)" opacity="${(1 - k * .9).toFixed(2)}"/><circle cx="${x}" cy="${gy - 20 - 360 * k}" r="${(300 * fb * (1 - .6 * k)).toFixed(1)}" fill="url(#goldG)" opacity="${(1 - k).toFixed(2)}"/>` +
     (w > 0 && w < 1 ? `<ellipse cx="${x}" cy="${gy}" rx="${(80 + w * 760).toFixed(1)}" ry="${(30 + w * 400).toFixed(1)}" fill="none" stroke="#fff" stroke-width="${(14 * (1 - w) + 2).toFixed(1)}" stroke-opacity="${(.7 * (1 - w)).toFixed(2)}"/>` : '') + `</g>`;
   return s;
 }
-const SHOTS2 = [[0, 360], [2, 420], [3, 300], [1, 380], [4, 330], [5, 400], [0, 300]];
+const SHOTS2 = [[0, 360], [2, 420], [5, 330], [1, 380]];
 function sceneBlast(t) {
-  const st = S0(2) - .2, t0 = WS(2, 3) - .15, en = S0(3) - .2, n = SHOTS2.length, dur = (en - t0) / n, i = t < t0 ? 0 : Math.min(n - 1, Math.floor((t - t0) / dur)), u = t - (t0 + i * dur), [v, x] = SHOTS2[i], P = place(t, v);
-  const sh = t < t0 ? 0 : 9 * Math.exp(-u * 3.5), s = `<g transform="translate(${(Math.sin(t * 61) * sh).toFixed(1)},${(Math.cos(t * 53) * sh).toFixed(1)}) scale(1.03) translate(-10,-18)">${P.s}</g>` + boom(x, P.gy, P.sc, t < t0 ? 0 : u + .001, t);
+  const st = S0(2) - .2, t0 = WS(2, 3) - .15, en = S0(3) - .2, n = SHOTS2.length, dur = (en - t0) / n, i = t < t0 ? 0 : Math.min(n - 1, Math.floor((t - t0) / dur)), u = t < t0 ? 0 : t - (t0 + i * dur), [v, x] = SHOTS2[i], P = place(t, v);
+  const c = ease(ramp(u, .3, dur * .9)), sh = t < t0 ? 0 : 10 * Math.exp(-u * 2.2);
+  const s = `<g transform="translate(${(Math.sin(t * 61) * sh).toFixed(1)},${(Math.cos(t * 53) * sh).toFixed(1)}) scale(1.03) translate(-10,-18)">${ruin(t, v, P, c, u)}</g>` + boom(x, P.gy, P.sc, t < t0 ? 0 : u + .001, t, dur);
   F.flash = t < t0 ? 0 : .95 * clamp(1 - Math.abs(u - .06) / .22);
   noEarth(); F.ov = ''; return s;
 }
@@ -789,12 +804,12 @@ function sceneFrozen(t) {
 // 3: cities burn everywhere and send black smoke into the stratosphere: ~150 million tonnes
 const SHOTS3 = [1, 2, 5, 0];
 function sceneSoot(t) {
-  const st = S0(4) - .2, T = t - st, en = S0(5) - .2, n = SHOTS3.length, dur = (en - st) / n, i = Math.min(n - 1, Math.floor(T / dur)), k = ease(ramp(t, WS(4, 9), WS(4, 13) + .2)), dk = .75, P = place(t, SHOTS3[i], dk), gy = P.gy + 30;
-  let s = P.s + `<rect width="720" height="1280" fill="51a0c06" opacity=".4"/>`;
-  [70, 190, 330, 470, 610].forEach((x, q) => { for (let j = 0; j < 9; j++) { const ph = pmod(T * (.16 + .03 * q) + j / 9, 1), y = gy - ph * 950, w = 40 + ph * 150; s += `<ellipse cx="${(x + Math.sin(ph * 5 + q + j + i) * 30 + ph * 60).toFixed(1)}" cy="${y.toFixed(1)}" rx="${w.toFixed(1)}" ry="${(w * .7).toFixed(1)}" fill="50c0a0a" opacity="${(.5 * Math.sin(Math.min(1, ph * 4) * 1.57)).toFixed(2)}" filter="url(5blur9)"/>`; }
-    for (let j = 0; j < 4; j++) { const fl = (40 + 30 * Math.sin(T * 9 + q * 2 + j * 1.7)) * P.sc; s += `<path d="M${x - 26 + j * 16},${gy} q8,${-fl} 4,${-fl * 1.6} q10,${fl * .6} 12,${fl * 1.6}Z" fill="url(5flameG)"/>`; }
-    s += `<circle cx="${x}" cy="${gy - 20}" r="110" fill="url(5fireGlow)" opacity=".5"/>`; });
-  s += panel(160, 1030, 400, 170) + lbl(360, 1082, 'دخانٌ يصعدُ إلى الجوّ', 1, '5cfd8ff', 24) + lbl(360, 1158, `${AR(Math.round(150 * k))} مليون طنّ`, 1, '5f4c76b', 46);
+  const st = S0(4) - .2, T = t - st, en = S0(5) - .2, n = SHOTS3.length, dur = (en - st) / n, i = Math.min(n - 1, Math.floor(T / dur)), k = ease(ramp(t, WS(4, 9), WS(4, 13) + .2)), dk = .4, P = place(t, SHOTS3[i], dk), gy = RUIN[SHOTS3[i]][0] - 10;
+  let s = ruin(t, SHOTS3[i], P, 1) + `<rect width="720" height="1280" fill="#1a0c06" opacity=".18"/>`;
+  [70, 190, 330, 470, 610].forEach((x, q) => { for (let j = 0; j < 9; j++) { const ph = pmod(T * (.16 + .03 * q) + j / 9, 1), y = gy - ph * 950, w = 40 + ph * 150; s += `<ellipse cx="${(x + Math.sin(ph * 5 + q + j + i) * 30 + ph * 60).toFixed(1)}" cy="${y.toFixed(1)}" rx="${w.toFixed(1)}" ry="${(w * .7).toFixed(1)}" fill="#0c0a0a" opacity="${(.5 * Math.sin(Math.min(1, ph * 4) * 1.57)).toFixed(2)}" filter="url(#blur9)"/>`; }
+    for (let j = 0; j < 4; j++) { const fl = (40 + 30 * Math.sin(T * 9 + q * 2 + j * 1.7)) * P.sc; s += `<path d="M${x - 26 + j * 16},${gy} q8,${-fl} 4,${-fl * 1.6} q10,${fl * .6} 12,${fl * 1.6}Z" fill="url(#flameG)"/>`; }
+    s += `<circle cx="${x}" cy="${gy - 20}" r="110" fill="url(#fireGlow)" opacity=".5"/>`; });
+  s += panel(160, 1030, 400, 170) + lbl(360, 1082, 'دخانٌ يصعدُ إلى الجوّ', 1, '#cfd8ff', 24) + lbl(360, 1158, `${AR(Math.round(150 * k))} مليون طنّ`, 1, '#f4c76b', 46);
   F.flash = .5 * clamp(1 - Math.abs(T - i * dur - .05) / .15) * (i > 0 ? 1 : 0);
   noEarth(); F.ov = ''; return s;
 }
@@ -803,33 +818,33 @@ function veil(g, k) { return `<defs><radialGradient id="vlG"><stop offset="0" st
 function sceneWinter(t) {
   const k = ease(ramp(t, WS(5, 0), WS(5, 4) + .4)), kt = ease(ramp(t, WS(5, 5), WS(5, 10) + .2)), g = gl(t, { sunI: 1 - .45 * k });
   let o = `<defs>${SDEF}</defs>` + veil(g, k);
-  o += panel(110, 1010, 500, 190) + `<rect x="150" y="1040" width="26" height="110" rx="13" fill="61c2440" stroke="6dfe6ff" stroke-width="2.5"/><rect x="156" y="${1050 + 60 * kt}" width="14" height="${94 - 60 * kt}" rx="7" fill="${mix('6ff6a4a', '66ab4ff', kt)}"/><circle cx="163" cy="1160" r="20" fill="${mix('6ff6a4a', '66ab4ff', kt)}" stroke="6dfe6ff" stroke-width="2.5"/>` + lbl(400, 1070, 'حرارةُ الأرض', 1, '6cfd8ff', 24) + lbl(400, 1150, `${AR(Math.round(9 * kt))} درجات أقلّ`, 1, '69ad0ff', 46);
+  o += panel(110, 1010, 500, 190) + `<rect x="150" y="1040" width="26" height="110" rx="13" fill="#1c2440" stroke="#dfe6ff" stroke-width="2.5"/><rect x="156" y="${1050 + 60 * kt}" width="14" height="${94 - 60 * kt}" rx="7" fill="${mix('#ff6a4a', '#6ab4ff', kt)}"/><circle cx="163" cy="1160" r="20" fill="${mix('#ff6a4a', '#6ab4ff', kt)}" stroke="#dfe6ff" stroke-width="2.5"/>` + lbl(400, 1070, 'حرارةُ الأرض', 1, '#cfd8ff', 24) + lbl(400, 1150, `${AR(Math.round(9 * kt))} درجات أقلّ`, 1, '#9ad0ff', 46);
   F.ov = o; F.earth = null; F.moon = null; F.sun = null; return space(t);
 }
 // 5: crops die in the fields under a dim sun
 function sceneCrops(t) {
   const st = S0(7) - .2, T = t - st, dk = ease(ramp(T, 0, 2.2));
-  let s = `<defs>${DEFB()}<linearGradient id="skc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix('85a7a9a', '82a2c32', dk)}"/><stop offset="1" stop-color="${mix('8c8d0c8', '86a6a6c', dk)}"/></linearGradient></defs><rect width="720" height="1280" fill="url(8skc)"/><circle cx="520" cy="470" r="120" fill="8fff6d0" opacity="${(.25 - .15 * dk).toFixed(2)}" filter="url(8soft)"/><circle cx="520" cy="470" r="26" fill="${mix('8fffdf2', '8b8a898', dk)}"/>`;
-  s += mountainsR(820, 150, 5, {}) + `<rect y="800" width="720" height="480" fill="${mix('8b89a4a', '88e8a84', dk)}"/><rect y="800" width="720" height="480" fill="8000" filter="url(8grainR)" opacity=".3"/>`;
-  s += `<rect x="90" y="740" width="110" height="64" fill="85a4a40"/><path d="M80,742 L145,700 L210,742Z" fill="83a2e28"/><rect x="130" y="768" width="22" height="36" fill="82a201a"/>`;
+  let s = `<defs>${DEFB()}<linearGradient id="skc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix('#5a7a9a', '#4a4e58', dk)}"/><stop offset="1" stop-color="${mix('#c8d0c8', '#8e8e90', dk)}"/></linearGradient></defs><rect width="720" height="1280" fill="url(#skc)"/><circle cx="520" cy="470" r="120" fill="#fff6d0" opacity="${(.25 - .15 * dk).toFixed(2)}" filter="url(#soft)"/><circle cx="520" cy="470" r="26" fill="${mix('#fffdf2', '#b8a898', dk)}"/>`;
+  s += mountainsR(820, 150, 5, {}) + `<rect y="800" width="720" height="480" fill="${mix('#b89a4a', '#a8a49a', dk)}"/><rect y="800" width="720" height="480" fill="#000" filter="url(#grainR)" opacity=".3"/>`;
+  s += `<rect x="90" y="740" width="110" height="64" fill="#5a4a40"/><path d="M80,742 L145,700 L210,742Z" fill="#3a2e28"/><rect x="130" y="768" width="22" height="36" fill="#2a201a"/>`;
   const r = RS(4); for (let row = 0; row < 11; row++) { const z = row / 10, y = 830 + Math.pow(z, 1.5) * 420, n = Math.round(30 - 14 * z), h = 26 + 90 * z;
-    for (let i = 0; i < n; i++) { const x = (i + r() * .6) * 760 / n - 20, droop = dk * (30 + r() * 50) * (r() > .5 ? 1 : -1) * z, col = mix('8c8a23a', '85a4e3a', dk); s += `<path d="M${x.toFixed(1)},${y.toFixed(1)} q${(droop * .2).toFixed(1)},${(-h * .6).toFixed(1)} ${droop.toFixed(1)},${(-h * (1 - .45 * dk)).toFixed(1)}" stroke="${col}" stroke-width="${(1.5 + 3 * z).toFixed(1)}" fill="none"/><ellipse cx="${(x + droop).toFixed(1)}" cy="${(y - h * (1 - .45 * dk)).toFixed(1)}" rx="${(2 + 4 * z).toFixed(1)}" ry="${(5 + 9 * z).toFixed(1)}" fill="${col}"/>`; } }
-  s += `<rect y="800" width="720" height="480" fill="8eef2f6" opacity="${(.22 * dk).toFixed(2)}"/>` + snow(t, 90, dk * .9);
+    for (let i = 0; i < n; i++) { const x = (i + r() * .6) * 760 / n - 20, droop = dk * (30 + r() * 50) * (r() > .5 ? 1 : -1) * z, col = mix('#c8a23a', '#6e6248', dk); s += `<path d="M${x.toFixed(1)},${y.toFixed(1)} q${(droop * .2).toFixed(1)},${(-h * .6).toFixed(1)} ${droop.toFixed(1)},${(-h * (1 - .45 * dk)).toFixed(1)}" stroke="${col}" stroke-width="${(1.5 + 3 * z).toFixed(1)}" fill="none"/><ellipse cx="${(x + droop).toFixed(1)}" cy="${(y - h * (1 - .45 * dk)).toFixed(1)}" rx="${(2 + 4 * z).toFixed(1)}" ry="${(5 + 9 * z).toFixed(1)}" fill="${col}"/>`; } }
+  s += `<rect y="800" width="720" height="480" fill="#eef2f6" opacity="${(.22 * dk).toFixed(2)}"/>` + snow(t, 90, dk * .9);
   noEarth(); F.ov = ''; return s;
 }
 // 6: most victims die of famine, not of the bombs: more than 5 billion
 function sceneFamine(t) {
   const g = gl(t, { sunI: .55 }), k1 = ease(ramp(t, WS(8, 3), WS(8, 5) + .3)), k2 = ease(ramp(t, WS(8, 6), WS(8, 11) + .3)), BX = 640, BW = 430;
   let o = `<defs>${SDEF}</defs>` + veil(g, 1);
-  o += panel(50, 990, 620, 230) + lbl(BX - 44, 1052, 'القنابل', 1, '9ffc2b8', 24) + `<rect x="${BX - 100 - BW * .07 * k1}" y="1026" width="${BW * .07 * k1}" height="36" rx="6" fill="9e5483a"/>` + lbl(BX - 100 - BW * .07 - 110, 1052, 'مئاتُ الملايين', k1, '9fff', 22) +
-    lbl(BX - 40, 1162, 'الجوع', 1, '9ffe4a0', 24) + `<rect x="${BX - 100 - BW * k2}" y="1136" width="${BW * k2}" height="36" rx="6" fill="9f4c76b"/>` + lbl(BX - 100 - BW / 2, 1162, '+٥ مليارات', k2 > .6 ? 1 : 0, '91c140a', 24);
+  o += panel(50, 990, 620, 230) + lbl(BX - 44, 1052, 'القنابل', 1, '#ffc2b8', 24) + `<rect x="${BX - 100 - BW * .07 * k1}" y="1026" width="${BW * .07 * k1}" height="36" rx="6" fill="#e5483a"/>` + lbl(BX - 100 - BW * .07 - 110, 1052, 'مئاتُ الملايين', k1, '#fff', 22) +
+    lbl(BX - 40, 1162, 'الجوع', 1, '#ffe4a0', 24) + `<rect x="${BX - 100 - BW * k2}" y="1136" width="${BW * k2}" height="36" rx="6" fill="#f4c76b"/>` + lbl(BX - 100 - BW / 2, 1162, '+٥ مليارات', k2 > .6 ? 1 : 0, '#1c140a', 24);
   F.ov = o; F.earth = null; F.moon = null; F.sun = null; return space(t);
 }
 function sceneEarth(t) {
   const q = ease(ramp(t, WS(9, 7) - .2, WS(9, 7) + .6)), b = Math.abs(Math.sin(t * 3)) * 6, az = .3 + (t - S0(9)) * .04;
   F.w = { set: 'space', cam: orbit(9.8, .3, az, [0, .64, 0]), L: sunFor(az), disc: { m: 1, spin: 3.3 + (t - S0(9)) * .08, clouds: .45 } };
-  F.ov = `<g opacity="${q}"><text x="360" y="440" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="190" fill="10f4c76b" style="filter:drop-shadow(0 6px 20px rgba(0,0,0,.7))">؟</text></g>` +
-    `<g opacity="${ramp(t, WS(9, 9), WS(9, 9) + .4)}" transform="translate(360,${1100 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="10e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="10fff">اشترك</text></g>`;
+  F.ov = `<g opacity="${q}"><text x="360" y="440" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="190" fill="#f4c76b" style="filter:drop-shadow(0 6px 20px rgba(0,0,0,.7))">؟</text></g>` +
+    `<g opacity="${ramp(t, WS(9, 9), WS(9, 9) + .4)}" transform="translate(360,${1100 - b})"><rect x="-120" y="-34" width="240" height="68" rx="16" fill="#e53935"/><text x="0" y="14" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#fff">اشترك</text></g>`;
   F.earth = null; F.moon = null; F.sun = null; return space(t);
 }
 const SCENES = [{ s: 0, f: sceneHook }, { s: S0(1) - .2, f: sceneCount }, { s: S0(2) - .2, f: sceneBlast }, { s: S0(3) - .2, f: sceneDark }, { s: S0(4) - .2, f: sceneSoot }, { s: S0(5) - .2, f: sceneWinter }, { s: S0(6) - .2, f: sceneFrozen }, { s: S0(7) - .2, f: sceneCrops }, { s: S0(8) - .2, f: sceneFamine }, { s: S0(9) - .2, f: sceneEarth }];
