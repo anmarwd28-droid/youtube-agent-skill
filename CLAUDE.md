@@ -14,6 +14,7 @@
 - When I give several ideas, make them one at a time, so they don't clash. Do two at once only when that is clearly safe.
 - Pick ideas and titles that can go far (my goal is more than 2,500 views per video). Use vidIQ research for this.
 - Each new video starts in a new conversation. Everything needed must be saved in the repo (this file, the `madha-law-short` skill, `videos/PENDING.md`); never keep an important rule only in the chat.
+- Whenever I say something important (a rule, a preference, a decision), save it in the repo right away (this file or the skill), commit and push. Don't rely on the chat to remember it.
 - Never ask me to paste an API key in the chat; use the secure credential form. ElevenLabs is on the free plan (10,000 characters a month); check the remaining characters before narrating.
 
 ## Two channels: never mix them
