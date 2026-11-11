@@ -66,7 +66,9 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 ## Content
 - Facts must be scientifically correct. Check numbers with formulas and sources, and list them in upload.md.
 - Talk about the whole world, not one country.
-- **Length:** as long as the idea needs (usually 55–75 s). Cut anything that adds nothing.
+- **Length:** never under 50 s (user, Nov 2026); usually 55–75 s. Cut anything that adds nothing.
+- **Creatures and destruction (user, Nov 2026):** draw animals and creatures as realistically as the drawn style allows (scales, shading, veined wings, cast shadows). When fire or a blast hits a building, show it burn and break down (jagged ruin, flames, smoke, falling pieces); `burnBld` and `ruin` in videos 30–31 do this.
+- **Explosions:** hold the shot until the cloud has fully risen before cutting, and show places all over the world, not one street.
 - **Hook:** line 0 is the "ماذا لو …؟" question over a strong first image.
 - **Ending:**
   - Add a surprise or twist near the end ("والغريب؟", "والمفاجأة؟").
