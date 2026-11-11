@@ -12,7 +12,7 @@ Read `CLAUDE.md` first (the two channels, never mixing them). This skill is for 
 ## Starting a fresh conversation (one per video)
 - **Why:** the user starts a new conversation for each video, to keep the context small and save usage. Everything needed is in the repo: `CLAUDE.md`, this skill, `reference/` (style, api, videos), `toolkit/`, `examples/` and the last videos' `src/`.
 - **First steps:**
-  1. Read `reference/style.md` and `reference/videos.md` (the next idea is there).
+  1. Read `reference/style.md`, `reference/videos.md` (the next idea is there) and `reference/audience.md` (what works on the channel).
   2. Follow the steps below.
 - **Scheduling:** look at `videos/PENDING.md` for what is waiting.
 - **Narration:** ElevenLabs runs through the proxy with the key saved on the Default environment. Check the remaining characters first with `GET /v1/user/subscription`; the free plan gives 10,000 a month.
