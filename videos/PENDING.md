@@ -10,7 +10,7 @@ Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a o
 
 ## Scheduled on 10 Nov 2026 (YouTube only, two per day: 10:00 and 18:00 Baghdad time)
 
-The user chose two Shorts a day, morning and evening. Keep this rhythm for new videos once they are approved: the next free slot is **19 Nov 10:00**.
+The user chose two Shorts a day, morning and evening. Keep this rhythm for new videos once they are approved: the next free slot is **20 Nov 10:00**.
 
 | # | Video | Publish time (Asia/Baghdad) |
 |---|---|---|
@@ -24,6 +24,8 @@ The user chose two Shorts a day, morning and evening. Keep this rhythm for new v
 | 25 | ماذا لو استطعت أن تركض بسرعة الصوت؟ | 17 Nov 18:00 |
 | 26 | ماذا لو توقّف الزمن ٥ ثوانٍ للجميع… إلّا أنت؟ | 18 Nov 10:00 |
 | 27 | ماذا لو كانت الأرض مسطّحة فعلاً؟ (`a86140d4c5030cfdbb64519a6bbf85a139255a98`, 33982913 bytes) | 18 Nov 18:00 |
+| 28 | ماذا لو استيقظ كل البشر بقوّة خارقة؟ (`dc7936676ce8f9d988f0eac40aba3a5814e369fa`, 26230147 bytes) | 19 Nov 10:00 |
+| 29 | ماذا لو عاش الإنسان ألف سنة؟ (`dc7936676ce8f9d988f0eac40aba3a5814e369fa`, 18134226 bytes) | 19 Nov 18:00 |
 
 Videos up to 17 were scheduled earlier (10:00 and 16:00, up to 13 Nov). No approved video is waiting now.
 

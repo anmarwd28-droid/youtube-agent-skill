@@ -32,12 +32,15 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 26-time-stops | ماذا لو توقّف الزمن ٥ ثوانٍ للجميع إلّا أنت؟ |
 | 27-flat-earth | ماذا لو كانت الأرض مسطّحة؟ (three.js version; the user said the street, sea and edge looked too photoreal for the channel; see style.md) |
 
+| 28-superpowers | ماذا لو استيقظ كل البشر بقوّة خارقة؟ |
+| 29-thousand-years | ماذا لو عاش الإنسان ألف سنة؟ |
+
 Scheduling status is in `videos/PENDING.md`.
 
 ## Ideas waiting (the user's list, Nov 2026; make them all)
 1. ~~ماذا لو كانت الأرض مسطّحة؟~~ Made (#27). Its street, sea and edge shots may be redone in the drawn style if the user asks.
-2. ماذا لو أصبح الناس يملكون قوّةً خارقة؟
-3. ماذا لو عاش الإنسان ألفَ سنة؟
+2. ~~ماذا لو أصبح الناس يملكون قوّةً خارقة؟~~ Made (#28).
+3. ~~ماذا لو عاش الإنسان ألفَ سنة؟~~ Made (#29).
 4. ماذا لو لم تكن هناك منازل؟
 5. ماذا لو كان الناس يطيرون؟
 6. ماذا لو اندلعت حربٌ نوويّة عالميّة؟
