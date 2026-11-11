@@ -5,8 +5,8 @@
 What it shows, in order:
 1. The 3D Earth: missile trails arc between cities all over the globe and flash on arrival.
 2. A counter runs up to more than 12,000 warheads.
-3. A city street: a flash, a fireball, a blast ring and a rising mushroom cloud.
-4. The city burns under a dark sky; black smoke columns rise; a counter reaches 150 million tonnes.
+3. Six places around the world, one after another (a street by day, a coast, a snowy mountain city, a street at night, a desert city, a river city at dusk): in each a flash, a fireball, a blast ring and a mushroom cloud.
+4. Cities burn in four different places under a dark sky; black smoke columns rise; a counter reaches 150 million tonnes.
 5. The Earth is veiled by grey smoke and dims; a thermometer falls by 9 degrees.
 6. A wheat field under a dim sun: the crops droop and die, snow falls.
 7. The veiled Earth with two bars: the bombs (hundreds of millions) against famine (more than 5 billion).
