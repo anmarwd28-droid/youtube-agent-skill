@@ -5,7 +5,7 @@ function sceneThumb(t) {
   const s = proj3w(cam, sp), r = RS(5); let bits = '';
   for (let i = 0; i < 70; i++) { const a = -0.9 + r() * 2.2, d = 120 + r() * 330, z = 3 + r() * 9; bits += `<circle cx="${(s[0] + Math.cos(a) * d).toFixed(1)}" cy="${(s[1] + Math.sin(a) * d * .8).toFixed(1)}" r="${z.toFixed(1)}" fill="${r() > .5 ? '#ffd870' : '#ff9a3a'}" opacity="${(.85 - d / 520).toFixed(2)}"/>`; }
   const T = (x, y, tx, fs, col) => `<text x="${x}" y="${y}" text-anchor="middle" direction="rtl" font-family="Noto Naskh Arabic" font-weight="700" font-size="${fs}" fill="${col}" stroke="#000" stroke-width="${fs * .09}" stroke-linejoin="round" style="paint-order:stroke">${tx}</text>`;
-  F.ov = bits + `<circle cx="${s[0].toFixed(1)}" cy="${s[1].toFixed(1)}" r="128" fill="none" stroke="#fff" stroke-width="7" stroke-dasharray="20 16" opacity=".9"/>` +
+  F.ov = bits + 
     `` + T(950, 250, 'اختفتِ', 176, '#ffffff') + T(950, 462, 'الشمس!', 190, '#f4c76b') +
     `<rect x="700" y="540" width="540" height="92" rx="22" fill="#e53935"/>` + `<text x="970" y="604" text-anchor="middle" direction="rtl" font-family="Noto Naskh Arabic" font-weight="700" font-size="52" fill="#fff">حتى مليونِ سنة</text>`;
   $('cap').style.display = 'none';
