@@ -79,3 +79,9 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - Send the mp4 together with the numbered 12-shot sheet. The user replies with shot numbers.
 - Re-render only the affected chunks, then send the new video and sheet.
 - If the user says a known small issue is fine (as with videos 13 and 15), leave the scheduled post alone and just don't repeat the issue.
+
+## Ending line of every Short (user, Nov 2026)
+- **Spoken last line:** end with one short line that asks for a comment and adds "subscribe" in the same breath, for example «اكتبْ جوابَك في التعليقات… واشتركْ.» Keep it under about 3 seconds.
+- **On screen:** keep the red «اشترك» button and @MadhaLawLab as before.
+- **Review after 10 Shorts:** compare `subscribersGained` and `averageViewPercentage` with the earlier Shorts in `audience.md`. If completion drops clearly, go back to the comment-only line.
+
