@@ -16,29 +16,33 @@ Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a o
 | 12 Nov | 16:00 | 32 Long video: ماذا لو اختفت الشمس؟ من الثانية الأولى حتى مليون سنة | youtube.com/watch?v=S5WYKhnetPQ |
 | 12 Nov | 17:00 | 16 ماذا لو بدأت الأرض تبتعد عن الشمس؟ | youtube.com/shorts/j6ZkgArrt1E |
 
-## Not published yet: schedule as the user set it in Metricool (checked 12 Nov 2026, YouTube only, Baghdad time)
+## Not published yet: schedule as the user set it in Metricool (YouTube only, Baghdad time)
 
-The user rescheduled everything themselves: three posts a day, 10:00, 16:00 and 20:00. Never change these times without asking. The next free slot is **18 Nov 16:00**.
+All 17 were scheduled on 12 Nov 21:03 on the NEW Metricool account (blogId `8065283`), same texts, titles and tags as before, files from commit `24bdcdab09278742ec2f01c94a5a12aecb3524fe`. The old account (blogId `7907171`) still holds copies: the user must delete them there so nothing goes out twice.
+
+**Metricool free limit: 20 published posts per calendar month, reset on the 1st.** The new account uses 17 in November, so only 3 are left until 1 Dec. Remind the user of the count before every new scheduling, and warn before it runs out.
+
+The user set the times: three posts a day, 10:00, 16:00 and 20:00. Never change these times without asking. The next free slot is **18 Nov 16:00**.
 
 | Date | Time | Video | Status on 12 Nov |
 |---|---|---|---|
-| 12 Nov | 20:00 | 17 ماذا لو اختفى الغلاف الجوي من حول الأرض فجأة؟ | **Error: "You have reached your Metricool account limit"**; the user must reschedule it |
-| 13 Nov | 10:00 | 18 بركان يلوستون | Pending |
-| 13 Nov | 16:00 | 19 الشمس قزم أحمر | Pending |
-| 13 Nov | 20:00 | 20 الأرض دارت بالعكس | Pending |
-| 14 Nov | 10:00 | 21 ثقب أسود بحجم حبة عنب | Pending |
-| 14 Nov | 16:00 | 22 للأرض قمران | Pending |
-| 14 Nov | 20:00 | 23 اختفى الأكسجين 5 ثوانٍ | Pending |
-| 15 Nov | 10:00 | 24 اختفى الزجاج 5 ثوانٍ | Pending |
-| 15 Nov | 16:00 | 25 تركض بسرعة الصوت | Pending |
-| 15 Nov | 20:00 | 26 توقّف الزمن 5 ثوانٍ | Pending |
-| 16 Nov | 10:00 | 27 الأرض مسطّحة | Pending |
-| 16 Nov | 16:00 | 28 قوّة خارقة | Pending |
-| 16 Nov | 20:00 | 29 الإنسان يعيش ألف سنة | Pending |
-| 17 Nov | 10:00 | 30 حرب نووية عالمية | Pending |
-| 17 Nov | 16:00 | 14 للأرض حلقات مثل زحل | Pending |
-| 17 Nov | 20:00 | 31 التنانين موجودة | Pending |
-| 18 Nov | 10:00 | 33 البشر يطيرون | Pending |
+| 12 Nov | 21:15 | 17 ماذا لو اختفى الغلاف الجوي من حول الأرض فجأة؟ | Scheduled on the new account (failed on the old one at 20:00) |
+| 13 Nov | 10:00 | 18 بركان يلوستون | Scheduled |
+| 13 Nov | 16:00 | 19 الشمس قزم أحمر | Scheduled |
+| 13 Nov | 20:00 | 20 الأرض دارت بالعكس | Scheduled |
+| 14 Nov | 10:00 | 21 ثقب أسود بحجم حبة عنب | Scheduled |
+| 14 Nov | 16:00 | 22 للأرض قمران | Scheduled |
+| 14 Nov | 20:00 | 23 اختفى الأكسجين 5 ثوانٍ | Scheduled |
+| 15 Nov | 10:00 | 24 اختفى الزجاج 5 ثوانٍ | Scheduled |
+| 15 Nov | 16:00 | 25 تركض بسرعة الصوت | Scheduled |
+| 15 Nov | 20:00 | 26 توقّف الزمن 5 ثوانٍ | Scheduled |
+| 16 Nov | 10:00 | 27 الأرض مسطّحة | Scheduled |
+| 16 Nov | 16:00 | 28 قوّة خارقة | Scheduled |
+| 16 Nov | 20:00 | 29 الإنسان يعيش ألف سنة | Scheduled |
+| 17 Nov | 10:00 | 30 حرب نووية عالمية | Scheduled |
+| 17 Nov | 16:00 | 14 للأرض حلقات مثل زحل | Scheduled |
+| 17 Nov | 20:00 | 31 التنانين موجودة | Scheduled |
+| 18 Nov | 10:00 | 33 البشر يطيرون | Scheduled |
 
 Every video file is in the repo: `videos/<number>-*/` (the number is in the Video column), each with its `upload.md` (title, description, tags). The long video 32 is split in parts: join them with `cat sunl_long.mp4.part0* > sunl_long.mp4`. If the user moves to a new Metricool account, reschedule from these files at the same times, and make sure the old posts are deleted so nothing goes out twice.
 
