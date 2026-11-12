@@ -20,9 +20,9 @@ Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a o
 
 All 17 were scheduled on 12 Nov 21:03 on the NEW Metricool account (blogId `8065283`), same texts, titles and tags as before, files from commit `24bdcdab09278742ec2f01c94a5a12aecb3524fe`. The user deleted the copies on the old account (blogId `7907171`) on 12 Nov, so nothing goes out twice.
 
-**Metricool free limit: 20 published posts per calendar month, reset on the 1st.** The new account uses 17 in November, so only 3 are left until 1 Dec. Remind the user of the count before every new scheduling, and warn before it runs out.
+**Metricool free limit: 20 published posts per calendar month, reset on the 1st.** The new account uses 18 in November, so only 2 are left until 1 Dec. Remind the user of the count before every new scheduling, and warn before it runs out.
 
-The user set the times: three posts a day, 10:00, 16:00 and 20:00. Never change these times without asking. The next free slot is **18 Nov 16:00**.
+The user set the times: three posts a day, 10:00, 16:00 and 20:00. Never change these times without asking. The next free slot is **18 Nov 20:00**.
 
 | Date | Time | Video | Status on 12 Nov |
 |---|---|---|---|
@@ -43,6 +43,7 @@ The user set the times: three posts a day, 10:00, 16:00 and 20:00. Never change 
 | 17 Nov | 16:00 | 14 للأرض حلقات مثل زحل | Scheduled |
 | 17 Nov | 20:00 | 31 التنانين موجودة | Scheduled |
 | 18 Nov | 10:00 | 33 البشر يطيرون | Scheduled |
+| 18 Nov | 16:00 | 34 لم تنم ١٠ أيام (commit `6caa8663ee04808814285cfce9824a1fceb667ab`, 28,010,744 bytes) | Scheduled 12 Nov 23:06 |
 
 Every video file is in the repo: `videos/<number>-*/` (the number is in the Video column), each with its `upload.md` (title, description, tags). The long video 32 is split in parts: join them with `cat sunl_long.mp4.part0* > sunl_long.mp4`. If the user moves to a new Metricool account, reschedule from these files at the same times, and make sure the old posts are deleted so nothing goes out twice.
 
