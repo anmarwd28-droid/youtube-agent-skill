@@ -93,3 +93,16 @@ Chromium and Playwright are preinstalled; `render3.js` serves `$W` over HTTP its
     - Schedule only when the user says Metricool is back on this channel: YouTube only, with the title, description and tags from upload.md, using the raw URL at that commit.
 
 [reference/videos.md](reference/videos.md) lists the videos already made (don't repeat an idea) and the ideas still waiting.
+
+## Long landscape video (1920x1080, 8-10 minutes)
+
+Same look, voice and rules as a Short; only the tools differ. Full worked example: `videos/32-sun-gone-long/` (its `src/blong.sh` shows the build order).
+
+- **Script:** chapters with on-screen titles, each in a new place; the strongest 15 seconds first with a promise that pays off at the end; a hook about every minute; a comment question and "subscribe" at the end. Get the user's approval of the script before narrating.
+- **Narration:** `tts_long.py <dir>` sends one ElevenLabs request per chapter (cached in `parts/`), joins them with 2.4 s gaps and writes `voice.mp3`, `timing.json` and `chap_times.json` (the YouTube chapter times). Check the remaining characters first: 9 minutes is about 6,000.
+- **Build:** `mk_gl_wide.py` makes `gl3d_wide.js` (1280x720 stage) from `gl3d_world.js`. `build_long.py <name> "<keywords>" files...` turns the Shorts template landscape and adds the chapter card, the chapter tag and the side timeline. The page is 1280x720 at scale 1.5.
+- **Stills:** `stq.sh "t1,t2,..."` makes stills and contact sheets. Look at several per chapter and fix them before the full render.
+- **Render:** `render_chunks_w.sh $W <name> TOTAL FRAMES 10700` in the background with `timeout: 7200000`. About 10 chunks an hour, so 9 minutes takes about 10 hours. It stops by itself before the 2-hour limit: run it again until it prints "done" (finished chunks are kept). Output: `<name>/<name>_long.mp4`.
+- **Review sheets:** `sheets_long.sh <video> <chap_times.json> TOTAL <out_dir>` makes one numbered sheet per chapter; the numbers run on across chapters.
+- **Thumbnail:** 1280x720, built from the same scene code (`lw_thumb.js` in the example).
+- **Save:** GitHub refuses files over 100 MB, so save the video as `split -b 90M -d` parts and write the join command in `upload.md`.

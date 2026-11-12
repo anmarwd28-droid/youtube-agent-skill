@@ -98,3 +98,9 @@ Not made for kids · not altered/synthetic content · Science & Technology · Ar
 - **Rogue planets:** microlensing surveys suggest billions to trillions of free-floating planets in the Milky Way (Sumi et al. 2023, AJ 166, 108; NASA Roman mission summary).
 - **Life goes on:** microbes live kilometres deep in rock and at vents, some on hydrogen from rock–water reactions and radiolysis, with no need for sunlight (Lin et al., Science 2006; Deep Carbon Observatory, 2018). The Earth's interior gives off about 44–47 TW, about half from radioactive decay with half-lives of billions of years (Davies & Davies 2010; KamLAND 2011).
 - **The good news:** the Sun has about 5 billion years of hydrogen burning left (NASA).
+
+## Files
+
+- Video: `sunl_long.mp4` (1920x1080, 30 fps, 8:47, 237,857,972 bytes) is saved in three parts because of GitHub's 100 MB limit. Join them before uploading: `cat sunl_long.mp4.part00 sunl_long.mp4.part01 sunl_long.mp4.part02 > sunl_long.mp4`, then check the size.
+- Thumbnail: `thumbnail.jpg` (1280x720).
+- Numbered review sheets, one per chapter: `sheets/sheet_01.jpg` to `sheets/sheet_11.jpg` (shots 1-124).

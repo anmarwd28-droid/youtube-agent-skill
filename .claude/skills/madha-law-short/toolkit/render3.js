@@ -25,7 +25,7 @@ const path = require('path');
     ...(noAudio ? [] : ['-c:a', 'aac', '-b:a', '192k', '-ar', '44100', '-af', `apad,atrim=0:${total}`, '-t', String(total)]), '-movflags', '+faststart', outMp4], { stdio: ['pipe', 'inherit', 'inherit'] });
   for (let i = f0; i < f1; i++) {
     await page.evaluate(t => render(t), i / fps);
-    const buf = await page.screenshot({ type: 'jpeg', quality: 90 });
+    let buf; for (let k = 0; ; k++) { try { buf = await page.screenshot({ type: 'jpeg', quality: 90, timeout: 60000 }); break; } catch (e) { if (k >= 4) throw e; console.log('retry shot', i, k); await page.evaluate(t => render(t), i / fps); } }
     if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
     if (i % 300 === 0) console.log(`frame ${i}/${n}`);
   }

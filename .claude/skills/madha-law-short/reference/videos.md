@@ -35,6 +35,8 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 28-superpowers | ماذا لو استيقظ كل البشر بقوّة خارقة؟ |
 | 29-thousand-years | ماذا لو عاش الإنسان ألف سنة؟ |
 | 30-nuclear-war | ماذا لو اندلعت حرب نووية عالمية؟ (explosions in many places around the world, cities collapse) |
+| 31-dragons | ماذا لو كانت التنانين موجودة؟ |
+| 32-sun-gone-long | ماذا لو اختفت الشمس؟ من الثانية الأولى حتى مليون سنة (first long landscape video, 8:47, nine timeline chapters) |
 
 Scheduling status is in `videos/PENDING.md`.
 
