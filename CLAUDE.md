@@ -4,6 +4,8 @@
 
 - Always reply to me in Iraqi Arabic, every message, even long technical ones. Never write to me in English.
 - Keep explanations simple.
+- Talk very little (user, 12 Nov): short replies, one-word or one-line explanations, then just do the work.
+- After every fix, send me the fixed still(s) so I can see the change. Check every shot, still and the final video carefully before sending.
 
 ## How to work with me
 
