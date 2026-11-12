@@ -8,15 +8,20 @@ Use the exact file at the exact commit (raw URL) and check its size first.
 
 Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a one-second dotted-globe glitch was found and fixed. The user decided not to replace them, so do not touch those posts. The fixed files are in the repo.
 
-## Schedule as the user set it in Metricool (checked 12 Nov 2026, YouTube only, Baghdad time)
+## Already published on YouTube: never upload these again
+
+| Date | Time | Video | Link |
+|---|---|---|---|
+| 12 Nov | 10:00 | 15 ماذا لو اختفت كل النباتات من الأرض في ليلة واحدة؟ | youtube.com/shorts/ofqzv1qu45A |
+| 12 Nov | 16:00 | 32 Long video: ماذا لو اختفت الشمس؟ من الثانية الأولى حتى مليون سنة | youtube.com/watch?v=S5WYKhnetPQ |
+| 12 Nov | 17:00 | 16 ماذا لو بدأت الأرض تبتعد عن الشمس؟ | youtube.com/shorts/j6ZkgArrt1E |
+
+## Not published yet: schedule as the user set it in Metricool (checked 12 Nov 2026, YouTube only, Baghdad time)
 
 The user rescheduled everything themselves: three posts a day, 10:00, 16:00 and 20:00. Never change these times without asking. The next free slot is **18 Nov 16:00**.
 
 | Date | Time | Video | Status on 12 Nov |
 |---|---|---|---|
-| 12 Nov | 10:00 | 15 ماذا لو اختفت كل النباتات من الأرض في ليلة واحدة؟ | Published |
-| 12 Nov | 16:00 | 32 Long video: ماذا لو اختفت الشمس؟ من الثانية الأولى حتى مليون سنة | Published (youtu.be/S5WYKhnetPQ) |
-| 12 Nov | 17:00 | 16 ماذا لو بدأت الأرض تبتعد عن الشمس؟ | Published |
 | 12 Nov | 20:00 | 17 ماذا لو اختفى الغلاف الجوي من حول الأرض فجأة؟ | **Error: "You have reached your Metricool account limit"**; the user must reschedule it |
 | 13 Nov | 10:00 | 18 بركان يلوستون | Pending |
 | 13 Nov | 16:00 | 19 الشمس قزم أحمر | Pending |
@@ -36,6 +41,8 @@ The user rescheduled everything themselves: three posts a day, 10:00, 16:00 and 
 | 18 Nov | 10:00 | 33 البشر يطيرون | Pending |
 
 Every video file is in the repo: `videos/<number>-*/` (the number is in the Video column), each with its `upload.md` (title, description, tags). The long video 32 is split in parts: join them with `cat sunl_long.mp4.part0* > sunl_long.mp4`. If the user moves to a new Metricool account, reschedule from these files at the same times, and make sure the old posts are deleted so nothing goes out twice.
+
+Checked on 12 Nov: the 17 files above that are not published yet are the final versions on `main` (no newer version on any branch, none changed after it was scheduled; the old Yellowstone on branch `ccr-ba7d4217-xeyy3x` is outdated, never use it). Each decodes with no errors, 1080x1920 with audio.
 
 The ideas list in `NEW_CHAT_PROMPT.md` is now mostly done (superpowers, 1000 years, flying, nuclear war, dragons are scheduled).
 
