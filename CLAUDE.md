@@ -26,7 +26,7 @@ I have two YouTube channels. They live in different Metricool accounts, and Clau
 | Name | "ماذا لو؟ Lab" | "Weird Space Lab" (was "BABY 🐦") |
 | Channel ID | `UCbbego5CIm5_6lwfvU2zXSA` (`@MadhaLawLab`) | `UC2Aav2c7K96ux-q1eJuuHYw` |
 | Language of everything in the video and on YouTube | Simple Modern Standard Arabic (فصحى) | English |
-| Metricool | brand `q3_tvm`, blogId `7907171` | blogId `7966902` |
+| Metricool | new account since 12 Nov: blogId `8065283` (old: brand `q3_tvm`, blogId `7907171`, hit the free limit) | blogId `7966902` |
 | vidIQ | connected | not connected yet (public data only) |
 | Video folders in this repo | `videos/` | `weird-space-lab/videos/` |
 
@@ -53,7 +53,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 
 - A "what if?" channel: animated videos about events that never happened (two moons, the sun moving closer to Earth, and so on), explained with real science.
 - Write scripts, narration, on-screen text, titles and descriptions in simple Modern Standard Arabic (فصحى) unless I ask otherwise.
-- Metricool brand `q3_tvm` (blogId `7907171`, timezone Asia/Baghdad): use only the `youtube` provider there. Never read, post to or change the Instagram account in that brand.
+- Metricool: since 12 Nov the channel is on a new Metricool account, blogId `8065283` (timezone Asia/Baghdad, YouTube only). The old brand `q3_tvm` (blogId `7907171`) hit the free monthly limit; its pending posts must be removed there so nothing goes out twice. Use only the `youtube` provider. Never read, post to or change the Instagram account in that brand.
 
 ## Channel 2: "Weird Space Lab"
 
