@@ -30,6 +30,7 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 24-no-glass | ماذا لو اختفى كل الزجاج ٥ ثوانٍ؟ |
 | 25-speed-of-sound | ماذا لو ركضتَ بسرعة الصوت؟ |
 | 26-time-stops | ماذا لو توقّف الزمن ٥ ثوانٍ للجميع إلّا أنت؟ |
+| 35-all-blind | ماذا لو أصبح كل البشر عُمياناً فجأة؟ |
 | 27-flat-earth | ماذا لو كانت الأرض مسطّحة؟ (three.js version; the user said the street, sea and edge looked too photoreal for the channel; see style.md) |
 
 Scheduling status is in `videos/PENDING.md`.
