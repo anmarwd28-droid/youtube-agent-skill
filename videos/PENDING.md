@@ -26,7 +26,7 @@ Video 30 was uploaded from commit `fa47b2206b9ea1397fe6fad0b5bfdde27d3ec553` (26
 
 Video 14 (rings) was published on 11 Nov 20:00 (`ktWXjUtvIDs`) but the user saw it as a normal video, not a Short, and asked on 12 Nov to post it again as a Short: scheduled 17 Nov 16:00 (Metricool post `425623011`, same media file). The old upload is the user's to delete.
 
-Long video 32 (the Sun disappears): the user asked on 12 Nov to schedule it at the best time (type `video`, with `thumbnail.jpg`). Not scheduled yet: the 238 MB file needs one public URL (GitHub refuses files over 100 MB and LFS on this fork). Best YouTube hours by Metricool: Wed and Thu 16:00, then 10:00.
+Long video 32 (the Sun disappears): scheduled Wed 18 Nov 16:00 (the best YouTube hour of the week by Metricool), type `video`, with `thumbnail.jpg` (Metricool post `425631639`). The 238 MB file came from the user's Dropbox link, because GitHub refuses files over 100 MB.
 
 ## Not approved yet
 
