@@ -40,6 +40,7 @@ Chromium and Playwright are preinstalled; `render3.js` serves `$W` over HTTP its
 
 1. **Idea and facts.**
    - Research with vidIQ (`vidiq_keyword_research`, `vidiq_outliers`) when choosing ideas.
+   - Every video (user, 12 Nov): also run the `yt-viral` skill together with vidIQ to find and rank what is working in the niche, and run the `yt-package` skill (with vidIQ title scoring) for the title and cover text. These only touch ideas and packaging, never the animation style.
    - Check every number (show the formula for physics) and keep sources.
    - Global framing, not one country.
    - Write a scene plan of 9–12 scenes, one per narration line.
