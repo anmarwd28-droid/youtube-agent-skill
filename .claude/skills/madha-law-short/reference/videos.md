@@ -36,6 +36,7 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 29-thousand-years | ماذا لو عاش الإنسان ألف سنة؟ |
 | 30-nuclear-war | ماذا لو اندلعت حرب نووية عالمية؟ (explosions in many places around the world, cities collapse) |
 | 31-dragons | ماذا لو كانت التنانين موجودة؟ |
+| 33-humans-fly | ماذا لو استطاع كل البشر الطيران؟ (feathered wings: `wingUV`, `flyer`, `wperson` in `fly_b.js`) |
 | 32-sun-gone-long | ماذا لو اختفت الشمس؟ من الثانية الأولى حتى مليون سنة (first long landscape video, 8:47, nine timeline chapters) |
 
 Scheduling status is in `videos/PENDING.md`.
@@ -45,7 +46,7 @@ Scheduling status is in `videos/PENDING.md`.
 2. ~~ماذا لو أصبح الناس يملكون قوّةً خارقة؟~~ Made (#28).
 3. ~~ماذا لو عاش الإنسان ألفَ سنة؟~~ Made (#29).
 4. ماذا لو لم تكن هناك منازل؟
-5. ماذا لو كان الناس يطيرون؟
+5. ~~ماذا لو كان الناس يطيرون؟~~ Made (#33).
 6. ~~ماذا لو اندلعت حربٌ نوويّة عالميّة؟~~ Made (#30).
 7. ماذا لو لم تأكل عشرة أيام؟
 8. ماذا لو لم تنم عشرة أيام؟

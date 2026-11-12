@@ -32,4 +32,4 @@ Video 31 (dragons): the user said to schedule it on 12 Nov; scheduled 17 Nov 20:
 
 ## Not approved yet
 
-Nothing.
+Video 33 (humans fly): finished and sent to the user on 12 Nov; waiting for their answer. Do not schedule before they approve. Next free slot: 18 Nov 10:00.
