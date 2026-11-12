@@ -53,7 +53,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 
 - A "what if?" channel: animated videos about events that never happened (two moons, the sun moving closer to Earth, and so on), explained with real science.
 - Write scripts, narration, on-screen text, titles and descriptions in simple Modern Standard Arabic (فصحى) unless I ask otherwise.
-- Metricool: since 12 Nov the channel is on a new Metricool account, blogId `8065283` (timezone Asia/Baghdad, YouTube only). The old brand `q3_tvm` (blogId `7907171`) hit the free monthly limit; its pending posts must be removed there so nothing goes out twice. Use only the `youtube` provider. Never read, post to or change the Instagram account in that brand.
+- Metricool: since 12 Nov the channel is on a new Metricool account, blogId `8065283` (timezone Asia/Baghdad, YouTube only). The old brand `q3_tvm` (blogId `7907171`) hit the free monthly limit; the user deleted its pending posts on 12 Nov; do not use it. Use only the `youtube` provider. Never read, post to or change the Instagram account in that brand.
 
 ## Channel 2: "Weird Space Lab"
 

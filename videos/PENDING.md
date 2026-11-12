@@ -1,6 +1,6 @@
 # Channel 1 ("ماذا لو؟ Lab"): Metricool work waiting for the right account
 
-Do nothing here until the user says Metricool is back on the account linked to this channel. Then check `getBrandSettings`: the brand must be `q3_tvm`, blogId `7907171`.
+Metricool for this channel is the NEW account: check `getBrandSettings` shows blogId `8065283` (YouTube `UCbbego5CIm5_6lwfvU2zXSA`) before any scheduling.
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
@@ -18,7 +18,7 @@ Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a o
 
 ## Not published yet: schedule as the user set it in Metricool (YouTube only, Baghdad time)
 
-All 17 were scheduled on 12 Nov 21:03 on the NEW Metricool account (blogId `8065283`), same texts, titles and tags as before, files from commit `24bdcdab09278742ec2f01c94a5a12aecb3524fe`. The old account (blogId `7907171`) still holds copies: the user must delete them there so nothing goes out twice.
+All 17 were scheduled on 12 Nov 21:03 on the NEW Metricool account (blogId `8065283`), same texts, titles and tags as before, files from commit `24bdcdab09278742ec2f01c94a5a12aecb3524fe`. The user deleted the copies on the old account (blogId `7907171`) on 12 Nov, so nothing goes out twice.
 
 **Metricool free limit: 20 published posts per calendar month, reset on the 1st.** The new account uses 17 in November, so only 3 are left until 1 Dec. Remind the user of the count before every new scheduling, and warn before it runs out.
 
@@ -26,7 +26,7 @@ The user set the times: three posts a day, 10:00, 16:00 and 20:00. Never change 
 
 | Date | Time | Video | Status on 12 Nov |
 |---|---|---|---|
-| 12 Nov | 21:15 | 17 ماذا لو اختفى الغلاف الجوي من حول الأرض فجأة؟ | Scheduled on the new account (failed on the old one at 20:00) |
+| 12 Nov | 21:15 | 17 ماذا لو اختفى الغلاف الجوي من حول الأرض فجأة؟ | Published 12 Nov: https://www.youtube.com/shorts/wA2y8ysVdbc |
 | 13 Nov | 10:00 | 18 بركان يلوستون | Scheduled |
 | 13 Nov | 16:00 | 19 الشمس قزم أحمر | Scheduled |
 | 13 Nov | 20:00 | 20 الأرض دارت بالعكس | Scheduled |
