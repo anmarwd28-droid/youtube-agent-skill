@@ -14,10 +14,10 @@ The user rescheduled everything themselves: three posts a day, 10:00, 16:00 and 
 
 | Date | Time | Video | Status on 12 Nov |
 |---|---|---|---|
-| 12 Nov | 10:00 | ماذا لو اختفت كل النباتات من الأرض في ليلة واحدة؟ | Published |
-| 12 Nov | 16:00 | Long video: ماذا لو اختفت الشمس؟ من الثانية الأولى حتى مليون سنة | Published (youtu.be/S5WYKhnetPQ) |
-| 12 Nov | 17:00 | ماذا لو بدأت الأرض تبتعد عن الشمس؟ | Published |
-| 12 Nov | 20:00 | ماذا لو اختفى الغلاف الجوي من حول الأرض فجأة؟ | **Error: "You have reached your Metricool account limit"**; the user must reschedule it |
+| 12 Nov | 10:00 | 15 ماذا لو اختفت كل النباتات من الأرض في ليلة واحدة؟ | Published |
+| 12 Nov | 16:00 | 32 Long video: ماذا لو اختفت الشمس؟ من الثانية الأولى حتى مليون سنة | Published (youtu.be/S5WYKhnetPQ) |
+| 12 Nov | 17:00 | 16 ماذا لو بدأت الأرض تبتعد عن الشمس؟ | Published |
+| 12 Nov | 20:00 | 17 ماذا لو اختفى الغلاف الجوي من حول الأرض فجأة؟ | **Error: "You have reached your Metricool account limit"**; the user must reschedule it |
 | 13 Nov | 10:00 | 18 بركان يلوستون | Pending |
 | 13 Nov | 16:00 | 19 الشمس قزم أحمر | Pending |
 | 13 Nov | 20:00 | 20 الأرض دارت بالعكس | Pending |
@@ -28,12 +28,14 @@ The user rescheduled everything themselves: three posts a day, 10:00, 16:00 and 
 | 15 Nov | 16:00 | 25 تركض بسرعة الصوت | Pending |
 | 15 Nov | 20:00 | 26 توقّف الزمن 5 ثوانٍ | Pending |
 | 16 Nov | 10:00 | 27 الأرض مسطّحة | Pending |
-| 16 Nov | 16:00 | قوّة خارقة | Pending |
-| 16 Nov | 20:00 | الإنسان يعيش ألف سنة | Pending |
-| 17 Nov | 10:00 | حرب نووية عالمية | Pending |
-| 17 Nov | 16:00 | للأرض حلقات مثل زحل | Pending |
-| 17 Nov | 20:00 | التنانين موجودة | Pending |
-| 18 Nov | 10:00 | البشر يطيرون | Pending |
+| 16 Nov | 16:00 | 28 قوّة خارقة | Pending |
+| 16 Nov | 20:00 | 29 الإنسان يعيش ألف سنة | Pending |
+| 17 Nov | 10:00 | 30 حرب نووية عالمية | Pending |
+| 17 Nov | 16:00 | 14 للأرض حلقات مثل زحل | Pending |
+| 17 Nov | 20:00 | 31 التنانين موجودة | Pending |
+| 18 Nov | 10:00 | 33 البشر يطيرون | Pending |
+
+Every video file is in the repo: `videos/<number>-*/` (the number is in the Video column), each with its `upload.md` (title, description, tags). The long video 32 is split in parts: join them with `cat sunl_long.mp4.part0* > sunl_long.mp4`. If the user moves to a new Metricool account, reschedule from these files at the same times, and make sure the old posts are deleted so nothing goes out twice.
 
 The ideas list in `NEW_CHAT_PROMPT.md` is now mostly done (superpowers, 1000 years, flying, nuclear war, dragons are scheduled).
 
