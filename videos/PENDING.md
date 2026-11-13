@@ -4,14 +4,15 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
-## State on 13 Nov, 03:00 (before the compact)
+## State on 13 Nov, 15:15 (before the compact)
 
 - **#37 «ماذا لو كان للإنسان عينٌ واحدة فقط؟ 👁️» approved and SCHEDULED (13 Nov) on blogId `8073705` for **19 Nov 16:00** (Metricool post id 426764195), YouTube Short, public, Science & Technology, texts from upload.md.** Files: `videos/37-one-eye/` (oneeye_short.mp4 at commit `8078dd5`).
 - **#38 «ماذا لو فقد كل البشر القدرة على الكلام فجأة؟ 🤐» approved and SCHEDULED (13 Nov) on blogId `8073705` for 19 Nov 20:00 (post id 426885759), file at commit `0f7f02f` (28,936,290 bytes).**
 - **Metricool:** the user logged out of blogId `8065283` and logged into a NEW Metricool account with the channel added (13 Nov). The old account was not deleted or disconnected, so its posts (up to 19 Nov 10:00) still publish by themselves. Checked 13 Nov: new blogId **`8073705`**, YouTube `UCbbego5CIm5_6lwfvU2zXSA` ✅. Next free slot: **20 Nov 10:00** (10:00 / 16:00 / 20:00).
 - **Next video:** the next idea from the ranked list in `NEW_CHAT_PROMPT.md`: «ماذا لو اختفى البعوض من العالم؟ 🦟».
-- **ElevenLabs:** about 3,200 characters left (≈ 4 Shorts at ~800 each); resets about 10 Dec.
-- **vidIQ:** 110 of 150 credits left, renews 13 Dec. Each outliers, channel-videos, keyword or title-score call costs 5.
+- **ElevenLabs:** about 2,450 characters left (≈ 3 Shorts at ~750 each); resets about 10 Dec.
+- **vidIQ:** about 90 of 150 credits left (spend ≤ 15 per video, see CLAUDE.md), renews 13 Dec. Each outliers, channel-videos, keyword or title-score call costs 5.
+- **Working state:** the scratch workspace is lost with the container; everything to rebuild #37/#38 is in `videos/37-one-eye/src/` and `videos/38-no-speech/src/` (build scripts `boe.sh`, `bsp.sh`). For a new video copy the latest `*_lib.js` and change the street.
 - **Research rule:** vidIQ plus every fitting `yt-*` skill together (see CLAUDE.md). Arabic Shorts are not indexed in vidIQ outliers; use English what-if Shorts and adapt them. yt-dlp is blocked here, so get the channel lists for `swipe.py` with `vidiq_channel_videos`.
 
 ## graphify (installed 13 Nov)
