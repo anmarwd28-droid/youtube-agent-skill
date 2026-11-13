@@ -16,9 +16,8 @@ Use the exact file at the exact commit (raw URL) and check its size first.
 - **Working state:** the scratch workspace is lost with the container; everything to rebuild #37/#38 is in `videos/37-one-eye/src/` and `videos/38-no-speech/src/` (build scripts `boe.sh`, `bsp.sh`). For a new video copy the latest `*_lib.js` and change the street.
 - **Research rule:** vidIQ plus every fitting `yt-*` skill together (see CLAUDE.md). Arabic Shorts are not indexed in vidIQ outliers; use English what-if Shorts and adapt them. yt-dlp is blocked here, so get the channel lists for `swipe.py` with `vidiq_channel_videos`.
 
-## graphify (installed 13 Nov)
-- The skill is in the repo at `.claude/skills/graphify/` (with `.claude/CLAUDE.md` pointing to it), so every new conversation on this repo sees `/graphify`.
-- Its command-line tool comes from `pip install graphifyy`. The Default environment's setup script (added 13 Nov, approved by the user) installs it in each new container. If `graphify` is missing in a session, run `pip install graphifyy`.
+## graphify: removed (user, 13 Nov)
+- The user asked to remove graphify completely. Do not install or use it again unless they ask.
 
 ## Switching to a new Metricool account (user, 13 Nov)
 
