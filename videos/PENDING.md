@@ -4,6 +4,14 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
+## Switching to a new Metricool account (user, 13 Nov)
+
+The account with blogId `8065283` used up its November free limit. The user is moving to a newer Metricool account so scheduling can continue. Rules:
+- The posts already scheduled on `8065283` (everything up to 19 Nov 10:00) stay there and publish by themselves. Do not reschedule them on the new account, so nothing goes out twice.
+- The user must not disconnect the YouTube channel from the old account, or those posts fail.
+- On the new account, schedule from **19 Nov 16:00** onward, at the same times: 10:00, 16:00 and 20:00.
+- Run `getBrandSettings` first. Note the new blogId here and check the YouTube channel ID is `UCbbego5CIm5_6lwfvU2zXSA`.
+
 ## Already scheduled: keep as they are
 
 Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a one-second dotted-globe glitch was found and fixed. The user decided not to replace them, so do not touch those posts. The fixed files are in the repo.
@@ -22,7 +30,7 @@ All 17 were scheduled on 12 Nov 21:03 on the NEW Metricool account (blogId `8065
 
 **Metricool free limit: 20 published posts per calendar month, reset on the 1st.** The new account uses 18 in November, so only 2 are left until 1 Dec. Remind the user of the count before every new scheduling, and warn before it runs out.
 
-The user set the times: three posts a day, 10:00, 16:00 and 20:00. Never change these times without asking. The next free slot is **18 Nov 20:00**.
+The user set the times: three posts a day, 10:00, 16:00 and 20:00. Never change these times without asking. The last scheduled post is **19 Nov 10:00** (#36). The next free slot is **19 Nov 16:00**.
 
 | Date | Time | Video | Status on 12 Nov |
 |---|---|---|---|
