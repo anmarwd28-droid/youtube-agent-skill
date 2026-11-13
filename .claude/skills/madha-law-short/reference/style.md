@@ -93,3 +93,13 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - Lessons from the test stills: the wing must bend at the wrist and its feathers must always trail behind the flight direction (`wingDir`); never let a wing shrink to a stub when level; hide the far arm behind the torso; the wing roots sit at the sides of the shoulders so the torso stays visible.
 - No hard black cast shadows under the drawn people (`castSh`) in bright scenes: they looked like sticks. Use a soft blurred ellipse.
 - Clouds that scroll during a climb must fade before they reach the caption band.
+
+## Mistakes caught in #35–#36 (check these in every test still)
+- **The sun as a flat grey disc:** a bare small circle looks grey and fake. Draw it as three layers: a wide soft glow (`soft`), a mid glow (r≈46–50, `blur9`, opacity .45), then a small white core (r≈22).
+- **Gaps between mountain ranges:** two `mountainsR` layers leave a strip of sky between them. Fill under the far range with an opaque rock-coloured rect, add a middle ridge, then soft haze; never leave a flat grey band.
+- **Hands and props over the body:** a hand or icon drawn near a head profile can look like it grows out of the neck. Put close-ups (touch, Braille) in their own panel or inset.
+- **SVG dots on the gl3d_world globe do not line up** with the texture (the cities came out shifted by about 15°). Don't pin SVG markers to places on that globe; show changes through the shader (`lights`, `sunI`) instead.
+- **Eyelashes drawn as strokes** looked like vertical bars; leave them out.
+- **A hub arc on a spinning fan or turbine** looked like a smile; use a small highlight dot instead.
+- **People inside props:** check that walking people are not inside a cart pole, a yoke or a car.
+- **A new street for every video:** copy the last `*_lib.js` (for example `videos/36-no-wheel/src/wh_lib.js`) and change the `blockN` list (colours, heights, seeds, kinds), `SHOPB` (shop names and colours) and the tree seeds.

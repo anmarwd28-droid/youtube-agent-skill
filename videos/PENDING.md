@@ -1,43 +1,92 @@
 # Channel 1 ("ماذا لو؟ Lab"): Metricool work waiting for the right account
 
-Do nothing here until the user says Metricool is back on the account linked to this channel. Then check `getBrandSettings`: the brand must be `q3_tvm`, blogId `7907171`.
+Metricool for this channel is the NEW account: check `getBrandSettings` shows blogId `8073705` (YouTube `UCbbego5CIm5_6lwfvU2zXSA`) before any scheduling.
 
 Use the exact file at the exact commit (raw URL) and check its size first.
+
+## Done (13 Nov, 17:44)
+- #39 is ALREADY SCHEDULED on blogId `8073705` for 20 Nov 10:00 (post id 427047926). Do NOT schedule it again. Next free slot: **20 Nov 16:00**.
+- Next: wait for the user's next idea (the next in the list is «ماذا لو اختفى البعوض من العالم؟ 🦟»).
+
+Connector notes (13 Nov): in the #39 session, Metricool and vidIQ dropped mid-session with CONNECT_TIMEOUT and never came back, although claude.ai showed both "connected". A session only loads connectors when it starts, so the fix is a NEW session. GitHub also needed reconnecting (fixed at claude.ai/customize/connectors). Environment: use **Default** (env `env_01Mymm6MAuNdECwPsCBDHwcw`, the one with the ElevenLabs key; the other "Default" is empty, «قناه اجنبيه» is channel 2). Renaming it was refused by the service. Its setup script was removed with graphify.
+
+## State on 13 Nov (after #39)
+
+- **#37 «ماذا لو كان للإنسان عينٌ واحدة فقط؟ 👁️» approved and SCHEDULED (13 Nov) on blogId `8073705` for **19 Nov 16:00** (Metricool post id 426764195), YouTube Short, public, Science & Technology, texts from upload.md.** Files: `videos/37-one-eye/` (oneeye_short.mp4 at commit `8078dd5`).
+- **#38 «ماذا لو فقد كل البشر القدرة على الكلام فجأة؟ 🤐» approved and SCHEDULED (13 Nov) on blogId `8073705` for 19 Nov 20:00 (post id 426885759), file at commit `0f7f02f` (28,936,290 bytes).**
+- **Metricool:** the user logged out of blogId `8065283` and logged into a NEW Metricool account with the channel added (13 Nov). The old account was not deleted or disconnected, so its posts (up to 19 Nov 10:00) still publish by themselves. Checked 13 Nov: new blogId **`8073705`**, YouTube `UCbbego5CIm5_6lwfvU2zXSA` ✅. Next free slot: **20 Nov 16:00** (10:00 / 16:00 / 20:00).
+- **#39 «ماذا لو كان جسمك من المادة المضادة؟ 💥» rendered 13 Nov (71 s, 2130 frames), files in `videos/39-antimatter/`. APPROVED by the user (13 Nov): schedule it on 8073705 at the next free slot, 20 Nov 10:00 (YouTube Short, public, Science & Technology, texts from upload.md). File `videos/39-antimatter/anti_short.mp4` at commit `14ae2aa` (33,145,746 bytes). SCHEDULED 13 Nov 17:44 on 8073705 for 20 Nov 10:00 (post id 427047926).**
+- **Next video:** the next idea from the ranked list in `NEW_CHAT_PROMPT.md`: «ماذا لو اختفى البعوض من العالم؟ 🦟».
+- **ElevenLabs:** about 1,590 characters left after #39 (≈ 2 Shorts at ~750 each); resets about 10 Dec.
+- **vidIQ:** 70 of 150 credits left after #39 (spend ≤ 15 per video, see CLAUDE.md), renews 13 Dec. Each outliers, channel-videos, keyword or title-score call costs 5.
+- **Working state:** the scratch workspace is lost with the container; everything to rebuild #37/#38/#39 is in `videos/37-one-eye/src/`, `videos/38-no-speech/src/`, `videos/39-antimatter/src/` (build scripts `boe.sh`, `bsp.sh`, `bam.sh`; copy the toolkit + those src files into one work folder first). For a new video copy the latest `*_lib.js` and change the street.
+- **Research rule:** vidIQ plus every fitting `yt-*` skill together (see CLAUDE.md). Arabic Shorts are not indexed in vidIQ outliers; use English what-if Shorts and adapt them. yt-dlp is blocked here, so get the channel lists for `swipe.py` with `vidiq_channel_videos`.
+
+## graphify: removed (user, 13 Nov)
+- The user asked to remove graphify completely. Do not install or use it again unless they ask.
+
+## Switching to a new Metricool account (user, 13 Nov)
+
+The account with blogId `8065283` used up its November free limit. The user is moving to a newer Metricool account so scheduling can continue. Rules:
+- The posts already scheduled on `8065283` (everything up to 19 Nov 10:00) stay there and publish by themselves. Do not reschedule them on the new account, so nothing goes out twice.
+- The user must not disconnect the YouTube channel from the old account, or those posts fail.
+- On the new account, schedule from **19 Nov 16:00** onward, at the same times: 10:00, 16:00 and 20:00.
+- Run `getBrandSettings` first. Note the new blogId here and check the YouTube channel ID is `UCbbego5CIm5_6lwfvU2zXSA`.
 
 ## Already scheduled: keep as they are
 
 Videos 13 (Wed 11 Nov 16:00) and 15 (Thu 12 Nov 16:00) were scheduled before a one-second dotted-globe glitch was found and fixed. The user decided not to replace them, so do not touch those posts. The fixed files are in the repo.
 
-## Schedule since 11 Nov 2026 (YouTube only, three per day: 10:00, 16:00 and 20:00 Baghdad time)
+## Already published on YouTube: never upload these again
 
-The user asked for three Shorts a day: 10:00, 16:00 and one at night. 20:00 was chosen as the best of 20:00–22:00 by Metricool's best-time data. Keep this rhythm: the next free slot is **18 Nov 16:00**.
-
-| Day | 10:00 | 16:00 | 20:00 |
+| Date | Time | Video | Link |
 |---|---|---|---|
-| 11 Nov | (published) | 13 توقفت الأرض | 14 حلقات |
-| 12 Nov | 15 النباتات | 16 تبتعد عن الشمس | 17 الغلاف الجوي |
-| 13 Nov | 18 يلوستون | 19 قزم أحمر | 20 دارت بالعكس |
-| 14 Nov | 21 ثقب أسود | 22 قمران | 23 الأكسجين |
-| 15 Nov | 24 الزجاج | 25 سرعة الصوت | 26 توقّف الزمن |
-| 16 Nov | 27 الأرض مسطّحة | 28 قوّة خارقة | 29 ألف سنة |
-| 17 Nov | 30 حرب نووية | 14 حلقات (again) | 31 التنانين |
-| 18 Nov | 33 الطيران | | |
+| 12 Nov | 10:00 | 15 ماذا لو اختفت كل النباتات من الأرض في ليلة واحدة؟ | youtube.com/shorts/ofqzv1qu45A |
+| 12 Nov | 16:00 | 32 Long video: ماذا لو اختفت الشمس؟ من الثانية الأولى حتى مليون سنة | youtube.com/watch?v=S5WYKhnetPQ |
+| 12 Nov | 17:00 | 16 ماذا لو بدأت الأرض تبتعد عن الشمس؟ | youtube.com/shorts/j6ZkgArrt1E |
 
-Video 30 was uploaded from commit `fa47b2206b9ea1397fe6fad0b5bfdde27d3ec553` (26257999 bytes). Videos 28 and 29 were uploaded from commit `dc7936676ce8f9d988f0eac40aba3a5814e369fa` (26230147 and 18134226 bytes).
+## Not published yet: schedule as the user set it in Metricool (YouTube only, Baghdad time)
 
-Video 14 (rings) was published on 11 Nov 20:00 (`ktWXjUtvIDs`) but the user saw it as a normal video, not a Short, and asked on 12 Nov to post it again as a Short: scheduled 17 Nov 16:00 (Metricool post `425623011`, same media file). The old upload is the user's to delete.
+All 17 were scheduled on 12 Nov 21:03 on the NEW Metricool account (blogId `8065283`), same texts, titles and tags as before, files from commit `24bdcdab09278742ec2f01c94a5a12aecb3524fe`. The user deleted the copies on the old account (blogId `7907171`) on 12 Nov, so nothing goes out twice.
 
-Long video 32 (the Sun disappears): the user asked for today, so it is scheduled Thu 12 Nov 16:00, type `video`, with `thumbnail.jpg` (Metricool uuid `7577765221890475282`). The 238 MB file came from the user's Dropbox link, because GitHub refuses files over 100 MB. Short 16 (تبتعد عن الشمس) moved from 16:00 to 17:00 the same day so the two do not go out together.
+**Metricool free limit: 20 published posts per calendar month, reset on the 1st.** The new account uses 18 in November, so only 2 are left until 1 Dec. Remind the user of the count before every new scheduling, and warn before it runs out.
 
-Video 31 (dragons): the user said to schedule it on 12 Nov; scheduled 17 Nov 20:00 from commit `341031f6d7ac9dee2997b18156157a8f52a90efc` (24393399 bytes), Metricool post `425669871`.
+The user set the times: three posts a day, 10:00, 16:00 and 20:00. Never change these times without asking. The last scheduled post is **19 Nov 10:00** (#36). The next free slot is **19 Nov 16:00**.
 
-Video 33 (humans fly): approved by the user on 12 Nov; scheduled 18 Nov 10:00 from commit `00ebb3bb59477840c37183cae7a6c83d0cd131e3` (33085335 bytes), Metricool post `425759931`.
+| Date | Time | Video | Status on 12 Nov |
+|---|---|---|---|
+| 12 Nov | 21:15 | 17 ماذا لو اختفى الغلاف الجوي من حول الأرض فجأة؟ | Published 12 Nov: https://www.youtube.com/shorts/wA2y8ysVdbc |
+| 13 Nov | 10:00 | 18 بركان يلوستون | Scheduled |
+| 13 Nov | 16:00 | 19 الشمس قزم أحمر | Scheduled |
+| 13 Nov | 20:00 | 20 الأرض دارت بالعكس | Scheduled |
+| 14 Nov | 10:00 | 21 ثقب أسود بحجم حبة عنب | Scheduled |
+| 14 Nov | 16:00 | 22 للأرض قمران | Scheduled |
+| 14 Nov | 20:00 | 23 اختفى الأكسجين 5 ثوانٍ | Scheduled |
+| 15 Nov | 10:00 | 24 اختفى الزجاج 5 ثوانٍ | Scheduled |
+| 15 Nov | 16:00 | 25 تركض بسرعة الصوت | Scheduled |
+| 15 Nov | 20:00 | 26 توقّف الزمن 5 ثوانٍ | Scheduled |
+| 16 Nov | 10:00 | 27 الأرض مسطّحة | Scheduled |
+| 16 Nov | 16:00 | 28 قوّة خارقة | Scheduled |
+| 16 Nov | 20:00 | 29 الإنسان يعيش ألف سنة | Scheduled |
+| 17 Nov | 10:00 | 30 حرب نووية عالمية | Scheduled |
+| 17 Nov | 16:00 | 14 للأرض حلقات مثل زحل | Scheduled |
+| 17 Nov | 20:00 | 31 التنانين موجودة | Scheduled |
+| 18 Nov | 10:00 | 33 البشر يطيرون | Scheduled |
+| 18 Nov | 16:00 | 34 لم تنم ١٠ أيام (commit `6caa8663ee04808814285cfce9824a1fceb667ab`, 28,010,744 bytes) | Scheduled 12 Nov 23:06 |
+| 18 Nov | 20:00 | 35 كل البشر عُمياناً فجأة (commit `919c95427b1d5b4393674190f6843ff3fd648d8a`, 27,121,512 bytes; Metricool post 426371480) | Scheduled 13 Nov 02:53 |
+| 19 Nov | 10:00 | 36 لم تُخترَع العجلة (commit `0b30d3a`, Metricool post 426431414) | Scheduled 13 Nov 04:18 |
+
+Every video file is in the repo: `videos/<number>-*/` (the number is in the Video column), each with its `upload.md` (title, description, tags). The long video 32 is split in parts: join them with `cat sunl_long.mp4.part0* > sunl_long.mp4`. If the user moves to a new Metricool account, reschedule from these files at the same times, and make sure the old posts are deleted so nothing goes out twice.
+
+Checked on 12 Nov: the 17 files above that are not published yet are the final versions on `main` (no newer version on any branch, none changed after it was scheduled; the old Yellowstone on branch `ccr-ba7d4217-xeyy3x` is outdated, never use it). Each decodes with no errors, 1080x1920 with audio.
+
+The ideas list in `NEW_CHAT_PROMPT.md` is now mostly done (superpowers, 1000 years, flying, nuclear war, dragons are scheduled).
 
 ## Not approved yet
 
 Nothing.
 
-## Notes for the next conversation (13 Nov 2026)
-- Ideas still not made: ماذا لو لم تكن هناك منازل؟ · ماذا لو لم تأكل عشرة أيام؟ · ماذا لو لم تنم عشرة أيام؟ · ماذا لو لم تشرب الماء عشرة أيام؟
-- ElevenLabs: after #33 (618 characters) about 3,250 of the 10,000 monthly characters are left; one Short uses about 600. Check `/v1/user/subscription` first.
-- When the user says only "جدولو" after watching, that is the approval: schedule at the next free slot and reply in one line.
+
+Metricool free plan (blogId 8065283): after #36 the November limit is used up (0 left); the limit resets on 1 Dec.
+
+ElevenLabs on 13 Nov: about 4,000 characters left of 10,000 (resets about 10 Dec); one Short uses about 770.

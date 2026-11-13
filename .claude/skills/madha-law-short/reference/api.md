@@ -81,3 +81,12 @@ To make a changed-Earth texture, write a Python script like `tex/retro_tex.py`, 
 - `plants_animals.js`: `quad` (four-legged animals) and `pigeon`.
 - `examples/bh_new.js` adds `milkyWay`, `lensBH` (gravitational lensing done with soft radial masks) and `cityDay`.
 - `examples/yell_real.js` has realistic ash, eruption and village pieces.
+
+## Latest build (videos #35–#36)
+- `src/bbl.sh` / `src/bwh.sh` build the page from `sup_n.js` + `mil_lib.js` + `*_lib.js` + `*_b.js`, then patch in the import map for `gl3d_world.js`, the NOKB line and `w: F.w`.
+- `*_lib.js` is the #34 helper set (room, brain head `HEADP`/`BRAINP`, `bigEye`, `blockN`, `street2`) plus `street3(t, {N, id, fg, cars})` with this video's buildings and shops.
+- `glB(t, {d, az, spin, sp, lights, sunI, off, up, el})` draws the house 3D Earth; `off` ≈ 2.7 turns the night side to the camera.
+- Reusable pieces in `videos/35-all-blind/src/bl_b.js`: `cockpit`, `controller` (round insets), `runway`, `tower`, `brainV` (the visual cortex lit, idle or rewired), `handR` (a pointing hand), `shades` (dark glasses on the last `hero`), a white cane, and echo rings.
+- Reusable pieces in `videos/36-no-wheel/src/wh_b.js`: `woodWheel`, `bladeWheel` (jet fan or turbine), `gear`, `windT`, `dust` (things vanishing), `oxCart`, `plain` (an open landscape), `clayDog`, `tramCar` and `bike`.
+- Use `quad(...)` and recolour it with `recol()` for an ox, a donkey or llamas (`horse`/`cow` kinds).
+- `render_chunks.sh` dies if the container restarts. Then delete `X/chunks` and run it again as a background task (`run_in_background`), not with `&`.

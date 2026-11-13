@@ -20,7 +20,7 @@ Read `CLAUDE.md` first (the two channels, never mixing them). This skill is for 
 ## Never do
 
 - Publish or schedule before the user has watched the final video and said it needs no changes.
-- Schedule while Metricool is on another account. Always check `getBrandSettings` first: brand `q3_tvm`, blogId `7907171`. See `videos/PENDING.md`.
+- Schedule while Metricool is on another account. Always check `getBrandSettings` first: blogId `8073705` (since 13 Nov). See `videos/PENDING.md`.
 - Touch the Instagram account in that brand, or anything under `weird-space-lab/`.
 - Cut corners to save tokens. Keep the full test stills and the full length and quality of every video (the user asked for this explicitly).
 - Put API keys in chat. ElevenLabs goes through the proxy; if it returns 401, use `request_credential`.
@@ -40,6 +40,7 @@ Chromium and Playwright are preinstalled; `render3.js` serves `$W` over HTTP its
 
 1. **Idea and facts.**
    - Research with vidIQ (`vidiq_keyword_research`, `vidiq_outliers`) when choosing ideas.
+   - Every video (user, 12 Nov), always together with vidIQ: run the `yt-viral` skill to find and rank what is working in the niche, and run the `yt-package` skill (with vidIQ title scoring) for the title and cover text. These only touch ideas and packaging, never the animation style.
    - Check every number (show the formula for physics) and keep sources.
    - Global framing, not one country.
    - Write a scene plan of 9–12 scenes, one per narration line.
@@ -85,6 +86,7 @@ Chromium and Playwright are preinstalled; `render3.js` serves `$W` over HTTP its
 10. **Save.** Copy the files to `videos/NN-slug/`:
     - `X_short.mp4` and `X_shots_numbered.jpg`
     - `upload.md`, in the same format as `videos/21-black-hole/upload.md`: shots in order, Title, Description, Tags, Settings, and Facts with numbers and sources
+     - Every video (user, 12 Nov): write the Description and Tags with the `yt-seo` skill together with vidIQ (`vidiq_keyword_research`), aimed at what people really type in search.
     - `src/`: X_new.js, X.html, X_mid.js, gl3d module, helper js, audio_X.py, script.json, timing.json, voice.mp3, plus any texture and its generator
 
     Then commit and push to the working branch and `main`.
