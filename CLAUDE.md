@@ -14,6 +14,7 @@
 - When I say "وقف" (stop), stop everything at once, background renders included, and wait for my next message.
 - If an instruction could mean more than one thing (especially deleting), ask me which one before acting. A wrong guess once deleted the wrong thing.
 - Never lower the quality to save tokens or time: keep the full test stills, full video length and full render quality.
+- No rush (user, 13 Nov): take as long as each video needs, even if the render is slow. Never simplify heavy scenes just to finish faster.
 - When I give several ideas, make them one at a time, so they don't clash. Do two at once only when that is clearly safe.
 - Pick ideas and titles that can go far (my goal is more than 2,500 views per video). Use vidIQ research for this.
 - Each new video starts in a new conversation. Everything needed must be saved in the repo (this file, the `madha-law-short` skill, `videos/PENDING.md`); never keep an important rule only in the chat.
