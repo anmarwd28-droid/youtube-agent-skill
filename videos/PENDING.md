@@ -4,7 +4,13 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
-## State on 13 Nov, 15:15 (before the compact)
+## FIRST THING in the next session (13 Nov, 17:45)
+1. Schedule #39 (approved): `getBrandSettings` must show blogId `8073705`, then YouTube Short at **20 Nov 10:00** Baghdad, public, Science & Technology, not for kids, title/description/tags from `videos/39-antimatter/upload.md`, media = raw URL of `videos/39-antimatter/anti_short.mp4` at commit `14ae2aa` (check 33,145,746 bytes). Then the next free slot is 20 Nov 16:00; update this file.
+2. Then wait for the user's next idea (the next in the list is «ماذا لو اختفى البعوض من العالم؟ 🦟»).
+
+Connector notes (13 Nov): in the #39 session, Metricool and vidIQ dropped mid-session with CONNECT_TIMEOUT and never came back, although claude.ai showed both "connected". A session only loads connectors when it starts, so the fix is a NEW session. GitHub also needed reconnecting (fixed at claude.ai/customize/connectors). Environment: use **Default** (env `env_01Mymm6MAuNdECwPsCBDHwcw`, the one with the ElevenLabs key; the other "Default" is empty, «قناه اجنبيه» is channel 2). Renaming it was refused by the service. Its setup script was removed with graphify.
+
+## State on 13 Nov (after #39)
 
 - **#37 «ماذا لو كان للإنسان عينٌ واحدة فقط؟ 👁️» approved and SCHEDULED (13 Nov) on blogId `8073705` for **19 Nov 16:00** (Metricool post id 426764195), YouTube Short, public, Science & Technology, texts from upload.md.** Files: `videos/37-one-eye/` (oneeye_short.mp4 at commit `8078dd5`).
 - **#38 «ماذا لو فقد كل البشر القدرة على الكلام فجأة؟ 🤐» approved and SCHEDULED (13 Nov) on blogId `8073705` for 19 Nov 20:00 (post id 426885759), file at commit `0f7f02f` (28,936,290 bytes).**
@@ -13,7 +19,7 @@ Use the exact file at the exact commit (raw URL) and check its size first.
 - **Next video:** the next idea from the ranked list in `NEW_CHAT_PROMPT.md`: «ماذا لو اختفى البعوض من العالم؟ 🦟».
 - **ElevenLabs:** about 1,590 characters left after #39 (≈ 2 Shorts at ~750 each); resets about 10 Dec.
 - **vidIQ:** 70 of 150 credits left after #39 (spend ≤ 15 per video, see CLAUDE.md), renews 13 Dec. Each outliers, channel-videos, keyword or title-score call costs 5.
-- **Working state:** the scratch workspace is lost with the container; everything to rebuild #37/#38 is in `videos/37-one-eye/src/` and `videos/38-no-speech/src/` (build scripts `boe.sh`, `bsp.sh`). For a new video copy the latest `*_lib.js` and change the street.
+- **Working state:** the scratch workspace is lost with the container; everything to rebuild #37/#38/#39 is in `videos/37-one-eye/src/`, `videos/38-no-speech/src/`, `videos/39-antimatter/src/` (build scripts `boe.sh`, `bsp.sh`, `bam.sh`; copy the toolkit + those src files into one work folder first). For a new video copy the latest `*_lib.js` and change the street.
 - **Research rule:** vidIQ plus every fitting `yt-*` skill together (see CLAUDE.md). Arabic Shorts are not indexed in vidIQ outliers; use English what-if Shorts and adapt them. yt-dlp is blocked here, so get the channel lists for `swipe.py` with `vidiq_channel_videos`.
 
 ## graphify: removed (user, 13 Nov)
