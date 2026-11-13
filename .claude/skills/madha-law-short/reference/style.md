@@ -108,3 +108,13 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - For a 3D body with drawn people on it, place every person from the 3D point (`onPt` in `videos/40-house-planet/src/hs_b.js`): it gives the screen spot, the rotation of "up" there and the TRUE person scale. Placing on a guessed 2D circle put people floating above the planet.
 - Close-ups of a rock surface need detail at every scale: the procedural 3D-noise bump and grain in `gl3d_hs.js`, plus `pebbles` (irregular shaded rocks, small). A texture-derivative bump looked blocky up close; big identical dome pebbles looked fake.
 - Keep a camera pull-back (close on the person → whole planet) for the hook: it shows the scale in two seconds.
+
+## The disc-globe Earth was MIRRORED (found in #41, Nov 2026)
+- The Earth of `gl3d_world.js` (the disc morphed to a globe, used through `glB` in #35–#40) showed the map mirrored: east on the left, Africa's horn pointing west. Nobody noticed because those shots were mostly oceans or spinning.
+- Fixed in `videos/41-land-ocean-swap/src/gl3d_sw.js`: in the disc vertex shader `vUv = vec2(1.0 - uv.x, uv.y)`. Use that module (or copy the line) for every new video with the Earth.
+- With the fix, `gW(t, {lon, el, d})` in `sw_b.js` puts a real longitude facing the camera, and `pin(G, lat, lon, text)` / `gPath` place labels exactly (checked at Cape Town, Rio, Cairo, London). Check a still with a recognisable continent before rendering.
+
+## Terrain close-ups (#41)
+- Rock faces: `litRock(path, ...)` (fractal noise through a diffuse light, clipped to any path) plus strata lines and jagged edges (`jag`); plain gradient walls looked flat.
+- Big single peaks (Everest): `litRock` body, a shaded face from the summit down a ridge, snow with a jagged snow line. `mountainsR` with custom points on a tall narrow peak came out as black-and-white noise.
+- Dunes: a continuous slip-face band under each crest (per-segment boxes looked like tiles). Mesas: lit rock + strata + talus apron + erosion streaks (flat trapezoids looked like cardboard).
