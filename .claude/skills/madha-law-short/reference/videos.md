@@ -74,3 +74,15 @@ yt-viral swipe.py run, 13 Nov (196 Shorts from World Simulations, TheNrth, Molli
 #39 «ماذا لو كان جسمك من المادة المضادة؟ 💥» made on 13 Nov (the user's idea; 6.7x outlier in the 13 Nov swipe). vidIQ: 1 keyword research + 2 title scores = 15 credits. New reusable pieces in `videos/39-antimatter/src/am_b.js`: `ptc` (a shaded charged particle), `antiHero` (a person with a violet halo), `antiTw` (twinkles), `mushroom`, `galaxy` (a dot spiral galaxy), a magnetic trap, a CERN landscape with the ring, a light bulb with a timer, a potassium tile. `am_lib.js` street: pharmacy, books, watches, sweets, clothes; `street3(..., {lamps: 0})` hides the lamp posts. Render note: the gram/mushroom and Big Bang chunks are slow (about 20 min each); the full render took about 70 min.
 
 #40 «ماذا لو عشت على كوكب بحجم بيت؟ 🏠» made on 13 Nov (the user's idea; 7.3x outlier in the 13 Nov swipe). vidIQ: 2 title scores = 10 credits. ElevenLabs: 674 characters with light tashkeel (only 687 were left; tashkeel marks count as characters). New reusable pieces in `videos/40-house-planet/src/`: `gl3d_hs.js` (the `moon` slot as a rock planet: procedural rock texture `tex/rock_tex.py`, 3D-noise bump in the shader, `lump` turns it into an irregular asteroid), and in `hs_b.js`: `camP`/`cam2`/`lerpCam`, `sil` (exact limb on screen), `onPt` (a surface point with its rotation and the true person scale), `astro` (the house person in a spacesuit), `pebbles` (3D-placed loose rocks), `houseD` (a drawn two-storey house), `dimLine`, `sunDisc`.
+
+## vidIQ + yt-viral research, 13 Nov evening (after #40)
+vidIQ outliers ("what if science scenario", English Shorts, last 3 months) + swipe.py on Ouranos and Milton Films (100 Shorts; multiple = views ÷ channel median). 15 credits. Ideas we have NOT made, best first:
+1. ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍 (54x in swipe, 36x vidIQ) — Earth from space, a swapped texture.
+2. ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️ (8.8–10.5x, 539K) — a Sun idea, our strongest category.
+3. ماذا لو انفجر القمر؟ 🌕💥 (12x, 1.8M) — a Moon idea.
+4. ماذا لو اختفى الحديد ٥ ثوانٍ؟ (429K) / البروتونات ٥ ثوانٍ (46x) — our "disappears for 5 s" format.
+5. ماذا لو كانت الأرض مكعّبة؟ 🧊 (21x, 3.8x).
+6. ماذا لو توقّف القمر عن الحركة؟ (11x).
+7. ماذا لو كانت الأرض من ذهب؟ (4.4x, 279K).
+Still open from earlier research: البعوض (10–176x), ثلاث عيون (48x), الميغالودون (29x), اختفاء المشتري (28x), سرعة الضوء تضاعفت (15x), الاحتكاك ٥ ثوانٍ (12x), الهيكل العظمي ٥ ثوانٍ (7x).
+What the winners share: one simple change to the Earth, the Sun, the Moon or a basic material, said in under 8 words.
