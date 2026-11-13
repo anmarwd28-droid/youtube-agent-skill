@@ -36,6 +36,7 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 38-no-speech | ماذا لو فقد كل البشر القدرة على الكلام فجأة؟ |
 | 39-antimatter | ماذا لو كان جسمك من المادة المضادة؟ |
 | 40-house-planet | ماذا لو عشت على كوكب بحجم بيت؟ |
+| 41-land-ocean-swap | ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ |
 | 27-flat-earth | ماذا لو كانت الأرض مسطّحة؟ (three.js version; the user said the street, sea and edge looked too photoreal for the channel; see style.md) |
 
 | 28-superpowers | ماذا لو استيقظ كل البشر بقوّة خارقة؟ |
@@ -77,7 +78,7 @@ yt-viral swipe.py run, 13 Nov (196 Shorts from World Simulations, TheNrth, Molli
 
 ## vidIQ + yt-viral research, 13 Nov evening (after #40)
 vidIQ outliers ("what if science scenario", English Shorts, last 3 months) + swipe.py on Ouranos and Milton Films (100 Shorts; multiple = views ÷ channel median). 15 credits. Ideas we have NOT made, best first:
-1. ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍 (54x in swipe, 36x vidIQ) — Earth from space, a swapped texture.
+1. ~~ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍~~ Made (#41).
 2. ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️ (8.8–10.5x, 539K) — a Sun idea, our strongest category.
 3. ماذا لو انفجر القمر؟ 🌕💥 (12x, 1.8M) — a Moon idea.
 4. ماذا لو اختفى الحديد ٥ ثوانٍ؟ (429K) / البروتونات ٥ ثوانٍ (46x) — our "disappears for 5 s" format.
@@ -86,3 +87,5 @@ vidIQ outliers ("what if science scenario", English Shorts, last 3 months) + swi
 7. ماذا لو كانت الأرض من ذهب؟ (4.4x, 279K).
 Still open from earlier research: البعوض (10–176x), ثلاث عيون (48x), الميغالودون (29x), اختفاء المشتري (28x), سرعة الضوء تضاعفت (15x), الاحتكاك ٥ ثوانٍ (12x), الهيكل العظمي ٥ ثوانٍ (7x).
 What the winners share: one simple change to the Earth, the Sun, the Moon or a basic material, said in under 8 words.
+
+#41 «ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍» made on 13 Nov (idea #1 of the evening research). vidIQ: 2 title scores = 10 credits (20 left). ElevenLabs: 987 characters. New pieces in `videos/41-land-ocean-swap/src/`: `gl3d_sw.js` (the Earth with the MIRROR FIX, `swap`, `ridgeA`, `trenchA`, `heat`), `tex/swap_tex.py` (swapped Earth, ridge/trench mask, coast lights), and in `sw_b.js`: `gW`/`pin`/`gPath` (place anything on the globe by lat/lon), `litRock`, `jag`, `valleyX` (Everest in the Mariana valley), `dunes`, `mesas`, `thermo`, `snowGround`/`snowTrees`/`snowFall`; `sw_lib.js` street4 (sky/overcast/ground options). Next idea: «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️».

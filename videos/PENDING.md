@@ -4,6 +4,10 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
+## #41 waiting for the user's review (13 Nov)
+- «ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍» rendered (80.2 s), files in `videos/41-land-ocean-swap/`. Not approved yet: do NOT schedule before the user says so. Next free slot: 20 Nov 20:00.
+- vidIQ: 20 credits left (renews 13 Dec). ElevenLabs: about 2,280 characters left.
+
 ## Done (13 Nov, 17:44)
 - #39 is ALREADY SCHEDULED on blogId `8073705` for 20 Nov 10:00 (post id 427047926). Do NOT schedule it again. Next free slot: **20 Nov 20:00** (after #40).
 - Next: wait for the user's next idea (the next in the list is «ماذا لو اختفى البعوض من العالم؟ 🦟»).
