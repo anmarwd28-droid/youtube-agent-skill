@@ -28,7 +28,7 @@ I have two YouTube channels. They live in different Metricool accounts, and Clau
 | Name | "ماذا لو؟ Lab" | "Weird Space Lab" (was "BABY 🐦") |
 | Channel ID | `UCbbego5CIm5_6lwfvU2zXSA` (`@MadhaLawLab`) | `UC2Aav2c7K96ux-q1eJuuHYw` |
 | Language of everything in the video and on YouTube | Simple Modern Standard Arabic (فصحى) | English |
-| Metricool | new account since 12 Nov: blogId `8065283` (old: brand `q3_tvm`, blogId `7907171`, hit the free limit) | blogId `7966902` |
+| Metricool | new account since 13 Nov: blogId `8073705` (before: `8065283` until 19 Nov 10:00, and `7907171`; both hit the free limit) | blogId `7966902` |
 | vidIQ | connected | not connected yet (public data only) |
 | Video folders in this repo | `videos/` | `weird-space-lab/videos/` |
 
@@ -58,7 +58,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 
 - A "what if?" channel: animated videos about events that never happened (two moons, the sun moving closer to Earth, and so on), explained with real science.
 - Write scripts, narration, on-screen text, titles and descriptions in simple Modern Standard Arabic (فصحى) unless I ask otherwise.
-- Metricool: since 12 Nov the channel is on a new Metricool account, blogId `8065283` (timezone Asia/Baghdad, YouTube only). The old brand `q3_tvm` (blogId `7907171`) hit the free monthly limit; the user deleted its pending posts on 12 Nov; do not use it. Use only the `youtube` provider. Never read, post to or change the Instagram account in that brand.
+- Metricool: since 13 Nov the channel is on a new Metricool account, blogId `8073705` (timezone Asia/Baghdad, YouTube only, checked 13 Nov). The previous account `8065283` hit the free limit; its posts up to 19 Nov 10:00 still publish by themselves; do not reschedule them. The older brand `q3_tvm` (blogId `7907171`) is not used. Use only the `youtube` provider. Never read, post to or change the Instagram account in that brand.
 
 ## Channel 2: "Weird Space Lab"
 

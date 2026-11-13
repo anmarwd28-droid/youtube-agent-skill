@@ -20,7 +20,7 @@ Read `CLAUDE.md` first (the two channels, never mixing them). This skill is for 
 ## Never do
 
 - Publish or schedule before the user has watched the final video and said it needs no changes.
-- Schedule while Metricool is on another account. Always check `getBrandSettings` first: brand `q3_tvm`, blogId `7907171`. See `videos/PENDING.md`.
+- Schedule while Metricool is on another account. Always check `getBrandSettings` first: blogId `8073705` (since 13 Nov). See `videos/PENDING.md`.
 - Touch the Instagram account in that brand, or anything under `weird-space-lab/`.
 - Cut corners to save tokens. Keep the full test stills and the full length and quality of every video (the user asked for this explicitly).
 - Put API keys in chat. ElevenLabs goes through the proxy; if it returns 401, use `request_credential`.
