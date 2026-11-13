@@ -4,6 +4,14 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
+## State on 13 Nov (before the compact; the next chat may run on another model)
+
+- Made and scheduled: up to #36. Nothing is waiting for approval and nothing is half-made.
+- Next video: the user will pick from the ranked list in `NEW_CHAT_PROMPT.md` (top: one eye, then mosquitoes). Make it in a new chat with the `madha-law-short` skill, in the same style.
+- ElevenLabs: about 4,000 characters left. That is about 5 Shorts at about 770 each; resets about 10 Dec.
+- vidIQ: 125 of 150 credits left, renews 13 Dec. Each outliers, channel-videos, keyword or title-score call costs 5.
+- Research rule: vidIQ plus every fitting `yt-*` skill together (see CLAUDE.md). Arabic Shorts are not indexed in vidIQ outliers; use English what-if Shorts and adapt them. yt-dlp is blocked here, so get the channel lists for `swipe.py` with `vidiq_channel_videos`.
+
 ## Switching to a new Metricool account (user, 13 Nov)
 
 The account with blogId `8065283` used up its November free limit. The user is moving to a newer Metricool account so scheduling can continue. Rules:
