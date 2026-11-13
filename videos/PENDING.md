@@ -85,11 +85,16 @@ The ideas list in `NEW_CHAT_PROMPT.md` is now mostly done (superpowers, 1000 yea
 ## Done (13 Nov, 19:48)
 - #40 «ماذا لو عشت على كوكب بحجم بيت؟ 🏠» approved and SCHEDULED on blogId `8073705` for **20 Nov 16:00** (post id 427197916), file at commit `36d6e9e9b5517deee8d8160f6c694fb84859db53` (25,780,230 bytes). Next free slot: **20 Nov 20:00**.
 
+## Next (13 Nov evening)
+- Waiting for the user to pick the next idea. Ranked list (vidIQ + yt-viral, 13 Nov evening) is at the end of `.claude/skills/madha-law-short/reference/videos.md`; recommended first: «ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍».
+- Next free scheduling slot: 20 Nov 20:00 on blogId `8073705`.
+- Work folder of #40 is lost with the container; rebuild from `videos/40-house-planet/src/` (`bhs.sh`, copy the toolkit first).
+
 ## Not approved yet
 
 Nothing.
 - ElevenLabs: the user added a NEW key on 13 Nov (secure form, saved on the environment): 3,265 of 10,000 characters left on it (≈ 4 Shorts at ~700 each with light tashkeel). The old key had run out.
-- vidIQ after #40: about 60 of 150 credits left.
+- vidIQ: 30 of 150 credits left after the 13 Nov evening idea research (renews 13 Dec). Spend ≤15 per video.
 
 
 Metricool free plan (blogId 8065283): after #36 the November limit is used up (0 left); the limit resets on 1 Dec.

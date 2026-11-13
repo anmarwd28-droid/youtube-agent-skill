@@ -103,3 +103,8 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **A hub arc on a spinning fan or turbine** looked like a smile; use a small highlight dot instead.
 - **People inside props:** check that walking people are not inside a cart pole, a yoke or a car.
 - **A new street for every video:** copy the last `*_lib.js` (for example `videos/36-no-wheel/src/wh_lib.js`) and change the `blockN` list (colours, heights, seeds, kinds), `SHOPB` (shop names and colours) and the tree seeds.
+
+## Small planet / close-to-the-ground shots (#40)
+- For a 3D body with drawn people on it, place every person from the 3D point (`onPt` in `videos/40-house-planet/src/hs_b.js`): it gives the screen spot, the rotation of "up" there and the TRUE person scale. Placing on a guessed 2D circle put people floating above the planet.
+- Close-ups of a rock surface need detail at every scale: the procedural 3D-noise bump and grain in `gl3d_hs.js`, plus `pebbles` (irregular shaded rocks, small). A texture-derivative bump looked blocky up close; big identical dome pebbles looked fake.
+- Keep a camera pull-back (close on the person → whole planet) for the hook: it shows the scale in two seconds.
