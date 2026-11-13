@@ -4,9 +4,9 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
-## FIRST THING in the next session (13 Nov, 17:45)
-1. Schedule #39 (approved): `getBrandSettings` must show blogId `8073705`, then YouTube Short at **20 Nov 10:00** Baghdad, public, Science & Technology, not for kids, title/description/tags from `videos/39-antimatter/upload.md`, media = raw URL of `videos/39-antimatter/anti_short.mp4` at commit `14ae2aa` (check 33,145,746 bytes). Then the next free slot is 20 Nov 16:00; update this file.
-2. Then wait for the user's next idea (the next in the list is «ماذا لو اختفى البعوض من العالم؟ 🦟»).
+## Done (13 Nov, 17:44)
+- #39 is ALREADY SCHEDULED on blogId `8073705` for 20 Nov 10:00 (post id 427047926). Do NOT schedule it again. Next free slot: **20 Nov 16:00**.
+- Next: wait for the user's next idea (the next in the list is «ماذا لو اختفى البعوض من العالم؟ 🦟»).
 
 Connector notes (13 Nov): in the #39 session, Metricool and vidIQ dropped mid-session with CONNECT_TIMEOUT and never came back, although claude.ai showed both "connected". A session only loads connectors when it starts, so the fix is a NEW session. GitHub also needed reconnecting (fixed at claude.ai/customize/connectors). Environment: use **Default** (env `env_01Mymm6MAuNdECwPsCBDHwcw`, the one with the ElevenLabs key; the other "Default" is empty, «قناه اجنبيه» is channel 2). Renaming it was refused by the service. Its setup script was removed with graphify.
 
