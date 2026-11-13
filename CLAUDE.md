@@ -52,6 +52,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 - Never publish or schedule a video before I have watched it and said it needs no changes.
 - vidIQ: use it for research, and update video metadata only after I approve the exact values.
 - vidIQ: reconnected on 13 Nov to a new vidIQ account linked to "ماذا لو؟ Lab": 150 credits a month (renews on the 13th). Spend them carefully: keyword research and title scoring cost 5 credits each.
+- Save vidIQ credits (user, 13 Nov: "قلل مال vidIQ حتى لا يخلص بسرعة"): at most about 15 credits per video. Score at most 2 titles, do one keyword research only if it adds something, skip `vidiq_youtube_search`/`outliers` when the idea is already proven by earlier research saved in `reference/videos.md`, and never call paid tools just to double-check. Balance checks are free. The yt-* skills cost nothing, so lean on them.
 - Always use the skills `yt-viral` (ideas), `yt-package` (title) and `yt-seo` (description and tags) together with vidIQ for every video (user, 12 Nov). They never change the animation style.
 - Every research (user, 13 Nov): whenever I research anything (ideas, titles, keywords, competitors), always run vidIQ AND every skill that fits together: `yt-viral` for ideas (run `swipe.py` on the outlier channels' videos), `yt-package` for titles, `yt-seo` for descriptions and tags, and any other `yt-*` skill that fits. Never use vidIQ alone or a skill alone. Say in the reply which ones were used.
 
