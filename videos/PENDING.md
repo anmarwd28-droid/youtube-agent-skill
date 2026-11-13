@@ -4,17 +4,18 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
-## State on 13 Nov (before the compact; the next chat may run on another model)
+## State on 13 Nov, 03:00 (before the compact)
 
-- Made and scheduled: up to #36. Nothing is waiting for approval and nothing is half-made.
-- Next video: the user will pick from the ranked list in `NEW_CHAT_PROMPT.md` (top: one eye, then mosquitoes). Make it in a new chat with the `madha-law-short` skill, in the same style.
-- ElevenLabs: about 4,000 characters left. That is about 5 Shorts at about 770 each; resets about 10 Dec.
-- vidIQ: 125 of 150 credits left, renews 13 Dec. Each outliers, channel-videos, keyword or title-score call costs 5.
-- Research rule: vidIQ plus every fitting `yt-*` skill together (see CLAUDE.md). Arabic Shorts are not indexed in vidIQ outliers; use English what-if Shorts and adapt them. yt-dlp is blocked here, so get the channel lists for `swipe.py` with `vidiq_channel_videos`.
+- **#37 «ماذا لو كان للإنسان عينٌ واحدة فقط؟ 👁️» is made and sent to the user, waiting for approval.** Files: `videos/37-one-eye/` (oneeye_short.mp4 at commit `8078dd5`, 25,296,246 bytes, 1983 frames with audio; upload.md; src/). Not scheduled yet. Schedule it only after the user approves.
+- **Metricool:** the user logged out of blogId `8065283` and logged into a NEW Metricool account with the channel added (13 Nov). The old account was not deleted or disconnected, so its posts (up to 19 Nov 10:00) still publish by themselves. Before scheduling, run `getBrandSettings`, write the new blogId here, check the channel ID `UCbbego5CIm5_6lwfvU2zXSA`, and schedule from **19 Nov 16:00** (10:00 / 16:00 / 20:00).
+- **Next video:** the next idea from the ranked list in `NEW_CHAT_PROMPT.md`: «ماذا لو اختفى البعوض من العالم؟ 🦟».
+- **ElevenLabs:** about 3,200 characters left (≈ 4 Shorts at ~800 each); resets about 10 Dec.
+- **vidIQ:** 110 of 150 credits left, renews 13 Dec. Each outliers, channel-videos, keyword or title-score call costs 5.
+- **Research rule:** vidIQ plus every fitting `yt-*` skill together (see CLAUDE.md). Arabic Shorts are not indexed in vidIQ outliers; use English what-if Shorts and adapt them. yt-dlp is blocked here, so get the channel lists for `swipe.py` with `vidiq_channel_videos`.
 
 ## graphify (installed 13 Nov)
 - The skill is in the repo at `.claude/skills/graphify/` (with `.claude/CLAUDE.md` pointing to it), so every new conversation on this repo sees `/graphify`.
-- Its command-line tool comes from `pip install graphifyy`. The environment setup script installs it in each new container. If `graphify` is missing in a session, run `pip install graphifyy`.
+- Its command-line tool comes from `pip install graphifyy`. The Default environment's setup script (added 13 Nov, approved by the user) installs it in each new container. If `graphify` is missing in a session, run `pip install graphifyy`.
 
 ## Switching to a new Metricool account (user, 13 Nov)
 
