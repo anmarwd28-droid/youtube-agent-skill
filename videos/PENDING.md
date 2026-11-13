@@ -59,3 +59,5 @@ Nothing.
 
 
 Metricool free plan (blogId 8065283): after #36 the November limit is used up (0 left); the limit resets on 1 Dec.
+
+ElevenLabs on 13 Nov: about 4,000 characters left of 10,000 (resets about 10 Dec); one Short uses about 770.
