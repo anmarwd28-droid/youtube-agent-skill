@@ -87,3 +87,9 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **On screen:** keep the red «اشترك» button and @MadhaLawLab as before.
 - **Review after 10 Shorts:** compare `subscribersGained` and `averageViewPercentage` with the earlier Shorts in `audience.md`. If completion drops clearly, go back to the comment-only line.
 
+
+## People with wings (#33, Nov 2026)
+- Feathered wings are drawn by `wingUV` (feathers along a bent spar), a flying person by `flyer` (body prone, arms inside the wings) and a walking person with folded wings by `wperson`, all in `videos/33-humans-fly/src/fly_b.js`. Reuse them for any idea with wings or flight.
+- Lessons from the test stills: the wing must bend at the wrist and its feathers must always trail behind the flight direction (`wingDir`); never let a wing shrink to a stub when level; hide the far arm behind the torso; the wing roots sit at the sides of the shoulders so the torso stays visible.
+- No hard black cast shadows under the drawn people (`castSh`) in bright scenes: they looked like sticks. Use a soft blurred ellipse.
+- Clouds that scroll during a climb must fade before they reach the caption band.

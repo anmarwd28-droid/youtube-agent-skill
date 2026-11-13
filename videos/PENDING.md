@@ -36,3 +36,8 @@ Video 33 (humans fly): approved by the user on 12 Nov; scheduled 18 Nov 10:00 fr
 ## Not approved yet
 
 Nothing.
+
+## Notes for the next conversation (13 Nov 2026)
+- Ideas still not made: ماذا لو لم تكن هناك منازل؟ · ماذا لو لم تأكل عشرة أيام؟ · ماذا لو لم تنم عشرة أيام؟ · ماذا لو لم تشرب الماء عشرة أيام؟
+- ElevenLabs: after #33 (618 characters) about 3,250 of the 10,000 monthly characters are left; one Short uses about 600. Check `/v1/user/subscription` first.
+- When the user says only "جدولو" after watching, that is the approval: schedule at the next free slot and reply in one line.
