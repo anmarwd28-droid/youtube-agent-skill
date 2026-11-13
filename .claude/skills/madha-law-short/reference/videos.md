@@ -32,6 +32,8 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 26-time-stops | ماذا لو توقّف الزمن ٥ ثوانٍ للجميع إلّا أنت؟ |
 | 35-all-blind | ماذا لو أصبح كل البشر عُمياناً فجأة؟ |
 | 36-no-wheel | ماذا لو لم تُخترَع العجلة؟ |
+| 37-one-eye | ماذا لو كان للإنسان عينٌ واحدة فقط؟ |
+| 38-no-speech | ماذا لو فقد كل البشر القدرة على الكلام فجأة؟ |
 | 27-flat-earth | ماذا لو كانت الأرض مسطّحة؟ (three.js version; the user said the street, sea and edge looked too photoreal for the channel; see style.md) |
 
 Scheduling status is in `videos/PENDING.md`.
@@ -57,3 +59,5 @@ vidIQ outliers research, 13 Nov (English what-if Shorts, last 3 months; the mult
 yt-viral swipe.py run, 13 Nov (196 Shorts from World Simulations, TheNrth, Molli Kroni and Wonder Peel; the multiple is views ÷ the channel median). New ideas we have not made: humans with only one eye (241x, 8.2M), three eyes (48x), all mosquitoes disappear (10.6x, 3.9M), planet the size of a house (7.3x, 2.7M), your skeleton disappears for 5 s (7.3x, 2.7M), body made of antimatter (6.7x, 2.4M). Ideas we already made also won there (time stops, super speed, black hole, sun gone), which confirms the niche. What they share: a simple change to YOUR body or the world around you, said in under 8 words.
 
 #37 «ماذا لو كان للإنسان عينٌ واحدة فقط؟ 👁️» made on 13 Nov (idea from the vidIQ + yt-viral research, 241x outlier). New reusable pieces in `videos/37-one-eye/src/oe_b.js`: `faceF` (a front-face portrait: two eyes, one central eye with a blink morph, eye patches, 3D glasses, `wild` beard for a giant), `heroC` (the side-view person with one big central eye), `miniView` (a small framed view: tree, table, red cup), `headTop` (a head seen from above), `carTop`/`bikeTop`/`canopy` (a street from above with a field-of-view fan), `pourInset`, `skull` (dwarf elephant skull), `copepod` (under a microscope). Next: «ماذا لو اختفى البعوض من العالم؟».
+
+#38 «ماذا لو فقد كل البشر القدرة على الكلام فجأة؟ 🤐» made on 13 Nov (the user's idea; research: "If Humans Cannot Talk" 136M views, 4.5x its channel median). New reusable pieces in `videos/38-no-speech/src/sp_b.js`: `faceF` with expressions (`mood` joy/fear/anger, `k`, `talk`), `palm` (front-view hand, per-finger curl; `HS` hand shapes, `hsAt` cycles them), `signT` (signing arm targets for hero), `bubble` (speech bubble that can burst), `sideMouth`, `phoneIn`, `phoneBig`, `radio`, a classroom (`sceneSchool`), `PALS`/`palS` (10 people palettes; CROWD has only 4). New street `sp_lib.js` (bakery, flowers, phones, café, opticians).
