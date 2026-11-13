@@ -12,8 +12,9 @@ Use the exact file at the exact commit (raw URL) and check its size first.
 - vidIQ: 125 of 150 credits left, renews 13 Dec. Each outliers, channel-videos, keyword or title-score call costs 5.
 - Research rule: vidIQ plus every fitting `yt-*` skill together (see CLAUDE.md). Arabic Shorts are not indexed in vidIQ outliers; use English what-if Shorts and adapt them. yt-dlp is blocked here, so get the channel lists for `swipe.py` with `vidiq_channel_videos`.
 
-## To do after Short #37 is rendered (user, 13 Nov)
-- Install **graphify** (the Claude Code knowledge-graph skill) for every conversation: put the skill in the repo under `.claude/skills/`, and add its tool install to the environment setup script with `update_environment`. The user approves that change in the prompt.
+## graphify (installed 13 Nov)
+- The skill is in the repo at `.claude/skills/graphify/` (with `.claude/CLAUDE.md` pointing to it), so every new conversation on this repo sees `/graphify`.
+- Its command-line tool comes from `pip install graphifyy`. The environment setup script installs it in each new container. If `graphify` is missing in a session, run `pip install graphifyy`.
 
 ## Switching to a new Metricool account (user, 13 Nov)
 
