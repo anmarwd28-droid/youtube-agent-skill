@@ -35,6 +35,7 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 37-one-eye | ماذا لو كان للإنسان عينٌ واحدة فقط؟ |
 | 38-no-speech | ماذا لو فقد كل البشر القدرة على الكلام فجأة؟ |
 | 39-antimatter | ماذا لو كان جسمك من المادة المضادة؟ |
+| 40-house-planet | ماذا لو عشت على كوكب بحجم بيت؟ |
 | 27-flat-earth | ماذا لو كانت الأرض مسطّحة؟ (three.js version; the user said the street, sea and edge looked too photoreal for the channel; see style.md) |
 
 | 28-superpowers | ماذا لو استيقظ كل البشر بقوّة خارقة؟ |
@@ -71,3 +72,5 @@ yt-viral swipe.py run, 13 Nov (196 Shorts from World Simulations, TheNrth, Molli
 #38 «ماذا لو فقد كل البشر القدرة على الكلام فجأة؟ 🤐» made on 13 Nov (the user's idea; research: "If Humans Cannot Talk" 136M views, 4.5x its channel median). New reusable pieces in `videos/38-no-speech/src/sp_b.js`: `faceF` with expressions (`mood` joy/fear/anger, `k`, `talk`), `palm` (front-view hand, per-finger curl; `HS` hand shapes, `hsAt` cycles them), `signT` (signing arm targets for hero), `bubble` (speech bubble that can burst), `sideMouth`, `phoneIn`, `phoneBig`, `radio`, a classroom (`sceneSchool`), `PALS`/`palS` (10 people palettes; CROWD has only 4). New street `sp_lib.js` (bakery, flowers, phones, café, opticians).
 
 #39 «ماذا لو كان جسمك من المادة المضادة؟ 💥» made on 13 Nov (the user's idea; 6.7x outlier in the 13 Nov swipe). vidIQ: 1 keyword research + 2 title scores = 15 credits. New reusable pieces in `videos/39-antimatter/src/am_b.js`: `ptc` (a shaded charged particle), `antiHero` (a person with a violet halo), `antiTw` (twinkles), `mushroom`, `galaxy` (a dot spiral galaxy), a magnetic trap, a CERN landscape with the ring, a light bulb with a timer, a potassium tile. `am_lib.js` street: pharmacy, books, watches, sweets, clothes; `street3(..., {lamps: 0})` hides the lamp posts. Render note: the gram/mushroom and Big Bang chunks are slow (about 20 min each); the full render took about 70 min.
+
+#40 «ماذا لو عشت على كوكب بحجم بيت؟ 🏠» made on 13 Nov (the user's idea; 7.3x outlier in the 13 Nov swipe). vidIQ: 2 title scores = 10 credits. ElevenLabs: 674 characters with light tashkeel (only 687 were left; tashkeel marks count as characters). New reusable pieces in `videos/40-house-planet/src/`: `gl3d_hs.js` (the `moon` slot as a rock planet: procedural rock texture `tex/rock_tex.py`, 3D-noise bump in the shader, `lump` turns it into an irregular asteroid), and in `hs_b.js`: `camP`/`cam2`/`lerpCam`, `sil` (exact limb on screen), `onPt` (a surface point with its rotation and the true person scale), `astro` (the house person in a spacesuit), `pebbles` (3D-placed loose rocks), `houseD` (a drawn two-storey house), `dimLine`, `sunDisc`.

@@ -84,7 +84,9 @@ The ideas list in `NEW_CHAT_PROMPT.md` is now mostly done (superpowers, 1000 yea
 
 ## Not approved yet
 
-Nothing.
+- **#40 «ماذا لو عشت على كوكب بحجم بيت؟ 🏠»** rendered 13 Nov (56.8 s, 1705 frames), files in `videos/40-house-planet/`. Sent to the user, waiting for approval. When approved: schedule at the next free slot (20 Nov 16:00) on blogId `8073705`.
+- ElevenLabs after #40: about 13 characters left this month (resets about 10 Dec). No more narration until then.
+- vidIQ after #40: about 60 of 150 credits left.
 
 
 Metricool free plan (blogId 8065283): after #36 the November limit is used up (0 left); the limit resets on 1 Dec.
