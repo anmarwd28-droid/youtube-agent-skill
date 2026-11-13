@@ -6,8 +6,8 @@ Use the exact file at the exact commit (raw URL) and check its size first.
 
 ## State on 13 Nov, 03:00 (before the compact)
 
-- **#37 «ماذا لو كان للإنسان عينٌ واحدة فقط؟ 👁️» is made and sent to the user, waiting for approval.** Files: `videos/37-one-eye/` (oneeye_short.mp4 at commit `8078dd5`, 25,296,246 bytes, 1983 frames with audio; upload.md; src/). Not scheduled yet. Schedule it only after the user approves.
-- **Metricool:** the user logged out of blogId `8065283` and logged into a NEW Metricool account with the channel added (13 Nov). The old account was not deleted or disconnected, so its posts (up to 19 Nov 10:00) still publish by themselves. Checked 13 Nov: new blogId **`8073705`**, YouTube `UCbbego5CIm5_6lwfvU2zXSA` ✅. Schedule from **19 Nov 16:00** (10:00 / 16:00 / 20:00).
+- **#37 «ماذا لو كان للإنسان عينٌ واحدة فقط؟ 👁️» approved and SCHEDULED (13 Nov) on blogId `8073705` for **19 Nov 16:00** (Metricool post id 426764195), YouTube Short, public, Science & Technology, texts from upload.md.** Files: `videos/37-one-eye/` (oneeye_short.mp4 at commit `8078dd5`).
+- **Metricool:** the user logged out of blogId `8065283` and logged into a NEW Metricool account with the channel added (13 Nov). The old account was not deleted or disconnected, so its posts (up to 19 Nov 10:00) still publish by themselves. Checked 13 Nov: new blogId **`8073705`**, YouTube `UCbbego5CIm5_6lwfvU2zXSA` ✅. Next free slot: **19 Nov 20:00** (10:00 / 16:00 / 20:00).
 - **Next video:** the next idea from the ranked list in `NEW_CHAT_PROMPT.md`: «ماذا لو اختفى البعوض من العالم؟ 🦟».
 - **ElevenLabs:** about 3,200 characters left (≈ 4 Shorts at ~800 each); resets about 10 Dec.
 - **vidIQ:** 110 of 150 credits left, renews 13 Dec. Each outliers, channel-videos, keyword or title-score call costs 5.
