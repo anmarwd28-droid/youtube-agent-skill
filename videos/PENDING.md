@@ -5,7 +5,7 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 Use the exact file at the exact commit (raw URL) and check its size first.
 
 ## Done (13 Nov, 17:44)
-- #39 is ALREADY SCHEDULED on blogId `8073705` for 20 Nov 10:00 (post id 427047926). Do NOT schedule it again. Next free slot: **20 Nov 16:00**.
+- #39 is ALREADY SCHEDULED on blogId `8073705` for 20 Nov 10:00 (post id 427047926). Do NOT schedule it again. Next free slot: **20 Nov 20:00** (after #40).
 - Next: wait for the user's next idea (the next in the list is «ماذا لو اختفى البعوض من العالم؟ 🦟»).
 
 Connector notes (13 Nov): in the #39 session, Metricool and vidIQ dropped mid-session with CONNECT_TIMEOUT and never came back, although claude.ai showed both "connected". A session only loads connectors when it starts, so the fix is a NEW session. GitHub also needed reconnecting (fixed at claude.ai/customize/connectors). Environment: use **Default** (env `env_01Mymm6MAuNdECwPsCBDHwcw`, the one with the ElevenLabs key; the other "Default" is empty, «قناه اجنبيه» is channel 2). Renaming it was refused by the service. Its setup script was removed with graphify.
@@ -82,9 +82,12 @@ Checked on 12 Nov: the 17 files above that are not published yet are the final v
 
 The ideas list in `NEW_CHAT_PROMPT.md` is now mostly done (superpowers, 1000 years, flying, nuclear war, dragons are scheduled).
 
+## Done (13 Nov, 19:48)
+- #40 «ماذا لو عشت على كوكب بحجم بيت؟ 🏠» approved and SCHEDULED on blogId `8073705` for **20 Nov 16:00** (post id 427197916), file at commit `36d6e9e9b5517deee8d8160f6c694fb84859db53` (25,780,230 bytes). Next free slot: **20 Nov 20:00**.
+
 ## Not approved yet
 
-- **#40 «ماذا لو عشت على كوكب بحجم بيت؟ 🏠»** rendered 13 Nov (56.8 s, 1705 frames), files in `videos/40-house-planet/`. Sent to the user, waiting for approval. When approved: schedule at the next free slot (20 Nov 16:00) on blogId `8073705`.
+Nothing.
 - ElevenLabs after #40: about 13 characters left this month (resets about 10 Dec). No more narration until then.
 - vidIQ after #40: about 60 of 150 credits left.
 
