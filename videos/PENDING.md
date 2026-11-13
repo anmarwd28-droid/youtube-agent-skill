@@ -45,6 +45,7 @@ The user set the times: three posts a day, 10:00, 16:00 and 20:00. Never change 
 | 18 Nov | 10:00 | 33 البشر يطيرون | Scheduled |
 | 18 Nov | 16:00 | 34 لم تنم ١٠ أيام (commit `6caa8663ee04808814285cfce9824a1fceb667ab`, 28,010,744 bytes) | Scheduled 12 Nov 23:06 |
 | 18 Nov | 20:00 | 35 كل البشر عُمياناً فجأة (commit `919c95427b1d5b4393674190f6843ff3fd648d8a`, 27,121,512 bytes; Metricool post 426371480) | Scheduled 13 Nov 02:53 |
+| 19 Nov | 10:00 | 36 لم تُخترَع العجلة (commit `0b30d3a`, Metricool post 426431414) | Scheduled 13 Nov 04:18 |
 
 Every video file is in the repo: `videos/<number>-*/` (the number is in the Video column), each with its `upload.md` (title, description, tags). The long video 32 is split in parts: join them with `cat sunl_long.mp4.part0* > sunl_long.mp4`. If the user moves to a new Metricool account, reschedule from these files at the same times, and make sure the old posts are deleted so nothing goes out twice.
 
@@ -57,4 +58,4 @@ The ideas list in `NEW_CHAT_PROMPT.md` is now mostly done (superpowers, 1000 yea
 Nothing.
 
 
-Metricool free plan (blogId 8065283): after #35 only 1 post is left in November; the limit resets on 1 Dec.
+Metricool free plan (blogId 8065283): after #36 the November limit is used up (0 left); the limit resets on 1 Dec.
