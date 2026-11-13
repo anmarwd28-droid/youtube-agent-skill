@@ -88,7 +88,7 @@ The ideas list in `NEW_CHAT_PROMPT.md` is now mostly done (superpowers, 1000 yea
 ## Not approved yet
 
 Nothing.
-- ElevenLabs after #40: about 13 characters left this month (resets about 10 Dec). No more narration until then.
+- ElevenLabs: the user added a NEW key on 13 Nov (secure form, saved on the environment): 3,265 of 10,000 characters left on it (≈ 4 Shorts at ~700 each with light tashkeel). The old key had run out.
 - vidIQ after #40: about 60 of 150 credits left.
 
 
