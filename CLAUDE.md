@@ -3,6 +3,7 @@
 ## Language and tone
 
 - Always reply to me in Iraqi Arabic, every message, even long technical ones. Never write to me in English.
+- This includes the short progress lines while working on a video ("I'm rendering", "checking the stills" and so on), status updates, stop-hook replies and every text between tool calls (user, 13 Nov: he got angry that progress lines came in English). Not one English sentence to me, ever.
 - Keep explanations simple.
 - Talk very little (user, 12 Nov): short replies, one-word or one-line explanations, then just do the work.
 - After every fix, send me the fixed still(s) so I can see the change. Check every shot, still and the final video carefully before sending.
