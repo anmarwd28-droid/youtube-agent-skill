@@ -4,9 +4,13 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
-## #41 waiting for the user's review (13 Nov)
-- «ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍» rendered (80.2 s), files in `videos/41-land-ocean-swap/`. Not approved yet: do NOT schedule before the user says so. Next free slot: 20 Nov 20:00.
-- vidIQ: 20 credits left (renews 13 Dec). ElevenLabs: about 2,280 characters left.
+## Latest state (14 Nov, before a compact)
+- **#41 «ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍» APPROVED (user: "فيديو حيل حلو") and SCHEDULED on blogId `8073705` for **20 Nov 20:00** (post id 427544257), YouTube Short, public, Science & Technology, cover at 1 s, texts from upload.md. File `videos/41-land-ocean-swap/swap_short.mp4` at commit `ce6762df80a51c6692468af5afbbdaa4a4e24089` (33,852,644 bytes). Do NOT schedule it again.
+- Scheduled on 8073705 now: #37 19 Nov 16:00, #38 19 Nov 20:00, #39 20 Nov 10:00, #40 20 Nov 16:00, #41 20 Nov 20:00. **Next free slot: 21 Nov 10:00** (slots 10:00 / 16:00 / 20:00).
+- **Next video:** wait for the user's pick. Next in the ranked list (`reference/videos.md`, research of 13 Nov evening): «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️», then انفجر القمر، اختفى الحديد ٥ ثوانٍ، الأرض مكعّبة، توقف القمر، الأرض من ذهب.
+- **vidIQ:** 20 of 150 credits left (renews 13 Dec). The user asked again (13 Nov) to use vidIQ as little as possible: #41 used only 2 title scores (10). Next videos: 1 title score (5) unless the idea really needs more; no outliers or keyword research while credits are this low.
+- **ElevenLabs:** about 2,280 characters left (resets about 10 Dec) = 2 Shorts at most; keep scripts tight (≈ 750–900 characters, light tashkeel).
+- **Earth module:** use `videos/41-land-ocean-swap/src/gl3d_sw.js` + `gW` from `sw_b.js` for any globe (the old disc-globe was mirrored; see style.md).
 
 ## Done (13 Nov, 17:44)
 - #39 is ALREADY SCHEDULED on blogId `8073705` for 20 Nov 10:00 (post id 427047926). Do NOT schedule it again. Next free slot: **20 Nov 20:00** (after #40).
