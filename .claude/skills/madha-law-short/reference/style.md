@@ -85,3 +85,13 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **On screen:** keep the red «اشترك» button and @MadhaLawLab as before.
 - **Review after 10 Shorts:** compare `subscribersGained` and `averageViewPercentage` with the earlier Shorts in `audience.md`. If completion drops clearly, go back to the comment-only line.
 
+
+## Mistakes caught in #35–#36 (check these in every test still)
+- **The sun as a flat grey disc:** a bare small circle looks grey and fake. Draw it as three layers: a wide soft glow (`soft`), a mid glow (r≈46–50, `blur9`, opacity .45), then a small white core (r≈22).
+- **Gaps between mountain ranges:** two `mountainsR` layers leave a strip of sky between them. Fill under the far range with an opaque rock-coloured rect, add a middle ridge, then soft haze; never leave a flat grey band.
+- **Hands and props over the body:** a hand or icon drawn near a head profile can look like it grows out of the neck. Put close-ups (touch, Braille) in their own panel or inset.
+- **SVG dots on the gl3d_world globe do not line up** with the texture (the cities came out shifted by about 15°). Don't pin SVG markers to places on that globe; show changes through the shader (`lights`, `sunI`) instead.
+- **Eyelashes drawn as strokes** looked like vertical bars; leave them out.
+- **A hub arc on a spinning fan or turbine** looked like a smile; use a small highlight dot instead.
+- **People inside props:** check that walking people are not inside a cart pole, a yoke or a car.
+- **A new street for every video:** copy the last `*_lib.js` (for example `videos/36-no-wheel/src/wh_lib.js`) and change the `blockN` list (colours, heights, seeds, kinds), `SHOPB` (shop names and colours) and the tree seeds.

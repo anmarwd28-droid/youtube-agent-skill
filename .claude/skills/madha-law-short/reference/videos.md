@@ -50,4 +50,4 @@ Scheduling status is in `videos/PENDING.md`.
 
 ## yt-viral + vidIQ research (12 Nov 2026)
 Top outliers (multiple over the channel's own median): wheels never invented 124x, opposite side of Earth when the dino asteroid hit 58x, joining the Mediterranean to the Dead Sea 45x (Arabic long-form), Sun vanishes and Earth doesn't know for 8 minutes 24x, everyone on Earth screams at once 10x. Our formula (an everyday thing disappears or changes) also shows up: flat Earth 68x, all glass gone 5 s 68x.
-Suggested next: 1) ~~ماذا لو لم تُخترَع العجلة؟~~ made (#36) 2) ماذا لو صرخ كل البشر في لحظة واحدة؟ 3) ماذا لو وصلنا البحر المتوسط بالبحر الميت؟ Waiting for the user to pick.
+Suggested next: 1) ~~ماذا لو لم تُخترَع العجلة؟~~ made (#36) 2) ماذا لو صرخ كل البشر في لحظة واحدة؟ 3) ماذا لو وصلنا البحر المتوسط بالبحر الميت؟ #35 (all blind, the user's own idea) and #36 (the wheel) are made. Next from the research: 2) all humans scream at once 3) joining the Mediterranean to the Dead Sea.

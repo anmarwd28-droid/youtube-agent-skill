@@ -50,6 +50,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 - Talk about the whole world, not one country: the narration and the effects shown are global. The street scenes keep the same drawn style, but they stand for any city in the world.
 - Never publish or schedule a video before I have watched it and said it needs no changes.
 - vidIQ: use it for research, and update video metadata only after I approve the exact values.
+- vidIQ credits ran out on 13 Nov (1 credit left); until they renew, use the yt-* skills on their own and say so.
 - Always use the skills `yt-viral` (ideas), `yt-package` (title) and `yt-seo` (description and tags) together with vidIQ for every video (user, 12 Nov). They never change the animation style.
 
 ## Channel 1: "ماذا لو؟ Lab"
