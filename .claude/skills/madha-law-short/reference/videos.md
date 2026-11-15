@@ -39,6 +39,7 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 41-land-ocean-swap | ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ |
 | 42-blue-sun | ماذا لو أصبحت الشمس زرقاء؟ |
 | 43-moon-explodes | ماذا لو انفجر القمر؟ |
+| 44-plague-returns | ماذا لو انتشر الطاعون مرة أخرى؟ |
 | 27-flat-earth | ماذا لو كانت الأرض مسطّحة؟ (three.js version; the user said the street, sea and edge looked too photoreal for the channel; see style.md) |
 
 | 28-superpowers | ماذا لو استيقظ كل البشر بقوّة خارقة؟ |
@@ -94,3 +95,4 @@ What the winners share: one simple change to the Earth, the Sun, the Moon or a b
 
 #42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️» made on 15 Nov (idea #2 of the 13 Nov evening research). vidIQ: 1 title score = 5 credits (15 left). ElevenLabs: 825 characters (about 1,450 left until about 10 Dec = 1 more Short). New pieces in `videos/42-blue-sun/src/`: `gl3d_bs.js` (blue-white Sun `hue`/`ts`; Earth `lc`, `scorch`, `boil`, `venus`; Venus in the moon slot; the 3D-pop crossfade fix), `bs_b.js` (`camPt`, `starD`, `beams`, `uvGauge`, `stopw`, `thermoH`), `bs_lib.js` street5, `sw_help.js` (the #41 globe helpers without its scenes). Next idea: «ماذا لو انفجر القمر؟ 🌕💥».
 #43 «ماذا لو انفجر القمر؟ 🌕💥» made on 15 Nov (the user picked it over «اختفى الحديد» on my advice). vidIQ: 1 title score = 5 credits (10 left). ElevenLabs: 683 characters (about 770 left until about 10 Dec = one short Short at most). New pieces in `videos/43-moon-explodes/src/`: `gl3d_mx.js` (Moon `crack`; `w.debris` instanced rocks: expanding cloud → ring → gather; `w.dust` ring), `mx_b.js` (`ringPt`, `meteors`, `skyRing`, coral reef `branchC`/`brainC`/`seaFan`, harbour tide scene), `mx_lib.js` street6. Next idea: «ماذا لو اختفى الحديد ٥ ثوانٍ؟».
+#44 «ماذا لو انتشر الطاعون مرة أخرى؟ 🐀» made on 15 Nov (the user's own idea). vidIQ: 1 title score = 5 credits (5 left until 13 Dec). ElevenLabs: 661 characters; only about 109 left until about 10 Dec, so NO more narration until the reset. New pieces in `videos/44-plague-returns/src/`: `gl3d_pl.js` (Earth infection layer `disc.inf`), `pl_b.js` (`flight` arcs, `pulse`, `people10`, `microField`, `rat`, `flea`, `lungs`, `capsule`), `pl_lib.js` street7.

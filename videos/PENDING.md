@@ -5,6 +5,8 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 Use the exact file at the exact commit (raw URL) and check its size first.
 
 ## Latest state (15 Nov)
+- **#44 «ماذا لو انتشر الطاعون مرة أخرى؟ 🐀» rendered** (53.4 s, 1602 frames), files in `videos/44-plague-returns/`. Sent for review; NOT approved, NOT scheduled. Next free slot: 21 Nov 20:00.
+- **ElevenLabs: about 109 characters left until about 10 Dec: no new narration possible before then.** vidIQ: 5 credits left until 13 Dec.
 - **#42 and #43 APPROVED and SCHEDULED** (user, 15 Nov) on blogId `8073705`:
   - #42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️»: **21 Nov 10:00** (post id 428885430), file `videos/42-blue-sun/blue_short.mp4` at commit `c6691af9af35c4f0d20887d50a4bdd8318dde957` (23,410,761 bytes).
   - #43 «ماذا لو انفجر القمر؟ 🌕💥»: **21 Nov 16:00** (post id 428885500), file `videos/43-moon-explodes/moon_short.mp4` at commit `5c322aef0d5b1d154f068dbb77baf6431a657aa7` (30,537,304 bytes).
