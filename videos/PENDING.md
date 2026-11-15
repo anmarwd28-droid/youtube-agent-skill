@@ -4,6 +4,9 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
+## ElevenLabs (15 Nov, after the compact)
+- The user added ANOTHER new key (secure form, saved on the environment): free plan, 10,000 of 10,000 characters left, resets 16 Dec. ≈ 12 Shorts at ~750 characters each. Older ElevenLabs notes below are out of date.
+
 ## Latest state (15 Nov, before a compact)
 - **Scheduled on blogId `8073705`, do NOT schedule again:**
 
