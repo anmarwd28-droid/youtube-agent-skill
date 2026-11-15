@@ -4,17 +4,26 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
-## Latest state (15 Nov)
-- **#44 «ماذا لو انتشر الطاعون مرة أخرى؟ 🐀» rendered** (53.4 s, 1602 frames), files in `videos/44-plague-returns/`. Sent for review; NOT approved, NOT scheduled. Next free slot: 21 Nov 20:00.
-- **ElevenLabs: about 109 characters left until about 10 Dec: no new narration possible before then.** vidIQ: 5 credits left until 13 Dec.
-- **#42 and #43 APPROVED and SCHEDULED** (user, 15 Nov) on blogId `8073705`:
-  - #42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️»: **21 Nov 10:00** (post id 428885430), file `videos/42-blue-sun/blue_short.mp4` at commit `c6691af9af35c4f0d20887d50a4bdd8318dde957` (23,410,761 bytes).
-  - #43 «ماذا لو انفجر القمر؟ 🌕💥»: **21 Nov 16:00** (post id 428885500), file `videos/43-moon-explodes/moon_short.mp4` at commit `5c322aef0d5b1d154f068dbb77baf6431a657aa7` (30,537,304 bytes).
-  - Do NOT schedule them again. **Next free slot: 21 Nov 20:00.** Metricool 8073705 now has 7 posts in November (13 left this month).
-- **#43 «ماذا لو انفجر القمر؟ 🌕💥» rendered** (56.8 s, 1704 frames), files in `videos/43-moon-explodes/`. Sent for review; NOT approved, NOT scheduled.
-- ElevenLabs after #43: about 770 characters left. vidIQ: 10 credits left. Metricool 8073705: 5 posts in November, so 15 more allowed this month (free limit 20/month).
-- **#42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️» rendered** (67.0 s, 2010 frames), files in `videos/42-blue-sun/`. Sent to the user for review; NOT approved, NOT scheduled yet. When approved: schedule on 8073705 at the next free slot, 21 Nov 10:00.
-- ElevenLabs: about 1,450 characters left (resets about 10 Dec) = 1 more Short. vidIQ: 15 credits left.
+## Latest state (15 Nov, before a compact)
+- **Scheduled on blogId `8073705`, do NOT schedule again:**
+
+  | Video | Date | Post id | File @ commit |
+  |---|---|---|---|
+  | #37 | 19 Nov 16:00 | 426764195 | |
+  | #38 | 19 Nov 20:00 | 426885759 | |
+  | #39 | 20 Nov 10:00 | 427047926 | |
+  | #40 | 20 Nov 16:00 | 427197916 | |
+  | #41 | 20 Nov 20:00 | 427544257 | |
+  | #42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️» | 21 Nov 10:00 | 428885430 | `c6691af9af35c4f0d20887d50a4bdd8318dde957` (23,410,761 bytes) |
+  | #43 «ماذا لو انفجر القمر؟ 🌕💥» | 21 Nov 16:00 | 428885500 | `5c322aef0d5b1d154f068dbb77baf6431a657aa7` (30,537,304 bytes) |
+  | #44 «ماذا لو انتشر الطاعون مرة أخرى؟ 🐀» | 21 Nov 20:00 | 428931976 | `c3416a775a18a1f6578f8c00decf521f71429a46` (21,865,523 bytes) |
+
+- **Next free slot: 22 Nov 10:00** (slots 10:00 / 16:00 / 20:00).
+- **Metricool 8073705:** 8 posts in November; the free plan allows 20 a month, so 12 more this month (resets 1 Dec).
+- **ElevenLabs: about 109 characters left until about 10 Dec. No new narration is possible before the reset.** Tell the user before starting any new video.
+- **vidIQ: 5 credits left until 13 Dec** (one title score at most).
+- **Next ideas** (ranked list in `reference/videos.md`): اختفى الحديد ٥ ثوانٍ، الأرض مكعّبة، توقف القمر، الأرض من ذهب، البعوض، ثلاث عيون.
+- **Earth module:** use the latest `videos/44-plague-returns/src/gl3d_pl.js` (mirror fix, 3D-fade fix, sun `hue`, Moon `crack`, debris/dust ring, Venus-style clouds, infection layer) with `gW`/`pin`/`gPath` from `sw_help.js`.
 
 ## Earlier state (14 Nov, before a compact)
 - **#41 «ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍» APPROVED (user: "فيديو حيل حلو") and SCHEDULED on blogId `8073705` for **20 Nov 20:00** (post id 427544257), YouTube Short, public, Science & Technology, cover at 1 s, texts from upload.md. File `videos/41-land-ocean-swap/swap_short.mp4` at commit `ce6762df80a51c6692468af5afbbdaa4a4e24089` (33,852,644 bytes). Do NOT schedule it again.
