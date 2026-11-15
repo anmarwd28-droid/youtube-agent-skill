@@ -118,3 +118,10 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - Rock faces: `litRock(path, ...)` (fractal noise through a diffuse light, clipped to any path) plus strata lines and jagged edges (`jag`); plain gradient walls looked flat.
 - Big single peaks (Everest): `litRock` body, a shaded face from the summit down a ridge, snow with a jagged snow line. `mountainsR` with custom points on a tall narrow peak came out as black-and-white noise.
 - Dunes: a continuous slip-face band under each crest (per-segment boxes looked like tiles). Mesas: lit rock + strata + talus apron + erosion streaks (flat trapezoids looked like cardboard).
+
+## A star changing colour, crossfades (#42, Nov 2026)
+- Blue-white Sun (`gl3d_bs.js`, `hue` 0→1): a deep-blue limb, a pale blue middle and a near-white core with fine low-contrast granulation, all kept under 1.0 before tone mapping, plus a strong blue-tinted corona sprite (`g` 6–8). Bright values blew out to a flat white ball; big fbm blotches made it look like an ice planet; no core made it a dull moon.
+- When a whole planet changes (Venus-like clouds), make it nearly featureless with soft noise; strong stripes looked like Jupiter. Under a coloured sunlight (`lc`), fade `lc` back to white when the point is to compare with a real planet.
+- **3D pop:** in a crossfade from a 2D scene to a 3D one, the old modules showed the 3D layer at full opacity at once. Fixed in `gl3d_bs.js` (`canvas.style.opacity = prev ? f.opacity : (f.opacity ?? 1)`); keep it in every new module.
+- A sunburn on `faceF`: an even red flush clipped to the face, plus soft blurred patches on forehead, nose and cheeks. Separate hard ellipses looked like make-up or a headband.
+- RTL labels: with `direction="rtl"`, text-anchor `start` grows to the LEFT of x; `end` grows to the right (and ran off the screen).
