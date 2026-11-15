@@ -5,6 +5,10 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 Use the exact file at the exact commit (raw URL) and check its size first.
 
 ## Latest state (15 Nov)
+- **#42 and #43 APPROVED and SCHEDULED** (user, 15 Nov) on blogId `8073705`:
+  - #42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️»: **21 Nov 10:00** (post id 428885430), file `videos/42-blue-sun/blue_short.mp4` at commit `c6691af9af35c4f0d20887d50a4bdd8318dde957` (23,410,761 bytes).
+  - #43 «ماذا لو انفجر القمر؟ 🌕💥»: **21 Nov 16:00** (post id 428885500), file `videos/43-moon-explodes/moon_short.mp4` at commit `5c322aef0d5b1d154f068dbb77baf6431a657aa7` (30,537,304 bytes).
+  - Do NOT schedule them again. **Next free slot: 21 Nov 20:00.** Metricool 8073705 now has 7 posts in November (13 left this month).
 - **#43 «ماذا لو انفجر القمر؟ 🌕💥» rendered** (56.8 s, 1704 frames), files in `videos/43-moon-explodes/`. Sent for review; NOT approved, NOT scheduled.
 - ElevenLabs after #43: about 770 characters left. vidIQ: 10 credits left. Metricool 8073705: 5 posts in November, so 15 more allowed this month (free limit 20/month).
 - **#42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️» rendered** (67.0 s, 2010 frames), files in `videos/42-blue-sun/`. Sent to the user for review; NOT approved, NOT scheduled yet. When approved: schedule on 8073705 at the next free slot, 21 Nov 10:00.
