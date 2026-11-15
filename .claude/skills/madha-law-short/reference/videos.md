@@ -38,6 +38,7 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 40-house-planet | ماذا لو عشت على كوكب بحجم بيت؟ |
 | 41-land-ocean-swap | ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ |
 | 42-blue-sun | ماذا لو أصبحت الشمس زرقاء؟ |
+| 43-moon-explodes | ماذا لو انفجر القمر؟ |
 | 27-flat-earth | ماذا لو كانت الأرض مسطّحة؟ (three.js version; the user said the street, sea and edge looked too photoreal for the channel; see style.md) |
 
 | 28-superpowers | ماذا لو استيقظ كل البشر بقوّة خارقة؟ |
@@ -81,7 +82,7 @@ yt-viral swipe.py run, 13 Nov (196 Shorts from World Simulations, TheNrth, Molli
 vidIQ outliers ("what if science scenario", English Shorts, last 3 months) + swipe.py on Ouranos and Milton Films (100 Shorts; multiple = views ÷ channel median). 15 credits. Ideas we have NOT made, best first:
 1. ~~ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍~~ Made (#41).
 2. ~~ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️~~ Made (#42).
-3. ماذا لو انفجر القمر؟ 🌕💥 (12x, 1.8M) — a Moon idea.
+3. ~~ماذا لو انفجر القمر؟ 🌕💥~~ Made (#43).
 4. ماذا لو اختفى الحديد ٥ ثوانٍ؟ (429K) / البروتونات ٥ ثوانٍ (46x) — our "disappears for 5 s" format.
 5. ماذا لو كانت الأرض مكعّبة؟ 🧊 (21x, 3.8x).
 6. ماذا لو توقّف القمر عن الحركة؟ (11x).
@@ -92,3 +93,4 @@ What the winners share: one simple change to the Earth, the Sun, the Moon or a b
 #41 «ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍» made on 13 Nov (idea #1 of the evening research). vidIQ: 2 title scores = 10 credits (20 left). ElevenLabs: 987 characters. New pieces in `videos/41-land-ocean-swap/src/`: `gl3d_sw.js` (the Earth with the MIRROR FIX, `swap`, `ridgeA`, `trenchA`, `heat`), `tex/swap_tex.py` (swapped Earth, ridge/trench mask, coast lights), and in `sw_b.js`: `gW`/`pin`/`gPath` (place anything on the globe by lat/lon), `litRock`, `jag`, `valleyX` (Everest in the Mariana valley), `dunes`, `mesas`, `thermo`, `snowGround`/`snowTrees`/`snowFall`; `sw_lib.js` street4 (sky/overcast/ground options). Next idea: «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️».
 
 #42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️» made on 15 Nov (idea #2 of the 13 Nov evening research). vidIQ: 1 title score = 5 credits (15 left). ElevenLabs: 825 characters (about 1,450 left until about 10 Dec = 1 more Short). New pieces in `videos/42-blue-sun/src/`: `gl3d_bs.js` (blue-white Sun `hue`/`ts`; Earth `lc`, `scorch`, `boil`, `venus`; Venus in the moon slot; the 3D-pop crossfade fix), `bs_b.js` (`camPt`, `starD`, `beams`, `uvGauge`, `stopw`, `thermoH`), `bs_lib.js` street5, `sw_help.js` (the #41 globe helpers without its scenes). Next idea: «ماذا لو انفجر القمر؟ 🌕💥».
+#43 «ماذا لو انفجر القمر؟ 🌕💥» made on 15 Nov (the user picked it over «اختفى الحديد» on my advice). vidIQ: 1 title score = 5 credits (10 left). ElevenLabs: 683 characters (about 770 left until about 10 Dec = one short Short at most). New pieces in `videos/43-moon-explodes/src/`: `gl3d_mx.js` (Moon `crack`; `w.debris` instanced rocks: expanding cloud → ring → gather; `w.dust` ring), `mx_b.js` (`ringPt`, `meteors`, `skyRing`, coral reef `branchC`/`brainC`/`seaFan`, harbour tide scene), `mx_lib.js` street6. Next idea: «ماذا لو اختفى الحديد ٥ ثوانٍ؟».

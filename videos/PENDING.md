@@ -5,6 +5,8 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 Use the exact file at the exact commit (raw URL) and check its size first.
 
 ## Latest state (15 Nov)
+- **#43 «ماذا لو انفجر القمر؟ 🌕💥» rendered** (56.8 s, 1704 frames), files in `videos/43-moon-explodes/`. Sent for review; NOT approved, NOT scheduled.
+- ElevenLabs after #43: about 770 characters left. vidIQ: 10 credits left. Metricool 8073705: 5 posts in November, so 15 more allowed this month (free limit 20/month).
 - **#42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️» rendered** (67.0 s, 2010 frames), files in `videos/42-blue-sun/`. Sent to the user for review; NOT approved, NOT scheduled yet. When approved: schedule on 8073705 at the next free slot, 21 Nov 10:00.
 - ElevenLabs: about 1,450 characters left (resets about 10 Dec) = 1 more Short. vidIQ: 15 credits left.
 
