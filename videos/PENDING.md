@@ -4,7 +4,11 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
-## Latest state (14 Nov, before a compact)
+## Latest state (15 Nov)
+- **#42 «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️» rendered** (67.0 s, 2010 frames), files in `videos/42-blue-sun/`. Sent to the user for review; NOT approved, NOT scheduled yet. When approved: schedule on 8073705 at the next free slot, 21 Nov 10:00.
+- ElevenLabs: about 1,450 characters left (resets about 10 Dec) = 1 more Short. vidIQ: 15 credits left.
+
+## Earlier state (14 Nov, before a compact)
 - **#41 «ماذا لو تبادلت اليابسة والمحيطات أماكنها؟ 🌍» APPROVED (user: "فيديو حيل حلو") and SCHEDULED on blogId `8073705` for **20 Nov 20:00** (post id 427544257), YouTube Short, public, Science & Technology, cover at 1 s, texts from upload.md. File `videos/41-land-ocean-swap/swap_short.mp4` at commit `ce6762df80a51c6692468af5afbbdaa4a4e24089` (33,852,644 bytes). Do NOT schedule it again.
 - Scheduled on 8073705 now: #37 19 Nov 16:00, #38 19 Nov 20:00, #39 20 Nov 10:00, #40 20 Nov 16:00, #41 20 Nov 20:00. **Next free slot: 21 Nov 10:00** (slots 10:00 / 16:00 / 20:00).
 - **Next video:** wait for the user's pick. Next in the ranked list (`reference/videos.md`, research of 13 Nov evening): «ماذا لو أصبحت الشمس زرقاء؟ 🔵☀️», then انفجر القمر، اختفى الحديد ٥ ثوانٍ، الأرض مكعّبة، توقف القمر، الأرض من ذهب.
