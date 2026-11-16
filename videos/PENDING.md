@@ -4,9 +4,10 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
-## #45 «ماذا لو جفّت المحيطات؟» (16 Nov)
-- Made and sent to the user for review; NOT approved yet, so not scheduled. Files: `videos/45-oceans-dry/`. Next free slot on blogId `8073705`: 22 Nov 10:00.
-- vidIQ: 0 credits until 13 Dec. ElevenLabs: about 9,290 characters left until 16 Dec.
+## #45 «ماذا لو جفّت المحيطات؟ 🌊🏜️» (17 Nov)
+- APPROVED (user: «جدولو») and SCHEDULED on blogId `8073705` for **22 Nov 10:00** (post id 430684081), YouTube Short, public, Science & Technology, cover at 1 s, texts from upload.md. File `videos/45-oceans-dry/dry_short.mp4` at commit `6ccce9689e9dfd0a3447ddd6630e6dbaae7313d3` (28,762,958 bytes). Do NOT schedule it again.
+- **Next free slot: 22 Nov 16:00** (slots 10:00 / 16:00 / 20:00). Metricool: 9 posts in November, 11 more this month.
+- vidIQ: 0 credits until 13 Dec. ElevenLabs: about 9,290 characters left until 16 Dec (≈ 12 Shorts).
 
 ## ElevenLabs (15 Nov, after the compact)
 - The user added ANOTHER new key (secure form, saved on the environment): free plan, 10,000 of 10,000 characters left, resets 16 Dec. ≈ 12 Shorts at ~750 characters each. Older ElevenLabs notes below are out of date.
