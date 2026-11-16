@@ -125,3 +125,12 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **3D pop:** in a crossfade from a 2D scene to a 3D one, the old modules showed the 3D layer at full opacity at once. Fixed in `gl3d_bs.js` (`canvas.style.opacity = prev ? f.opacity : (f.opacity ?? 1)`); keep it in every new module.
 - A sunburn on `faceF`: an even red flush clipped to the face, plus soft blurred patches on forehead, nose and cheeks. Separate hard ellipses looked like make-up or a headband.
 - RTL labels: with `direction="rtl"`, text-anchor `start` grows to the LEFT of x; `end` grows to the right (and ran off the screen).
+
+## Ruins, sand and night people (#45, Nov 2026)
+- **Night street people:** `street*` draws the lit shop windows and signs OVER `fg`, so people passed as `fg` at night look see-through. Pass them as `top` (drawn last, with its own night tint).
+- **Sun and moon glows:** a big circle with the `soft` filter shows as a flat hard-edged disc. Use `sun3` (the `sunW` radial gradient + a `blur9` mid glow + a small core), and `overcast: 1, noMoon: 1` on the street when drawing your own.
+- **Ruined buildings (`ruinB`):** a jagged clip for the broken top, dark empty windows (recolour the glass), cracks, streaks, a dust coat and rebar on the broken edge look right. Dark polygon "holes" on the walls looked like boulders stuck to the facade: don't draw them.
+- **Buried things:** draw the dune layers one by one (`duneL`) so cars, lamp posts and signs sit BETWEEN layers; a car on top of the last layer looks parked on the sand.
+- **Rocks on sunlit ground:** `rockR` is a dark night rock; use `rockS` (lit top facet, shaded side, soft shadow).
+- **Arms folded (cold):** set the arm angles directly (`aF: [.7, -1.9], aB: [.55, -1.75]`); IK targets on the chest pushed the elbows out like wings.
+- **People near parked cars:** a walking person whose path crosses a parked car looks like stepping on its roof; park the car away from the walking path.
