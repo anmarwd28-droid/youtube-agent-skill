@@ -4,6 +4,11 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
+## #46 «ماذا لو بقي ٩٩ شخصاً فقط في العالم؟ 🌍» (17 Nov)
+- The user's own idea. Rendered (77.0 s, 2310 frames, 38,930,053 bytes): `videos/46-99-people/lone_short.mp4` + `lone_shots_numbered.jpg` (18 shots) + `upload.md` + `src/`. Sent to the user for review.
+- **NOT approved yet: do NOT schedule until the user has watched it and said it needs no changes.** When approved: blogId `8073705`, next free slot **22 Nov 16:00**, YouTube Short, public, Science & Technology, cover at 3 s, texts from upload.md.
+- ElevenLabs: about 8,350 characters left until 16 Dec (934 used here). vidIQ: 0 credits until 13 Dec (title checked with yt-package only).
+
 ## #45 «ماذا لو جفّت المحيطات؟ 🌊🏜️» (17 Nov)
 - APPROVED (user: «جدولو») and SCHEDULED on blogId `8073705` for **22 Nov 10:00** (post id 430684081), YouTube Short, public, Science & Technology, cover at 1 s, texts from upload.md. File `videos/45-oceans-dry/dry_short.mp4` at commit `6ccce9689e9dfd0a3447ddd6630e6dbaae7313d3` (28,762,958 bytes). Do NOT schedule it again.
 - **Next free slot: 22 Nov 16:00** (slots 10:00 / 16:00 / 20:00). Metricool: 9 posts in November, 11 more this month.
