@@ -4,6 +4,11 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
+## #48 «ماذا لو تدمّرت الأرض؟ 💥» (17 Nov)
+- APPROVED (user: «جدولو») and SCHEDULED on blogId `8073705` for **23 Nov 10:00** (post id 431386899), YouTube Short, public, Science & Technology, cover at 5.5 s, texts from upload.md. File `videos/48-earth-destroyed/earth_short.mp4` at commit `20694563b5002be5b29277d9e9304b72f69c934c` (32,224,840 bytes). Do NOT schedule it again.
+- **Next free slot: 23 Nov 16:00** (slots 10:00 / 16:00 / 20:00). Metricool: 12 posts in November, 8 more this month.
+- vidIQ: 0 credits until 13 Dec. ElevenLabs: about 6,990 characters left until 16 Dec.
+
 ## #47 «ماذا لو لم تكن هناك تكنولوجيا؟ 📵» (17 Nov)
 - APPROVED (user: «جدولو») and SCHEDULED on blogId `8073705` for **22 Nov 20:00** (post id 431308762), YouTube Short, public, Science & Technology, cover at 2 s, texts from upload.md. File `videos/47-no-technology/tech_short.mp4` at commit `1d98eceec51963ca125c04156f87cf3da548dd22` (34,475,448 bytes). Do NOT schedule it again.
 - **Next free slot: 23 Nov 10:00** (slots 10:00 / 16:00 / 20:00). Metricool: 11 posts in November, 9 more this month.
