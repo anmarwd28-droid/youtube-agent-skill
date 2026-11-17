@@ -143,3 +143,12 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **Night scenes that go dark:** raise `N` as the lights go out (`.84` → `.97`), keep the people in `top`, and add one light source (a torch beam with `scr`) so the shot stays readable.
 - **Animals from `quad`:** check the bottom edge: scenes with the Ken Burns zoom crop a little, so keep feet above y ≈ 1220. Don't put a pale antler in front of a sapling or another pale shape.
 - **Labels near the top:** chips sit at y 330–385; keep pinned labels (a star's name) below y ≈ 430.
+
+## Blackouts, airports, hands (#47, Nov 2026)
+- **A real blackout:** the street night tint (`mulF`) works in linearRGB, so even N .95 only looks like dusk. For "all the lights die" add a multiply rect (`#0c1430`, opacity .12 → .54) in `o.emit` of `street10`, and keep one light (moon, phone, lamp).
+- **Lit windows over trees:** the lit-window layer is drawn after the trees, so at night yellow windows showed through the leaves. `street10` draws the trees again after the lit layer.
+- **Big glows:** a large circle with the `soft` filter looked like a flat disc (the billboard and the oil lamp). Use a radial gradient that fades to 0 (`lampW`, `bbGl`).
+- **True size next to big machines:** a person beside a parked airliner made the plane look like a toy (37 m vs 1.75 m). Leave people out of such shots or make them tiny; same for tugs and trucks.
+- **Hands:** floating front-view hands (`palm`) holding stones or a tap lever did not read. Use a whole person (seated: `lF: [1.5708, …]`) with `hF`/`hB` targets on the object.
+- **Insets and labels near the edges:** the Ken Burns zoom cuts anything past x ≈ 680 or below y ≈ 1250; keep round insets inside x 40–680 and bottom panels above y ≈ 1250.
+- **Timelines over huge spans:** a log scale crowded the old end (3.3 Myr and 1 Myr overlapped). Space the marks evenly and write the age under each one.
