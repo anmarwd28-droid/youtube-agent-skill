@@ -64,7 +64,7 @@ export async function init(canvas, dpr = 1.5) {
         gl_FragColor = vec4(c * (0.03 + 1.1 * lit) + haze * rim * (0.2 + lit), alpha); }` });
   const planet = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 64), planetMat);
   scene.add(sun, earth, atm, moon, planet);
-  earth.rotation.order = 'ZYX'; earth.rotation.z = 0.41; // axial tilt (spin about the tilted axis)
+  earth.rotation.order = 'ZXY'; earth.rotation.z = 0.41; // axial tilt (spin about the tilted axis)
 
 
   // ---------- a real 3D underwater set: sand seabed (photo texture) with moving caustics, 3D rocks (photo texture), fog ----------
@@ -115,7 +115,7 @@ export async function init(canvas, dpr = 1.5) {
       earthMat.uniforms.L.value.set(lx, ly, 120).normalize();
       earthMat.uniforms.sunI.value = e.sunI; earthMat.uniforms.lights.value = e.lights; earthMat.uniforms.cloudOff.value = f.t * 0.004;
       earthMat.uniforms.alpha.value = e.a; atm.material.uniforms.alpha.value = e.a;
-      earth.rotation.y = (e.rot ?? 0.6) + f.t * 0.03; earth.rotation.z = e.tilt ?? 0.41;
+      earth.rotation.y = (e.rot ?? 0.6) + f.t * 0.03; earth.rotation.z = e.tilt ?? 0.41; earth.rotation.x = e.tx ?? 0;
     }
     if (f.moon) { const m = f.moon, lx = (f.light ? f.light[0] : m.x - 400) - m.x, ly = -((f.light ? f.light[1] : m.y) - m.y);
       moonMat.uniforms.L.value.set(lx, ly, 120).normalize(); moonMat.uniforms.sunI.value = m.sunI; moonMat.uniforms.alpha.value = m.a; moon.rotation.y = 4.2; }
