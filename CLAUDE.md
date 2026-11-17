@@ -7,6 +7,7 @@
 - Keep explanations simple.
 - No extra talk (user, Nov 2026): do not explain what you did, changed or fixed, and do not send progress reports, unless I ask. Work silently; when a video is finished, send the files with at most one short line. Answer questions in as few words as possible.
 - Talk very little (user, 12 Nov): short replies, one-word or one-line explanations, then just do the work.
+- Said again on 17 Nov («لا تصل تكتب كثير و تشرحلي»): after scheduling or finishing, reply with one short line only (for example the date and time). No lists, no explanations, no summaries.
 - After every fix, send me the fixed still(s) so I can see the change. Check every shot, still and the final video carefully before sending.
 - Always check every shot for distortions (user, 15 Nov): deformed or broken people, limbs, faces, shapes, glitches, stretched textures, objects cut or merged wrongly. Look at every test still and the final review sheet for this before sending; fix anything distorted first.
 
