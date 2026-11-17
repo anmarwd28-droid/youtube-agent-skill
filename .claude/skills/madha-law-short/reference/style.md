@@ -164,3 +164,10 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - A video about a real game may name it, but the screens show our own generic drawn gameplay (`gameView`): no logos, characters, maps or art from the game. Consoles are generic shapes with no logos.
 - People playing: `player` puts the phone sideways in both hands in front of the chest, the head bent down, a soft screen glow on the face; it works standing and seated (`sit: 1`). Seated people need a seat or chair under the hips (cushion top ≈ feet y − 76 × scale).
 - Timers like 6:00 in RTL text show reversed: give the text `direction="ltr"`.
+
+## Zombies, insects, epidemics on the globe (#50, Nov 2026)
+- **Zombies:** keep the house person (`zombie` in `videos/50-zombie-virus/src/zb_a.js`): grey-green skin, pale eyes (`glow` ≈ .34 pale), dark under-eyes, torn hem and stains, arms reaching forward, a slow lurching walk. No blood or gore.
+- **A sitting, exhausted person on the ground:** knees up (`lF: [2.0, .45]`, `lB: [1.85, .32]`), lean forward, head down, arms over the knees. Thighs and shins both near horizontal looked like a broken log.
+- **Macro insects:** an ant needs dark (almost black) shaded body parts, tapered two-part legs with the feet on the surface, elbowed antennae; a mid-brown ant looked like a toy. Keep the insect touching the stem (offset ≈ feet length + half the stem).
+- **Infection patches on the globe:** the cloud texture is near 0 over clear sky, so a mask made from it covered almost everything at once. Use a 3D value noise on the sphere position (`zvn` in `gl3d_zb.js`; never name a GLSL function like an existing variable, the shader failed silently and the globe vanished). For an exponential spread, map the number to the patch level with a power (≈ 0.22) so the planet turns green only in the last days.
+- **`blockN` returns `{s, e}`:** add `.s` (and `.e` for lit windows), or the buildings vanish.
