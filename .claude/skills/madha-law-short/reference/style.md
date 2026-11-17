@@ -134,3 +134,12 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **Rocks on sunlit ground:** `rockR` is a dark night rock; use `rockS` (lit top facet, shaded side, soft shadow).
 - **Arms folded (cold):** set the arm angles directly (`aF: [.7, -1.9], aB: [.55, -1.75]`); IK targets on the chest pushed the elbows out like wings.
 - **People near parked cars:** a walking person whose path crosses a parked car looks like stepping on its roof; park the car away from the walking path.
+
+## Overgrown streets, villages, interiors (#46, Nov 2026)
+- **Ivy and moss:** `ivyM` in `videos/46-99-people/src/ln_b.js`: a fractal-noise mask added to the alpha of the source (a rect with a vertical gradient), then a flat green flood. Dense at the bottom, sparse at the top, with organic edges. Keep `k4` low enough that the noise alone never passes the level, or green specks appear all over the sky. Two layers (dark, then a lighter one shifted a few pixels) give depth.
+- **People and houses in one landscape:** pick a camera height and size everything from it: height on screen = real height × (y − horizon) ÷ camera height. With a 6 m camera a person at y is `(y − hz) × .000977` in `hero` scale and a door is a little taller than a person. Small houses with big people beside them looked like toys.
+- **A warm reflection or tint over water:** fade it with a gradient; a plain rect leaves a hard horizontal edge across the river.
+- **The street sun:** `street*` draws a blurred sun disc that does not fade at night. For night or custom skies pass `overcast: 1` and draw `sun3` in `back`.
+- **Night scenes that go dark:** raise `N` as the lights go out (`.84` → `.97`), keep the people in `top`, and add one light source (a torch beam with `scr`) so the shot stays readable.
+- **Animals from `quad`:** check the bottom edge: scenes with the Ken Burns zoom crop a little, so keep feet above y ≈ 1220. Don't put a pale antler in front of a sapling or another pale shape.
+- **Labels near the top:** chips sit at y 330–385; keep pinned labels (a star's name) below y ≈ 430.
