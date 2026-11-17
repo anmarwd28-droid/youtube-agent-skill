@@ -172,3 +172,11 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **Infection patches on the globe:** the cloud texture is near 0 over clear sky, so a mask made from it covered almost everything at once. Use a 3D value noise on the sphere position (`zvn` in `gl3d_zb.js`; never name a GLSL function like an existing variable, the shader failed silently and the globe vanished). For an exponential spread, map the number to the patch level with a power (≈ 0.22) so the planet turns green only in the last days.
 - **`blockN` returns `{s, e}`:** add `.s` (and `.e` for lit windows), or the buildings vanish.
 - **People fighting back (user, 17 Nov: «ناس مو متحولين يقاتلون الزومبي و لابسين بدلات»):** `soldier` and `hazmat` in `videos/50-zombie-virus/src/zb_e.js`. A vest drawn over the torso covered the front arm and looked like a box: leave it out. The helmet brim must sit above the eye (hy − 8), or the face looks blank. Keep a held baton angled back, away from the face. Fights stay non-gory: shields shove, torches light the zombies.
+
+## Stars, gas clouds and cut-open planets (#51, Nov 2026)
+- **A planet turning into a star:** do it in the Earth's own shader (`disc.star` in `videos/51-earth-star/src/gl3d_es.js`): first glowing lava cracks over a darkening crust, then a red-dwarf surface with fine granulation and limb darkening. Big dark spots looked like continents on a ball; keep spots small and rare.
+- **A gas cloud:** soft additive points in 3D (`w.cloud`), big faint blobs plus small sparks, swirling faster as it shrinks. Points at the default size were invisible; too much brightening as it collapsed made a white ball of glow.
+- **Cut-open spheres:** a wedge (`cutaway` in `st_a.js`) drawn exactly over the 3D sphere's screen circle (`fit3`, or `G.c0`/`G.R` from `gW`), with layered radial gradients, noise textures and a shadow along the cut edges.
+- **Camera jumps between two 3D scenes of the same body** show a double Earth during the crossfade; start the new scene from the old camera and move from there.
+- **Scale models:** small sprites of the real Earth (`tex/earth_ico.py`) packed into a ball read as "a ball made of Earths"; make them fully lit, or they turn into grey dots.
+
