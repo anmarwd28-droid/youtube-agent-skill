@@ -152,3 +152,10 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **Hands:** floating front-view hands (`palm`) holding stones or a tap lever did not read. Use a whole person (seated: `lF: [1.5708, …]`) with `hF`/`hB` targets on the object.
 - **Insets and labels near the edges:** the Ken Burns zoom cuts anything past x ≈ 680 or below y ≈ 1250; keep round insets inside x 40–680 and bottom panels above y ≈ 1250.
 - **Timelines over huge spans:** a log scale crowded the old end (3.3 Myr and 1 Myr overlapped). Space the marks evenly and write the age under each one.
+
+## Breaking planets apart (#48, Nov 2026)
+- **Cracks on a sphere:** a Voronoi on the UVs looked like a football (regular cells, seams at the poles). Use a 3D Voronoi on the object position, warped by sines, at two scales (big plates + fine branches), as in `gl3d_ex.js`.
+- **Switching the house globe to another sphere** (to crack or recolour it): line the textures up with `exRot(lon, az)` and turn the house clouds down to 0 before the switch; the cloud PNG on a plain sphere showed blocky white specks, so leave clouds off there.
+- **Keep scale honest in 3D diagrams:** a portrait frame is narrow (half-width ≈ distance × 0.15). An orbit of radius 2.6 at distance 8.6 fell off the screen; use radius ≈ 1.6 at distance 14–17.
+- **A 3D globe "swallowed" by an SVG body:** the 3D canvas is above the scene SVG, so draw a copy of the swallowing body in `F.ov`, fading in over the globe, then drop the globe (`F.w.disc = null`; setting `m: 0` shows the flat disc).
+- **Fades to black between scenes:** a scene that fades fully to black right before a crossfade gives a black frame; stop the fade at about 70%.
