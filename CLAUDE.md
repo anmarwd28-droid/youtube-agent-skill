@@ -64,6 +64,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 
 - A "what if?" channel: animated videos about events that never happened (two moons, the sun moving closer to Earth, and so on), explained with real science.
 - Write scripts, narration, on-screen text, titles and descriptions in simple Modern Standard Arabic (فصحى) unless I ask otherwise.
+- Posting times (user, 17 Nov): two Shorts a day, 10:00 and 18:00 Baghdad (Metricool best times: a morning peak at 10:00 and an afternoon/evening peak at 16:00–18:00). Schedule new videos into the next free slot of that pattern; `videos/PENDING.md` keeps the next free slot.
 - Metricool: since 13 Nov the channel is on a new Metricool account, blogId `8073705` (timezone Asia/Baghdad, YouTube only, checked 13 Nov). The previous account `8065283` hit the free limit; its posts up to 19 Nov 10:00 still publish by themselves; do not reschedule them. The older brand `q3_tvm` (blogId `7907171`) is not used. Use only the `youtube` provider. Never read, post to or change the Instagram account in that brand.
 
 ## Channel 2: "Weird Space Lab"

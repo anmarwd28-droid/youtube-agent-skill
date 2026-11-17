@@ -4,6 +4,27 @@ Metricool for this channel is the NEW account: check `getBrandSettings` shows bl
 
 Use the exact file at the exact commit (raw URL) and check its size first.
 
+## RESCHEDULED 17 Nov evening: two Shorts a day, 10:00 and 18:00 Baghdad (user: «مقطعين كل يوم بافضل وقت … صبح و ليل»)
+Metricool best times for this channel: 10:00 (morning peak) and 16:00–18:00 (afternoon/evening peak). New schedule on blogId `8073705` (post ids changed on update; uuids stay):
+| Video | New date | New post id |
+|---|---|---|
+| #37 one eye | 19 Nov 18:00 | 431503454 |
+| #38 no speech | 20 Nov 10:00 | 431503566 |
+| #39 antimatter | 20 Nov 18:00 | 431503718 |
+| #40 house planet | 21 Nov 10:00 | 431503817 |
+| #41 land/ocean swap | 21 Nov 18:00 | 431503966 |
+| #42 blue sun | 22 Nov 10:00 | 431504084 |
+| #43 moon explodes | 22 Nov 18:00 | 431504231 |
+| #44 plague | 23 Nov 10:00 | 431504358 |
+| #45 oceans dry | 23 Nov 18:00 | 431504550 |
+| #46 99 people | 24 Nov 10:00 | 431504690 |
+| #47 no technology | 24 Nov 18:00 | 431504833 |
+| #48 Earth destroyed | 25 Nov 10:00 | 431504959 |
+- The old account (`8065283`) still publishes its own posts up to 19 Nov 10:00, so this schedule starts at 19 Nov 18:00.
+- **Next free slot: 25 Nov 18:00**, then 26 Nov 10:00, 18:00, …
+- #49 GTA 6 (`videos/49-gta6-phones/`) is NOT scheduled: the user chose to leave it out of this rescheduling (17 Nov). Ask before scheduling it.
+- Older dates written in the sections below are out of date.
+
 ## #48 «ماذا لو تدمّرت الأرض؟ 💥» (17 Nov)
 - APPROVED (user: «جدولو») and SCHEDULED on blogId `8073705` for **23 Nov 10:00** (post id 431386899), YouTube Short, public, Science & Technology, cover at 5.5 s, texts from upload.md. File `videos/48-earth-destroyed/earth_short.mp4` at commit `20694563b5002be5b29277d9e9304b72f69c934c` (32,224,840 bytes). Do NOT schedule it again.
 - **Next free slot: 23 Nov 16:00** (slots 10:00 / 16:00 / 20:00). Metricool: 12 posts in November, 8 more this month.
