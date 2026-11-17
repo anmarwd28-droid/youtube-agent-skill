@@ -159,3 +159,8 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **Keep scale honest in 3D diagrams:** a portrait frame is narrow (half-width ≈ distance × 0.15). An orbit of radius 2.6 at distance 8.6 fell off the screen; use radius ≈ 1.6 at distance 14–17.
 - **A 3D globe "swallowed" by an SVG body:** the 3D canvas is above the scene SVG, so draw a copy of the swallowing body in `F.ov`, fading in over the globe, then drop the globe (`F.w.disc = null`; setting `m: 0` shows the flat disc).
 - **Fades to black between scenes:** a scene that fades fully to black right before a crossfade gives a black frame; stop the fade at about 70%.
+
+## Games and real brands (#49, Nov 2026)
+- A video about a real game may name it, but the screens show our own generic drawn gameplay (`gameView`): no logos, characters, maps or art from the game. Consoles are generic shapes with no logos.
+- People playing: `player` puts the phone sideways in both hands in front of the chest, the head bent down, a soft screen glow on the face; it works standing and seated (`sit: 1`). Seated people need a seat or chair under the hips (cushion top ≈ feet y − 76 × scale).
+- Timers like 6:00 in RTL text show reversed: give the text `direction="ltr"`.
