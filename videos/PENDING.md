@@ -22,7 +22,7 @@ Metricool best times for this channel: 10:00 (morning peak) and 16:00–18:00 (a
 | #48 Earth destroyed | 25 Nov 10:00 | 431504959 |
 - The old account (`8065283`) still publishes its own posts up to 19 Nov 10:00, so this schedule starts at 19 Nov 18:00.
 - **Next free slot: 25 Nov 18:00**, then 26 Nov 10:00, 18:00, …
-- #49 GTA 6 (`videos/49-gta6-phones/`) is NOT scheduled: the user chose to leave it out of this rescheduling (17 Nov). Ask before scheduling it.
+- #49 GTA 6 «ماذا لو كانت GTA 6 تعمل على كل الهواتف؟ 📱»: APPROVED (user: post it today) and SCHEDULED on blogId `8073705` for **17 Nov 18:00** (post id 431509480), between the old account's 16:00 and 20:00 posts. File `videos/49-gta6-phones/gta_short.mp4` at commit `e105bb3b4fd8e23ee9dbec3e9380fada6750a667` (20,994,059 bytes). Do NOT schedule it again. English version for Weird Space Lab: `weird-space-lab/videos/15-gta6-phones/` (not scheduled; needs that channel's Metricool account).
 - Older dates written in the sections below are out of date.
 
 ## #48 «ماذا لو تدمّرت الأرض؟ 💥» (17 Nov)
