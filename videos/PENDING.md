@@ -22,8 +22,9 @@ Metricool best times for this channel: 10:00 (morning peak) and 16:00–18:00 (a
 | #48 Earth destroyed | 25 Nov 10:00 | 431504959 |
 | #50 zombie virus | 25 Nov 18:00 | 431758334 (commit 8ddc00f, 41,934,060 bytes) |
 | #51 Earth turns into a sun | 26 Nov 10:00 | 431847635 (commit cfa04e2, 31,000,202 bytes) |
+| #52 Newton's apple | 26 Nov 18:00 | 432210363 (commit 0a3b9b0, 42,809,756 bytes) |
 - The old account (`8065283`) still publishes its own posts up to 19 Nov 10:00, so this schedule starts at 19 Nov 18:00.
-- **Next free slot: 26 Nov 18:00**, then 27 Nov 10:00, …
+- **Next free slot: 27 Nov 10:00**, then 27 Nov 18:00, …
 - #49 GTA 6 «ماذا لو كانت GTA 6 تعمل على كل الهواتف؟ 📱»: APPROVED (user: post it today) and SCHEDULED on blogId `8073705` for **17 Nov 22:00** (post id 431511053; the user asked for 10 or 11 at night), after the old account's 20:00 post. File `videos/49-gta6-phones/gta_short.mp4` at commit `e105bb3b4fd8e23ee9dbec3e9380fada6750a667` (20,994,059 bytes). Do NOT schedule it again. English version for Weird Space Lab: `weird-space-lab/videos/15-gta6-phones/` (not scheduled; needs that channel's Metricool account).
 - Older dates written in the sections below are out of date.
 
