@@ -26,6 +26,7 @@ Metricool best times for this channel: 10:00 (morning peak) and 16:00–18:00 (a
 | #53 Hitler won | 27 Nov 10:00 | 432697652 (commit 16a39e4, 38,767,237 bytes) |
 | #54 no time | 27 Nov 18:00 | 432833362 (commit ddf788e, 41,464,831 bytes) |
 - The old account (`8065283`) still publishes its own posts up to 19 Nov 10:00, so this schedule starts at 19 Nov 18:00.
+- **18 Nov (user, going to sleep):** schedule #55 «ماذا لو اختفت المدارس من العالم؟ 🏫» as soon as its render is done and checked, WITHOUT waiting for him to watch it (one-time exception for #55 only). Then make «ماذا لو أصبحت الأرض مثلثة؟» on your own, but do NOT schedule it: he watches it first.
 - **Next free slot: 28 Nov 10:00**, then 28 Nov 18:00, … ElevenLabs: NEW key added 18 Nov (secure form, on the Default environment): 10,000 of 10,000 characters, free plan.
 - #49 GTA 6 «ماذا لو كانت GTA 6 تعمل على كل الهواتف؟ 📱»: APPROVED (user: post it today) and SCHEDULED on blogId `8073705` for **17 Nov 22:00** (post id 431511053; the user asked for 10 or 11 at night), after the old account's 20:00 post. File `videos/49-gta6-phones/gta_short.mp4` at commit `e105bb3b4fd8e23ee9dbec3e9380fada6750a667` (20,994,059 bytes). Do NOT schedule it again. English version for Weird Space Lab: `weird-space-lab/videos/15-gta6-phones/` (not scheduled; needs that channel's Metricool account).
 - Older dates written in the sections below are out of date.
