@@ -47,6 +47,9 @@ Each folder in `videos/` has upload.md, the final mp4 and its sources.
 | 49-gta6-phones | ماذا لو كانت GTA 6 تعمل على كل الهواتف؟ |
 | 50-zombie-virus | ماذا لو انتشر فيروس الزومبي؟ |
 | 51-earth-star | ماذا لو تحوّلت الأرض إلى شمس؟ |
+| 52-newton-apple | ماذا لو لم تسقط تفاحة نيوتن؟ |
+| 53-hitler-won | ماذا لو انتصر هتلر في الحرب؟ (no Nazi symbols; history + science: V-2, the bomb, fission in Berlin; vidIQ: «هتلر» ≈ 25,000 searches/month) |
+| 54-no-time | ماذا لو لم يكتشف الإنسان الوقت؟ (in progress) |
 | 27-flat-earth | ماذا لو كانت الأرض مسطّحة؟ (three.js version; the user said the street, sea and edge looked too photoreal for the channel; see style.md) |
 
 | 28-superpowers | ماذا لو استيقظ كل البشر بقوّة خارقة؟ |
