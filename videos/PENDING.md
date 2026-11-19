@@ -30,10 +30,10 @@ Metricool best times for this channel: 10:00 (morning peak) and 16:00–18:00 (a
 | #57 no COVID vaccine | 29 Nov 10:00 | 433403330 (commit a764812, 49,091,047 bytes) |
 | #58 no WW1 | 29 Nov 18:00 | 433528769 (commit 3a99633, 52,690,173 bytes) |
 | #59 no WW2 | 30 Nov 10:00 | 433601827 (commit 734422f, 50,938,320 bytes; the user said «جدولو من يخلص» before watching) |
+| #60 Saddam 2003 | 30 Nov 18:00 | 434547831 (commit 2608e07, 44,902,101 bytes; approved 19 Nov) |
 - The old account (`8065283`) still publishes its own posts up to 19 Nov 10:00, so this schedule starts at 19 Nov 18:00.
 - **18 Nov (user, going to sleep):** schedule #55 «ماذا لو اختفت المدارس من العالم؟ 🏫» as soon as its render is done and checked, WITHOUT waiting for him to watch it (one-time exception for #55 only). Then make «ماذا لو أصبحت الأرض مثلثة؟» on your own, but do NOT schedule it: he watches it first.
-- **#60 «ماذا لو لم يسقط صدام حسين عام 2003؟» (19 Nov): made, NOT approved yet. Files `videos/60-saddam-2003/` (sd_short.mp4, 44,902,101 bytes). Schedule only after the user watches it and approves, into 30 Nov 18:00.**
-- **Next free slot: 30 Nov 18:00**, then 1 Dec 10:00, … ElevenLabs: NEW key added 18 Nov (secure form, on the Default environment); after #60 about 4,490 of 10,000 characters left (resets 16 Dec). vidIQ: about 65 credits left (renews 13 Dec).
+- **Next free slot: 1 Dec 10:00**, then 1 Dec 18:00, … ElevenLabs: NEW key added 18 Nov (secure form, on the Default environment); after #60 about 4,490 of 10,000 characters left (resets 16 Dec). vidIQ: about 65 credits left (renews 13 Dec).
 - #49 GTA 6 «ماذا لو كانت GTA 6 تعمل على كل الهواتف؟ 📱»: APPROVED (user: post it today) and SCHEDULED on blogId `8073705` for **17 Nov 22:00** (post id 431511053; the user asked for 10 or 11 at night), after the old account's 20:00 post. File `videos/49-gta6-phones/gta_short.mp4` at commit `e105bb3b4fd8e23ee9dbec3e9380fada6750a667` (20,994,059 bytes). Do NOT schedule it again. English version for Weird Space Lab: `weird-space-lab/videos/15-gta6-phones/` (not scheduled; needs that channel's Metricool account).
 - Older dates written in the sections below are out of date.
 
