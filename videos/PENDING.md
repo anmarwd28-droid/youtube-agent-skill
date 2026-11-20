@@ -37,9 +37,11 @@ Metricool best times for this channel: 10:00 (morning peak) and 16:00–18:00 (a
 | #64 time portal | 2 Dec 18:00 | 435273376 (commit f39540f, 39,444,322 bytes; approved 20 Nov) |
 | #65 never sick | 3 Dec 10:00 | 435581093 (commit 345fb41, 40,943,603 bytes; approved 20 Nov) |
 | #66 Earth the size of the Sun | 3 Dec 18:00 | 435581209 (commit 8062a27, 25,452,268 bytes; approved 20 Nov) |
+| #67 One language | 4 Dec 10:00 | 435790148 (commit 103c977, 41,275,045 bytes; user said "make and schedule" 20 Nov) |
+| #68 Never tired | 4 Dec 18:00 | 435790236 (commit 103c977, 34,614,979 bytes; same) |
 - The old account (`8065283`) still publishes its own posts up to 19 Nov 10:00, so this schedule starts at 19 Nov 18:00.
 - **18 Nov (user, going to sleep):** schedule #55 «ماذا لو اختفت المدارس من العالم؟ 🏫» as soon as its render is done and checked, WITHOUT waiting for him to watch it (one-time exception for #55 only). Then make «ماذا لو أصبحت الأرض مثلثة؟» on your own, but do NOT schedule it: he watches it first.
-- **Next free slot: 4 Dec 10:00**, then 4 Dec 18:00, … ElevenLabs: NEW key added 20 Nov (secure form): 10,000 of 10,000 characters left (resets about 20 Dec). vidIQ: about 25 credits left (renews about 17 Dec).
+- **Next free slot: 5 Dec 10:00**, then 5 Dec 18:00, … ElevenLabs: NEW key added 20 Nov (secure form): 10,000 of 10,000 characters left (resets about 20 Dec). vidIQ: about 25 credits left (renews about 17 Dec).
 - **20 Nov (user, screenshot of 6 ideas): «سوي هذني الافكار فكرتين فكرتين»** — make them two at a time, in this order: (1) ماذا لو كان الإنسان لا يمرض (2) ماذا لو كان حجم الأرض مثل حجم الشمس (3) ماذا لو كان كل البشر يتكلمون لغة واحدة (4) ماذا لو كان الإنسان لا يتعب (5) ماذا لو كانت الأرض بشكل دونت (6) ماذا لو لم يطلق الإنسان الريح. He did NOT say schedule when done: send each for review first.
 - **Pair 1 (#65, #66) approved and scheduled 3 Dec; pair 2 (#67 «لغة واحدة», #68 «لا يتعب») scripted, narrated and built (src in `videos/67-one-language/src`, `videos/68-never-tired/src`).** ElevenLabs after these four: about 6,160 left. vidIQ: 5 credits left (one title score each was used for #65–#68).
 - #64 «ماذا لو صُنعت بوابة زمنية؟ ⏳» approved and scheduled 2 Dec 18:00.
