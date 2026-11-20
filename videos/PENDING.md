@@ -35,11 +35,13 @@ Metricool best times for this channel: 10:00 (morning peak) and 16:00–18:00 (a
 | #62 no firearms | 1 Dec 18:00 | 434956313 (commit d0401b4, 46,758,454 bytes; approved 20 Nov) |
 | #63 everyone a genius | 2 Dec 10:00 | 435038702 (commit b27c256, 49,087,196 bytes; the user said «من يكمل جدولو» before watching, 20 Nov) |
 | #64 time portal | 2 Dec 18:00 | 435273376 (commit f39540f, 39,444,322 bytes; approved 20 Nov) |
+| #65 never sick | 3 Dec 10:00 | 435581093 (commit 345fb41, 40,943,603 bytes; approved 20 Nov) |
+| #66 Earth the size of the Sun | 3 Dec 18:00 | 435581209 (commit 8062a27, 25,452,268 bytes; approved 20 Nov) |
 - The old account (`8065283`) still publishes its own posts up to 19 Nov 10:00, so this schedule starts at 19 Nov 18:00.
 - **18 Nov (user, going to sleep):** schedule #55 «ماذا لو اختفت المدارس من العالم؟ 🏫» as soon as its render is done and checked, WITHOUT waiting for him to watch it (one-time exception for #55 only). Then make «ماذا لو أصبحت الأرض مثلثة؟» on your own, but do NOT schedule it: he watches it first.
-- **Next free slot: 3 Dec 10:00**, then 3 Dec 18:00, … ElevenLabs: NEW key added 20 Nov (secure form): 10,000 of 10,000 characters left (resets about 20 Dec). vidIQ: about 25 credits left (renews about 17 Dec).
+- **Next free slot: 4 Dec 10:00**, then 4 Dec 18:00, … ElevenLabs: NEW key added 20 Nov (secure form): 10,000 of 10,000 characters left (resets about 20 Dec). vidIQ: about 25 credits left (renews about 17 Dec).
 - **20 Nov (user, screenshot of 6 ideas): «سوي هذني الافكار فكرتين فكرتين»** — make them two at a time, in this order: (1) ماذا لو كان الإنسان لا يمرض (2) ماذا لو كان حجم الأرض مثل حجم الشمس (3) ماذا لو كان كل البشر يتكلمون لغة واحدة (4) ماذا لو كان الإنسان لا يتعب (5) ماذا لو كانت الأرض بشكل دونت (6) ماذا لو لم يطلق الإنسان الريح. He did NOT say schedule when done: send each for review first.
-- **Pair 1 (#65 «لا يمرض», #66 «الأرض بحجم الشمس») rendering; pair 2 (#67 «لغة واحدة», #68 «لا يتعب») scripted, narrated and built (src in `videos/67-one-language/src`, `videos/68-never-tired/src`).** ElevenLabs after these four: about 6,160 left. vidIQ: 5 credits left (one title score each was used for #65–#68).
+- **Pair 1 (#65, #66) approved and scheduled 3 Dec; pair 2 (#67 «لغة واحدة», #68 «لا يتعب») scripted, narrated and built (src in `videos/67-one-language/src`, `videos/68-never-tired/src`).** ElevenLabs after these four: about 6,160 left. vidIQ: 5 credits left (one title score each was used for #65–#68).
 - #64 «ماذا لو صُنعت بوابة زمنية؟ ⏳» approved and scheduled 2 Dec 18:00.
 - #49 GTA 6 «ماذا لو كانت GTA 6 تعمل على كل الهواتف؟ 📱»: APPROVED (user: post it today) and SCHEDULED on blogId `8073705` for **17 Nov 22:00** (post id 431511053; the user asked for 10 or 11 at night), after the old account's 20:00 post. File `videos/49-gta6-phones/gta_short.mp4` at commit `e105bb3b4fd8e23ee9dbec3e9380fada6750a667` (20,994,059 bytes). Do NOT schedule it again. English version for Weird Space Lab: `weird-space-lab/videos/15-gta6-phones/` (not scheduled; needs that channel's Metricool account).
 - Older dates written in the sections below are out of date.
