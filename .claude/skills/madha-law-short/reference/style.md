@@ -180,3 +180,13 @@ The flat-Earth Short (#27) was rebuilt as photoreal 3D. The user said it no long
 - **Camera jumps between two 3D scenes of the same body** show a double Earth during the crossfade; start the new scene from the old camera and move from there.
 - **Scale models:** small sprites of the real Earth (`tex/earth_ico.py`) packed into a ball read as "a ball made of Earths"; make them fully lit, or they turn into grey dots.
 
+
+## Lessons from #68–#70 (20 Nov, the user found these in a scheduled video)
+- Nobody walks or runs in place: if legs animate (`walk:`), x must move at a matching speed (≈ 40 px/s walking at s .7, ≈ 110–125 px/s running at phase t*6.5). Check every `walk:` call.
+- People in one shot share one scale (a hero at s 1.05 next to others at .7 reads as a giant); a worker must not be taller than the building behind him.
+- Wheels of moving vehicles turn (rotate lugs/bolts by distance / radius).
+- Organs in a body diagram sit in the body (lungs in the chest, not on the head); measure the hero on a still first.
+- `filter="url(#blur…)"` does not work inside `F.ov` over the 3D layer: use a radialGradient glow instead, or it renders as a hard grey disc.
+- Two 3D shots with different camera/texture make a double image in the crossfade: start the next shot from the last shot's exact state and ease from there.
+- Never leave the screen nearly empty for more than ~1 s.
+- Review every finished video at 1 frame per second (a full contact sheet), not only the 12-shot sheet, before sending.
