@@ -8,8 +8,8 @@ function streetO(t, o = {}) {
   let s = `<defs>${DEFN()}${mulF('sf' + id, N * .9)}<linearGradient id="sk${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset=".6" stop-color="${sky[1]}"/><stop offset="1" stop-color="${sky[2]}"/></linearGradient></defs><rect x="-200" y="-200" width="1120" height="1500" fill="url(#sk${id})"/>`;
   s += sun3(120, 600, .7 * (1 - N)) + cumulus(300 + t * 1.5, 470, 250, 21, { a: .7 * (1 - N) }) + cumulus(640 + t, 530, 170, 23, { a: .6 * (1 - N) });
   let g = farCity(31, 905, mix(sky[2], '#58607a', .45)) + `<rect x="-20" y="780" width="760" height="125" fill="${sky[2]}" opacity=".22"/>`, e = '';
-  [[-12, 166, 400, '#c4a07a', 961, 1], [154, 144, 480, '#6a7e92', 962, 2], [298, 158, 360, '#d8c4a4', 963, 0], [456, 140, 440, '#9a6a5a', 964, 1], [596, 160, 500, '#7a8a7a', 965, 2]].forEach(([x, w, h, c, sd, k]) => { const b = blockN(x, PV, w, h, c, sd, k); g += b.s; e += b.e; });
-  const sh = shopRowO(PV); g += sh.s; e += sh.e;
+  (o.blocks || [[-12, 166, 400, '#c4a07a', 961, 1], [154, 144, 480, '#6a7e92', 962, 2], [298, 158, 360, '#d8c4a4', 963, 0], [456, 140, 440, '#9a6a5a', 964, 1], [596, 160, 500, '#7a8a7a', 965, 2]]).forEach(([x, w, h, c, sd, k]) => { const b = blockN(x, PV, w, h, c, sd, k); g += b.s; e += b.e; });
+  const sh = o.shops ? (() => { const keep = SHOPB.slice(); SHOPB.splice(0, SHOPB.length, ...o.shops); const r = shopRowB(PV); SHOPB.splice(0, SHOPB.length, ...keep); return r; })() : shopRowO(PV); g += sh.s; e += sh.e;
   g += `<rect x="-20" y="${PV - 20}" width="760" height="20" fill="url(#aoUp)" opacity=".5"/>`;
   g += `<rect x="-200" y="${PV}" width="1120" height="${KB - PV}" fill="#c4b8a4"/><rect x="-20" y="${PV}" width="760" height="${KB - PV}" fill="#000" filter="url(#grainR)" opacity=".25"/><rect x="-20" y="${PV}" width="760" height="26" fill="url(#aoDn)" opacity=".7"/>`;
   for (let q = 0; q < 6; q++) for (let r = 0; r < 16; r++) g += `<rect x="${r * 48 - 20 + (q % 2) * 24}" y="${PV + q * 17 + 2}" width="46" height="15" fill="none" stroke="#a89c88" stroke-width="1.2"/>`;
