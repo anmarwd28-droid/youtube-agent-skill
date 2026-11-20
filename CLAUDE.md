@@ -19,6 +19,7 @@
 - Never lower the quality to save tokens or time: keep the full test stills, full video length and full render quality.
 - No rush (user, 13 Nov): take as long as each video needs, even if the render is slow. Never simplify heavy scenes just to finish faster.
 - When I give several ideas, make them one at a time, so they don't clash. Do two at once only when that is clearly safe.
+- «فكرتين فكرتين» (user, 20 Nov, angry): work on ONLY the two current ideas. Do not script, narrate or build the next ideas until those two are rendered and sent to me. Do not run test stills or other heavy jobs while the renders run in the background; let them finish.
 - Pick ideas and titles that can go far (my goal is more than 2,500 views per video). Use vidIQ research for this.
 - Each new video starts in a new conversation. Everything needed must be saved in the repo (this file, the `madha-law-short` skill, `videos/PENDING.md`); never keep an important rule only in the chat.
 - Whenever I say something important (a rule, a preference, a decision), save it in the repo right away (this file or the skill), commit and push. Don't rely on the chat to remember it.
