@@ -34,7 +34,7 @@ I have two YouTube channels. They live in different Metricool accounts, and Clau
 | Name | "ماذا لو؟ Lab" | "Weird Space Lab" (was "BABY 🐦") |
 | Channel ID | `UCbbego5CIm5_6lwfvU2zXSA` (`@MadhaLawLab`) | `UC2Aav2c7K96ux-q1eJuuHYw` |
 | Language of everything in the video and on YouTube | Simple Modern Standard Arabic (فصحى) | English |
-| Metricool | new account since 13 Nov: blogId `8073705` (before: `8065283` until 19 Nov 10:00, and `7907171`; both hit the free limit) | blogId `7966902` |
+| Metricool | newest account since 20 Nov: blogId `8257196` (before: `8073705` 13–20 Nov, `8065283` until 19 Nov 10:00, and `7907171`; both hit the free limit) | blogId `7966902` |
 | vidIQ | connected | not connected yet (public data only) |
 | Video folders in this repo | `videos/` | `weird-space-lab/videos/` |
 
@@ -67,7 +67,7 @@ Before any work that touches a channel (research, script, video, metadata, sched
 - Write scripts, narration, on-screen text, titles and descriptions in simple Modern Standard Arabic (فصحى) unless I ask otherwise.
 - Posting times (user, 17 Nov): two Shorts a day, 10:00 and 18:00 Baghdad (Metricool best times: a morning peak at 10:00 and an afternoon/evening peak at 16:00–18:00). Schedule new videos into the next free slot of that pattern; `videos/PENDING.md` keeps the next free slot.
 - **Metricool limit reminder (user, 20 Nov, angry that I forgot):** before EVERY scheduling, count the posts already scheduled + published in that calendar month on the current account and tell the user the count against the free limit (20 per month on the old account; assume the same). Warn before going over; never schedule past it without his OK.
-- Metricool: since 13 Nov the channel is on a new Metricool account, blogId `8073705` (timezone Asia/Baghdad, YouTube only, checked 13 Nov). The previous account `8065283` hit the free limit; its posts up to 19 Nov 10:00 still publish by themselves; do not reschedule them. The older brand `q3_tvm` (blogId `7907171`) is not used. Use only the `youtube` provider. Never read, post to or change the Instagram account in that brand.
+- Metricool: since 20 Nov (late) the channel is on blogId `8257196`; before that `8073705` (posts up to 5 Dec are still scheduled there, see `videos/PENDING.md`). Earlier: blogId `8073705` (timezone Asia/Baghdad, YouTube only, checked 13 Nov). The previous account `8065283` hit the free limit; its posts up to 19 Nov 10:00 still publish by themselves; do not reschedule them. The older brand `q3_tvm` (blogId `7907171`) is not used. Use only the `youtube` provider. Never read, post to or change the Instagram account in that brand.
 
 ## Channel 2: "Weird Space Lab"
 

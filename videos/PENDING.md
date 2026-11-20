@@ -1,8 +1,19 @@
 # Channel 1 ("ماذا لو؟ Lab"): Metricool work waiting for the right account
 
-Metricool for this channel is the NEW account: check `getBrandSettings` shows blogId `8073705` (YouTube `UCbbego5CIm5_6lwfvU2zXSA`) before any scheduling.
+Metricool for this channel is now blogId `8257196` (since 20 Nov late; before: `8073705`): check `getBrandSettings` (YouTube `UCbbego5CIm5_6lwfvU2zXSA`) before any scheduling.
 
 Use the exact file at the exact commit (raw URL) and check its size first.
+
+## 20 Nov late: NEWEST Metricool account blogId `8257196` (same YouTube channel)
+The account `8073705` went over its free limit for November (24 posts: 4 published + 20 scheduled; limit 20). The user switched to a new account `8257196` and said «انقل الي واصلات الحد». The 4 over-limit posts (29–30 Nov) were re-created on `8257196`, same times, texts, tags, covers, files from the commits below:
+| Video | Date | New post id on 8257196 |
+|---|---|---|
+| #57 no COVID vaccine | 29 Nov 10:00 | 436080750 |
+| #58 no WW1 | 29 Nov 18:00 | 436080815 |
+| #59 no WW2 | 30 Nov 10:00 | 436080896 |
+| #60 Saddam 2003 | 30 Nov 18:00 | 436080969 |
+**The same 4 are still on the old account `8073705` (ids 433403330, 433528769, 433601827, 434547831); Claude cannot reach that account any more. The user must delete them there, or they may go out twice.**
+Monthly count on `8257196`: November 4 of 20. December 0 (the 10 December posts are still on `8073705`: 10 of 20 there).
 
 ## RESCHEDULED 17 Nov evening: two Shorts a day, 10:00 and 18:00 Baghdad (user: «مقطعين كل يوم بافضل وقت … صبح و ليل»)
 Metricool best times for this channel: 10:00 (morning peak) and 16:00–18:00 (afternoon/evening peak). New schedule on blogId `8073705` (post ids changed on update; uuids stay):
