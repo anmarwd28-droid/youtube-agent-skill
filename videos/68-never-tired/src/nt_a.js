@@ -25,11 +25,10 @@ function stadium(t, N = 0, o = {}) {
 function sceneHook(t) {
   const lap = Math.floor(t * 3);
   let s = `<defs>${LDEFS()}</defs>` + stadium(t, 0);
+  s += runner(130 + t * 125, 1060, .66, 1, t * 6.5, 1);   // the runner who never tires, in a far lane (drawn first: behind the resting ones)
   // two tired runners at the side, hands on knees
   s += hero(120, 1150, Object.assign({ s: .7, face: 1, shade: 1, lean: 28, hF: [150, 1080], hB: [140, 1085] }, gp(2))) + hero(600, 1140, Object.assign({ s: .68, face: -1, shade: 1, lean: 24, hF: [570, 1072], hB: [580, 1076] }, gp(4)));
   // the runner who never tires, centred, the track sliding past (lane lines dashes move)
-  for (let i = 0; i < 10; i++) { const x = pmod(i * 90 - t * 520, 900) - 80; s += `<rect x="${x}" y="1030" width="40" height="4" fill="#fff" opacity=".6"/>`; }
-  s += runner(360, 1100, .95, 1, t * 11, 1);
   s += `${panel(470, 420, 210, 120)}<text x="575" y="500" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="54" fill="#f4c76b">${arN2(lap + 12)}</text>${NTL(575, 530, 'لفّة', 1, '#fff', 20)}`;
   noEarth(); F.ov = ''; return s;
 }
@@ -48,9 +47,9 @@ function sceneSite(t) {
   s += `<rect x="-20" y="880" width="760" height="420" fill="${mix('#a89478', '#2a2620', N)}"/><rect x="-20" y="880" width="760" height="420" fill="#000" filter="url(#grainR)" opacity=".3"/>` + brickStack(40, 1000, 24) + brickStack(520, 1010, 16);
   // a worker carries bricks back and forth
   const ph = pmod(T * .35, 2), go = ph < 1, u = go ? ph : 2 - ph, x = lerp(180, 470, u), f = go ? 1 : -1;
-  s += hero(x, 1180, Object.assign({ s: .95, face: f, shade: 1, walk: T * 5, amp: .45, hF: [x + f * 34, 1180 - 210], hB: [x + f * 2, 1180 - 205] }, gp(3), { top: '#e8a030' }));
-  if (go) s += `<g transform="translate(${x + f * 18},${1180 - 222})">${brickStack(-34, 0, 8)}</g>`;
-  s += `<path d="M${x - 22},${1180 - 330} q22,-26 44,0Z" fill="#f4c040"/>`;
+  s += hero(x, 1180, Object.assign({ s: .74, face: f, shade: 1, walk: T * 5, amp: .45, hF: [x + f * 27, 1180 - 164], hB: [x + f * 2, 1180 - 160] }, gp(3), { top: '#e8a030' }));
+  if (go) s += `<g transform="translate(${x + f * 14},${1180 - 173}) scale(.8)">${brickStack(-34, 0, 8)}</g>`;
+  s += `<path d="M${x - 17},${1180 - 258} q17,-20 34,0Z" fill="#f4c040"/>`;
   s += `<g opacity="${clamp(day * 5).toFixed(2)}">${panel(40, 420, 220, 110)}<text x="150" y="494" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="48" fill="#f4c76b">${arN2(Math.floor(day * 24))} س</text></g>`;
   noEarth(); F.ov = ''; return s;
 }
@@ -59,17 +58,26 @@ function sceneMarathon(t) {
   const T = t - (S0(2) - .2), go = ease(ramp(t, WS(2, 8), S0(3) - .5)), b1 = ease(ramp(t, WS(2, 3), WS(2, 6))), b2 = ease(ramp(t, WS(2, 12), WS(2, 16)));
   let s = `<defs>${LDEFS()}</defs>` + streetO(t, { id: 'mr', top: '' });
   // the race on the road: a marathon runner and a "sprinter" who pulls away
-  const xa = lerp(140, 360, go), xb = lerp(160, 640, go);
+  const xa = 70 + T * 30, xb = 170 + T * 30 + go * 230;
   for (let i = 0; i < 6; i++) s += `<rect x="${i * 130 - 40}" y="1168" width="20" height="60" fill="#f4f0e8" opacity=".25"/>`;
   s += `<path d="M-20,1165 H740" stroke="#4a8ad8" stroke-width="5" stroke-dasharray="20 12"/>`;
-  s += runner(xa, 1250, .82, 1, T * 8, 2) + `<rect x="${xa - 16}" y="${1250 - 220}" width="32" height="24" fill="#fff"/><text x="${xa}" y="${1250 - 202}" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1a1a">42</text>`;
-  s += runner(xb, 1230, .8, 1, T * 13, 4, { top: '#e8402a' });
+  s += runner(xa, 1250, .82, 1, T * 5, 2) + `<rect x="${xa - 16}" y="${1250 - 220}" width="32" height="24" fill="#fff"/><text x="${xa}" y="${1250 - 202}" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1a1a">42</text>`;
+  s += runner(xb, 1230, .8, 1, T * 5 + go * 9, 4, { top: '#e8402a' });
   // two time bars
   const bar = (y, k, w, col, lab, val) => `<g opacity="${clamp(k * 3).toFixed(2)}">${panel(60, y - 52, 600, 120)}<rect x="250" y="${y - 10}" width="${(380 * w * k).toFixed(1)}" height="30" rx="10" fill="${col}"/>${NTL(150, y + 14, lab, 1, '#fff', 22)}${NTL(440, y + 60, val, 1, col, 26)}</g>`;
   s += bar(470, b1, 1, '#8ac0e8', 'الرقمُ القياسيّ', '≈ ساعتان') + bar(620, b2, 1.17 / 2.01, '#f4c76b', 'بلا تعب', '≈ ساعة و١٠ دقائق');
   noEarth(); F.ov = ''; return s;
 }
 // ---------- 3: factories and farms work day and night; production doubles ----------
+function tractorR(x, y, s, d = 0) {   // tractor() with turning wheels: d = distance driven (screen px)   // side view facing right; (x, y) = ground under the rear wheel
+  const tyre = (cx, cy, R, q = d / s / R) => `<circle cx="${cx}" cy="${cy}" r="${R}" fill="#1e1e22"/>` + Array.from({ length: 18 }, (_, i) => { const a = i / 18 * 6.2832 + q; return `<path d="M${(cx + Math.cos(a) * (R - 2)).toFixed(1)},${(cy + Math.sin(a) * (R - 2)).toFixed(1)} L${(cx + Math.cos(a + .12) * (R + 4)).toFixed(1)},${(cy + Math.sin(a + .12) * (R + 4)).toFixed(1)}" stroke="#141418" stroke-width="7"/>`; }).join('') +
+    `<circle cx="${cx}" cy="${cy}" r="${R * .58}" fill="#d8a82a"/><circle cx="${cx}" cy="${cy}" r="${R * .18}" fill="#8a6a1a"/>` + [0, 1, 2, 3, 4, 5].map(i => { const a = i / 6 * 6.2832 + q; return `<circle cx="${(cx + Math.cos(a) * R * .36).toFixed(1)}" cy="${(cy + Math.sin(a) * R * .36).toFixed(1)}" r="${(R * .05).toFixed(1)}" fill="#6a5010"/>`; }).join('');
+  return `<g transform="translate(${x},${y}) scale(${s})"><ellipse cx="80" cy="4" rx="190" ry="12" fill="#000" opacity=".3" filter="url(#blur5)"/>` +
+    `<path d="M40,-120 L250,-120 Q268,-118 268,-100 L268,-62 L40,-62Z" fill="#2f7a3a"/><path d="M40,-120 L250,-120 Q268,-118 268,-100 L268,-108 L40,-108Z" fill="#fff" opacity=".2"/>` + Array.from({ length: 6 }, (_, i) => `<path d="M${200 + i * 10},-110 v36" stroke="#1a4a22" stroke-width="3"/>`).join('') +
+    `<rect x="-30" y="-150" width="90" height="100" fill="#2a6a32"/><path d="M-38,-250 L72,-250 L66,-150 L-30,-150Z" fill="#9ab8c8" opacity=".55"/><path d="M-38,-250 L72,-250 L66,-150 L-30,-150Z" fill="none" stroke="#1e2a20" stroke-width="7"/><path d="M-44,-258 H80 V-248 H-44Z" fill="#2f7a3a"/>` +
+    `<path d="M-30,-250 L10,-250 L-28,-170Z" fill="#fff" opacity=".22"/><path d="M150,-120 V-190" stroke="#3a3a40" stroke-width="9"/><path d="M146,-190 h8 v-10 h-8Z" fill="#2a2a30"/>` +
+    `<path d="M-30,-60 L270,-60" stroke="#1e2420" stroke-width="10"/>` + tyre(0, -78, 78) + tyre(214, -42, 42) + `<path d="M-84,-108 A88,88 0 0 1 84,-108" stroke="#2f7a3a" stroke-width="16" fill="none"/></g>`;
+}
 function sceneFarm(t) {
   const T = t - (S0(3) - .2), cyc = T * .55, N = clamp(.5 - .5 * Math.cos(cyc * 6.283) + 0) , up = ease(ramp(t, WS(3, 5), WS(3, 7) + .3));
   let s = `<defs>${LDEFS()}<linearGradient id="fdS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix('#5a92cc', '#0a1430', N)}"/><stop offset="1" stop-color="${mix('#f0d8b0', '#2a2a48', N)}"/></linearGradient></defs><rect x="-20" y="-20" width="760" height="1320" fill="url(#fdS)"/>`;
@@ -78,7 +86,7 @@ function sceneFarm(t) {
   // a factory on the horizon: chimneys with steam, windows that glow at night
   s += `<rect x="400" y="660" width="300" height="200" fill="${mix('#8a7a6a', '#2a2630', N)}"/>` + [440, 520, 600].map(x => `<rect x="${x}" y="540" width="30" height="130" fill="${mix('#9a8a7a', '#2a2630', N)}"/>` + plume(x + 15, 540, .5, t, x, .6)).join('') + [0, 1, 2, 3, 4].map(i => `<rect x="${420 + i * 56}" y="720" width="36" height="40" fill="${mix('#4a5a6a', '#ffd88a', N)}"/>`).join('');
   s += wheatField(t, 880, .9, 21);
-  s += tractor(lerp(-120, 760, pmod(T * .12, 1)), 1150, .9) + (N > .4 ? scr(`<ellipse cx="${lerp(-120, 760, pmod(T * .12, 1)) + 150}" cy="1110" rx="140" ry="40" fill="url(#lampG)" opacity="${(N * .8).toFixed(2)}"/>`) : '');
+  s += tractorR(lerp(-120, 760, pmod(T * .12, 1)), 1150, .9, lerp(-120, 760, pmod(T * .12, 1))) + (N > .4 ? scr(`<ellipse cx="${lerp(-120, 760, pmod(T * .12, 1)) + 150}" cy="1110" rx="140" ry="40" fill="url(#lampG)" opacity="${(N * .8).toFixed(2)}"/>`) : '');
   s += `<g opacity="${up.toFixed(2)}">${panel(60, 420, 240, 120)}<text x="180" y="498" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="56" fill="#f4c76b">×٢</text>${NTL(180, 528, 'الإنتاج', 1, '#fff', 20)}</g>`;
   noEarth(); F.ov = ''; return s;
 }
@@ -87,7 +95,7 @@ function bellI(x, y, s, rot, a) { return `<g opacity="${a.toFixed(2)}" transform
 function sceneAlarm(t) {
   const T = t - (S0(4) - .2), b = ease(ramp(t, WS(4, 5), WS(4, 7))), ring = Math.sin(t * 22) * 14 * b;
   let s = `<defs>${LDEFS()}</defs>` + stadium(t, .2);
-  s += hero(360, 1160, Object.assign({ s: 1.05, face: 1, shade: 1, lean: 18, hF: [400, 1080], hB: [390, 1084] }, gp(1)));
+  s += hero(360, 1140, Object.assign({ s: .8, face: 1, shade: 1, lean: 18, hF: [390, 1078], hB: [382, 1081] }, gp(1)));
   s += scr(`<circle cx="360" cy="560" r="${(150 + 20 * Math.sin(t * 8)).toFixed(1)}" fill="#ff3a2a" opacity="${(.25 * b).toFixed(2)}" filter="url(#blur16)"/>`) + bellI(360, 560, 1.3, ring, b);
   for (let i = 0; i < 3; i++) s += `<path d="M${470 + i * 26},${520 - i * 10} q20,40 0,80" stroke="#f4c040" stroke-width="6" fill="none" opacity="${(b * (.5 + .5 * Math.sin(t * 10 + i))).toFixed(2)}"/><path d="M${250 - i * 26},${520 - i * 10} q-20,40 0,80" stroke="#f4c040" stroke-width="6" fill="none" opacity="${(b * (.5 + .5 * Math.sin(t * 10 + i))).toFixed(2)}"/>`;
   noEarth(); F.ov = ''; return s;

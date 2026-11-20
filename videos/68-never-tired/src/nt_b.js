@@ -25,7 +25,7 @@ function sceneTear(t) {
 function sceneFuel(t) {
   const T = t - (S0(6) - .2), k = ease(ramp(t, WS(6, 2), S0(7) - .2)), lvl = 1 - k;
   let s = `<defs>${LDEFS()}${CVD()}</defs>` + stadium(t, .15);
-  s += runner(200, 1130, .82, 1, t * 11, 1);
+  s += runner(60 + (t - S0(6)) * 110, 1130, .8, 1, t * 6.5, 1);
   // a big fuel gauge
   const cx = 470, cy = 560, R = 150, an = lerp(-200, 20, lvl) * Math.PI / 180;
   s += `<circle cx="${cx}" cy="${cy}" r="${R + 20}" fill="#0a0e1c" opacity=".88"/><circle cx="${cx}" cy="${cy}" r="${R}" fill="#1c2232" stroke="url(#chromeV)" stroke-width="8"/>`;
@@ -37,10 +37,10 @@ function sceneFuel(t) {
 }
 // ---------- 7: without tiredness people run until the fuel suddenly runs out, and they drop without warning ----------
 function sceneFall(t) {
-  const T = t - (S0(7) - .2), drop = ease(ramp(t, WS(7, 9), WS(7, 10) + .5)), x = 200 + Math.min(T, WS(7, 9) - S0(7) + .2) * 40;
+  const T = t - (S0(7) - .2), drop = ease(ramp(t, WS(7, 9), WS(7, 10) + .5)), x = 60 + Math.min(T, WS(7, 9) - S0(7) + .2) * 90;
   let s = `<defs>${LDEFS()}</defs>` + stadium(t, .3);
-  if (drop < .02) s += runner(x, 1110, .9, 1, t * 11, 1);
-  else s += `<ellipse cx="${x + 110 * drop}" cy="1112" rx="${40 + 70 * drop}" ry="10" fill="#000" opacity=".3" filter="url(#blur5)"/><g transform="rotate(${(84 * drop).toFixed(1)},${x},1104)">` + hero(x, 1110, Object.assign({ s: .9, face: 1, shade: 1, noShadow: 1, aF: [-.6 * drop - .1, .4], aB: [-.3 * drop, .3] }, gp(1))) + `</g>`;
+  if (drop < .02) s += runner(x, 1110, .8, 1, t * 6.5, 1);
+  else s += `<ellipse cx="${x + 110 * drop}" cy="1112" rx="${40 + 70 * drop}" ry="10" fill="#000" opacity=".3" filter="url(#blur5)"/><g transform="rotate(${(84 * drop).toFixed(1)},${x},1104)">` + hero(x, 1110, Object.assign({ s: .8, face: 1, shade: 1, noShadow: 1, aF: [-.6 * drop - .1, .4], aB: [-.3 * drop, .3] }, gp(1))) + `</g>`;
   if (drop > .6) s += `<g opacity="${clamp((drop - .6) * 3).toFixed(2)}">${panel(180, 420, 360, 110)}${NTL(360, 490, 'دونَ أيِّ إنذار', 1, '#ff8a7a', 36)}</g>`;
   noEarth(); F.ov = ''; return s;
 }
@@ -65,8 +65,8 @@ function heartA(cx, cy, s, beat) {   // an anatomical heart: ventricles, atria, 
   return `<g transform="translate(${cx},${cy}) scale(${(s * k).toFixed(3)},${(s * (1 - .03 * beat)).toFixed(3)})">` +
     `<path d="M-30,-150 Q-34,-210 10,-226 Q60,-236 70,-196 L58,-180 Q30,-206 14,-190 Q4,-170 6,-140Z" fill="#c84a44"/><path d="M20,-150 Q30,-250 -10,-268 L-6,-246 Q20,-232 6,-150Z" fill="#a83a3a"/>` +
     `<path d="M50,-150 Q100,-200 120,-180 L110,-160 Q90,-176 70,-140Z" fill="#4a6ab0"/><path d="M-60,-130 Q-110,-170 -130,-150 L-120,-130 Q-100,-150 -76,-110Z" fill="#4a6ab0"/>` +
-    `<g transform="rotate(-22)"><path d="M10,170 C-70,140 -150,60 -150,-30 C-150,-100 -100,-140 -40,-130 C0,-150 60,-150 100,-110 C140,-70 130,20 90,80 C70,120 40,160 10,170Z" fill="#b8403c"/><path d="M10,170 C40,160 70,120 90,80 C130,20 140,-70 100,-110 C120,-40 100,60 10,170Z" fill="#8a2a2c" opacity=".55"/>` + `<path d="M-30,-128 C-10,-60 -20,60 10,168" stroke="#e8c87a" stroke-width="16" fill="none" opacity=".55"/><path d="M-30,-128 C-10,-60 -20,60 10,168" stroke="#a8282a" stroke-width="6" fill="none"/><path d="M-18,-40 q-40,30 -70,30 M-14,30 q-40,20 -80,10 M-20,-90 q50,10 80,40 M-8,40 q40,10 70,-10" stroke="#a8282a" stroke-width="4" fill="none"/></g>` +
-    `<path d="M-120,-60 C-110,-110 -60,-130 -26,-104" stroke="#e8807a" stroke-width="14" fill="none" stroke-linecap="round" opacity=".55"/><path d="M10,-110 C0,-40 -10,40 0,160" stroke="#7a2224" stroke-width="5" fill="none" opacity=".6"/>` +
+    `<g transform="rotate(-22)"><path d="M10,170 C-70,140 -150,60 -150,-30 C-150,-100 -100,-140 -40,-130 C0,-150 60,-150 100,-110 C140,-70 130,20 90,80 C70,120 40,160 10,170Z" fill="#b8403c"/><path d="M10,170 C40,160 70,120 90,80 C130,20 140,-70 100,-110 C120,-40 100,60 10,170Z" fill="#8a2a2c" opacity=".55"/>` + `<path d="M-30,-128 C-10,-60 -20,60 10,168" stroke="#d89a78" stroke-width="22" fill="none" opacity=".28"/><path d="M-30,-128 C-10,-60 -20,60 10,168" stroke="#a8282a" stroke-width="6" fill="none"/><path d="M-18,-40 q-40,30 -70,30 M-14,30 q-40,20 -80,10 M-20,-90 q50,10 80,40 M-8,40 q40,10 70,-10" stroke="#a8282a" stroke-width="4" fill="none"/></g>` +
+    `<path d="M-120,-60 C-110,-110 -60,-130 -26,-104" stroke="#e8807a" stroke-width="14" fill="none" stroke-linecap="round" opacity=".55"/>` +
     `<path d="M-60,-60 q-14,40 -8,90 M60,-80 q20,50 6,110 M-20,-20 q30,20 40,60" stroke="#8a2a2a" stroke-width="4" fill="none" opacity=".55"/><path d="M-100,0 q20,60 70,110" stroke="#f4c8a0" stroke-width="10" fill="none" opacity=".3"/></g>`;
 }
 function ecg(x0, x1, y, t, a) { let d = ''; for (let x = x0; x <= x1; x += 3) { const ph = pmod((x - x0) / 160 - t * 1.2, 1); let v = 0; if (ph > .4 && ph < .44) v = -(ph - .4) * 1500; else if (ph >= .44 && ph < .48) v = -60 + (ph - .44) * 3000; else if (ph >= .48 && ph < .52) v = 60 - (ph - .48) * 1500; else if (ph > .62 && ph < .74) v = -16 * Math.sin((ph - .62) / .12 * Math.PI); d += (x === x0 ? 'M' : ' L') + x + ',' + (y + v).toFixed(1); }
