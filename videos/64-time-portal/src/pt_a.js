@@ -114,7 +114,7 @@ function clockBox(x, y, R, sec, lab, sub, a, fast) {
   return g + PTL(x, y + R + 50, lab, 1, '#fff', 26) + PTL(x, y + R + 82, sub, 1, '#f4c76b', 22) + `</g>`;
 }
 function sceneDilation(t) {
-  const t0 = S0(1) - .2, T = t - t0, ca = ease(ramp(t, WS(1, 7) - .3, WS(1, 7) + .2)) * (1 - ease(ramp(t, S0(2) - .4, S0(2)))), ia = ease(ramp(t, S0(2) - .2, S0(2) + .5));
+  const t0 = S0(1) - .2, T = t - t0, ca = ease(ramp(t, WS(1, 2) - .3, WS(1, 2) + .3)) * (1 - ease(ramp(t, S0(2) - .4, S0(2)))), ia = ease(ramp(t, S0(2) - .2, S0(2) + .5));
   glE(t, { d: lerp(9.8, 8.6, ease(ramp(t, t0, S0(3)))), el: .22, lon: 30 + T * 4, clouds: .45, lights: .35, off: -.5, tg: [0, -.2, 0] });
   let ov = `<defs>${PTDEF}${TMDEFS2()}</defs>`;
   const ts = T * 6;
