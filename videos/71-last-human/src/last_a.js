@@ -120,6 +120,8 @@ function sceneCig(t) {
   const hb = ease(ramp(t, WS(10, 3), WS(10, 6) + .4));
   s += scr(`<ellipse cx="180" cy="1110" rx="160" ry="200" fill="#bcd0ff" opacity=".1" filter="url(#blur16)"/>`) + hero(180, 1250, Object.assign({ s: .85, face: 1, shade: 1, lean: 10, aF: [.05, .2], aB: [-.05, .18] }, gp(1), { top: '#e85a2a' }));
   s += `${panel(330, 1040, 360, 130)}${LHL(510, 1086, 'صحّةُ الجسم', 1, '#fff', 24)}<rect x="360" y="1112" width="300" height="30" rx="10" fill="#2a3040"/><rect x="360" y="1112" width="${(300 * (1 - .55 * hb)).toFixed(1)}" height="30" rx="10" fill="${mix('#4ac87a', '#e8503a', hb)}"/>`;
+  const ti = ease(ramp(t, S0(10) - .1, S0(10) + .4)) * (1 - ease(ramp(t, n0 - .5, n0 - .1)));
+  if (ti > 0) s += `<g opacity="${ti.toFixed(2)}">${panel(90, 470, 540, 260)}<circle cx="360" cy="560" r="46" fill="none" stroke="#bcd0ff" stroke-width="5"/><circle cx="360" cy="546" r="14" fill="#bcd0ff"/><path d="M334,590 q26,-30 52,0" fill="#bcd0ff"/>${LHL(360, 660, 'العزلةُ الطويلة', 1, '#fff', 40)}${LHL(360, 710, 'تضرُّ الجسم', ease(ramp(t, WS(10, 5), WS(10, 6))), '#ff8a6a', 32)}</g>`;
   for (let i = 0; i < 15; i++) { const c = i % 3, r = Math.floor(i / 3), at = lerp(n0, n1, i / 14); s += cigL(150 + c * 210, 440 + r * 92, ease(ramp(t, at, at + .25)), t, i); }
   const cnt = Math.round(15 * clamp((t - n0) / (n1 - n0))); if (t > n0) s += `${panel(250, 860, 220, 110)}<text x="360" y="934" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="52" fill="#ff8a6a">${arL(Math.max(1, cnt))}</text>`;
   noEarth(); F.ov = ''; return s;
