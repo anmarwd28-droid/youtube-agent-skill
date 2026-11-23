@@ -1,6 +1,6 @@
 # #72 ماذا لو أصبح رد فعلك أسرع ١٠ مرات؟ ⚡
 
-Short, 78.8 s, 1080x1920. **ON HOLD (user, 22 Nov): render stopped to save usage; built and stills checked, only the render is left (`brx.sh`, then `render_chunks.sh $W rflx 78.8 2364`).** Shots: you snatch a falling cup (×10), eye → brain → hand path at 0.25 s, the same path 10× faster (0.025 s), catching the cup in slow motion, braking at 100 km/h (21 m vs 2 m), the 100 m start, the false start rule (0.10 s), the nerve signal along the arm (100 m/s), faster nerves / stronger muscles / more energy, the world in slow motion, a fly dodging a swatter (≈60 vs ≈250 images a second), the end question.
+Short, 78.8 s, 1080x1920. Approved 23 Nov; scheduled 6 Dec 18:00 (Metricool 8257196, post 439259982). Shots: you snatch a falling cup (×10), eye → brain → hand path at 0.25 s, the same path 10× faster (0.025 s), catching the cup in slow motion, braking at 100 km/h (21 m vs 2 m), the 100 m start, the false start rule (0.10 s), the nerve signal along the arm (100 m/s), faster nerves / stronger muscles / more energy, the world in slow motion, a fly dodging a swatter (≈60 vs ≈250 images a second), the end question.
 
 ## Title
 ماذا لو أصبح رد فعلك أسرع ١٠ مرات؟ ⚡
