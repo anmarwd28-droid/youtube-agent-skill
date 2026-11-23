@@ -33,12 +33,21 @@ function uwBg(t, o = {}) {
     s += `<path d="M-20,${fl - 40} Q120,${fl - 110} 260,${fl - 50} T560,${fl - 70} T760,${fl - 40} L760,${fl + 20} L-20,${fl + 20}Z" fill="#0e3a5a" opacity=".55"/>`;
     s += `<path d="M-20,${fl} Q200,${fl - 34} 380,${fl - 8} T740,${fl - 18} L740,1300 L-20,1300Z" fill="url(#sandU)"/><path d="M-20,${fl} Q200,${fl - 34} 380,${fl - 8} T740,${fl - 18} L740,1300 L-20,1300Z" fill="#000" filter="url(#grainS)" opacity=".3"/>`;
     for (let i = 0; i < 9; i++) { const y = fl + 30 + i * 24, ph = t * .9 + i; let p = `M-20,${y}`; for (let x = 0; x <= 760; x += 40) p += ` Q${x - 20},${(y + Math.sin(ph + x * .03) * 8).toFixed(1)} ${x},${(y + Math.sin(ph + x * .02 + 1) * 5).toFixed(1)}`; s += `<path d="${p}" stroke="#fff6d8" stroke-width="2" fill="none" opacity="${(.16 * ry).toFixed(2)}"/>`; }
-    if (o.coral !== 0) s += kelp(40, fl + 6, 300, t, 0) + kelp(84, fl + 10, 220, t, 2, '#4a8a50') + seaFan(170, fl + 4, 190, 3, '#b0486a') + brainC(300, fl + 16, 90, 64, 7, '#c89a5a', '#7a5a2a') + branchC(470, fl + 12, 250, 11, '#d88aa0', '#7a3a4a') +
-      brainC(590, fl + 26, 80, 54, 19, '#9a8ab8', '#4a3a6a') + kelp(680, fl + 8, 330, t, 4) + branchC(640, fl + 20, 180, 13, '#e0a86a', '#7a4a1a');
+    if (o.coral !== 0) s += kelp(40, fl + 6, 300, t, 0) + kelp(84, fl + 10, 220, t, 2, '#4a8a50') + seaFan(170, fl + 4, 190, 3, '#b0486a') + brainU(300, fl + 16, 90, 64, 7, '#c89a5a', '#7a5a2a') + branchC(470, fl + 12, 250, 11, '#d88aa0', '#7a3a4a') +
+      brainU(590, fl + 26, 80, 54, 19, '#9a8ab8', '#4a3a6a') + kelp(680, fl + 8, 330, t, 4) + branchC(640, fl + 20, 180, 13, '#e0a86a', '#7a4a1a');
   }
   s += snow(t, o.snowN ?? 70, o.snow ?? .9, o.seed || 3);
   if (o.dk) s += `<rect x="-20" y="-20" width="760" height="1320" fill="#020a16" opacity="${o.dk.toFixed(2)}"/>`;
   return s;
+}
+// brain coral without the lit-rock filter (that filter flickered black in some frames)
+function brainU(x, y, rw, rh, seed, c1, c2) {
+  const d = `M${x - rw},${y} C${x - rw},${y - rh * 1.3} ${x + rw},${y - rh * 1.3} ${x + rw},${y} Z`, r = RS(seed), id = 'bu' + seed;
+  let s = `<defs><radialGradient id="${id}" cx=".38" cy=".25" r=".9"><stop offset="0" stop-color="${mix(c1, '#ffffff', .25)}"/><stop offset=".6" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></radialGradient></defs><path d="${d}" fill="url(#${id})"/>`;
+  for (let i = 0; i < 7; i++) { const yy = y - rh * (.12 + i * .13), ww = rw * Math.sqrt(Math.max(0, 1 - Math.pow((y - yy) / (rh * .98), 2))) * .92; let p = `M${(x - ww).toFixed(1)},${yy.toFixed(1)}`;
+    for (let k = 1; k <= 10; k++) p += ` Q${(x - ww + (k - .5) * ww / 5).toFixed(1)},${(yy + (k % 2 ? -5 : 5) + (r() - .5) * 3).toFixed(1)} ${(x - ww + k * ww / 5).toFixed(1)},${yy.toFixed(1)}`;
+    s += `<path d="${p}" stroke="#000" stroke-opacity=".22" stroke-width="2.2" fill="none"/>`; }
+  return s + `<ellipse cx="${x}" cy="${y + 2}" rx="${rw * 1.05}" ry="7" fill="#000" opacity=".3" filter="url(#blur2)"/>`;
 }
 // ---------- a fish (side view), facing +x when f = 1; tail wags ----------
 function fishA(x, y, s, f, col, t, ph = 0, stripe) {
@@ -84,14 +93,14 @@ function jetty() { let s = '';
   for (let x = 10; x < 232; x += 34) s += `<path d="M${x},527 v18" stroke="#5a3e28" stroke-width="2"/>`;
   return s; }
 function sceneDive(t) {
-  const SY = 600, tj = WS(1, 0), sc = .85, u = clamp((t - tj) / .62), tu = t - tj - .62;
+  const SY = 600, tj = WS(1, 0) + .5, sc = .85, u = clamp((t - tj) / .62), tu = t - tj - .62;
   let s = `<defs>${UDEFS()}</defs>` + uwBg(t, { floor: 1210, rays: .8, snowN: 50 });
   s += `<rect x="-20" y="-20" width="760" height="${SY + 20}" fill="url(#skyU)"/><circle cx="560" cy="300" r="120" fill="#fff6d8" opacity=".25" filter="url(#blur16)"/><circle cx="560" cy="300" r="34" fill="#fffbe8"/>`;
   s += `<path d="M380,${SY} Q440,${SY - 34} 520,${SY - 26} Q600,${SY - 48} 690,${SY - 12} L700,${SY}Z" fill="#5a7a6a" opacity=".7"/><path d="M-20,${SY} Q60,${SY - 14} 140,${SY - 6} L160,${SY}Z" fill="#6a8a78" opacity=".5"/>`;
   s += jetty();
   let hx, hy, rot = 0, h = {}, sw = 0;
   if (t < tj) { const cr = ease(ramp(t, tj - .45, tj)); hx = 180; hy = 526 - 150 * sc; h = { lF: [.35 * cr, -.25 * cr], lB: [-.05 + .3 * cr, -.4 * cr], aF: [-.5 * cr, -.2 * cr], aB: [-.6 * cr, -.3 * cr], lean: 12 * cr }; }
-  else if (u < 1) { hx = 180 + 170 * u; hy = lerp(526, SY + 60, u) - 150 * sc - 150 * 4 * u * (1 - u); h = { lF: [.02, 0], lB: [-.02, 0], aF: [Math.PI - .12, Math.PI - .05], aB: [Math.PI - .08, Math.PI - .02], air: 1 }; }
+  else if (u < 1) { hx = 180 + 150 * u; hy = lerp(526, SY + 60, u) - 150 * sc - 70 * 4 * u * (1 - u); h = { lF: [.02, 0], lB: [-.02, 0], aF: [Math.PI - .12, Math.PI - .05], aB: [Math.PI - .08, Math.PI - .02], air: 1 }; }
   else { const sink = 1 - Math.exp(-tu * 1.4); sw = ease(clamp((tu - .5) / 1.3)); hx = 350 + 34 * Math.max(0, tu - .4); hy = SY + 60 - 150 * sc + 250 * sink; rot = 84 * sw; }
   const you = sw > 0 ? swimmer(hx, hy, sc, t, { rot, kick: .24 * sw, look: .3 * sw }) : hero(hx, hy + 150 * sc, Object.assign({ s: sc, face: 1, shade: 1, noShadow: t >= tj ? 1 : 0, pv: -150 * sc }, gp(1), { top: '#e85a2a' }, h));
   s += you + bubbles(t, hx, hy + 60, tj + .62, tj + 1.5, 46, 7, 90);
