@@ -107,9 +107,11 @@ function iconBattery(x, y, k) { return `<g transform="translate(${x},${y})"><rec
 function sceneNeeds(t) {
   const a = [WS(8, 6), WS(8, 8), WS(8, 10)].map(w => ease(ramp(t, w - .1, w + .3)));
   let s = `<defs>${LDEFS()}</defs><rect x="-20" y="-20" width="760" height="1320" fill="#141c2a"/>` + scr(`<ellipse cx="360" cy="800" rx="360" ry="420" fill="#f4c76b" opacity=".06" filter="url(#blur16)"/>`);
-  s += `<g opacity=".9">${hero(360, 1275, Object.assign({ s: 1.0, face: 1, shade: 1, aF: [.25, .9], aB: [-.25, .9] }, gp(1), { top: '#e85a2a' }))}</g>`;
+  s += hero(170, 1262, Object.assign({ s: 1.7, face: 1, shade: 1, aF: [.25, .9], aB: [-.25, .9] }, gp(1), { top: '#e85a2a' }));
+  const kx = ease(ramp(t, S0(8) - .2, S0(8) + .5)) * (1 - a[0]);
+  s += `<g opacity="${kx.toFixed(2)}"><text x="500" y="700" text-anchor="middle" font-family="Inter" font-weight="900" font-size="190" fill="#f4c76b">×10</text>${RXL(500, 790, 'أسرع', 1, '#fff', 44)}</g>`;
   [[iconBolt(0, 0), 'أعصابٌ أسرع', '#ffd060'], [iconMuscle(0, 0), 'عضلاتٌ أقوى', '#c8d0dc'], [iconBattery(0, 0, .3 + .7 * a[2]), 'طاقةٌ أكبر', '#4ac87a']].forEach(([ic, lab, col], i) => {
-    const y = 470 + i * 150; s += `<g opacity="${a[i].toFixed(2)}" transform="translate(0,${((1 - a[i]) * 30).toFixed(1)})">${panel(110, y - 60, 500, 120)}<g transform="translate(200,${y})">${ic}</g>${RXL(440, y + 12, lab, 1, col, 34)}</g>`; });
+    const y = 500 + i * 150; s += `<g opacity="${a[i].toFixed(2)}" transform="translate(0,${((1 - a[i]) * 30).toFixed(1)})">${panel(300, y - 60, 390, 120)}<g transform="translate(395,${y}) scale(.85)">${ic}</g>${RXL(565, y + 12, lab, 1, col, 32)}</g>`; });
   noEarth(); F.ov = ''; return s;
 }
 // ---------- 9: if your brain also took in images faster, the world would look slow-motion ----------
