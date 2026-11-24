@@ -9,9 +9,9 @@ chip('كاتب', 640, 170, 'big', WS(61, 1), S0(62) - .3); chip('من أهمِّ
 // ---------- 62: very few people could read and write ----------
 function sceneLiteracy(t) { noW(); const a = S0(62) - .2, k = ease(ramp(t, a, a + 1.2)), g = ease(ramp(t, WS(62, 6), WS(62, 8)));
   let s = PHDF() + `<rect x="-20" y="-20" width="1320" height="760" fill="#14161e"/>`;
-  for (let r = 0; r < 5; r++) for (let c = 0; c < 20; c++) { const i = r * 20 + c, x = 170 + c * 47, y = 250 + r * 76, on = i === 47, a2 = clamp(k * 1.6 - i / 100); const col = on ? mix('#8a8e9a', '#f4c76b', g) : '#8a8e9a';
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 20; c++) { const i = r * 20 + c, x = 140 + c * 47, y = 250 + r * 76, on = i === 47, a2 = clamp(k * 1.6 - i / 100); const col = on ? mix('#8a8e9a', '#f4c76b', g) : '#8a8e9a';
     s += `<g opacity="${a2.toFixed(2)}" transform="translate(${x},${y})"><circle cx="0" cy="-22" r="9" fill="${col}"/><path d="M-10,-10 Q0,-14 10,-10 L12,22 H-12Z" fill="${col}"/>${on && g > .3 ? `<rect x="10" y="-6" width="16" height="10" fill="#e2cc96" opacity="${g.toFixed(2)}"/>` : ''}</g>`; }
-  s += `<g opacity="${g.toFixed(2)}"><circle cx="${170 + 7 * 47}" cy="${250 + 2 * 76 - 6}" r="34" fill="none" stroke="#f4c76b" stroke-width="3"/>${darkP(440, 640, 400, 56)}${goldT(640, 678, 'قليلٌ جداً يقرأُ ويكتب', 1, 28)}</g>`;
+  s += `<g opacity="${g.toFixed(2)}"><circle cx="${140 + 7 * 47}" cy="${250 + 2 * 76 - 6}" r="34" fill="none" stroke="#f4c76b" stroke-width="3"/>${darkP(440, 640, 400, 56)}${goldT(640, 678, 'قليلٌ جداً يقرأُ ويكتب', 1, 28)}</g>`;
   return s + grain(.06); }
 // ---------- 63: hieroglyphs: hundreds of signs; some are letters, some are whole words ----------
 function sceneHiero(t) { noW(); const a = S0(63) - .2, k = ramp(t, a, WS(63, 3) + .5), l1 = ease(ramp(t, WS(63, 9), WS(63, 10) + .3)), l2 = ease(ramp(t, WS(63, 11), WS(63, 13)));
@@ -89,7 +89,7 @@ function sceneSiriusNight(t) { noW(); const a = S0(70) - .2, rise = ease(ramp(t,
   return s + grain(.08); }
 chip('نجمُ فيضانِ النيل', 640, 650, '', WS(70, 6), S0(71) - .3);
 // ---------- 71-72: life is hard: average life about 30, because many children do not grow up ----------
-function sceneLife(t) { noW(); const a = S0(71) - .2, k = ease(ramp(t, S0(71) + .3, WS(71, 11))), c = ease(ramp(t, WS(71, 13), WS(71, 18))), q = ease(ramp(t, S0(72), WS(72, 6)));
+function sceneLife(t) { noW(); const a = WS(71, 7) - .3, k = ease(ramp(t, WS(71, 7) - .3, WS(71, 8) + .2)), c = ease(ramp(t, WS(71, 13), WS(71, 18))), q = ease(ramp(t, S0(72), WS(72, 6)));
   let s = PHDF() + `<rect x="-20" y="-20" width="1320" height="760" fill="#14161e"/>`;
   s += `<g opacity="${(k * (1 - q * .85)).toFixed(2)}">${darkP(140, 180, 400, 260)}${txt(340, 250, 'متوسّطُ العمر', 1, '#fff', 30)}${txt(340, 350, 'نحوَ ٣٠ سنة', 1, '#f4c76b', 60)}</g>`;
   // children: many do not grow up (faded icons)
@@ -111,7 +111,7 @@ chip('السرّ', 640, 640, 'big', WS(73, 1), S0(74) - .3);
 function sceneTallest(t) { noW(); const a = S0(74) - .2, k = ease(ramp(t, WS(74, 5), WS(74, 15))), c = ease(ramp(t, WS(74, 15), WS(74, 17)));
   let s = PHDF() + `<rect x="-20" y="-20" width="1320" height="760" fill="#14161e"/>`;
   const x0 = 200, x1 = 1060, y = 560; s += `<path d="M${x0},${y} H${x1}" stroke="#3a3e4a" stroke-width="10" stroke-linecap="round"/><path d="M${x0},${y} H${lerp(x0, x1, k).toFixed(1)}" stroke="#f4c76b" stroke-width="10" stroke-linecap="round"/>`;
-  s += pyrP(x0, y - 20, 240, { tip: 1, id: 'tl' }) + txt(x0, y + 50, 'نحوَ ٢٥٦٠ ق.م', 1, '#fff', 22) + `<path d="M${x0 - 30},${y - 200} l12,-22 l18,14 l18,-14 l12,22Z" fill="#f4c76b" opacity="${(1 - c * .7).toFixed(2)}"/>`;
+  s += pyrP(x0, y - 20, 240, { tip: 1, id: 'tl' }) + txt(x0, y + 50, 'نحوَ ٢٥٦٠ ق.م', 1, '#fff', 22);
   s += `<g opacity="${c.toFixed(2)}"><path d="M${x1 - 70},${y - 20} V${y - 150} H${x1 - 20} V${y - 280} L${x1},${y - 340} L${x1 + 20},${y - 280} V${y - 150} H${x1 + 70} V${y - 20}Z" fill="#8a8e9a"/><path d="M${x1 - 10},${y - 120} q10,-20 20,0 v40 h-20Z" fill="#2a2e3a"/>${txt(x1, y + 50, 'سنة ١٣١١م', 1, '#fff', 22)}${txt(x1, y - 360, 'كاتدرائيةُ لينكولن', 1, '#cfd4e0', 22)}</g>`;
   s += `<g opacity="${k.toFixed(2)}">${txt((x0 + x1) / 2, y - 40, `${fmtN(Math.round(3800 * k))} سنة`, 1, '#f4c76b', 46)}</g>`;
   return s + grain(.06); }

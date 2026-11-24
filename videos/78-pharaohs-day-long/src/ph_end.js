@@ -9,7 +9,7 @@ const SCENES = [{ s: 0, f: sceneHook }, { s: S0(2) - .2, f: sceneGlobe }, { s: S
   { s: CS(4), f: sceneInjury }, { s: S0(46) - .2, f: sceneSmith }, { s: S0(47) - .2, f: sceneSplint }, { s: S0(48) - .2, f: sceneHoney }, { s: S0(50) - .2, f: sceneHealed }, { s: S0(51) - .2, f: sceneBackWork }, { s: S0(52) - .2, f: sceneDung },
   { s: CS(5), f: sceneMarket }, { s: S0(55) - .2, f: sceneCoins }, { s: S0(56) - .2, f: sceneBarter }, { s: S0(57) - .2, f: sceneKohl }, { s: S0(58) - .2, f: sceneKohlSci }, { s: S0(59) - .2, f: sceneWig }, { s: S0(60) - .2, f: sceneScribeSee },
   { s: CS(6), f: sceneScribe }, { s: S0(62) - .2, f: sceneLiteracy }, { s: S0(63) - .2, f: sceneHiero }, { s: S0(64) - .2, f: sceneAccounts }, { s: S0(65) - .2, f: sceneRich }, { s: S0(66) - .2, f: sceneSunset },
-  { s: CS(7), f: sceneEvening }, { s: S0(68) - .2, f: sceneSenet }, { s: S0(69) - .2, f: sceneNightRoof }, { s: S0(70) - .2, f: sceneSiriusNight }, { s: S0(71) - .2, f: sceneLife },
+  { s: CS(7), f: sceneEvening }, { s: S0(68) - .2, f: sceneSenet }, { s: S0(69) - .2, f: sceneNightRoof }, { s: S0(70) - .2, f: sceneSiriusNight }, { s: WS(71, 7) - .3, f: sceneLife },
   { s: CS(8), f: sceneSecret2 }, { s: S0(74) - .2, f: sceneTallest }, { s: S0(75) - .2, f: sceneCleo }, { s: S0(76) - .2, f: sceneOldEven }, { s: S0(77) - .2, f: sceneSurvive }, { s: S0(78) - .2, f: sceneEnd }];
 const XF = .5;
 uiInit();

@@ -2,6 +2,13 @@
 
 7:52 (472.5 s), 1920x1080, 30 fps, landscape. Channel 1 ("ماذا لو؟ Lab"). Same house style as the Shorts and the #32 long video: the drawn 2D people (now dressed as ancient Egyptians: linen kilts, sheath dresses, wigs, broad collars), mud-brick houses, the white pyramid under construction, the three.js Earth (intro and ending), captions at the top with gold keywords, gold chips, the side list «يومُك في مصر». Not yet scheduled: the user watches it first.
 
+**Files:** the video is saved in three parts (GitHub refuses files over 100 MB). Join them with:
+```
+cat phar_long.mp4.part00 phar_long.mp4.part01 phar_long.mp4.part02 > phar_long.mp4
+```
+The joined file is 216,986,998 bytes, with 14,175 frames and an audio track. Review sheets, one per chapter with numbered shots, are in `sheets/`.
+Thumbnail: `thumbnail.jpg` (1280x720). It shows «رجعتَ ٤٥٠٠ سنة!»; you in front of the white pyramid with its ramp, and the haul team. Its text deliberately does not repeat the title. Source: `src/ph_thumb.js`.
+
 Format: one day from dawn to night, in seven chapters plus the ending «السرّ». Every chapter has a title card and a new place.
 
 ## Chapters (paste into the description)
