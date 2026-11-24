@@ -9,6 +9,7 @@
 - Talk very little (user, 12 Nov): short replies, one-word or one-line explanations, then just do the work.
 - Said again on 17 Nov («لا تصل تكتب كثير و تشرحلي»): after scheduling or finishing, reply with one short line only (for example the date and time). No lists, no explanations, no summaries.
 - After every fix, send me the fixed still(s) so I can see the change. Check every shot, still and the final video carefully before sending.
+- 25 Nov (user, again): after making the shots of EVERY video (the dinosaurs one and every one after it), check every shot for mistakes before scheduling: look at the 1-fps review of the whole render frame by frame, not only the 12-shot sheet, and fix anything wrong first.
 - Always check every shot for distortions (user, 15 Nov): deformed or broken people, limbs, faces, shapes, glitches, stretched textures, objects cut or merged wrongly. Look at every test still and the final review sheet for this before sending; fix anything distorted first.
 
 ## How to work with me
