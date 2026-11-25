@@ -333,7 +333,7 @@ function lizard(x, y, s, t) { const w = Math.sin(t * 5) * .2;
 function badge4(x, y, a, n = '٤') { if (a <= 0) return ''; const k = .6 + .4 * Math.min(1, a * 1.4);
   return `<g transform="translate(${b1(x)},${b1(y)}) scale(${b1(k * 100) / 100})" opacity="${b1(clamp(a * 1.5))}"><circle r="26" fill="#0a0e1c" opacity=".85"/><circle r="26" fill="none" stroke="#f4c76b" stroke-width="3"/><text y="12" text-anchor="middle" font-family="Noto Naskh Arabic" font-weight="700" font-size="34" fill="#f4c76b">${n}</text></g>`; }
 function shotLineup(t) {
-  const st = S0(6) - .2, T = t - st, ts = [0, 1, 2, 3, 4, 5].map(i => lerp(WS(6, 1), WS(6, 11), i / 5));
+  const st = S0(6) - .2, T = t - st, ts = [0, 1, 2, 3, 4, 5].map(i => lerp(S0(6) + .1, WS(6, 6), i / 5)), tb = [0, 1, 2, 3, 4, 5].map(i => lerp(WS(6, 8) - .1, WS(6, 11), i / 5));
   let s = studio('stE', '#2e3a54', '#090d18', 15);
   const C = [[30, 410], [255, 410], [480, 410], [30, 800], [255, 800], [480, 800]], W = 210, H = 320;
   const art = [cx => lizard(cx, 660, 1.15, t), cx => frog(cx, 670, .9), cx => hero(cx, 680, Object.assign({ s: .8, face: -1, shade: 1, lookUp: .05 }, gp(4))),
@@ -342,7 +342,7 @@ function shotLineup(t) {
   C.forEach(([cx0, cy0], i) => { const a = ease(ramp(t, ts[i] - .35, ts[i] + .15)); if (a <= 0) return; const cx = cx0 + W / 2, gy = cy0 + H - 60;
     s += `<g opacity="${b1(a)}"><defs><clipPath id="arCd${i}"><rect x="${cx0}" y="${cy0}" width="${W}" height="${H}" rx="18"/></clipPath></defs><g clip-path="url(#arCd${i})"><rect x="${cx0}" y="${cy0}" width="${W}" height="${H}" fill="url(#bkFarmSky)"/>` +
       `<rect x="${cx0}" y="${gy - 40}" width="${W}" height="100" fill="#8aa05a"/><rect x="${cx0}" y="${gy - 40}" width="${W}" height="100" fill="#000" filter="url(#grainR)" opacity=".25"/><rect x="${cx0}" y="${gy - 44}" width="${W}" height="8" fill="#6a8a4a" opacity=".6"/>` + art[i](cx) + `</g>` +
-      `<rect x="${cx0}" y="${cy0}" width="${W}" height="${H}" rx="18" fill="none" stroke="#f4c76b" stroke-width="3" opacity=".8"/>` + AL(cx, cy0 + H + 34, nm[i], 1, '#fff', 26) + `</g>` + badge4(cx0 + W - 30, cy0 + 30, ease(ramp(t, ts[i] - .1, ts[i] + .3))); });
+      `<rect x="${cx0}" y="${cy0}" width="${W}" height="${H}" rx="18" fill="none" stroke="#f4c76b" stroke-width="3" opacity=".8"/>` + AL(cx, cy0 + H + 34, nm[i], 1, '#fff', 26) + `</g>` + badge4(cx0 + W - 30, cy0 + 30, ease(ramp(t, tb[i] - .1, tb[i] + .3))); });
   const ok = ease(ramp(t, WS(6, 8) - .2, WS(6, 11)));
   s += `<g opacity="${b1(ok)}">${panel(130, 1190, 460, 64)}${AL(360, 1234, 'لا أكثرَ من ٤ أطراف', 1, '#f4c76b', 34)}</g>`;
   return s;
