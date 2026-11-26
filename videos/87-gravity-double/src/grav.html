@@ -8320,21 +8320,21 @@ function shotBall(t) {
   // the ground line and distance ticks
   for (let i = 0; i <= 10; i++) s += `<path d="M${X0 + i * 50},${GY + 10} v12" stroke="#fff" stroke-width="3" opacity=".6"/>`;
   s += `<path d="M${X0},${GY + 16} H${X0 + 500}" stroke="#fff" stroke-width="2" opacity=".5"/>`;
-  const arc = (R, H, k) => { let d = ''; for (let i = 0; i <= 40 * k; i++) { const u = i / 40, x = X0 + 30 + R * u, y = GY - 190 - H * 4 * u * (1 - u) + 190 * u * u; d += (i ? ' L' : 'M') + g1(x) + ',' + g1(y); } return d; };
+  const arc = (R, H, k) => { let d = ''; for (let i = 0; i <= 40 * k; i++) { const u = i / 40, x = X0 + 60 + R * u, y = GY - 190 - H * 4 * u * (1 - u) + 190 * u * u; d += (i ? ' L' : 'M') + g1(x) + ',' + g1(y); } return d; };
   // release height ~190 px above the ground; landing point = ground for simplicity of the drawing
   const today = ease(ramp(t, t0 + .1, t0 + 1.6)), now = clamp((t - t0) / .9);
   if (today > 0) s += `<path d="${arc(R1, H1, today)}" stroke="#ffffff" stroke-width="5" stroke-dasharray="14 10" fill="none" opacity=".8"/>`;
   if (now > 0) s += `<path d="${arc(R1 / 2, H1 / 2, now)}" stroke="#f4c76b" stroke-width="6" fill="none"/>`;
-  if (today >= 1) s += gvL(X0 + 30 + R1, GY + 60, 'اليوم', 1, '#ffffff', 28);
-  if (now >= 1) s += gvL(X0 + 30 + R1 / 2, GY + 60, 'نصفُ المسافة', 1, '#f4c76b', 30);
+  if (today >= 1) s += gvL(X0 + 60 + R1 - 34, GY + 60, 'اليوم', 1, '#ffffff', 28);
+  if (now >= 1) s += gvL(X0 + 60 + R1 / 2, GY + 60, 'نصفُ المسافة', 1, '#f4c76b', 30);
   // the ball along the new arc
-  const u = now, bx = X0 + 30 + R1 / 2 * u, by = GY - 190 - H1 / 2 * 4 * u * (1 - u) + 190 * u * u;
+  const u = now, bx = X0 + 60 + R1 / 2 * u, by = GY - 190 - H1 / 2 * 4 * u * (1 - u) + 190 * u * u;
   const ball = (x, y) => `<circle cx="${g1(x)}" cy="${g1(y)}" r="13" fill="#e8e0c8"/><path d="M${g1(x - 12)},${g1(y - 3)} q12,8 24,0" stroke="#c83a2a" stroke-width="2.4" fill="none"/><circle cx="${g1(x - 4)}" cy="${g1(y - 5)}" r="4" fill="#fff" opacity=".6"/>`;
   // the thrower
   const th = clamp((t - (t0 - .5)) / .5), rel = t >= t0;
-  const hF = rel ? [X0 + 40 + 30 * ease(clamp((t - t0) / .3)), GY - 230 + 40 * ease(clamp((t - t0) / .3))] : [X0 - 60 - 15 * th, GY - 205 - 15 * th];
+  const hF = rel ? [X0 + 66 + 30 * ease(clamp((t - t0) / .3)), GY - 196 + 30 * ease(clamp((t - t0) / .3))] : [X0 - 60 - 15 * th, GY - 205 - 15 * th];
   s += hero(X0, GY, Object.assign({ s: 1.0, face: 1, shade: 1, lean: rel ? 10 : -6, lookUp: .15, lF: [.32, .1], lB: [-.3, -.2], hF, aB: [-.6, -.2] }, YOU, rel ? {} : { bendF: 1 }));
-  if (!rel) s += ball(HP.hand[0], HP.hand[1] - 6); else if (u < 1) s += ball(bx, by); else s += ball(X0 + 30 + R1 / 2 + 10, GY - 2);
+  if (!rel) s += ball(HP.hand[0], HP.hand[1] - 6); else if (u < 1) s += ball(bx, by); else s += ball(X0 + 60 + R1 / 2 + 10, GY - 2);
   return s;
 }
 function sceneFall(t) { let s = `<defs>${GVDEFS()}</defs>` + gvSubs(t, [[S0(4) - .2, shotPots], [WS(4, 6) - .25, shotBall]]); noEarth(); F.ov = ''; return s; }
