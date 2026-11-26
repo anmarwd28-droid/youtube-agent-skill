@@ -1,0 +1,40 @@
+# #89 ماذا لو كانت لديك معدةُ بقرة؟ 🐄
+
+Short, 65.4 s (FRAMES_N frames, checked with ffprobe -count_frames; AAC audio), 1080x1920. Source in `src/`: `cow_a.js` (all scenes; built on the #88 chain, see `bcow.sh`, 3D module gl3d_cb.js), `audio_cow.py`, `script.json`, `timing.json`, `voice.mp3`, `cow.html`. Idea: English outlier "what if you had a cow's stomach" (11x its channel, 1.3M); body ideas win on our channel (skeleton, one eye, flying). ElevenLabs: 813 characters. vidIQ: 5 credits (one title score). New pieces: `cowB` (a Holstein cow in side view: spotted hide clipped to the body, shading, udder, ear, horn buds, grazing head, chewing jaw, and an X-ray mode with the four compartments in their places), `cwOrgans` (rumen with grass, honeycomb reticulum, leafy omasum, abomasum with folds, oesophagus, a food bolus on its path), `youB` (the house person with a belly that grows to barrel size, also in X-ray with the four compartments inside), `rumenSack`, `microbe` (rods, cocci, ciliates), `cwGasC` (a soft methane cloud with CH₄ molecules).
+
+Shots, in order: a city park: you, with a big belly, eat a tuft of grass next to a grazing Holstein cow; an X-ray band sweeps across and shows the same four-part stomach inside the cow and inside you («معدةُ بقرة»); an X-ray studio: a scan line turns the cow into an X-ray and the four compartments light up as they are named, with labels «الكَرِش», «الشَّبَكيّة», «أمُّ التلافيف», «الإنْفَحة — المعدةُ الحقيقيّة» while a bolus of grass travels the path («٤ أجزاء»); the rumen fills with grass soup while a counter runs to «١٥٠ لتراً», a steel barrel «برميل ≈ ١٥٩ لتراً» rolls in at true scale, then your stomach and a 1-litre bottle «معدتُك ≈ ١ لتر»; a city street: your belly grows to barrel size as you walk, a dashed barrel outline over it («بطنٌ بحجمِ برميل»); a round microscope view inside the rumen: bacteria and ciliates eat grass fibres «السِّليلوز» and set free gold sugar units «سكّرٌ وطاقة»; then «جسمُك اليوم»: a cellulose chain passes through untouched «لا يهضمُه ✗» («تهضمُ السِّليلوز»); a park: you eat leaves from a low branch, someone sitting on the grass eats grass, another bends to the lawn («العشبُ طعامُك», side timeline); the real 3D Earth over Africa with a ring chart «٪٤٠ مراعٍ من اليابسة» and bars «الجوعُ في العالم: اليوم ← قد يقلّ»; a park bench: you chew while an X-ray inset shows the cud rising from the belly to the mouth «من البطنِ إلى الفم ← مضغٌ من جديد», a clock fills to «٨ ساعات» while the sun moves across the sky («≈ ٨ ساعاتٍ مضغاً يومياً»); the twist: you burp a pale cloud with CH₄ molecules «ميثان CH₄ — غازٌ لا لونَ له», a counter «١٠٠ كغ في السنة», then a cow beside you burps too («≈ ١٠٠ كغ ميثان سنوياً»); the 3D Earth with a warm rim, bars «٨ مليارات إنسان» vs «١٫٥ مليار بقرة», «× ٥» and a rising thermometer «المناخُ يسخن» («× ٥ أبقارِ العالم»); the 3D Earth, a gold ؟, اشترك and @MadhaLawLab.
+
+## Title
+ماذا لو كانت لديك معدةُ بقرة؟ 🐄
+
+(vidIQ score: 84, one score call = 5 credits; 5 credits left, renews 20 Dec. yt-package lint (title.py): 31 characters, inside the 40-character mobile cut; the "no number" and "front-load" flags are expected for the channel's «ماذا لو…؟» format. Other candidates linted: «ماذا لو كان لديك ٤ معدات مثل البقرة؟ 🐄» (94 by lint, but "4 stomachs" is the common myth: a cow has ONE stomach with four compartments), «ماذا لو صار بطنك ١٥٠ لتراً مثل البقرة؟ 🐄» (94 by lint, weaker match to the search phrase), «ماذا لو هضمت العشب مثل البقرة؟ 🐄».)
+
+## Description
+ماذا لو كانت لديك معدة بقرة، وصرت تأكل العشب مثلها؟ معدة البقرة أربعة أجزاء، وأكبرها الكرش يتسع لنحو ١٥٠ لتراً، أي برميلاً تقريباً، بينما معدتك نحو لتر واحد.
+في الكرش ميكروبات تهضم السليلوز الذي لا يهضمه جسمك، فتأكل العشب في أي حديقة… لكنك ستمضغه نحو ٨ ساعات يومياً، والمفاجأة: ستتجشأ نحو ١٠٠ كيلوغرام من غاز الميثان في السنة!
+هل تأكل العشب لو استطعت؟ اكتب جوابك في التعليقات.
+
+#ماذا_لو #البقرة #جسم_الإنسان #علوم #shorts
+
+—
+ماذا لو؟ Lab — أسئلة مستحيلة… بأجوبة علمية.
+اشترك حتى لا يفوتك السؤال القادم: @MadhaLawLab
+
+## Tags
+ماذا لو, ماذا لو كانت لديك معدة بقرة, معدة البقرة, كم معدة للبقرة, الكرش, الحيوانات المجترة, الاجترار, هضم العشب, السليلوز, غاز الميثان, تجشؤ البقر, جسم الإنسان, هل تعلم, what if you had a cow's stomach, cow stomach
+
+Search queries this should win (yt-seo query test): «ماذا لو كانت لديك معدة بقرة» (title), «كم معدة للبقرة» (first description line «أربعة أجزاء» + tag), «لماذا لا يستطيع الإنسان أكل العشب» (description «السليلوز الذي لا يهضمه جسمك» + tags «هضم العشب», «السليلوز»).
+
+## Settings
+YouTube Short, category Education, not made for kids, cover frame at COVER_S s (the X-ray band over the cow in the park, showing the four-part stomach, chip «معدةُ بقرة»), Arabic.
+
+## Facts (numbers and sources)
+- Four compartments: a cow (a ruminant) has one stomach with four compartments: rumen, reticulum, omasum and abomasum; the abomasum is the "true" glandular stomach, like ours (Mississippi State University Extension, "Understanding the Ruminant Animal Digestive System", P2503; University of Minnesota Extension, "The ruminant digestive system"; South Dakota State University Extension, "Ruminants: a digestive powerhouse"). Arabic names: الكرش، الشبكيّة (القلنسوة)، أمّ التلافيف (الورقيّة)، الإنفحة.
+- Rumen size: the rumen of a mature cow holds up to about 40 gallons (≈150 L) (Mississippi State Extension); other extension sources give 25–50 gallons (≈95–190 L) depending on the cow's size (SDSU Extension) or 40–60 gallons of material (Penn State Extension, "From Feed to Milk: Understanding Rumen Function"). Narration: «نحوِ مئةٍ وخمسينَ لتراً». A standard oil barrel is 42 US gallons = 159 L, so 150 L is «سعةُ برميلٍ تقريباً».
+- Human stomach: a typical comfortable meal volume is about 1 L (about 1–1.5 L; it can stretch to about 4 L) (Harvard BioNumbers ID 109067; normative gastric volumes in 354 healthy volunteers, mean post-meal ≈ 0.76 L). Narration: «نحوُ لترٍ واحد».
+- Microbes and cellulose: rumen bacteria, protozoa and fungi make the enzymes (cellulases) that break cellulose into sugars and volatile fatty acids that the cow absorbs; mammals, including humans, make no cellulase, so cellulose passes through us as insoluble fibre (extension sources above; standard physiology/nutrition textbooks). Rumen fluid holds about 10¹⁰–10¹¹ bacteria per mL, so a rumen of ~150 L holds well over a trillion: «تريليوناتُ الميكروبات».
+- Grasslands: grassland covers about 40% of the Earth's land outside Greenland and Antarctica (World Resources Institute estimate quoted in FAO, Suttie, Reynolds & Batello, "Grasslands of the World", 2005); rangelands in the wider sense cover about half of the land (FAO; UNEP rangelands atlas 2021: 54%). Narration: «نحوَ أربعينَ في المئةِ من اليابسة». «فقد يقلُّ الجوعُ في العالم» is a possibility in the what-if, not a prediction.
+- Chewing the cud: cattle bring food back from the rumen to the mouth (regurgitation) and chew it again; healthy cows ruminate about 7–9 hours a day (Welch 1970: 8–9 h; review "Current perspectives on eating and rumination activity in dairy cows", J. Dairy Sci.; sensor study of 300 cows: about 441 min/day), and spend about 4–5 more hours eating. Narration: «نحوَ ثماني ساعاتٍ كلَّ يوم».
+- Methane: an adult cow emits roughly 80–110 kg of methane a year from enteric fermentation (US EPA Ruminant Livestock FAQ); IPCC 2019 default factors run up to about 138 kg for a high-yield dairy cow. Most of it leaves by belching (eructation) and breath, not flatulence (EPA AP-42 ch. 14.4; IPCC Good Practice Guidance, enteric fermentation). Methane itself is colourless. Narration: «نحوَ مئةِ كيلوغرامٍ في السنة».
+- Five times the world's cows: about 1.5 billion cattle live on Earth (FAOSTAT live animals, ≈1.55 billion head in 2022) and about 8 billion people (UN WPP 2024). 8 ÷ 1.55 ≈ 5.2, so 8 billion people burping like cows ≈ «خمسةِ أضعافِ أبقارِ العالم». Methane is a strong greenhouse gas (about 80 times CO₂ over 20 years, IPCC AR6), so the climate would warm faster.
+- Global framing: the park, street and people stand for any city in the world; the globe shows the whole Earth.
