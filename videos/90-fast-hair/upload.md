@@ -1,0 +1,41 @@
+# #90 ماذا لو نما شعرك أسرع ١٠٠ مرة؟ 💇
+
+Short, 69.3 s (2079 frames, checked with ffprobe -count_frames; AAC audio), 1080x1920. Source in `src/`: `hair_a.js` (all scenes; built on the #89 chain without `cow_a.js`, see `bhair.sh`, 3D module gl3d_cb.js), `audio_hair.py`, `script.json`, `timing.json`, `voice.mp3`, `hair.html`. Idea: English outlier "what if your hair grew 100x faster" (8.8x its channel); body + "everyone at once" ideas win on our channel. ElevenLabs: 678 characters by the API count (848-character script; 7,326 left). vidIQ: 0 credits (balance was 0, no title score). New pieces: `hrHero` (the house person with real drawn long hair: layered strands (deep shadow lock, base, light strand, broken sheen) that follow the scalp over the crown, leave the back of the head at different points, hang behind the back with volume and sway, taper at the tips, and trail along the ground when longer than the body), `hrCrown`, `hrBeard` (a beard that grows from the jaw and chin over the chest), `hrFoll` (a magnified skin cross-section: epidermis, dermis with collagen and vessels, fat, follicles with bulb, papilla, sebaceous gland and arrector muscle, a shaft with cuticle marks; it can shed the hair and start a new one), `hrBraid` (a plaited braid), `hrEleph` (an African elephant, side view), `hrPole` (barber pole), `hrSciss`, `hrBrush`, `hrHelix` (keratin coil), `hrPlate`.
+
+Shots, in order: a city street: your hair shoots from short to the middle of your back in two seconds while a passer-by's hair grows too («شعرٌ أسرعُ × ١٠٠»); a magnified skin cross-section with three follicles, a ruler and a day counter: in 30 days the shaft grows 1 cm, then one day's growth is lit on the tip «يومٌ واحد < ٠٫٥ مم» («≈ ١ سم في الشهر»); a growth-chart wall: a dial swings to «×١٠٠», a day counter runs 0→7 with «+٤ سم كلَّ يوم» and the hair reaches the dashed shoulder line «الكتفان» («≈ ٤ سم كلَّ يوم»); a street: you walk with hair to the knees «≈ ١ م», then two months on it drags on the pavement behind you «أكثرُ من ٢ م», passers-by too (side timeline; «شهران ← أكثرُ من مترين»); a street with a barber's pole and a queue of long-haired people, men's beards growing over their chests; insets: a two-week calendar ticked every day «كلَّ يوم» and scissors «=» a toothbrush «مثلَ تنظيفِ الأسنان» («قصُّ الشعرِ كلَّ يوم»); a studio portrait with long hair: a callout on the crown «≈ ١٠٠٬٠٠٠ شعرة», a keratin coil «الكيراتين», a bar «البروتين الذي تحتاجُه يومياً ≈ ٥٠ غ» with a gold third «ثلثُه للشعر ≈ ١٥–٢٠ غ», a plate «تجوعُ أكثر» («≈ ثلثُ بروتينِك للشعر»); the real 3D Earth with gold hair bundles rising from the land and a panel «عشراتُ آلافِ الأطنان من الشعرِ كلَّ يوم» («جبالٌ من الشعر»); a steel beam: one hair holds a brass «١٠٠ غ» weight, then a braid holds a steel block «١٠ أطنان» «نظرياً», and an elephant walks in «فيل ≈ ٦ أطنان» («ضفيرةٌ ≈ ١٠ أطنان»); the magnified follicle again: «تنمو ٢–٧ سنوات», then the hair is shed «ثم تسقط» and a new one starts; the twist: close on you sitting on the roof edge of a building, the camera pulls back while your hair hangs down the whole facade to the street and onto the pavement, floor numbers ١–١٠ and a measure «١٠ طوابق ≈ ٣٠ م» («عشراتُ الأمتار»); the 3D Earth, a gold ؟, اشترك and @MadhaLawLab.
+
+## Title
+ماذا لو نما شعرك أسرع ١٠٠ مرة؟ 💇
+
+(yt-package lint (title.py): 32 characters, inside the 40-character mobile cut, score 94, carries the figure ١٠٠; the "front-load" flag is expected for the channel's «ماذا لو…؟» format. Other candidates linted: «ماذا لو طال شعرك ٤ سم كل يوم؟ 💇» (94), «ماذا لو نما شعرك ١٠٠ مرة أسرع؟ 💇» (94), «ماذا لو نما شعرك أسرع بمئة مرة؟ 💇» (76, no digit), «ماذا لو صار شعرك يطول مترا كل شهر؟ 💇» (76). vidIQ title score skipped: the vidIQ balance was 0 credits (renews 20 Dec).)
+
+## Description
+ماذا لو نما شعرك أسرع ١٠٠ مرة؟ شعر الرأس ينمو اليوم نحو سنتيمتر واحد في الشهر، لكن بمئة ضعف سيطول نحو ٤ سنتيمترات كل يوم: يصل إلى كتفيك بعد أسبوع، ونحو متر بعد شهر، وبعد شهرين تجره على الأرض!
+اللحى تطول أيضاً، ويصبح قص الشعر كل يوم مثل تنظيف الأسنان، وشعرك المصنوع من الكيراتين سيأخذ نحو ثلث البروتين الذي يحتاجه جسمك. والمفاجأة: قبل أن تسقط الشعرة قد تبلغ عشرات الأمتار!
+هل ستقصه كل يوم أم تتركه يطول؟ اكتب جوابك في التعليقات.
+
+#ماذا_لو #الشعر #جسم_الإنسان #علوم #shorts
+
+—
+ماذا لو؟ Lab — أسئلة مستحيلة… بأجوبة علمية.
+اشترك حتى لا يفوتك السؤال القادم: @MadhaLawLab
+
+## Tags
+ماذا لو, ماذا لو نما شعرك أسرع, نمو الشعر, كم ينمو الشعر في الشهر, سرعة نمو الشعر, تطويل الشعر, الشعر الطويل, الكيراتين, بصيلة الشعر, دورة نمو الشعر, قوة الشعرة, جسم الإنسان, هل تعلم, what if your hair grew 100x faster, hair growth
+
+Search queries this should win (yt-seo query test): «ماذا لو نما شعرك أسرع» (title), «كم ينمو الشعر في الشهر» (first description line «نحو سنتيمتر واحد في الشهر» + tag), «سرعة نمو الشعر» (description «ينمو… ٤ سنتيمترات كل يوم» + tags «سرعة نمو الشعر», «نمو الشعر»).
+
+## Settings
+YouTube Short, category Education, not made for kids, cover frame at 3.0 s (your hair just grown long in the street, chip «شعرٌ أسرعُ × ١٠٠»), Arabic.
+
+## Facts (numbers and sources)
+- Growth today: scalp hair grows about 0.35–0.4 mm a day, about 1–1.25 cm a month (American Academy of Dermatology, hair facts: about 6 inches a year; Cleveland Clinic, "Hair": about half an inch a month; Myers & Hamilton 1951, Annals NY Acad Sci, ~0.37 mm/day). Narration: «نحوَ سنتيمترٍ واحدٍ في الشهر، أي أقلَّ من نصفِ مليمترٍ يومياً». On screen the magnified shaft grows 10.5 mm in 30 days (0.35 mm/day).
+- ×100: 0.35–0.4 mm/day × 100 = 3.5–4 cm a day («نحوَ أربعةِ سنتيمترات»); after a week 25–28 cm, about shoulder length from the back of the head; after a month (30 days) 1.05–1.2 m («نحوَ متر»); after two months 2.1–2.4 m, longer than the 1.5 m from the nape of an adult to the ground, so it drags («يجرُّه خلفَك على الأرض», on screen «أكثرُ من ٢ م»).
+- Beards: facial hair grows too (about 0.27–0.4 mm a day today; Randall, "Androgens and hair growth", Dermatol Ther 2008); in the what-if every hair follicle speeds up, so beards also grow by centimetres a day. Global: all people at once.
+- Number of hairs: about 100,000 scalp hairs (blond about 110,000–150,000, brown/black about 100,000, red about 90,000) (AAD; Britannica "hair"). Narration: «نحوُ مئةِ ألفِ شعرة».
+- Keratin and protein: hair is about 90% protein, mostly keratin (Robbins, "Chemical and Physical Behavior of Human Hair", 5th ed.). Estimate of the hair mass: diameter ≈ 70 µm → cross-section ≈ 3.85×10⁻⁹ m²; density ≈ 1.3 g/cm³; at 3.5–4 cm a day one hair makes ≈ 0.18–0.2 mg; with ≈ 85% of hairs in the growth phase, 100,000 hairs make ≈ 15–17 g a day. Adult protein need ≈ 0.8 g/kg/day ≈ 46–56 g (US RDA; WHO/FAO 2007 safe level 0.83 g/kg). 15–17 ÷ 50 ≈ 0.3 → «نحوَ ثلثِ البروتين» (an estimate; on screen «≈ ٥٠ غ», «ثلثُه للشعر ≈ ١٥–٢٠ غ»). More protein and energy means more food: «فتجوعُ أكثر».
+- World hair: ≈ 8.2 billion people (UN WPP 2024) × up to ≈ 15–17 g a day, fewer for bald and thin-haired people → roughly 50,000–130,000 tonnes a day: «عشراتِ آلافِ الأطنانِ من الشعرِ كلَّ يوم» (an order-of-magnitude estimate).
+- Strength: a single scalp hair breaks at a load of about 50–100 g (tensile tests, Robbins; Popescu & Höcker, Chem Soc Rev 2007; often quoted "up to 100 g"). Narration «نحوَ مئةِ غرام». 100,000 hairs × 100 g = 10,000 kg = 10 tonnes, only in theory (a braid never loads every hair equally): «نظرياً عشرةَ أطنان». An adult African elephant weighs about 4–7 tonnes (bulls up to about 6–7 t; Smithsonian National Zoo), so 10 t is «أثقلَ من فيل»; on screen «فيل ≈ ٦ أطنان».
+- The twist: each scalp hair grows only in its anagen (growth) phase, about 2–7 years, then it rests (catagen, telogen) and is shed, and the follicle starts a new hair (AAD; Cleveland Clinic; Paus & Cotsarelis, NEJM 1999). This is why hair today stops at a maximum length (about 0.3–1 m for most people). Keeping the cycle the same, at 3.5–4 cm a day: 2 years ≈ 26–29 m, 3 years ≈ 38–44 m, 7 years ≈ 90–100 m → «عشراتِ الأمتار». A ten-storey building is about 30 m (about 3 m a storey): «كمبنى من عشرةِ طوابق», on screen «١٠ طوابق ≈ ٣٠ م».
+- Nails (about 3.5 mm a month) are not part of this what-if and are not shown.
+- Global framing: the streets and people stand for any city in the world; the globe shows the whole Earth.
